@@ -2,7 +2,7 @@
 ares:
   base:
     name: ARES
-    version: V1.0.0
+    version: V2.0.0
     copyright: Copyright © 2020-2030 ${ares.base.name}-${ares.base.version}
     #全局session时间
     timeout: 3600

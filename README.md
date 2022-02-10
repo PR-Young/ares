@@ -13,7 +13,7 @@ ares
 │
 ├─（※）ares-core 核心模块
 │
-├─ares-flowable 流程模块（待完善）
+├─（※）ares-flowable 流程模块（待完善）
 │
 ├─（※）ares-generator 代码生成模块（待完善）
 │
@@ -33,7 +33,7 @@ ares
 │
 ├─doc sql及一些文件说明
 │
-└─pom.xml   maven.xml
+└─pom.xml
 
 ```
 
