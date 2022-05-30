@@ -76,10 +76,10 @@
           >导出</el-button
         >
       </el-col>
-      <right-toolbar
+      <!-- <right-toolbar
         :showSearch.sync="showSearch"
         @queryTable="getList"
-      ></right-toolbar>
+      ></right-toolbar> -->
     </el-row>
 
     <el-table
