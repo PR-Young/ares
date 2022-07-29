@@ -1,33 +1,40 @@
 package com.ares.system.controller;
 
+import com.ares.core.common.exception.UserException;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysNotice;
 import com.ares.core.persistence.service.SysNoticeService;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * @description: 通知
+ * @author: Young
+ */
 @RestController
 @RequestMapping("/system/notice/*")
 @Api(value = "通知公告API", tags = {"通知公告"})
 public class SysNoticeApiController extends BaseController {
 
-    @Resource
-    SysNoticeService sysNoticeService;
+    private SysNoticeService sysNoticeService;
 
+    @Autowired
+    public SysNoticeApiController(SysNoticeService sysNoticeService) {
+        this.sysNoticeService = sysNoticeService;
+    }
 
-    @RequiresPermissions("notice:list")
+    @PreAuthorize("hasAnyAuthority('notice:list')")
     @RequestMapping("list")
     @ApiOperation(value = "通知公告列表", response = TableDataInfo.class)
     public TableDataInfo list(SysNotice sysNotice) {
@@ -42,21 +49,21 @@ public class SysNoticeApiController extends BaseController {
         return AjaxResult.successData(sysNoticeService.getById(noticeId));
     }
 
-    @RequiresPermissions("notice:edit")
+    @PreAuthorize("hasAnyAuthority('notice:edit')")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改通知公告", response = Object.class)
     public Object edit(@Validated @RequestBody SysNotice sysNotice) throws Exception {
         if (StringUtils.isEmpty(sysNotice.getId())) {
-            sysNotice.setCreator(ShiroUtils.getUserId());
+            sysNotice.setCreator(SecurityUtils.getUser().getId());
             sysNoticeService.insert(sysNotice);
         } else {
-            sysNotice.setModifier(ShiroUtils.getUserId());
+            sysNotice.setModifier(SecurityUtils.getUser().getId());
             sysNoticeService.update(sysNotice);
         }
         return AjaxResult.success();
     }
 
-    @RequiresPermissions("notice:delete")
+    @PreAuthorize("hasAnyAuthority('notice:delete')")
     @DeleteMapping("{noticeIds}")
     @ApiOperation(value = "删除通知公告", response = Object.class)
     public Object remove(@PathVariable String[] noticeIds) {
@@ -66,13 +73,13 @@ public class SysNoticeApiController extends BaseController {
 
     @GetMapping("noticeNum")
     @ApiOperation(value = "获取通知公告数量", response = Object.class)
-    public Object noticeNum() throws Exception {
-        return AjaxResult.successData(sysNoticeService.noticeNum(ShiroUtils.getUserId()));
+    public Object noticeNum() throws UserException {
+        return AjaxResult.successData(sysNoticeService.noticeNum(SecurityUtils.getUser().getId()));
     }
 
     @GetMapping("getNotices")
     @ApiOperation(value = "通知公告时间线", response = Object.class)
-    public Object getNotices() throws Exception {
-        return AjaxResult.successData(sysNoticeService.getNotices(ShiroUtils.getUserId()));
+    public Object getNotices() throws UserException {
+        return AjaxResult.successData(sysNoticeService.getNotices(SecurityUtils.getUser().getId()));
     }
 }

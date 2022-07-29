@@ -6,29 +6,36 @@ import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysDept;
 import com.ares.core.persistence.service.SysDeptService;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * @description: 部门
+ * @author: Young
+ */
 @RestController
 @RequestMapping("/sysDept/*")
 @Api(value = "部门管理API", tags = {"部门管理"})
 public class SysDeptApiController extends BaseController {
 
-    @Resource
-    SysDeptService sysDeptService;
+    private SysDeptService sysDeptService;
 
-    @RequiresPermissions("sysDept:list")
+    @Autowired
+    public SysDeptApiController(SysDeptService sysDeptService) {
+        this.sysDeptService = sysDeptService;
+    }
+
+    @PreAuthorize("hasAnyAuthority('sysDept:list')")
     @RequestMapping("list")
     @ApiOperation(value = "部门列表", response = TableDataInfo.class)
     public TableDataInfo list(SysDept sysDept) {
@@ -43,21 +50,21 @@ public class SysDeptApiController extends BaseController {
         return AjaxResult.successData(sysDeptService.getByDeptId(sysDeptId));
     }
 
-    //@RequiresPermissions("sysDept:edit")
+    //@PreAuthorize("hasAnyAuthority('sysDept:edit')")
     @PostMapping("edit")
     @ApiOperation(value = "编辑部门信息", response = Object.class)
     public Object edit(@Validated @RequestBody SysDept sysDept) throws Exception {
         if (StringUtils.isEmpty(sysDept.getId())) {
-            sysDept.setCreator(ShiroUtils.getUserId());
+            sysDept.setCreator(SecurityUtils.getUser().getId());
             sysDeptService.insert(sysDept);
         } else {
-            sysDept.setModifier(ShiroUtils.getUserId());
+            sysDept.setModifier(SecurityUtils.getUser().getId());
             sysDeptService.update(sysDept);
         }
         return AjaxResult.success();
     }
 
-    //@RequiresPermissions("sysDept:delete")
+    //@PreAuthorize("hasAnyAuthority('sysDept:delete')")
     @DeleteMapping("{sysDeptIds}")
     @ApiOperation(value = "删除部门", response = Object.class)
     public Object remove(@PathVariable String[] sysDeptIds) {

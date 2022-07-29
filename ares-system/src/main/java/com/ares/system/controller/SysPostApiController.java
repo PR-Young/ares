@@ -6,28 +6,34 @@ import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysPost;
 import com.ares.core.persistence.service.SysPostService;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * @description: 职务
+ * @author: Young
+ */
 @RestController
 @RequestMapping("/sysPost/*")
 @Api(value = "岗位管理API", tags = {"岗位管理"})
 public class SysPostApiController extends BaseController {
 
-    @Resource
-    SysPostService sysPostService;
+    private SysPostService sysPostService;
 
+    @Autowired
+    public SysPostApiController(SysPostService sysPostService) {
+        this.sysPostService = sysPostService;
+    }
 
-    @RequiresPermissions("sysPost:list")
+    @PreAuthorize("hasAnyAuthority('sysPost:list')")
     @RequestMapping("list")
     @ApiOperation(value = "岗位列表", response = TableDataInfo.class)
     public TableDataInfo list(SysPost sysPost) {
@@ -42,21 +48,21 @@ public class SysPostApiController extends BaseController {
         return AjaxResult.successData(sysPostService.getById(sysPostId));
     }
 
-    @RequiresPermissions("sysPost:edit")
+    @PreAuthorize("hasAnyAuthority('sysPost:edit')")
     @PostMapping("edit")
     @ApiOperation(value = "编辑岗位信息", response = Object.class)
     public Object edit(@Validated @RequestBody SysPost sysPost) throws Exception {
         if (StringUtils.isEmpty(sysPost.getId())) {
-            sysPost.setCreator(ShiroUtils.getUserId());
+            sysPost.setCreator(SecurityUtils.getUser().getId());
             sysPostService.insert(sysPost);
         } else {
-            sysPost.setModifier(ShiroUtils.getUserId());
+            sysPost.setModifier(SecurityUtils.getUser().getId());
             sysPostService.update(sysPost);
         }
         return AjaxResult.success();
     }
 
-    @RequiresPermissions("sysPost:delete")
+    @PreAuthorize("hasAnyAuthority('sysPost:delete')")
     @DeleteMapping("{sysPostIds}")
     @ApiOperation(value = "删除岗位信息", response = Object.class)
     public Object remove(@PathVariable String[] sysPostIds) {

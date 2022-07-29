@@ -1,16 +1,16 @@
-public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJMKPVHYRh6inLK5zn4LaXQuBCeiLmtonqRVoiJOPOCNXWLCjwyz7tA7SeIUKAI970dRPXAgB4qKnlw0KKR/wisCAwEAAQ==
+public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAL7RfKDu37MWmf6AsKSuqyIa9yjWfNn69Dq2YW9JnHC4Qx1v6rMruo+SR6R00WfrjtblLYUV2W8qsCGiTD0pYnUCAwEAAQ==
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      mysql:
+      master:
         db-type: mysql
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/springbootv1?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+        url: jdbc:mysql://localhost:3306/ares?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
         username: root
-        password: MZnC0SMIlW3+Pat1CqL1U8Mv7Fw8n2D/RMMWHPzT3mzvcbhtNlAsnaDSSmVLIJs3zGjjYcGxoKEhCO6uiTFDMw==
-        connection-properties: config.decrypt=true;config.decrypt.key=${public-key};druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      neo4j:
+        password: TlLoBEB3zNIXq/oItvk9ce4jv4b42oBg2aVJ4L4wOW3/y79+oj+6ctb0RhY95oxgp3HKgCaJu5SQg7166iHJOQ==
+        connection-properties: config.decrypt=false;config.decrypt.key=${public-key};druid.stat.mergeSql=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=3000
+      slave:
         enabled: false
         db-type: neo4j
         driver-class-name: org.neo4j.jdbc.bolt.BoltDriver
@@ -40,8 +40,8 @@ spring:
         enabled: true
         reset-enable: false
         url-pattern: /druid/*
-#        login-username: admin
-#        login-password: admin
+      #        login-username: admin
+      #        login-password: admin
       filter:
         slf4j:
           enable: true
@@ -53,7 +53,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    password: root
+    password:
     database: 0
     jedis:
       pool:
@@ -63,7 +63,3 @@ spring:
         min-idle: 0
     lettuce:
       shutdown-timeout: 0
-
-
-
-

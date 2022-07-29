@@ -1,36 +1,41 @@
 package com.ares.system.controller;
 
 
-import com.ares.core.persistence.model.system.SysMenu;
 import com.ares.core.persistence.model.base.AjaxResult;
+import com.ares.core.persistence.model.system.SysMenu;
 import com.ares.core.persistence.service.SysMenuService;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 菜单
  * @author: Young 2020/05/05
  **/
 @RestController
 @RequestMapping("/system/menu/*")
 @Api(value = "系统菜单API", tags = {"系统菜单"})
 public class SysMenuApiController {
-    @Resource
-    SysMenuService menuService;
 
-    @RequiresPermissions("menu:list")
+    private SysMenuService menuService;
+
+    @Autowired
+    public SysMenuApiController(SysMenuService menuService) {
+        this.menuService = menuService;
+    }
+
+    @PreAuthorize("hasAnyAuthority('menu:list')")
     @RequestMapping("list")
     @ApiOperation(value = "菜单列表", response = Object.class)
     public Object list(SysMenu menu) throws Exception {
-        String userId = ShiroUtils.getUserId();
+        String userId = SecurityUtils.getUser().getId();
         List<SysMenu> menuList = menuService.selectMenuList(menu, userId);
         return AjaxResult.successData(menuList);
     }
@@ -47,26 +52,26 @@ public class SysMenuApiController {
     @GetMapping("treeselect")
     @ApiOperation(value = "获取菜单下拉树列表", response = Object.class)
     public Object treeselect(SysMenu menu) throws Exception {
-        String userId = ShiroUtils.getUserId();
+        String userId = SecurityUtils.getUser().getId();
         List<SysMenu> menus = menuService.selectMenuList(menu, userId);
         return AjaxResult.successData(menuService.buildMenuTreeSelect(menus));
     }
 
-    @RequiresPermissions("menu:edit")
+    @PreAuthorize("hasAnyAuthority('menu:edit')")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改菜单", response = Object.class)
     public Object edit(@Validated @RequestBody SysMenu menu) throws Exception {
         if (StringUtils.isEmpty(menu.getId())) {
-            menu.setCreator(ShiroUtils.getUserId());
+            menu.setCreator(SecurityUtils.getUser().getId());
             menuService.insert(menu);
         } else {
-            menu.setModifier(ShiroUtils.getUserId());
+            menu.setModifier(SecurityUtils.getUser().getId());
             menuService.update(menu);
         }
         return AjaxResult.success();
     }
 
-    @RequiresPermissions("menu:delete")
+    @PreAuthorize("hasAnyAuthority('menu:delete')")
     @DeleteMapping("{menuId}")
     @ApiOperation(value = "删除菜单", response = Object.class)
     public Object remove(@PathVariable String menuId) {
@@ -80,7 +85,7 @@ public class SysMenuApiController {
     @GetMapping(value = "roleMenuTreeselect/{roleId}")
     @ApiOperation(value = "根据角色Id获取菜单", response = Object.class)
     public Object roleMenuTreeselect(@PathVariable("roleId") String roleId) throws Exception {
-        String userId = ShiroUtils.getUserId();
+        String userId = SecurityUtils.getUser().getId();
         List<SysMenu> menus = menuService.selectMenuList(new SysMenu(), userId);
         AjaxResult result = AjaxResult.success();
         result.put("checkedKeys", menuService.selectMenuByRole(roleId));

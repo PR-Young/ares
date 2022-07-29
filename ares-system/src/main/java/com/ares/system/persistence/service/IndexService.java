@@ -1,6 +1,7 @@
 package com.ares.system.persistence.service;
 
 import com.ares.core.persistence.model.base.Constants;
+import com.ares.core.utils.DateUtils;
 import com.ares.redis.utils.RedisUtil;
 import com.ares.system.persistence.dao.IIndexDao;
 import com.ares.system.persistence.model.PanelGroup;
@@ -9,9 +10,9 @@ import com.ares.system.persistence.model.line.LineChart;
 import com.ares.system.persistence.model.line.Series;
 import com.ares.system.persistence.model.line.XAxis;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -24,42 +25,46 @@ import java.util.*;
 @Service
 public class IndexService {
 
-    @Resource
     private IIndexDao indexDao;
+
+    @Autowired
+    public IndexService(IIndexDao indexDao) {
+        this.indexDao = indexDao;
+    }
 
     public List<PanelGroup> getPanelGroup() {
         List<PanelGroup> panelGroups = new ArrayList<>();
-        PanelGroup panelGroup = new PanelGroup();
-        panelGroup.setName("在线人数");
-        panelGroup.setType("newVisitis");
-        panelGroup.setIcon("peoples");
-        panelGroup.setStartVal(0);
-        panelGroup.setEndVal(getOnlinePeople());
-        panelGroup.setDuration(2000);
+        PanelGroup panelGroup = PanelGroup.newInstance()
+                .setName("在线人数")
+                .setType("newVisitis")
+                .setIcon("peoples")
+                .setStartVal(0)
+                .setEndVal(getOnlinePeople())
+                .setDuration(2000).build();
         panelGroups.add(panelGroup);
-        panelGroup = new PanelGroup();
-        panelGroup.setName("消息");
-        panelGroup.setType("messages");
-        panelGroup.setIcon("message");
-        panelGroup.setStartVal(0);
-        panelGroup.setEndVal(81212);
-        panelGroup.setDuration(3000);
+        panelGroup = PanelGroup.newInstance()
+                .setName("消息")
+                .setType("messages")
+                .setIcon("message")
+                .setStartVal(0)
+                .setEndVal(81212)
+                .setDuration(3000).build();
         panelGroups.add(panelGroup);
-        panelGroup = new PanelGroup();
-        panelGroup.setName("定时任务");
-        panelGroup.setType("jobs");
-        panelGroup.setIcon("job");
-        panelGroup.setStartVal(0);
-        panelGroup.setEndVal(indexDao.getJobNumber());
-        panelGroup.setDuration(2000);
+        panelGroup = PanelGroup.newInstance()
+                .setName("定时任务")
+                .setType("jobs")
+                .setIcon("job")
+                .setStartVal(0)
+                .setEndVal(indexDao.getJobNumber())
+                .setDuration(2000).build();
         panelGroups.add(panelGroup);
-        panelGroup = new PanelGroup();
-        panelGroup.setName("日志");
-        panelGroup.setType("logs");
-        panelGroup.setIcon("log");
-        panelGroup.setStartVal(0);
-        panelGroup.setEndVal(indexDao.getLogNumber());
-        panelGroup.setDuration(2000);
+        panelGroup = PanelGroup.newInstance()
+                .setName("日志")
+                .setType("logs")
+                .setIcon("log")
+                .setStartVal(0)
+                .setEndVal(indexDao.getLogNumber())
+                .setDuration(2000).build();
         panelGroups.add(panelGroup);
         return panelGroups;
     }
@@ -90,45 +95,77 @@ public class IndexService {
         return map;
     }
 
+    private int getOnlinePeople() {
+        String pattern = Constants.LOGIN_INFO + "*";
+        Set<String> keys = RedisUtil.getKeysByPattern(pattern);
+        return keys.size();
+    }
+
     public LineChart getLineChart() {
         LineChart lineChart = new LineChart();
         XAxis xAxis = new XAxis();
         Legend legend = new Legend();
         List<Series> series = new ArrayList<>();
 
-        xAxis.setData(new String[]{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"});
+        xAxis.setData(getXLine());
         xAxis.setBoundaryGap(false);
-        xAxis.setAxisTick(new HashMap<String, Object>() {{
-            put("show", true);
-        }});
+        xAxis.isShow(false);
+        xAxis.setType("category");
         lineChart.setXAxis(xAxis);
-        legend.setData(new String[]{"expected", "actual"});
+        legend.setData(new String[]{"随机数1", "随机数2"});
         lineChart.setLegend(legend);
 
         Series ser = new Series();
-        ser.setName("expected");
-        ser.setItemStyle(new HashMap<String, Object>() {{
-            put("normal", new HashMap<String, Object>() {{
-                put("color", "#FF005A");
-                put("lineStyle", new HashMap<String, Object>() {{
-                    put("color", "#FF005A");
-                    put("width", "2");
-                }});
-            }});
-        }});
+        ser.setName("随机数1");
+        //ser.buildItemStyle("#FF005A", 2, "#FF005A", null);
+
         ser.setSmooth(true);
         ser.setType("line");
-        ser.setData(new Number[]{});
+        ser.setData(buildData());
         ser.setAnimationDuration(2800);
         ser.setAnimationEasing("cubicInOut");
+        series.add(ser);
+
+        ser = new Series();
+        ser.setName("随机数2");
+        //ser.buildItemStyle("#3888fa", 2, "#3888fa", "#f3f8ff");
+
+        ser.setSmooth(true);
+        ser.setType("line");
+        ser.setData(buildData());
+        ser.setAnimationDuration(2800);
+        ser.setAnimationEasing("quadraticOut");
         series.add(ser);
         lineChart.setSeries(series);
         return lineChart;
     }
 
-    private int getOnlinePeople() {
-        String pattern = Constants.LOGIN_INFO + "*";
-        Set<String> keys = RedisUtil.getKeysByPattern(pattern);
-        return keys.size();
+    private String[] getXLine() {
+        Calendar calendar = Calendar.getInstance();
+        List<String> times = new ArrayList<>(7);
+        times.add(DateUtils.format(calendar.getTime(), DateUtils.DATE_TIME_MIN_PATTERN));
+        for (int i = 0; i < 6; i++) {
+            String time = getTime(calendar);
+            times.add(time);
+        }
+        times.sort(Comparator.naturalOrder());
+        String[] xLine = new String[7];
+        times.toArray(xLine);
+        return xLine;
+    }
+
+    private String getTime(Calendar current) {
+        current.add(Calendar.MINUTE, -10);
+        Date before = current.getTime();
+        String beforeTime = DateUtils.format(before, DateUtils.DATE_TIME_MIN_PATTERN);
+        return beforeTime;
+    }
+
+    private Integer[] buildData() {
+        Integer[] data = new Integer[7];
+        for (int i = 0; i < 7; i++) {
+            data[i] = (int) Math.ceil(Math.random() * 100000);
+        }
+        return data;
     }
 }

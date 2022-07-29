@@ -7,28 +7,34 @@ import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysProperties;
 import com.ares.core.persistence.service.SysPropertiesService;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * @description: 系统参数
+ * @author: Young
+ */
 @RestController
 @RequestMapping("/sysProperties/*")
 @Api(value = "系统参数API", tags = {"系统参数"})
 public class SysPropertiesApiController extends BaseController {
 
-    @Resource
-    SysPropertiesService sysPropertiesService;
+    private SysPropertiesService sysPropertiesService;
 
+    @Autowired
+    public SysPropertiesApiController(SysPropertiesService sysPropertiesService) {
+        this.sysPropertiesService = sysPropertiesService;
+    }
 
-    @RequiresPermissions("sysProperties:list")
+    @PreAuthorize("hasAnyAuthority('sysProperties:list')")
     @RequestMapping("list")
     @ApiOperation(value = "系统参数列表", response = TableDataInfo.class)
     public TableDataInfo list(SysProperties sysProperties) {
@@ -43,21 +49,21 @@ public class SysPropertiesApiController extends BaseController {
         return AjaxResult.successData(sysPropertiesService.getById(sysPropertiesId));
     }
 
-    @RequiresPermissions("sysProperties:edit")
+    @PreAuthorize("hasAnyAuthority('sysProperties:edit')")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改系统参数", response = Object.class)
     public Object edit(@Validated @RequestBody SysProperties sysProperties) throws Exception {
         if (StringUtils.isEmpty(sysProperties.getId())) {
-            sysProperties.setCreator(ShiroUtils.getUserId());
+            sysProperties.setCreator(SecurityUtils.getUser().getId());
             sysPropertiesService.insert(sysProperties);
         } else {
-            sysProperties.setModifier(ShiroUtils.getUserId());
+            sysProperties.setModifier(SecurityUtils.getUser().getId());
             sysPropertiesService.update(sysProperties);
         }
         return AjaxResult.success();
     }
 
-    @RequiresPermissions("sysProperties:delete")
+    @PreAuthorize("hasAnyAuthority('sysProperties:delete')")
     @DeleteMapping("{sysPropertiesIds}")
     @ApiOperation(value = "删除系统参数", response = Object.class)
     public Object remove(@PathVariable String[] sysPropertiesIds) {

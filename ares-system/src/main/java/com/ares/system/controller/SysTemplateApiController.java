@@ -7,27 +7,34 @@ import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysTemplate;
 import com.ares.core.persistence.service.SysTemplateService;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * @description: 模版
+ * @author: Young
+ */
 @RestController
 @RequestMapping("/sysTemplate/*")
 @Api(value = "系统模版API", tags = {"系统模版"})
 public class SysTemplateApiController extends BaseController {
 
-    @Resource
-    SysTemplateService sysTemplateService;
+    private SysTemplateService sysTemplateService;
 
-    @RequiresPermissions("sysTemplate:list")
+    @Autowired
+    public SysTemplateApiController(SysTemplateService sysTemplateService) {
+        this.sysTemplateService = sysTemplateService;
+    }
+
+    @PreAuthorize("hasAnyAuthority('sysTemplate:list')")
     @RequestMapping("list")
     @ApiOperation(value = "模版列表", response = TableDataInfo.class)
     public TableDataInfo list(SysTemplate sysTemplate) {
@@ -42,21 +49,21 @@ public class SysTemplateApiController extends BaseController {
         return AjaxResult.successData(sysTemplateService.getById(sysTemplateId));
     }
 
-    @RequiresPermissions("sysTemplate:edit")
+    @PreAuthorize("hasAnyAuthority('sysTemplate:edit')")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改模版", response = Object.class)
     public Object edit(@Validated @RequestBody SysTemplate sysTemplate) throws Exception {
         if (StringUtils.isEmpty(sysTemplate.getId())) {
-            sysTemplate.setCreator(ShiroUtils.getUserId());
+            sysTemplate.setCreator(SecurityUtils.getUser().getId());
             sysTemplateService.insert(sysTemplate);
         } else {
-            sysTemplate.setModifier(ShiroUtils.getUserId());
+            sysTemplate.setModifier(SecurityUtils.getUser().getId());
             sysTemplateService.update(sysTemplate);
         }
         return AjaxResult.success();
     }
 
-    @RequiresPermissions("sysTemplate:delete")
+    @PreAuthorize("hasAnyAuthority('sysTemplate:delete')")
     @DeleteMapping("{sysTemplateIds}")
     @ApiOperation(value = "删除模版", response = Object.class)
     public Object remove(@PathVariable String[] sysTemplateIds) {

@@ -2,6 +2,7 @@ package com.ares.system.persistence.model.line;
 
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,7 +13,13 @@ import java.util.Map;
  **/
 @Data
 public class XAxis {
+    private String type;
     private String[] data;
-    private boolean boundaryGap;
+    private boolean boundaryGap = false;
     private Map<String, Object> axisTick;
+
+    public void isShow(boolean show) {
+        this.axisTick = new HashMap<>();
+        this.axisTick.put("show", show);
+    }
 }

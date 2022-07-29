@@ -9,31 +9,35 @@ import com.ares.core.persistence.model.system.SysUser;
 import com.ares.core.persistence.service.SysRoleService;
 import com.ares.core.persistence.service.SysUserService;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 角色
  * @author: Young 2020/05/06
  **/
 @RestController
 @RequestMapping("/system/role/*")
 @Api(value = "系统角色API", tags = {"系统角色"})
 public class SysRoleApiController extends BaseController {
-    @Resource
-    SysRoleService roleService;
-    @Resource
-    SysUserService userService;
+    private SysRoleService roleService;
+    private SysUserService userService;
 
-    @RequiresPermissions("role:list")
+    @Autowired
+    public SysRoleApiController(SysRoleService roleService, SysUserService userService) {
+        this.roleService = roleService;
+        this.userService = userService;
+    }
+
+    @PreAuthorize("hasAnyAuthority('role:list')")
     @RequestMapping("list")
     @ApiOperation(value = "角色列表", response = TableDataInfo.class)
     public TableDataInfo list(SysRole role) {
@@ -48,27 +52,27 @@ public class SysRoleApiController extends BaseController {
         return AjaxResult.successData(roleService.getById(roleId));
     }
 
-    @RequiresPermissions("role:edit")
+    @PreAuthorize("hasAnyAuthority('role:edit')")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改角色", response = Object.class)
     public Object edit(@Validated @RequestBody SysRole role) throws Exception {
         String roleId = "";
         if (StringUtils.isEmpty(role.getId())) {
-            if (roleService.checkRoleName(role.getRoleName())) {
+            if (!roleService.checkRoleName(role.getRoleName())) {
                 return AjaxResult.error("新增角色'" + role.getRoleName() + "'失败，角色名称已存在");
             }
-            role.setCreator(ShiroUtils.getUserId());
+            role.setCreator(SecurityUtils.getUser().getId());
             roleId = roleService.insertRole(role);
         } else {
             roleId = role.getId();
-            role.setModifier(ShiroUtils.getUserId());
+            role.setModifier(SecurityUtils.getUser().getId());
             roleService.updateRole(role);
         }
 
         return AjaxResult.success();
     }
 
-    @RequiresPermissions("role:delete")
+    @PreAuthorize("hasAnyAuthority('role:delete')")
     @DeleteMapping("{roleIds}")
     @ApiOperation(value = "删除用户", response = Object.class)
     public Object remove(@PathVariable String[] roleIds) {

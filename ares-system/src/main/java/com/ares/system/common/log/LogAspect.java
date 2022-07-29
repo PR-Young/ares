@@ -5,7 +5,7 @@ import com.ares.core.persistence.model.system.SysLog;
 import com.ares.core.persistence.model.system.SysUser;
 import com.ares.core.persistence.service.SysLogService;
 import com.ares.core.utils.*;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -14,6 +14,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -21,10 +22,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Date;
 import java.util.Map;
 
@@ -39,9 +40,12 @@ public class LogAspect {
     private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
     private static final ThreadLocal<Date> dateThreadLocal = new ThreadLocal<>();
+    private SysLogService sysLogService;
 
-    @Resource
-    SysLogService sysLogService;
+    @Autowired
+    public LogAspect(SysLogService sysLogService) {
+        this.sysLogService = sysLogService;
+    }
 
     @Pointcut("@annotation(com.ares.system.common.log.Log)")
     public void logPointCut() {
@@ -55,13 +59,13 @@ public class LogAspect {
     public void logPointCutService() {
     }
 
-    @AfterReturning("logPointCutController()")
+    @AfterReturning("logPointCutController() || logPointCut()")
     public void doBefore(JoinPoint joinPoint) {
         handleLog(joinPoint, null);
     }
 
     //出错时记录日志
-    @AfterThrowing(value = "logPointCutController()", throwing = "e")
+    @AfterThrowing(value = "logPointCutController() || logPointCut()", throwing = "e")
     public void doAfter(JoinPoint joinPoint, Exception e) {
         handleLog(joinPoint, e);
     }
@@ -77,22 +81,32 @@ public class LogAspect {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
             Method method = signature.getMethod();
             Log annotation = method.getAnnotation(Log.class);
-            if (null != annotation) {
-                String value = annotation.value();
-            }
-            String url = ServletUtils.getRequest().getRequestURI();
-            String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
+            Log ignoreClazz = method.getDeclaringClass().getAnnotation(Log.class);
 
-            SysUser currentUser = ShiroUtils.getUser();
-            if (null != currentUser) {
-                sysLog.setHostIp(ip);
-                sysLog.setUrl(url);
-                sysLog.setUserName(currentUser.getUserName());
-                sysLog.setRequestMethod(ServletUtils.getRequest().getMethod());
+            if (null != ignoreClazz || null != annotation) {
+                if (ignoreClazz.isIgnore() || annotation.isIgnore()) {
+                    return;
+                }
+                sysLog.setUrl(method.getDeclaringClass().getName() + "." + method.getName())
+                        .setOperParams(setMethodParameters(joinPoint, method));
                 if (null != e) {
                     sysLog.setNotes(StringUtils.substring(e.getMessage(), 0, 2000));
-                } else {
-                    setRequestValue(joinPoint, sysLog);
+                }
+            } else {
+                String url = ServletUtils.getRequest().getRequestURI();
+                String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
+
+                SysUser currentUser = SecurityUtils.getUser();
+                if (null != currentUser) {
+                    sysLog.setHostIp(ip)
+                            .setUrl(url)
+                            .setUserName(currentUser.getUserName())
+                            .setRequestMethod(ServletUtils.getRequest().getMethod());
+                    if (null != e) {
+                        sysLog.setNotes(StringUtils.substring(e.getMessage(), 0, 2000));
+                    } else {
+                        setRequestValue(joinPoint, sysLog);
+                    }
                 }
             }
             long beginTime = dateThreadLocal.get().getTime();
@@ -135,7 +149,23 @@ public class LogAspect {
         return params.trim();
     }
 
-    public boolean isFilterObject(final Object o) {
+    private boolean isFilterObject(final Object o) {
         return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse;
+    }
+
+    private String setMethodParameters(JoinPoint joinPoint, Method method) {
+        StringBuffer sb = new StringBuffer();
+        Parameter[] parameters = method.getParameters();
+        Object[] values = joinPoint.getArgs();
+        if (null != parameters && parameters.length > 0) {
+            for (int i = 0; i < parameters.length; i++) {
+                sb.append("{").append(parameters[i].getName()).append("=");
+                if (null != values && values.length > 0) {
+                    sb.append(values[i]).append("}");
+                }
+                sb.append(",");
+            }
+        }
+        return sb.toString();
     }
 }

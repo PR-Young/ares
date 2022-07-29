@@ -9,7 +9,7 @@ server:
       min-spare: 30
 spring:
   profiles:
-    include: @profileActive@,ares,quartz,message,activiti,neo4j
+    include: @profileActive@,ares,quartz,message,activiti,neo4j,generator,flowable
   application:
     name: Ares
   devtools:
@@ -60,6 +60,8 @@ management:
       enabled: false
     rabbit:
       enabled: false
+    elasticsearch:
+      enabled: false
   endpoint:
     health:
       show-details: always
@@ -78,4 +80,3 @@ info:
   project-description: ${spring.application.name} project
   project-sourceEncoding: '@project.build.sourceEncoding@'
   project-version: '@project.version@'
-

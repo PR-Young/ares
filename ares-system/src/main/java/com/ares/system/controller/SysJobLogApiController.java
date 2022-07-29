@@ -8,15 +8,15 @@ import com.ares.quartz.persistence.model.SysQuartzJobLog;
 import com.ares.quartz.persistence.service.SysQuartzJobLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 任务日志
  * @author: Young 2020/05/07
  **/
 @RestController
@@ -24,10 +24,14 @@ import java.util.List;
 @Api(value = "系统任务日志API", tags = {"系统任务日志"})
 public class SysJobLogApiController extends BaseController {
 
-    @Resource
-    SysQuartzJobLogService jobLogService;
+    private SysQuartzJobLogService jobLogService;
 
-    @RequiresPermissions("quartz:logList")
+    @Autowired
+    public SysJobLogApiController(SysQuartzJobLogService jobLogService) {
+        this.jobLogService = jobLogService;
+    }
+
+    @PreAuthorize("hasAnyAuthority('quartz:logList')")
     @GetMapping("list")
     @ApiOperation(value = "任务日志列表", response = TableDataInfo.class)
     public TableDataInfo list(SysQuartzJobLog jobLog) {
@@ -49,7 +53,7 @@ public class SysJobLogApiController extends BaseController {
     /**
      * 删除定时任务调度日志
      */
-    @RequiresPermissions("quartz:logDelete")
+    @PreAuthorize("hasAnyAuthority('quartz:logDelete')")
     @DeleteMapping("{jobLogIds}")
     @ApiOperation(value = "删除定时任务调度日志", response = Object.class)
     public Object remove(@PathVariable String[] jobLogIds) {
@@ -57,7 +61,7 @@ public class SysJobLogApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @RequiresPermissions("quartz:logDelete")
+    @PreAuthorize("hasAnyAuthority('quartz:logDelete')")
     @DeleteMapping("clean")
     @ApiOperation(value = "清空定时任务调度日志", response = Object.class)
     public Object clean() {

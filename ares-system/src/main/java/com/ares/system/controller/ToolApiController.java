@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @description:
+ * @description: 工具
  * @author: Young 2020/05/06
  **/
 @Controller
@@ -44,4 +44,11 @@ public class ToolApiController {
     public String swagger() {
         return "redirect:/swagger-ui.html";
     }
+
+    @RequestMapping("tool/knife4j/index")
+    @ApiOperation(value = "knife4j接口", response = String.class)
+    public String knife4j() {
+        return "redirect:/doc.html";
+    }
+
 }

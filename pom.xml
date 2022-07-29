@@ -21,11 +21,9 @@
         <module>ares-redis</module>
         <module>ares-neo4j</module>
         <module>ares-message</module>
-        <module>ares-activiti</module>
         <module>ares-admin</module>
         <module>ares-test</module>
         <module>ares-system</module>
-        <module>ares-system-new</module>
         <module>ares-generator</module>
         <module>ares-config</module>
         <module>ares-flowable</module>

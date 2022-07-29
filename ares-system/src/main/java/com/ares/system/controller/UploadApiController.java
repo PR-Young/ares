@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @description:
+ * @description: 文件
  * @author: Young
  * @date: 2020/09/23
  * @see: com.ares.system.controller UploadApiController.java

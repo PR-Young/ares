@@ -9,7 +9,7 @@ import com.ares.core.persistence.model.system.SysUser;
 import com.ares.core.persistence.service.*;
 import com.ares.core.utils.EncryptUtils;
 import com.ares.core.utils.MD5Util;
-import com.ares.system.common.shiro.ShiroUtils;
+import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +23,31 @@ import java.io.FileInputStream;
 import java.io.OutputStream;
 
 /**
- * 个人信息 业务处理
+ * @description: 个人信息 业务处理
+ * @author: Young
  */
 @RestController
 @RequestMapping("/system/user/profile/*")
 @Api(value = "个人信息API", tags = {"个人信息"})
 public class SysProfileApiController extends BaseController {
-    @Autowired
     private SysUserService userService;
-    @Autowired
     private UploadService uploadService;
-    @Autowired
     private SysPropertiesService propertiesService;
-    @Autowired
     private SysPostService postService;
-    @Autowired
     private SysDeptService deptService;
+
+    @Autowired
+    public SysProfileApiController(SysUserService userService,
+                                   UploadService uploadService,
+                                   SysPropertiesService propertiesService,
+                                   SysPostService postService,
+                                   SysDeptService deptService) {
+        this.userService = userService;
+        this.uploadService = uploadService;
+        this.propertiesService = propertiesService;
+        this.postService = postService;
+        this.deptService = deptService;
+    }
 
     /**
      * 个人信息
@@ -46,7 +55,7 @@ public class SysProfileApiController extends BaseController {
     @GetMapping("info")
     @ApiOperation(value = "获取个人信息", response = Object.class)
     public Object profile() throws Exception {
-        SysUser user = ShiroUtils.getUser();
+        SysUser user = SecurityUtils.getUser();
         SysDept sysDept = deptService.getById(user.getDeptId());
         SysPost sysPost = postService.getById(user.getPostId());
         AjaxResult result = AjaxResult.successData(user);
@@ -63,7 +72,6 @@ public class SysProfileApiController extends BaseController {
     @ApiOperation(value = "修改用户信息", response = Object.class)
     public Object updateProfile(@RequestBody SysUser user) {
         userService.update(user);
-        ShiroUtils.setUser(user);
         return AjaxResult.success();
     }
 
@@ -73,7 +81,7 @@ public class SysProfileApiController extends BaseController {
     @PutMapping("updatePwd")
     @ApiOperation(value = "重置密码", response = Object.class)
     public Object updatePwd(String oldPassword, String newPassword) throws Exception {
-        SysUser user = ShiroUtils.getUser();
+        SysUser user = SecurityUtils.getUser();
         if (!user.getPassword().equals(MD5Util.encode(oldPassword))) {
             return AjaxResult.error("修改密码失败，旧密码错误");
         }
@@ -82,8 +90,6 @@ public class SysProfileApiController extends BaseController {
         }
         if (userService.updatePassword(user, newPassword) > 0) {
             user.setPassword(MD5Util.encode(newPassword));
-            ShiroUtils.setUser(user);
-            // 更新缓存用户密码
             return AjaxResult.success();
         }
         return AjaxResult.error("修改密码异常，请联系管理员");
@@ -96,7 +102,7 @@ public class SysProfileApiController extends BaseController {
     @ApiOperation(value = "头像上传", response = Object.class)
     public Object avatar(@RequestParam("avatarfile") MultipartFile file) throws Exception {
         if (!file.isEmpty()) {
-            SysUser user = ShiroUtils.getUser();
+            SysUser user = SecurityUtils.getUser();
             String path = propertiesService.getValueByAlias("avatar.path");
             String avatar = uploadService.upload(path, file);
             user.setAvatar(EncryptUtils.encode(avatar));
@@ -110,16 +116,18 @@ public class SysProfileApiController extends BaseController {
     @ApiOperation(value = "获取头像")
     public void getAvatar(HttpServletRequest request, HttpServletResponse response, @PathVariable String path) throws Exception {
         File file = new File(EncryptUtils.decode(path));
+        OutputStream toClient = response.getOutputStream();
         if (file.exists()) {
             FileInputStream fileInputStream = new FileInputStream(file);
-            int i = fileInputStream.available(); // 得到文件大小
+            int i = fileInputStream.available();
             byte data[] = new byte[i];
-            fileInputStream.read(data); // 读数据
+            fileInputStream.read(data);
             fileInputStream.close();
-            response.setContentType("image/*"); // 设置返回的文件类型
-            OutputStream toClient = response.getOutputStream(); // 得到向客户端输出二进制数据的对象
-            toClient.write(data); // 输出数据
-            toClient.close();
+            response.setContentType("image/*");
+            toClient.write(data);
+        } else {
+            toClient.write(null);
         }
+        toClient.close();
     }
 }
