@@ -9,8 +9,6 @@ ares
 │
 ├─（※）ares-admin spring-boot-admin监控模块
 │
-├─ares-activiti 流程模块（待开发）
-│
 ├─（※）ares-core 核心模块
 │
 ├─（※）ares-flowable 流程模块（待完善）
@@ -25,9 +23,7 @@ ares
 │
 ├─（※）ares-redis 缓存模块
 │
-├─ares-system 系统(使用shiro，目前不在该模块继续开发)
-│
-├─（※）ares-system-new 系统(使用spring-security)
+├─（※）ares-system 系统模块
 │
 ├─（※）ares-ui vue前端 
 │
