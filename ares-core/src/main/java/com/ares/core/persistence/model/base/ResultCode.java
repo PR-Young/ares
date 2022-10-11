@@ -15,6 +15,7 @@ public enum ResultCode {
     UNKNOWN(10000, "未知错误"),
     NOAUTH(401, "用户没有权限"),
     NOLOGIN(1000, "用户没有登录!"),
+    PWDERROR(1001, "密码错误"),
     NOMODEL(2000, "模型不存在"),
     NOFLOW(2001, "请先设计流程定义并成功保存，再进行部署"),
     ERRORFLOWDEFINITION(2002, "流程定义不符要求，请至少设计一条主线流程");

@@ -27,6 +27,8 @@ ares
 │
 ├─（※）ares-ui vue前端 
 │
+├─（※）ares-ui-plus vue3 + element-plus前端 
+│
 ├─doc sql及一些文件说明
 │
 └─pom.xml
@@ -35,9 +37,9 @@ ares
 
 # 使用技术
 
-- 前端：vue + element-ui
+- 前端：vue + element-plus
 - 后端：springboot2.3.4.RELEASE，jdk11
-- 数据库：mysql8.0、redis、neo4j
+- 数据库：mysql8、redis、neo4j
 - 消息机制：kafka、rabbitmq、rocketmq
 - 全文检索：elasticsearch
 - 流程引擎：flowable
