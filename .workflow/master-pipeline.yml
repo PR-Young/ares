@@ -19,7 +19,7 @@ stages:
         jdkVersion: 11
         mavenVersion: 3.3.9
         commands:
-          - mvn -B clean package -Dmaven.test.skip=true -P dev -f ares-system/pom.xml
+          - mvn clean package -Dmaven.test.skip=true -P dev -f ares-system/pom.xml
         artifacts:
           - name: BUILD_ARTIFACT
             path:
