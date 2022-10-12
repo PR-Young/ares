@@ -100,5 +100,8 @@ public class GeneratorConfig {
     @Value("${ares.generator.controllerPackage}")
     private String controllerPackage;
 
+    @Value("${ares.generator.templatePath}")
+    private String templatePath;
+
 
 }
