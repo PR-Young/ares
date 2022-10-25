@@ -245,7 +245,7 @@
             >
               <template v-slot:append>
                 <el-button
-                  :icon="ElIconThumb"
+                  icon="el-icon-thumb"
                   @click="openIconsDialog('prefix-icon')"
                 >
                   选择
@@ -263,7 +263,7 @@
             >
               <template v-slot:append>
                 <el-button
-                  :icon="ElIconThumb"
+                  icon="el-icon-thumb"
                   @click="openIconsDialog('suffix-icon')"
                 >
                   选择
@@ -283,7 +283,10 @@
               placeholder="请输入按钮图标名称"
             >
               <template v-slot:append>
-                <el-button :icon="ElIconThumb" @click="openIconsDialog('icon')">
+                <el-button
+                  icon="el-icon-thumb"
+                  @click="openIconsDialog('icon')"
+                >
                   选择
                 </el-button>
               </template>
@@ -588,7 +591,7 @@
             <div style="margin-left: 20px">
               <el-button
                 style="padding-bottom: 0"
-                :icon="ElIconCirclePlusOutline"
+                icon="el-icon-circle-plus-outline"
                 type="text"
                 @click="addSelectItem"
               >
@@ -685,7 +688,7 @@
             >
               <el-button
                 style="padding-bottom: 0"
-                :icon="ElIconCirclePlusOutline"
+                icon="el-icon-circle-plus-outline"
                 type="text"
                 @click="addTreeItem"
               >
@@ -947,7 +950,7 @@
             </div>
             <div style="margin-left: 20px">
               <el-button
-                :icon="ElIconCirclePlusOutline"
+                icon="el-icon-circle-plus-outline"
                 type="text"
                 @click="addReg"
               >
@@ -1018,12 +1021,12 @@
     </div>
 
     <treeNode-dialog
-      v-model:visible="dialogVisible"
+      :visible="dialogVisible"
       title="添加选项"
       @commit="addNode"
     />
     <icons-dialog
-      v-model:visible="iconsVisible"
+      :visible="iconsVisible"
       :current="activeData[currentIconModel]"
       @select="setIcon"
     />
@@ -1031,14 +1034,6 @@
 </template>
 
 <script>
-import {
-  SOperation as ElIconSOperation,
-  RemoveOutline as ElIconRemoveOutline,
-  Close as ElIconClose,
-  Thumb as ElIconThumb,
-  CirclePlusOutline as ElIconCirclePlusOutline,
-} from "@element-plus/icons";
-import { $on, $off, $once, $emit } from "../../../utils/gogocodeTransfer";
 import { isArray } from "util";
 import TreeNodeDialog from "./TreeNodeDialog";
 import { isNumberStr } from "@/utils/index";
@@ -1158,16 +1153,11 @@ export default {
           return data.componentName || `${config.label}: ${data.__vModel__}`;
         },
       },
-      ElIconThumb,
-      ElIconCirclePlusOutline,
     };
   },
   components: {
     TreeNodeDialog,
     IconsDialog,
-    ElIconSOperation,
-    ElIconRemoveOutline,
-    ElIconClose,
   },
   props: ["showField", "activeData", "formConf"],
   computed: {

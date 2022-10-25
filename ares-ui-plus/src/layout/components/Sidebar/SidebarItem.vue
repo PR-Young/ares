@@ -52,6 +52,7 @@ import { isExternal } from "@/utils/validate";
 import Item from "./Item";
 import AppLink from "./Link";
 import FixiOSBug from "./FixiOSBug";
+import { useRouter } from "vue-router";
 
 export default {
   name: "SidebarItem",
@@ -77,6 +78,10 @@ export default {
     return {};
   },
   methods: {
+    clickMenu(url) {
+      debugger;
+      useRouter().push({ url });
+    },
     hasOneShowingChild(children = [], parent) {
       const showingChildren = children.filter((item) => {
         if (item.hidden) {

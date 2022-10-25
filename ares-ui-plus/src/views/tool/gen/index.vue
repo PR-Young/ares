@@ -11,7 +11,7 @@
           v-model="queryParams.tableName"
           placeholder="请输入表名称"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -20,14 +20,14 @@
           v-model="queryParams.tableComment"
           placeholder="请输入表描述"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="创建时间">
         <el-date-picker
           v-model="dateRange"
-          size="small"
+          size="default"
           style="width: 240px"
           value-format="yyyy-MM-dd"
           type="daterange"
@@ -106,7 +106,7 @@
         <template v-slot="scope">
           <el-button
             type="text"
-            size="small"
+            size="default"
             :icon="ElIconView"
             @click="handlePreview(scope.row)"
             v-hasPermi="['tool:gen:preview']"
@@ -114,7 +114,7 @@
           >
           <el-button
             type="text"
-            size="small"
+            size="default"
             :icon="ElIconDownload"
             @click="handleGenTable(scope.row)"
             >生成代码</el-button
@@ -158,17 +158,17 @@ import {
   Refresh as ElIconRefresh,
   View as ElIconView,
   Download as ElIconDownload,
-} from '@element-plus/icons'
-import { listDbTable, previewTable, delTable } from '@/api/tool/gen'
-import importTable from './importTable'
-import { downLoadZip } from '@/utils/zipdownload'
+} from "@element-plus/icons";
+import { listDbTable, previewTable, delTable } from "@/api/tool/gen";
+import importTable from "./importTable";
+import { downLoadZip } from "@/utils/zipdownload";
 export default {
   data() {
     return {
       // 遮罩层
       loading: true,
       // 唯一标识符
-      uniqueId: '',
+      uniqueId: "",
       // 选中数组
       ids: [],
       // 选中表数组
@@ -182,7 +182,7 @@ export default {
       // 表数据
       tableList: [],
       // 日期范围
-      dateRange: '',
+      dateRange: "",
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -193,100 +193,100 @@ export default {
       // 预览参数
       preview: {
         open: false,
-        title: '代码预览',
+        title: "代码预览",
         data: {},
-        activeName: 'domain.java',
+        activeName: "domain.java",
       },
       ElIconSearch,
       ElIconRefresh,
       ElIconView,
       ElIconDownload,
-    }
+    };
   },
-  name: 'Gen',
+  name: "Gen",
   components: { importTable },
   created() {
-    this.getList()
+    this.getList();
   },
   activated() {
-    const time = this.$route.query.t
+    const time = this.$route.query.t;
     if (time != null && time != this.uniqueId) {
-      this.uniqueId = time
-      this.resetQuery()
+      this.uniqueId = time;
+      this.resetQuery();
     }
   },
   methods: {
     /** 查询表集合 */
     getList() {
-      this.loading = true
+      this.loading = true;
       listDbTable(this.addDateRange(this.queryParams, this.dateRange)).then(
         (response) => {
-          this.tableList = response.rows
-          this.total = response.total
-          this.loading = false
+          this.tableList = response.rows;
+          this.total = response.total;
+          this.loading = false;
         }
-      )
+      );
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1
-      this.getList()
+      this.queryParams.pageNum = 1;
+      this.getList();
     },
     /** 生成代码操作 */
     handleGenTable(row) {
-      const tableNames = row.TABLE_NAME
-      if (tableNames == '') {
-        this.msgError('请选择要生成的数据')
-        return
+      const tableNames = row.TABLE_NAME;
+      if (tableNames == "") {
+        this.msgError("请选择要生成的数据");
+        return;
       }
-      downLoadZip('ares/tool/gen/genCode/' + tableNames, 'code')
+      downLoadZip("ares/tool/gen/genCode/" + tableNames, "code");
     },
     /** 打开导入表弹窗 */
     openImportTable() {
-      this.$refs.import.show()
+      this.$refs.import.show();
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.dateRange = []
-      this.resetForm('queryForm')
-      this.handleQuery()
+      this.dateRange = [];
+      this.resetForm("queryForm");
+      this.handleQuery();
     },
     /** 预览按钮 */
     handlePreview(row) {
       previewTable(row.tableId).then((response) => {
-        this.preview.data = response.data
-        this.preview.open = true
-      })
+        this.preview.data = response.data;
+        this.preview.open = true;
+      });
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.tableId)
-      this.tableNames = selection.map((item) => item.tableName)
-      this.single = selection.length != 1
-      this.multiple = !selection.length
+      this.ids = selection.map((item) => item.tableId);
+      this.tableNames = selection.map((item) => item.tableName);
+      this.single = selection.length != 1;
+      this.multiple = !selection.length;
     },
     /** 修改按钮操作 */
     handleEditTable(row) {
-      const tableId = row.tableId || this.ids[0]
-      this.$router.push({ path: '/gen/edit', query: { tableId: tableId } })
+      const tableId = row.tableId || this.ids[0];
+      this.$router.push({ path: "/gen/edit", query: { tableId: tableId } });
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const tableIds = row.tableId || this.ids
-      this.$confirm('是否确认删除表编号为"' + tableIds + '"的数据项?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
+      const tableIds = row.tableId || this.ids;
+      this.$confirm('是否确认删除表编号为"' + tableIds + '"的数据项?', "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(function () {
-          return delTable(tableIds)
+          return delTable(tableIds);
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('删除成功')
+          this.getList();
+          this.msgSuccess("删除成功");
         })
-        .catch(function () {})
+        .catch(function () {});
     },
   },
-}
+};
 </script>

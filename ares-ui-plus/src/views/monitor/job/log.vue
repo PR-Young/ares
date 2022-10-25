@@ -11,7 +11,7 @@
           v-model="queryParams.jobName"
           placeholder="请输入任务名称"
           clearable
-          size="small"
+          size="default"
           style="width: 240px"
           @keyup.enter="handleQuery"
         />
@@ -21,7 +21,7 @@
           v-model="queryParams.jobGroup"
           placeholder="请任务组名"
           clearable
-          size="small"
+          size="default"
           style="width: 240px"
         >
           <el-option
@@ -37,7 +37,7 @@
           v-model="queryParams.status"
           placeholder="请选择执行状态"
           clearable
-          size="small"
+          size="default"
           style="width: 240px"
         >
           <el-option
@@ -51,7 +51,7 @@
       <el-form-item label="执行时间">
         <el-date-picker
           v-model="dateRange"
-          size="small"
+          size="default"
           style="width: 240px"
           value-format="yyyy-MM-dd"
           type="daterange"
@@ -237,13 +237,13 @@ import {
   Delete as ElIconDelete,
   Download as ElIconDownload,
   View as ElIconView,
-} from '@element-plus/icons'
+} from "@element-plus/icons";
 import {
   listJobLog,
   delJobLog,
   exportJobLog,
   cleanJobLog,
-} from '@/api/monitor/jobLog'
+} from "@/api/monitor/jobLog";
 
 export default {
   data() {
@@ -266,14 +266,14 @@ export default {
       form: {},
       // 执行状态字典
       statusOptions: [
-        { dictValue: 0, dictLabel: '成功' },
-        { dictValue: 1, dictLabel: '失败' },
+        { dictValue: 0, dictLabel: "成功" },
+        { dictValue: 1, dictLabel: "失败" },
       ],
       // 查询参数
       // 任务组名字典
       jobGroupOptions: [
-        { dictValue: 'DEFAULT', dictLabel: '默认组' },
-        { dictValue: 'SYSTEM', dictLabel: '系统组' },
+        { dictValue: "DEFAULT", dictLabel: "默认组" },
+        { dictValue: "SYSTEM", dictLabel: "系统组" },
       ],
       // 查询参数
       queryParams: {
@@ -292,11 +292,11 @@ export default {
       ElIconDelete,
       ElIconDownload,
       ElIconView,
-    }
+    };
   },
-  name: 'JobLog',
+  name: "JobLog",
   created() {
-    this.getList()
+    this.getList();
     // this.getDicts("sys_job_status").then(response => {
     //   this.statusOptions = response.data;
     // });
@@ -306,104 +306,104 @@ export default {
   },
   methods: {
     sortChange(data) {
-      const { prop, order } = data
-      this.queryParams.sortColumn = prop
-      this.queryParams.sortAsc = order === null ? 'descending' : order
-      this.getList()
+      const { prop, order } = data;
+      this.queryParams.sortColumn = prop;
+      this.queryParams.sortAsc = order === null ? "descending" : order;
+      this.getList();
     },
     /** 查询调度日志列表 */
     getList() {
-      this.loading = true
+      this.loading = true;
       listJobLog(this.addDateRange(this.queryParams, this.dateRange)).then(
         (response) => {
-          this.jobLogList = response.rows
-          this.total = response.total
-          this.loading = false
+          this.jobLogList = response.rows;
+          this.total = response.total;
+          this.loading = false;
         }
-      )
+      );
     },
     // 执行状态字典翻译
     statusFormat(row, column) {
-      return this.selectDictLabel(this.statusOptions, row.status)
+      return this.selectDictLabel(this.statusOptions, row.status);
     },
     // 任务组名字典翻译
     jobGroupFormat(row, column) {
-      return this.selectDictLabel(this.jobGroupOptions, row.jobGroup)
+      return this.selectDictLabel(this.jobGroupOptions, row.jobGroup);
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1
-      this.getList()
+      this.queryParams.pageNum = 1;
+      this.getList();
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.dateRange = []
-      this.resetForm('queryForm')
-      this.handleQuery()
+      this.dateRange = [];
+      this.resetForm("queryForm");
+      this.handleQuery();
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.id)
-      this.multiple = !selection.length
+      this.ids = selection.map((item) => item.id);
+      this.multiple = !selection.length;
     },
     /** 详细按钮操作 */
     handleView(row) {
-      this.open = true
-      this.form = row
+      this.open = true;
+      this.form = row;
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const jobLogIds = this.ids
+      const jobLogIds = this.ids;
       this.$confirm(
         '是否确认删除调度日志编号为"' + jobLogIds + '"的数据项?',
-        '警告',
+        "警告",
         {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
         }
       )
         .then(function () {
-          return delJobLog(jobLogIds)
+          return delJobLog(jobLogIds);
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('删除成功')
+          this.getList();
+          this.msgSuccess("删除成功");
         })
-        .catch(function () {})
+        .catch(function () {});
     },
     /** 清空按钮操作 */
     handleClean() {
-      this.$confirm('是否确认清空所有调度日志数据项?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
+      this.$confirm("是否确认清空所有调度日志数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(function () {
-          return cleanJobLog()
+          return cleanJobLog();
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('清空成功')
+          this.getList();
+          this.msgSuccess("清空成功");
         })
-        .catch(function () {})
+        .catch(function () {});
     },
     /** 导出按钮操作 */
     handleExport() {
-      const queryParams = this.queryParams
-      this.$confirm('是否确认导出所有调度日志数据项?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
+      const queryParams = this.queryParams;
+      this.$confirm("是否确认导出所有调度日志数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(function () {
-          return exportJobLog(queryParams)
+          return exportJobLog(queryParams);
         })
         .then((response) => {
-          this.download(response.msg)
+          this.download(response.msg);
         })
-        .catch(function () {})
+        .catch(function () {});
     },
   },
-}
+};
 </script>

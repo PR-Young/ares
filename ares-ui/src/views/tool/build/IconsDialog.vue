@@ -15,7 +15,7 @@
             size="mini"
             :style="{ width: '260px' }"
             placeholder="请输入图标名称"
-            :prefix-icon="ElIconSearch"
+            prefix-icon="el-icon-search"
             clearable
           />
         </div>
@@ -36,58 +36,55 @@
 </template>
 
 <script>
-import { Search as ElIconSearch } from '@element-plus/icons'
-import { $on, $off, $once, $emit } from '../../../utils/gogocodeTransfer'
-import iconList from '@/utils/generator/icon.json'
+import iconList from "@/utils/generator/icon.json";
 
 function inheriltClassAndStyle() {
-  const attrs = this.$attrs
-  attrs.class && this.$el.classList.add(attrs.class)
+  const attrs = this.$attrs;
+  attrs.class && this.$el.classList.add(attrs.class);
   attrs.style &&
     Object.entries(attrs.style).forEach(([k, v]) => {
-      this.$el.style[k] = v
-    })
+      this.$el.style[k] = v;
+    });
 }
 
-const originList = iconList.map((name) => `el-icon-${name}`)
+const originList = iconList.map((name) => `el-icon-${name}`);
 
 export default {
   data() {
     return {
       iconList: originList,
       active: null,
-      key: '',
-      ElIconSearch,
-    }
+      key: "",
+    };
   },
   mounted() {
-    inheriltClassAndStyle.call(this)
+    inheriltClassAndStyle.call(this);
   },
   inheritAttrs: false,
-  props: ['current'],
+  props: ["current"],
   watch: {
     key(val) {
       if (val) {
-        this.iconList = originList.filter((name) => name.indexOf(val) > -1)
+        this.iconList = originList.filter((name) => name.indexOf(val) > -1);
       } else {
-        this.iconList = originList
+        this.iconList = originList;
       }
     },
   },
   methods: {
     onOpen() {
-      this.active = this.current
-      this.key = ''
+      this.active = this.current;
+      this.key = "";
     },
     onClose() {},
     onSelect(icon) {
-      this.active = icon
-      $emit(this, 'select', icon)
-      $emit(this, 'update:visible', false)
+      this.active = icon;
+      $emit(this, "select", icon);
+      $emit(this, "update:visible", false);
     },
   },
-  emits: ['select', 'update:visible'],
-}
+  emits: ["select", "update:visible"],
+};
 </script>
 
 <style lang="scss" scoped>

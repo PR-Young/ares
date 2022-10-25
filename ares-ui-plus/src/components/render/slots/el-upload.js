@@ -6,7 +6,7 @@ export default {
       list.push(<i class="el-icon-plus"></i>)
     } else {
       list.push(
-        <el-button size="small" type="primary" icon="el-icon-upload">
+        <el-button size="default" type="primary" icon="el-icon-upload">
           {config.buttonText}
         </el-button>
       )

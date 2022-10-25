@@ -11,7 +11,7 @@
           v-model="queryParams.subject"
           placeholder="请输入模版名称"
           clearable
-          size="small"
+          size="default"
           style="width: 240px"
           @keyup.enter="handleQuery"
         />
@@ -19,7 +19,7 @@
       <el-form-item label="创建时间">
         <el-date-picker
           v-model="dateRange"
-          size="small"
+          size="default"
           style="width: 240px"
           value-format="yyyy-MM-dd"
           type="daterange"

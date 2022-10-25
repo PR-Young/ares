@@ -12,14 +12,14 @@
           v-model="queryParams.name"
           placeholder="请输入名称"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item label="开始时间" prop="deployTime">
         <el-date-picker
           clearable
-          size="small"
+          size="default"
           v-model="queryParams.deployTime"
           type="date"
           value-format="yyyy-MM-dd"

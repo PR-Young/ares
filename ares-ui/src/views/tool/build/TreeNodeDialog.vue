@@ -58,20 +58,19 @@
 </template>
 
 <script>
-import { $on, $off, $once, $emit } from '../../../utils/gogocodeTransfer'
-import { isNumberStr } from '@/utils/index'
-import { getTreeNodeId, saveTreeNodeId } from '@/utils/db'
+import { isNumberStr } from "@/utils/index";
+import { getTreeNodeId, saveTreeNodeId } from "@/utils/db";
 
 function inheriltClassAndStyle() {
-  const attrs = this.$attrs
-  attrs.class && this.$el.classList.add(attrs.class)
+  const attrs = this.$attrs;
+  attrs.class && this.$el.classList.add(attrs.class);
   attrs.style &&
     Object.entries(attrs.style).forEach(([k, v]) => {
-      this.$el.style[k] = v
-    })
+      this.$el.style[k] = v;
+    });
 }
 
-const id = getTreeNodeId()
+const id = getTreeNodeId();
 
 export default {
   components: {},
@@ -88,39 +87,39 @@ export default {
         label: [
           {
             required: true,
-            message: '请输入选项名',
-            trigger: 'blur',
+            message: "请输入选项名",
+            trigger: "blur",
           },
         ],
         value: [
           {
             required: true,
-            message: '请输入选项值',
-            trigger: 'blur',
+            message: "请输入选项值",
+            trigger: "blur",
           },
         ],
       },
-      dataType: 'string',
+      dataType: "string",
       dataTypeOptions: [
         {
-          label: '字符串',
-          value: 'string',
+          label: "字符串",
+          value: "string",
         },
         {
-          label: '数字',
-          value: 'number',
+          label: "数字",
+          value: "number",
         },
       ],
-    }
+    };
   },
   computed: {},
   watch: {
     // eslint-disable-next-line func-names
-    'formData.value': function (val) {
-      this.dataType = isNumberStr(val) ? 'number' : 'string'
+    "formData.value": function (val) {
+      this.dataType = isNumberStr(val) ? "number" : "string";
     },
     id(val) {
-      saveTreeNodeId(val)
+      saveTreeNodeId(val);
     },
   },
   created() {},
@@ -129,27 +128,27 @@ export default {
       this.formData = {
         label: undefined,
         value: undefined,
-      }
+      };
     },
     onClose() {},
     close() {
-      $emit(this, 'update:visible', false)
+      $emit(this, "update:visible", false);
     },
     handelConfirm() {
       this.$refs.elForm.validate((valid) => {
-        if (!valid) return
-        if (this.dataType === 'number') {
-          this.formData.value = parseFloat(this.formData.value)
+        if (!valid) return;
+        if (this.dataType === "number") {
+          this.formData.value = parseFloat(this.formData.value);
         }
-        this.formData.id = this.id++
-        $emit(this, 'commit', this.formData)
-        this.close()
-      })
+        this.formData.id = this.id++;
+        $emit(this, "commit", this.formData);
+        this.close();
+      });
     },
   },
   mounted() {
-    inheriltClassAndStyle.call(this)
+    inheriltClassAndStyle.call(this);
   },
-  emits: ['update:visible', 'commit'],
-}
+  emits: ["update:visible", "commit"],
+};
 </script>

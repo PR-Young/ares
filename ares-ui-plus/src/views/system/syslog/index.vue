@@ -11,7 +11,7 @@
           v-model="queryParams.hostIp"
           placeholder="请输入IP"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -20,7 +20,7 @@
           v-model="queryParams.userName"
           placeholder="请输入用户名"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -29,7 +29,7 @@
           v-model="queryParams.requestMethod"
           placeholder="请求方式"
           clearable
-          size="small"
+          size="default"
         >
           <el-option
             v-for="dict in methodOptions"

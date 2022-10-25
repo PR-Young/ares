@@ -12,7 +12,7 @@
           v-model="queryParams.formName"
           placeholder="请输入表单名称"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -177,7 +177,7 @@ import {
   Delete as ElIconDelete,
   Download as ElIconDownload,
   View as ElIconView,
-} from '@element-plus/icons'
+} from "@element-plus/icons";
 import {
   listForm,
   getForm,
@@ -185,9 +185,9 @@ import {
   addForm,
   updateForm,
   exportForm,
-} from '@/api/flowable/form'
-import Editor from '@/components/Editor'
-import Parser from '@/components/parser/Parser'
+} from "@/api/flowable/form";
+import Editor from "@/components/Editor";
+import Parser from "@/components/parser/Parser";
 export default {
   data() {
     return {
@@ -206,11 +206,11 @@ export default {
       // 流程表单表格数据
       formList: [],
       // 弹出层标题
-      title: '',
+      title: "",
       // 默认表单数据
       formConf: {},
       formConfOpen: false,
-      formTitle: '',
+      formTitle: "",
       // 是否显示弹出层
       open: false,
       // 查询参数
@@ -231,30 +231,30 @@ export default {
       ElIconDelete,
       ElIconDownload,
       ElIconView,
-    }
+    };
   },
-  name: 'Form',
+  name: "Form",
   components: {
     Editor,
     Parser,
   },
   created() {
-    this.getList()
+    this.getList();
   },
   methods: {
     /** 查询流程表单列表 */
     getList() {
-      this.loading = true
+      this.loading = true;
       listForm(this.queryParams).then((response) => {
-        this.formList = response.rows
-        this.total = response.total
-        this.loading = false
-      })
+        this.formList = response.rows;
+        this.total = response.total;
+        this.loading = false;
+      });
     },
     // 取消按钮
     cancel() {
-      this.open = false
-      this.reset()
+      this.open = false;
+      this.reset();
     },
     // 表单重置
     reset() {
@@ -267,37 +267,37 @@ export default {
         createBy: null,
         updateBy: null,
         remark: null,
-      }
-      this.resetForm('form')
+      };
+      this.resetForm("form");
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1
-      this.getList()
+      this.queryParams.pageNum = 1;
+      this.getList();
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm('queryForm')
-      this.handleQuery()
+      this.resetForm("queryForm");
+      this.handleQuery();
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.id)
-      this.single = selection.length !== 1
-      this.multiple = !selection.length
+      this.ids = selection.map((item) => item.id);
+      this.single = selection.length !== 1;
+      this.multiple = !selection.length;
     },
     /** 表单配置信息 */
     handleDetail(row) {
-      this.formConfOpen = true
-      this.formTitle = '流程表单配置详细'
-      this.formConf = JSON.parse(row.formContent)
+      this.formConfOpen = true;
+      this.formTitle = "流程表单配置详细";
+      this.formConf = JSON.parse(row.formContent);
     },
     /** 新增按钮操作 */
     handleAdd() {
       // this.reset();
       // this.open = true;
       // this.title = "添加流程表单";
-      this.$router.push({ path: '/tool/build/index', query: { formId: null } })
+      this.$router.push({ path: "/tool/build/index", query: { formId: null } });
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -309,67 +309,67 @@ export default {
       //   this.title = "修改流程表单";
       // });
       this.$router.push({
-        path: '/tool/build/index',
+        path: "/tool/build/index",
         query: { formId: row.id },
-      })
+      });
     },
     /** 提交按钮 */
     submitForm() {
-      this.$refs['form'].validate((valid) => {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
           if (this.form.formId != null) {
             updateForm(this.form).then((response) => {
-              this.msgSuccess('修改成功')
-              this.open = false
-              this.getList()
-            })
+              this.msgSuccess("修改成功");
+              this.open = false;
+              this.getList();
+            });
           } else {
             addForm(this.form).then((response) => {
-              this.msgSuccess('新增成功')
-              this.open = false
-              this.getList()
-            })
+              this.msgSuccess("新增成功");
+              this.open = false;
+              this.getList();
+            });
           }
         }
-      })
+      });
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const formIds = row.id || this.ids
+      const formIds = row.id || this.ids;
       this.$confirm(
         '是否确认删除流程表单编号为"' + formIds + '"的数据项?',
-        '警告',
+        "警告",
         {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
         }
       )
         .then(function () {
-          return delForm(formIds)
+          return delForm(formIds);
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('删除成功')
-        })
+          this.getList();
+          this.msgSuccess("删除成功");
+        });
     },
     /** 导出按钮操作 */
     handleExport() {
-      const queryParams = this.queryParams
-      this.$confirm('是否确认导出所有流程表单数据项?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
+      const queryParams = this.queryParams;
+      this.$confirm("是否确认导出所有流程表单数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(function () {
-          return exportForm(queryParams)
+          return exportForm(queryParams);
         })
         .then((response) => {
-          this.download(response.msg)
-        })
+          this.download(response.msg);
+        });
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

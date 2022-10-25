@@ -3,22 +3,21 @@
     <el-drawer v-bind="$attrs" @opened="onOpen" @close="onClose">
       <div class="action-bar" :style="{ 'text-align': 'left' }">
         <span class="bar-btn" @click="refresh">
-          <el-icon><el-icon-refresh /></el-icon>
+          <i class="el-icon-refresh" />
           刷新
         </span>
         <span ref="copyBtn" class="bar-btn copy-json-btn">
-          <el-icon><el-icon-document-copy /></el-icon>
-          复制JSON
+          <i class="el-icon-document-copy" />
         </span>
         <span class="bar-btn" @click="exportJsonFile">
-          <el-icon><el-icon-download /></el-icon>
+          <i class="el-icon-download" />
           导出JSON文件
         </span>
         <span
           class="bar-btn delete-btn"
           @click="$emit('update:visible', false)"
         >
-          <el-icon><el-icon-circle-close /></el-icon>
+          <i class="el-icon-circle-close" />
           关闭
         </span>
       </div>
@@ -28,29 +27,17 @@
 </template>
 
 <script>
-import {
-  Refresh as ElIconRefresh,
-  DocumentCopy as ElIconDocumentCopy,
-  Download as ElIconDownload,
-  CircleClose as ElIconCircleClose,
-} from '@element-plus/icons'
-import { $on, $off, $once, $emit } from '../../../utils/gogocodeTransfer'
-import { beautifierConf } from '@/utils/index'
-import ClipboardJS from 'clipboard'
-import { saveAs } from 'file-saver'
-import loadMonaco from '@/utils/loadMonaco'
-import loadBeautifier from '@/utils/loadBeautifier'
+import { beautifierConf } from "@/utils/index";
+import ClipboardJS from "clipboard";
+import { saveAs } from "file-saver";
+import loadMonaco from "@/utils/loadMonaco";
+import loadBeautifier from "@/utils/loadBeautifier";
 
-let beautifier
-let monaco
+let beautifier;
+let monaco;
 
 export default {
-  components: {
-    ElIconRefresh,
-    ElIconDocumentCopy,
-    ElIconDownload,
-    ElIconCircleClose,
-  },
+  components: {},
   props: {
     jsonStr: {
       type: String,
@@ -58,96 +45,96 @@ export default {
     },
   },
   data() {
-    return {}
+    return {};
   },
   computed: {},
   watch: {},
   created() {},
   mounted() {
-    window.addEventListener('keydown', this.preventDefaultSave)
-    const clipboard = new ClipboardJS('.copy-json-btn', {
+    window.addEventListener("keydown", this.preventDefaultSave);
+    const clipboard = new ClipboardJS(".copy-json-btn", {
       text: (trigger) => {
         this.$notify({
-          title: '成功',
-          message: '代码已复制到剪切板，可粘贴。',
-          type: 'success',
-        })
-        return this.beautifierJson
+          title: "成功",
+          message: "代码已复制到剪切板，可粘贴。",
+          type: "success",
+        });
+        return this.beautifierJson;
       },
-    })
-    clipboard.on('error', (e) => {
-      this.$message.error('代码复制失败')
-    })
+    });
+    clipboard.on("error", (e) => {
+      this.$message.error("代码复制失败");
+    });
   },
   beforeUnmount() {
-    window.removeEventListener('keydown', this.preventDefaultSave)
+    window.removeEventListener("keydown", this.preventDefaultSave);
   },
   methods: {
     preventDefaultSave(e) {
-      if (e.key === 's' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
+      if (e.key === "s" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
       }
     },
     onOpen() {
       loadBeautifier((btf) => {
-        beautifier = btf
-        this.beautifierJson = beautifier.js(this.jsonStr, beautifierConf.js)
+        beautifier = btf;
+        this.beautifierJson = beautifier.js(this.jsonStr, beautifierConf.js);
 
         loadMonaco((val) => {
-          monaco = val
-          this.setEditorValue('editorJson', this.beautifierJson)
-        })
-      })
+          monaco = val;
+          this.setEditorValue("editorJson", this.beautifierJson);
+        });
+      });
     },
     onClose() {},
     setEditorValue(id, codeStr) {
       if (this.jsonEditor) {
-        this.jsonEditor.setValue(codeStr)
+        this.jsonEditor.setValue(codeStr);
       } else {
         this.jsonEditor = monaco.editor.create(document.getElementById(id), {
           value: codeStr,
-          theme: 'vs-dark',
-          language: 'json',
+          theme: "vs-dark",
+          language: "json",
           automaticLayout: true,
-        })
+        });
         // ctrl + s 刷新
         this.jsonEditor.onKeyDown((e) => {
           if (e.keyCode === 49 && (e.metaKey || e.ctrlKey)) {
-            this.refresh()
+            this.refresh();
           }
-        })
+        });
       }
     },
     exportJsonFile() {
-      this.$prompt('文件名:', '导出文件', {
+      this.$prompt("文件名:", "导出文件", {
         inputValue: `${+new Date()}.json`,
         closeOnClickModal: false,
-        inputPlaceholder: '请输入文件名',
+        inputPlaceholder: "请输入文件名",
       }).then(({ value }) => {
-        if (!value) value = `${+new Date()}.json`
-        const codeStr = this.jsonEditor.getValue()
-        const blob = new Blob([codeStr], { type: 'text/plain;charset=utf-8' })
-        saveAs(blob, value)
-      })
+        if (!value) value = `${+new Date()}.json`;
+        const codeStr = this.jsonEditor.getValue();
+        const blob = new Blob([codeStr], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, value);
+      });
     },
     refresh() {
       try {
-        $emit(this, 'refresh', JSON.parse(this.jsonEditor.getValue()))
+        $emit(this, "refresh", JSON.parse(this.jsonEditor.getValue()));
       } catch (error) {
         this.$notify({
-          title: '错误',
-          message: 'JSON格式错误，请检查',
-          type: 'error',
-        })
+          title: "错误",
+          message: "JSON格式错误，请检查",
+          type: "error",
+        });
       }
     },
   },
-  emits: ['update:visible', 'refresh'],
-}
+  emits: ["update:visible", "refresh"],
+};
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/mixin.scss';
+@import "@/styles/mixin.scss";
 ::v-deep .el-drawer__header {
   display: none;
 }

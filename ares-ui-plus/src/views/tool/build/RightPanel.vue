@@ -12,7 +12,7 @@
         <!-- 组件属性 -->
         <el-form
           v-show="currentTab === 'field' && showField"
-          size="small"
+          size="default"
           label-width="90px"
         >
           <el-form-item v-if="activeData.__config__.changeTag" label="组件类型">
@@ -476,7 +476,7 @@
             v-if="activeData['list-type'] !== undefined"
             label="列表类型"
           >
-            <el-radio-group v-model="activeData['list-type']" size="small">
+            <el-radio-group v-model="activeData['list-type']" size="default">
               <el-radio-button label="text"> text </el-radio-button>
               <el-radio-button label="picture"> picture </el-radio-button>
               <el-radio-button label="picture-card">
@@ -569,11 +569,11 @@
                 <el-input
                   v-model="item.label"
                   placeholder="选项名"
-                  size="small"
+                  size="default"
                 />
                 <el-input
                   placeholder="选项值"
-                  size="small"
+                  size="default"
                   :model-value="item.value"
                   @input="setOptionValue(item, $event)"
                 />
@@ -610,7 +610,7 @@
             >
               <el-radio-group
                 v-model="activeData.__config__.dataType"
-                size="small"
+                size="default"
               >
                 <el-radio-button label="dynamic"> 动态数据 </el-radio-button>
                 <el-radio-button label="static"> 静态数据 </el-radio-button>
@@ -957,7 +957,11 @@
           </template>
         </el-form>
         <!-- 表单属性 -->
-        <el-form v-show="currentTab === 'form'" size="small" label-width="90px">
+        <el-form
+          v-show="currentTab === 'form'"
+          size="default"
+          label-width="90px"
+        >
           <el-form-item label="表单名">
             <el-input
               v-model="formConf.formRef"

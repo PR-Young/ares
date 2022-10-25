@@ -8,7 +8,7 @@
             v-model="deptName"
             placeholder="请输入部门名称"
             clearable
-            size="small"
+            size="default"
             :prefix-icon="ElIconSearch"
             style="margin-bottom: 20px"
           />
@@ -39,7 +39,7 @@
               v-model="queryParams.userName"
               placeholder="请输入用户名称"
               clearable
-              size="small"
+              size="default"
               style="width: 240px"
               @keyup.enter="handleQuery"
             />
@@ -47,7 +47,7 @@
           <el-form-item label="创建时间">
             <el-date-picker
               v-model="dateRange"
-              size="small"
+              size="default"
               style="width: 240px"
               value-format="yyyy-MM-dd"
               type="daterange"

@@ -242,8 +242,8 @@ export const constantRoutes = [
 
 export default createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
-  routes: constantRoutes,
   scrollBehavior: () => ({
-    top: 0,
+    y: 0,
   }),
+  routes: constantRoutes,
 })

@@ -12,7 +12,7 @@
           placeholder="请输入登录地址"
           clearable
           style="width: 240px"
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -22,7 +22,7 @@
           placeholder="请输入用户名称"
           clearable
           style="width: 240px"
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -31,7 +31,7 @@
           v-model="queryParams.status"
           placeholder="登录状态"
           clearable
-          size="small"
+          size="default"
           style="width: 240px"
         >
           <el-option
@@ -45,7 +45,7 @@
       <el-form-item label="登录时间">
         <el-date-picker
           v-model="dateRange"
-          size="small"
+          size="default"
           style="width: 240px"
           value-format="yyyy-MM-dd"
           type="daterange"
@@ -155,13 +155,13 @@ import {
   Refresh as ElIconRefresh,
   Delete as ElIconDelete,
   Download as ElIconDownload,
-} from '@element-plus/icons'
+} from "@element-plus/icons";
 import {
   list,
   delLogininfor,
   cleanLogininfor,
   exportLogininfor,
-} from '@/api/monitor/logininfor'
+} from "@/api/monitor/logininfor";
 
 export default {
   data() {
@@ -192,100 +192,100 @@ export default {
       ElIconRefresh,
       ElIconDelete,
       ElIconDownload,
-    }
+    };
   },
-  name: 'Logininfor',
+  name: "Logininfor",
   created() {
-    this.getList()
-    this.getDicts('sys_common_status').then((response) => {
-      this.statusOptions = response.data
-    })
+    this.getList();
+    this.getDicts("sys_common_status").then((response) => {
+      this.statusOptions = response.data;
+    });
   },
   methods: {
     /** 查询登录日志列表 */
     getList() {
-      this.loading = true
+      this.loading = true;
       list(this.addDateRange(this.queryParams, this.dateRange)).then(
         (response) => {
-          this.list = response.rows
-          this.total = response.total
-          this.loading = false
+          this.list = response.rows;
+          this.total = response.total;
+          this.loading = false;
         }
-      )
+      );
     },
     // 登录状态字典翻译
     statusFormat(row, column) {
-      return this.selectDictLabel(this.statusOptions, row.status)
+      return this.selectDictLabel(this.statusOptions, row.status);
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1
-      this.getList()
+      this.queryParams.pageNum = 1;
+      this.getList();
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.dateRange = []
-      this.resetForm('queryForm')
-      this.handleQuery()
+      this.dateRange = [];
+      this.resetForm("queryForm");
+      this.handleQuery();
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.infoId)
-      this.multiple = !selection.length
+      this.ids = selection.map((item) => item.infoId);
+      this.multiple = !selection.length;
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const infoIds = row.infoId || this.ids
+      const infoIds = row.infoId || this.ids;
       this.$confirm(
         '是否确认删除访问编号为"' + infoIds + '"的数据项?',
-        '警告',
+        "警告",
         {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
         }
       )
         .then(function () {
-          return delLogininfor(infoIds)
+          return delLogininfor(infoIds);
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('删除成功')
+          this.getList();
+          this.msgSuccess("删除成功");
         })
-        .catch(function () {})
+        .catch(function () {});
     },
     /** 清空按钮操作 */
     handleClean() {
-      this.$confirm('是否确认清空所有登录日志数据项?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
+      this.$confirm("是否确认清空所有登录日志数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(function () {
-          return cleanLogininfor()
+          return cleanLogininfor();
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('清空成功')
+          this.getList();
+          this.msgSuccess("清空成功");
         })
-        .catch(function () {})
+        .catch(function () {});
     },
     /** 导出按钮操作 */
     handleExport() {
-      const queryParams = this.queryParams
-      this.$confirm('是否确认导出所有操作日志数据项?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
+      const queryParams = this.queryParams;
+      this.$confirm("是否确认导出所有操作日志数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(function () {
-          return exportLogininfor(queryParams)
+          return exportLogininfor(queryParams);
         })
         .then((response) => {
-          this.download(response.msg)
+          this.download(response.msg);
         })
-        .catch(function () {})
+        .catch(function () {});
     },
   },
-}
+};
 </script>

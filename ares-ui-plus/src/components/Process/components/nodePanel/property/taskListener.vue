@@ -15,7 +15,7 @@
             :model-value="scope.row.params ? scope.row.params.length : 0"
             type="primary"
           >
-            <el-button size="small" @click="configParam(scope.$index)"
+            <el-button size="default" @click="configParam(scope.$index)"
               >配置</el-button
             >
           </el-badge>

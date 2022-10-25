@@ -11,7 +11,7 @@
           v-model="queryParams.configName"
           placeholder="请输入参数名称"
           clearable
-          size="small"
+          size="default"
           style="width: 240px"
           @keyup.enter="handleQuery"
         />
@@ -21,7 +21,7 @@
           v-model="queryParams.configKey"
           placeholder="请输入参数键名"
           clearable
-          size="small"
+          size="default"
           style="width: 240px"
           @keyup.enter="handleQuery"
         />
@@ -31,7 +31,7 @@
           v-model="queryParams.configType"
           placeholder="系统内置"
           clearable
-          size="small"
+          size="default"
         >
           <el-option
             v-for="dict in typeOptions"
@@ -44,7 +44,7 @@
       <el-form-item label="创建时间">
         <el-date-picker
           v-model="dateRange"
-          size="small"
+          size="default"
           style="width: 240px"
           value-format="yyyy-MM-dd"
           type="daterange"
@@ -236,7 +236,7 @@ import {
   Edit as ElIconEdit,
   Delete as ElIconDelete,
   Download as ElIconDownload,
-} from '@element-plus/icons'
+} from "@element-plus/icons";
 import {
   listConfig,
   getConfig,
@@ -244,7 +244,7 @@ import {
   addConfig,
   updateConfig,
   exportConfig,
-} from '@/api/system/config'
+} from "@/api/system/config";
 
 export default {
   data() {
@@ -262,7 +262,7 @@ export default {
       // 参数表格数据
       configList: [],
       // 弹出层标题
-      title: '',
+      title: "",
       // 是否显示弹出层
       open: false,
       // 类型数据字典
@@ -282,13 +282,13 @@ export default {
       // 表单校验
       rules: {
         configName: [
-          { required: true, message: '参数名称不能为空', trigger: 'blur' },
+          { required: true, message: "参数名称不能为空", trigger: "blur" },
         ],
         configKey: [
-          { required: true, message: '参数键名不能为空', trigger: 'blur' },
+          { required: true, message: "参数键名不能为空", trigger: "blur" },
         ],
         configValue: [
-          { required: true, message: '参数键值不能为空', trigger: 'blur' },
+          { required: true, message: "参数键值不能为空", trigger: "blur" },
         ],
       },
       ElIconSearch,
@@ -297,35 +297,35 @@ export default {
       ElIconEdit,
       ElIconDelete,
       ElIconDownload,
-    }
+    };
   },
-  name: 'Config',
+  name: "Config",
   created() {
-    this.getList()
-    this.getDicts('sys_yes_no').then((response) => {
-      this.typeOptions = response.data
-    })
+    this.getList();
+    this.getDicts("sys_yes_no").then((response) => {
+      this.typeOptions = response.data;
+    });
   },
   methods: {
     /** 查询参数列表 */
     getList() {
-      this.loading = true
+      this.loading = true;
       listConfig(this.addDateRange(this.queryParams, this.dateRange)).then(
         (response) => {
-          this.configList = response.rows
-          this.total = response.total
-          this.loading = false
+          this.configList = response.rows;
+          this.total = response.total;
+          this.loading = false;
         }
-      )
+      );
     },
     // 参数系统内置字典翻译
     typeFormat(row, column) {
-      return this.selectDictLabel(this.typeOptions, row.configType)
+      return this.selectDictLabel(this.typeOptions, row.configType);
     },
     // 取消按钮
     cancel() {
-      this.open = false
-      this.reset()
+      this.open = false;
+      this.reset();
     },
     // 表单重置
     reset() {
@@ -334,109 +334,109 @@ export default {
         configName: undefined,
         configKey: undefined,
         configValue: undefined,
-        configType: 'Y',
+        configType: "Y",
         remark: undefined,
-      }
-      this.resetForm('form')
+      };
+      this.resetForm("form");
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1
-      this.getList()
+      this.queryParams.pageNum = 1;
+      this.getList();
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.dateRange = []
-      this.resetForm('queryForm')
-      this.handleQuery()
+      this.dateRange = [];
+      this.resetForm("queryForm");
+      this.handleQuery();
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.reset()
-      this.open = true
-      this.title = '添加参数'
+      this.reset();
+      this.open = true;
+      this.title = "添加参数";
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.configId)
-      this.single = selection.length != 1
-      this.multiple = !selection.length
+      this.ids = selection.map((item) => item.configId);
+      this.single = selection.length != 1;
+      this.multiple = !selection.length;
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.reset()
-      const configId = row.configId || this.ids
+      this.reset();
+      const configId = row.configId || this.ids;
       getConfig(configId).then((response) => {
-        this.form = response.data
-        this.open = true
-        this.title = '修改参数'
-      })
+        this.form = response.data;
+        this.open = true;
+        this.title = "修改参数";
+      });
     },
     /** 提交按钮 */
     submitForm: function () {
-      this.$refs['form'].validate((valid) => {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
           if (this.form.configId != undefined) {
             updateConfig(this.form).then((response) => {
               if (response.code === 200) {
-                this.msgSuccess('修改成功')
-                this.open = false
-                this.getList()
+                this.msgSuccess("修改成功");
+                this.open = false;
+                this.getList();
               } else {
-                this.msgError(response.msg)
+                this.msgError(response.msg);
               }
-            })
+            });
           } else {
             addConfig(this.form).then((response) => {
               if (response.code === 200) {
-                this.msgSuccess('新增成功')
-                this.open = false
-                this.getList()
+                this.msgSuccess("新增成功");
+                this.open = false;
+                this.getList();
               } else {
-                this.msgError(response.msg)
+                this.msgError(response.msg);
               }
-            })
+            });
           }
         }
-      })
+      });
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const configIds = row.configId || this.ids
+      const configIds = row.configId || this.ids;
       this.$confirm(
         '是否确认删除参数编号为"' + configIds + '"的数据项?',
-        '警告',
+        "警告",
         {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
         }
       )
         .then(function () {
-          return delConfig(configIds)
+          return delConfig(configIds);
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('删除成功')
+          this.getList();
+          this.msgSuccess("删除成功");
         })
-        .catch(function () {})
+        .catch(function () {});
     },
     /** 导出按钮操作 */
     handleExport() {
-      const queryParams = this.queryParams
-      this.$confirm('是否确认导出所有参数数据项?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
+      const queryParams = this.queryParams;
+      this.$confirm("是否确认导出所有参数数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(function () {
-          return exportConfig(queryParams)
+          return exportConfig(queryParams);
         })
         .then((response) => {
-          this.download(response.msg)
+          this.download(response.msg);
         })
-        .catch(function () {})
+        .catch(function () {});
     },
   },
-}
+};
 </script>

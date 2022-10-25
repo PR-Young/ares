@@ -6,12 +6,12 @@
           v-model="queryParams.name"
           placeholder="请输入菜单名称"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
       <!-- <el-form-item label="状态">
-            <el-select v-model="queryParams.status" placeholder="菜单状态" clearable size="small">
+            <el-select v-model="queryParams.status" placeholder="菜单状态" clearable size="default">
               <el-option
                 v-for="dict in statusOptions"
                 :key="dict.dictValue"

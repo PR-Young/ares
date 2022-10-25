@@ -4,7 +4,7 @@ import { ElMessage as Message } from 'element-plus'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/auth'
-import Layout from '@/layout/index'
+
 
 NProgress.configure({ showSpinner: false })
 
@@ -41,7 +41,7 @@ router.beforeEach((to, from, next) => {
               for (let i = 0; i < accessRoutes.length; i++) {
                 router.addRoute(accessRoutes[i])
               }
-              // router.addRoute(accessRoutes) // 动态添加可访问路由表
+              //router.addRoute(accessRoutes) // 动态添加可访问路由表
               next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
             })
           })

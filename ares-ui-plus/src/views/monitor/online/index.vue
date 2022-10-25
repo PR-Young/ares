@@ -6,7 +6,7 @@
           v-model="queryParams.ipaddr"
           placeholder="请输入登录地址"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -15,7 +15,7 @@
           v-model="queryParams.userName"
           placeholder="请输入用户名称"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -107,8 +107,8 @@ import {
   Search as ElIconSearch,
   Refresh as ElIconRefresh,
   Delete as ElIconDelete,
-} from '@element-plus/icons'
-import { list, forceLogout } from '@/api/monitor/online'
+} from "@element-plus/icons";
+import { list, forceLogout } from "@/api/monitor/online";
 
 export default {
   data() {
@@ -129,52 +129,52 @@ export default {
       ElIconSearch,
       ElIconRefresh,
       ElIconDelete,
-    }
+    };
   },
-  name: 'Online',
+  name: "Online",
   created() {
-    this.getList()
+    this.getList();
   },
   methods: {
     /** 查询登录日志列表 */
     getList() {
-      this.loading = true
+      this.loading = true;
       list(this.queryParams).then((response) => {
-        this.list = response.rows
-        this.total = response.total
-        this.loading = false
-      })
+        this.list = response.rows;
+        this.total = response.total;
+        this.loading = false;
+      });
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.pageNum = 1
-      this.getList()
+      this.pageNum = 1;
+      this.getList();
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm('queryForm')
-      this.handleQuery()
+      this.resetForm("queryForm");
+      this.handleQuery();
     },
     /** 强退按钮操作 */
     handleForceLogout(row) {
       this.$confirm(
         '是否确认强退名称为"' + row.userName + '"的数据项?',
-        '警告',
+        "警告",
         {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
         }
       )
         .then(function () {
-          return forceLogout(row.tokenId)
+          return forceLogout(row.tokenId);
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('强退成功')
+          this.getList();
+          this.msgSuccess("强退成功");
         })
-        .catch(function () {})
+        .catch(function () {});
     },
   },
-}
+};
 </script>

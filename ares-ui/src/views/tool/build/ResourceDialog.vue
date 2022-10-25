@@ -14,11 +14,11 @@
         v-model="resources[index]"
         class="url-item"
         placeholder="请输入 css 或 js 资源路径"
-        :prefix-icon="ElIconLink"
+        prefix-icon="el-icon-link"
         clearable
       >
         <template v-slot:append>
-          <el-button :icon="ElIconDelete" @click="deleteOne(index)" />
+          <el-button icon="el-icon-delete" @click="deleteOne(index)" />
         </template>
       </el-input>
       <el-button-group class="add-item">
@@ -31,7 +31,7 @@
         <el-button plain @click="addOne('https://unpkg.com/http-vue-loader')">
           http-vue-loader
         </el-button>
-        <el-button :icon="ElIconCirclePlusOutline" plain @click="addOne('')">
+        <el-button icon="el-icon-circle-plusoutline" plain @click="addOne('')">
           添加其他
         </el-button>
       </el-button-group>
@@ -46,34 +46,25 @@
 </template>
 
 <script>
-import {
-  Link as ElIconLink,
-  Delete as ElIconDelete,
-  CirclePlusOutline as ElIconCirclePlusOutline,
-} from '@element-plus/icons'
-import { $on, $off, $once, $emit } from '../../../utils/gogocodeTransfer'
-import { deepClone } from '@/utils/index'
+import { deepClone } from "@/utils/index";
 
 function inheriltClassAndStyle() {
-  const attrs = this.$attrs
-  attrs.class && this.$el.classList.add(attrs.class)
+  const attrs = this.$attrs;
+  attrs.class && this.$el.classList.add(attrs.class);
   attrs.style &&
     Object.entries(attrs.style).forEach(([k, v]) => {
-      this.$el.style[k] = v
-    })
+      this.$el.style[k] = v;
+    });
 }
 export default {
   data() {
     return {
       resources: null,
-      ElIconLink,
-      ElIconDelete,
-      ElIconCirclePlusOutline,
-    }
+    };
   },
   components: {},
   inheritAttrs: false,
-  props: ['originResource'],
+  props: ["originResource"],
   computed: {},
   watch: {},
   created() {},
@@ -81,36 +72,36 @@ export default {
     onOpen() {
       this.resources = this.originResource.length
         ? deepClone(this.originResource)
-        : ['']
+        : [""];
     },
     onClose() {},
     close() {
-      $emit(this, 'update:visible', false)
+      $emit(this, "update:visible", false);
     },
     handelConfirm() {
-      const results = this.resources.filter((item) => !!item) || []
-      $emit(this, 'save', results)
-      this.close()
+      const results = this.resources.filter((item) => !!item) || [];
+      $emit(this, "save", results);
+      this.close();
       if (results.length) {
-        this.resources = results
+        this.resources = results;
       }
     },
     deleteOne(index) {
-      this.resources.splice(index, 1)
+      this.resources.splice(index, 1);
     },
     addOne(url) {
       if (this.resources.indexOf(url) > -1) {
-        this.$message('资源已存在')
+        this.$message("资源已存在");
       } else {
-        this.resources.push(url)
+        this.resources.push(url);
       }
     },
   },
   mounted() {
-    inheriltClassAndStyle.call(this)
+    inheriltClassAndStyle.call(this);
   },
-  emits: ['update:visible', 'save'],
-}
+  emits: ["update:visible", "save"],
+};
 </script>
 
 <style lang="scss" scoped>

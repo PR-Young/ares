@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true">
       <el-form-item label="字典名称" prop="dictType">
-        <el-select v-model="queryParams.dictType" size="small">
+        <el-select v-model="queryParams.dictType" size="default">
           <el-option
             v-for="item in typeOptions"
             :key="item.dictId"
@@ -16,7 +16,7 @@
           v-model="queryParams.dictLabel"
           placeholder="请输入字典标签"
           clearable
-          size="small"
+          size="default"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
@@ -25,7 +25,7 @@
           v-model="queryParams.status"
           placeholder="数据状态"
           clearable
-          size="small"
+          size="default"
         >
           <el-option
             v-for="dict in statusOptions"
@@ -215,15 +215,15 @@ import {
   Edit as ElIconEdit,
   Delete as ElIconDelete,
   Download as ElIconDownload,
-} from '@element-plus/icons'
+} from "@element-plus/icons";
 import {
   listData,
   getData,
   delData,
   editData,
   exportData,
-} from '@/api/system/dict/data'
-import { listType, getType } from '@/api/system/dict/type'
+} from "@/api/system/dict/data";
+import { listType, getType } from "@/api/system/dict/type";
 
 export default {
   data() {
@@ -241,9 +241,9 @@ export default {
       // 字典表格数据
       dataList: [],
       // 默认字典类型
-      defaultDictType: '',
+      defaultDictType: "",
       // 弹出层标题
-      title: '',
+      title: "",
       // 是否显示弹出层
       open: false,
       // 状态数据字典
@@ -263,13 +263,13 @@ export default {
       // 表单校验
       rules: {
         dictLabel: [
-          { required: true, message: '数据标签不能为空', trigger: 'blur' },
+          { required: true, message: "数据标签不能为空", trigger: "blur" },
         ],
         dictValue: [
-          { required: true, message: '数据键值不能为空', trigger: 'blur' },
+          { required: true, message: "数据键值不能为空", trigger: "blur" },
         ],
         dictSort: [
-          { required: true, message: '数据顺序不能为空', trigger: 'blur' },
+          { required: true, message: "数据顺序不能为空", trigger: "blur" },
         ],
       },
       ElIconSearch,
@@ -278,49 +278,49 @@ export default {
       ElIconEdit,
       ElIconDelete,
       ElIconDownload,
-    }
+    };
   },
-  name: 'Data',
+  name: "Data",
   created() {
-    const dictId = this.$route.params && this.$route.params.dictId
-    this.getType(dictId)
-    this.getTypeList()
-    this.getDicts('sys_normal_status').then((response) => {
-      this.statusOptions = response.data
-    })
+    const dictId = this.$route.params && this.$route.params.dictId;
+    this.getType(dictId);
+    this.getTypeList();
+    this.getDicts("sys_normal_status").then((response) => {
+      this.statusOptions = response.data;
+    });
   },
   methods: {
     /** 查询字典类型详细 */
     getType(dictId) {
       getType(dictId).then((response) => {
-        this.queryParams.dictType = response.data.dictType
-        this.defaultDictType = response.data.dictType
-        this.getList()
-      })
+        this.queryParams.dictType = response.data.dictType;
+        this.defaultDictType = response.data.dictType;
+        this.getList();
+      });
     },
     /** 查询字典类型列表 */
     getTypeList() {
       listType().then((response) => {
-        this.typeOptions = response.rows
-      })
+        this.typeOptions = response.rows;
+      });
     },
     /** 查询字典数据列表 */
     getList() {
-      this.loading = true
+      this.loading = true;
       listData(this.queryParams).then((response) => {
-        this.dataList = response.rows
-        this.total = response.total
-        this.loading = false
-      })
+        this.dataList = response.rows;
+        this.total = response.total;
+        this.loading = false;
+      });
     },
     // 数据状态字典翻译
     statusFormat(row, column) {
-      return this.selectDictLabel(this.statusOptions, row.status)
+      return this.selectDictLabel(this.statusOptions, row.status);
     },
     // 取消按钮
     cancel() {
-      this.open = false
-      this.reset()
+      this.open = false;
+      this.reset();
     },
     // 表单重置
     reset() {
@@ -329,110 +329,110 @@ export default {
         dictLabel: undefined,
         dictValue: undefined,
         dictSort: 0,
-        status: '0',
+        status: "0",
         remark: undefined,
-      }
-      this.resetForm('form')
+      };
+      this.resetForm("form");
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.pageNum = 1
-      this.getList()
+      this.queryParams.pageNum = 1;
+      this.getList();
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm('queryForm')
-      this.queryParams.dictType = this.defaultDictType
-      this.handleQuery()
+      this.resetForm("queryForm");
+      this.queryParams.dictType = this.defaultDictType;
+      this.handleQuery();
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.reset()
-      this.open = true
-      this.title = '添加字典数据'
-      this.form.dictType = this.queryParams.dictType
+      this.reset();
+      this.open = true;
+      this.title = "添加字典数据";
+      this.form.dictType = this.queryParams.dictType;
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.id)
-      this.single = selection.length != 1
-      this.multiple = !selection.length
+      this.ids = selection.map((item) => item.id);
+      this.single = selection.length != 1;
+      this.multiple = !selection.length;
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.reset()
-      const dictCode = row.id || this.ids
+      this.reset();
+      const dictCode = row.id || this.ids;
       getData(dictCode).then((response) => {
-        this.form = response.data
-        this.open = true
-        this.title = '修改字典数据'
-      })
+        this.form = response.data;
+        this.open = true;
+        this.title = "修改字典数据";
+      });
     },
     /** 提交按钮 */
     submitForm: function () {
-      this.$refs['form'].validate((valid) => {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
           if (this.form.id != undefined) {
             editData(this.form).then((response) => {
               if (response.code === 200) {
-                this.msgSuccess('修改成功')
-                this.open = false
-                this.getList()
+                this.msgSuccess("修改成功");
+                this.open = false;
+                this.getList();
               } else {
-                this.msgError(response.msg)
+                this.msgError(response.msg);
               }
-            })
+            });
           } else {
             editData(this.form).then((response) => {
               if (response.code === 200) {
-                this.msgSuccess('新增成功')
-                this.open = false
-                this.getList()
+                this.msgSuccess("新增成功");
+                this.open = false;
+                this.getList();
               } else {
-                this.msgError(response.msg)
+                this.msgError(response.msg);
               }
-            })
+            });
           }
         }
-      })
+      });
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const dictCodes = row.id || this.ids
+      const dictCodes = row.id || this.ids;
       this.$confirm(
         '是否确认删除字典编码为"' + dictCodes + '"的数据项?',
-        '警告',
+        "警告",
         {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
         }
       )
         .then(function () {
-          return delData(dictCodes)
+          return delData(dictCodes);
         })
         .then(() => {
-          this.getList()
-          this.msgSuccess('删除成功')
+          this.getList();
+          this.msgSuccess("删除成功");
         })
-        .catch(function () {})
+        .catch(function () {});
     },
     /** 导出按钮操作 */
     handleExport() {
-      const queryParams = this.queryParams
-      this.$confirm('是否确认导出所有数据项?', '警告', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning',
+      const queryParams = this.queryParams;
+      this.$confirm("是否确认导出所有数据项?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
         .then(function () {
-          return exportData(queryParams)
+          return exportData(queryParams);
         })
         .then((response) => {
-          this.download(response.msg)
+          this.download(response.msg);
         })
-        .catch(function () {})
+        .catch(function () {});
     },
   },
-}
+};
 </script>

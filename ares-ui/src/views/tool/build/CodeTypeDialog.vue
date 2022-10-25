@@ -51,75 +51,74 @@
 </template>
 
 <script>
-import { $on, $off, $once, $emit } from '../../../utils/gogocodeTransfer'
 function inheriltClassAndStyle() {
-  const attrs = this.$attrs
-  attrs.class && this.$el.classList.add(attrs.class)
+  const attrs = this.$attrs;
+  attrs.class && this.$el.classList.add(attrs.class);
   attrs.style &&
     Object.entries(attrs.style).forEach(([k, v]) => {
-      this.$el.style[k] = v
-    })
+      this.$el.style[k] = v;
+    });
 }
 export default {
   inheritAttrs: false,
-  props: ['showFileName'],
+  props: ["showFileName"],
   data() {
     return {
       formData: {
         fileName: undefined,
-        type: 'file',
+        type: "file",
       },
       rules: {
         fileName: [
           {
             required: true,
-            message: '请输入文件名',
-            trigger: 'blur',
+            message: "请输入文件名",
+            trigger: "blur",
           },
         ],
         type: [
           {
             required: true,
-            message: '生成类型不能为空',
-            trigger: 'change',
+            message: "生成类型不能为空",
+            trigger: "change",
           },
         ],
       },
       typeOptions: [
         {
-          label: '页面',
-          value: 'file',
+          label: "页面",
+          value: "file",
         },
         {
-          label: '弹窗',
-          value: 'dialog',
+          label: "弹窗",
+          value: "dialog",
         },
       ],
-    }
+    };
   },
   computed: {},
   watch: {},
   methods: {
     onOpen() {
       if (this.showFileName) {
-        this.formData.fileName = `${+new Date()}.vue`
+        this.formData.fileName = `${+new Date()}.vue`;
       }
     },
     onClose() {},
     close(e) {
-      $emit(this, 'update:visible', false)
+      $emit(this, "update:visible", false);
     },
     handelConfirm() {
       this.$refs.elForm.validate((valid) => {
-        if (!valid) return
-        $emit(this, 'confirm', { ...this.formData })
-        this.close()
-      })
+        if (!valid) return;
+        $emit(this, "confirm", { ...this.formData });
+        this.close();
+      });
     },
   },
   mounted() {
-    inheriltClassAndStyle.call(this)
+    inheriltClassAndStyle.call(this);
   },
-  emits: ['update:visible', 'confirm'],
-}
+  emits: ["update:visible", "confirm"],
+};
 </script>
