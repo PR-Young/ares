@@ -43,6 +43,9 @@ public class SysUser extends BaseModel implements Serializable {
     private String deptId;
     @ExcelIgnore
     private String postId;
+    @ApiModelProperty("状态")
+    @ExcelIgnore
+    private int status;
 
     public SysUser() {
     }
@@ -131,4 +134,11 @@ public class SysUser extends BaseModel implements Serializable {
         this.postId = postId;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

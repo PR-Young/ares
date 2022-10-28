@@ -1,6 +1,7 @@
 package com.ares.system.controller;
 
 
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.system.SysDept;
@@ -9,7 +10,6 @@ import com.ares.core.persistence.model.system.SysUser;
 import com.ares.core.persistence.service.*;
 import com.ares.core.utils.EncryptUtils;
 import com.ares.core.utils.MD5Util;
-import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

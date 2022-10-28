@@ -11,24 +11,29 @@
         <result column="DeptId" jdbcType="VARCHAR" property="deptId"/>
         <result column="PostId" jdbcType="VARCHAR" property="postId"/>
         <result column="Avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="Status" jdbcType="INTEGER" property="status"/>
         <result column="Creator" jdbcType="VARCHAR" property="creator"/>
         <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="Modifier" jdbcType="VARCHAR" property="modifier"/>
         <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        `Id`, `Account`, `UserName`, `Password`,`PhoneNumber`,`Email`,`DeptId`,`PostId`,`Avatar`,`Creator`
-        ,`CreateTime`,`Modifier`, `ModifyTime`
+        `Id`
+        , `Account`, `UserName`, `Password`,`PhoneNumber`,
+        `Email`,`DeptId`,`PostId`,`Avatar`,`Status`,
+        `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
     <insert id="insert" parameterType="com.ares.core.persistence.model.system.SysUser">
         insert into `sys_user` (`Id`, `Account`,
-        `UserName`,`Password`,`PhoneNumber`,`Email`,`Avatar`,`DeptId`,`PostId`,`Creator` ,`CreateTime`,`Modifier`,
-        `ModifyTime`)
+                                `UserName`, `Password`, `PhoneNumber`, `Email`, `Avatar`, `Status`, `DeptId`, `PostId`,
+                                `Creator`,
+                                `CreateTime`, `Modifier`,
+                                `ModifyTime`)
         values (#{id,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
-        #{password,jdbcType=VARCHAR},#{phoneNumber,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},
-        #{avatar,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR},#{postId,jdbcType=VARCHAR},
-        #{creator,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},
-        #{modifier,jdbcType=VARCHAR},#{modifyTime,jdbcType=TIMESTAMP})
+                #{password,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+                #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{deptId,jdbcType=VARCHAR},
+                #{postId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+                #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
     <update id="update" parameterType="com.ares.core.persistence.model.system.SysUser">
         update `sys_user`
@@ -50,6 +55,9 @@
             </if>
             <if test="avatar != null">
                 `Avatar` = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `Status` = #{status,jdbcType=INTEGER},
             </if>
             <if test="deptId != null">
                 `DeptId` = #{deptId,jdbcType=VARCHAR},
@@ -84,7 +92,7 @@
         select
         <include refid="Base_Column_List"/>
         from `sys_user`
-        where `Account` = #{userName,jdbcType=VARCHAR}
+        where `Status` = 1 and `Account` = #{userName,jdbcType=VARCHAR}
     </select>
     <select id="getById" parameterType="java.lang.String" resultMap="SysUser">
         select
@@ -112,11 +120,13 @@
     <select id="checkAccount" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(1)
         from `sys_user`
-        where `Account` = #{userName,jdbcType=VARCHAR}
+        where `Status` = 1
+          and `Account` = #{userName,jdbcType=VARCHAR}
     </select>
 
     <update id="resetPassword">
-        update `sys_user` set `Password` = #{password}
+        update `sys_user`
+        set `Password` = #{password}
         where `Id` = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateUserByAccount" parameterType="com.ares.core.persistence.model.system.SysUser">
@@ -160,19 +170,26 @@
     </update>
 
     <select id="getUserByRole" parameterType="java.lang.String" resultMap="SysUser">
-        select
-        user.`Id`, user.`Account`, user.`UserName`, user.`Password`,user.`PhoneNumber`,user.`Email`,user.`Avatar`,
-        user.`CreateTime`, user.`ModifyTime`
+        select user.`Id`,
+               user.`Account`,
+               user.`UserName`,
+               user.`Password`,
+               user.`PhoneNumber`,
+               user.`Email`,
+               user.`Avatar`,
+               user.`CreateTime`,
+               user.`ModifyTime`
         from `sys_user` user
-        left join `sys_role_user` roleuser on user.Id = roleuser.UserId
-        where roleuser.RoleId = #{roleId,jdbcType=VARCHAR}
+        left join `sys_role_user` roleuser
+        on user.Id = roleuser.UserId
+        where user.`Status` = 1 and roleuser.RoleId = #{roleId,jdbcType=VARCHAR}
     </select>
 
     <select id="allUser" parameterType="java.lang.String" resultMap="SysUser">
         select
         <include refid="Base_Column_List"/>
         from `sys_user`
-        where `Id` not in (
+        where `Status` = 1 and `Id` not in (
         select `UserId`
         from `sys_role_user`
         where `RoleId` = #{roleId,jdbcType=VARCHAR}

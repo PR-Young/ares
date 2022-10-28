@@ -1,7 +1,6 @@
 import { constantRoutes } from '@/router'
 import { getRouters } from '@/api/menu'
 import Layout from '@/layout/index'
-import { defineComponent, defineAsyncComponent } from 'vue'
 
 const modules = require.context('@/views', true, /\.vue$/)
 const importAll = (module) => {
@@ -11,7 +10,7 @@ const importAll = (module) => {
     keyArr.shift() // 移除.
     const moduleKey = keyArr.join('/').replace(/\.vue$/g, '')
     if (module == moduleKey) {
-      result = modules(key)
+      result = () => modules(key)
       break
     }
   }
@@ -63,9 +62,9 @@ function filterAsyncRouter(asyncRouterMap) {
   })
 }
 
-export const loadView = async (view) => {
+export const loadView = (view) => {
   // 路由懒加载
-  return await importAll(view).default
+  return importAll(view)
 }
 
 export default permission

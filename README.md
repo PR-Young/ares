@@ -21,8 +21,6 @@ ares
 │
 ├─（※）ares-quartz 定时任务模块
 │
-├─（※）ares-redis 缓存模块
-│
 ├─（※）ares-system 系统模块
 │
 ├─（※）ares-ui vue前端 
@@ -37,7 +35,7 @@ ares
 
 # 使用技术
 
-- 前端：vue + element-plus
+- 前端：vue + element
 - 后端：springboot2.3.4.RELEASE，jdk11
 - 数据库：mysql8、redis、neo4j
 - 消息机制：kafka、rabbitmq、rocketmq

@@ -1,10 +1,10 @@
 package com.ares.system.controller;
 
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.security.SecurityUtils;
 import com.ares.system.persistence.model.Articles;
 import com.ares.system.persistence.service.ArticlesService;
 import io.swagger.annotations.Api;

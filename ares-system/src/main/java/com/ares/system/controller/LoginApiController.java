@@ -2,6 +2,8 @@ package com.ares.system.controller;
 
 
 import com.ares.config.base.BaseConfig;
+import com.ares.core.common.jwt.JwtAuthenticationToken;
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.base.Constants;
 import com.ares.core.persistence.model.system.SysMenu;
@@ -10,11 +12,9 @@ import com.ares.core.persistence.model.system.SysUser;
 import com.ares.core.persistence.service.SysMenuService;
 import com.ares.core.persistence.service.SysRoleService;
 import com.ares.core.persistence.service.SysUserService;
+import com.ares.core.utils.AresCommonUtils;
 import com.ares.core.utils.ServletUtils;
 import com.ares.redis.utils.RedisUtil;
-import com.ares.system.common.jwt.JwtAuthenticationToken;
-import com.ares.system.common.security.SecurityUtils;
-import com.ares.system.utils.AresCommonUtils;
 import com.wf.captcha.ArithmeticCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

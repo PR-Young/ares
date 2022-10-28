@@ -3,8 +3,10 @@ package com.ares.system.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
+import com.ares.core.persistence.model.base.Constants;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysUser;
 import com.ares.core.persistence.service.SysPostService;
@@ -12,7 +14,7 @@ import com.ares.core.persistence.service.SysRoleService;
 import com.ares.core.persistence.service.SysUserService;
 import com.ares.core.utils.ExcelUtils;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.security.SecurityUtils;
+import com.ares.redis.utils.RedisUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,5 +152,12 @@ public class SysUserApiController extends BaseController {
         AnalysisEventListener listener = userService.new UserDataListener(needUpdate, deptId);
         EasyExcel.read(inputStream, SysUser.class, listener).sheet().doRead();
         return AjaxResult.success("导入成功");
+    }
+
+    @RequestMapping("kick")
+    @ApiOperation(value = "下线", response = Object.class)
+    public Object kickUser(@RequestParam("username") String userName) {
+        RedisUtil.del(Constants.LOGIN_INFO + userName);
+        return AjaxResult.success();
     }
 }

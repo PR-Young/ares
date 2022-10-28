@@ -135,7 +135,7 @@
           <el-col :span="24">
             <el-form-item label="上级菜单">
               <treeselect
-                v-model:value="form.pid"
+                :v-model="form.pid"
                 :options="menuOptions"
                 :normalizer="normalizer"
                 :show-count="true"

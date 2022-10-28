@@ -1,13 +1,13 @@
 package com.ares.system.controller;
 
 
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysTemplate;
 import com.ares.core.persistence.service.SysTemplateService;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

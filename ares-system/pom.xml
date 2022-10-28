@@ -51,11 +51,6 @@
             <version>${ares.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.ares.redis</groupId>
-            <artifactId>ares-redis</artifactId>
-            <version>${ares.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.ares.quartz</groupId>
             <artifactId>ares-quartz</artifactId>
             <version>${ares.version}</version>

@@ -9,7 +9,7 @@ import java.util.Collection;
  * @description:
  * @author: Young
  * @date: 2020/10/19
- * @see: com.ares.system.common.jwt JwtUserDetails.java
+ * @see: com.ares.core.common.jwt JwtUserDetails.java
  **/
 public class JwtUserDetails extends User {
     private static final long serialVersionUID = 1L;

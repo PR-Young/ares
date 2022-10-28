@@ -6,7 +6,7 @@ import ${entityPackage}.${entityName};
 import com.ares.core.persistence.model.page.TableDataInfo;
 import ${servicePackage}.${entityName}Service;
 import com.ares.core.utils.StringUtils;
-import com.ares.system.common.security.SecurityUtils;
+import com.ares.core.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
