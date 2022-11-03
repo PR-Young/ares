@@ -2,7 +2,9 @@ package com.ares.neo4j.persistence.model;
 
 import lombok.Builder;
 import lombok.Data;
-import org.neo4j.ogm.annotation.*;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+
 
 /**
  * @description:
@@ -12,7 +14,6 @@ import org.neo4j.ogm.annotation.*;
  **/
 @Data
 @Builder
-@RelationshipEntity(type = "in")
 public class RelationShip {
 
     @Id
@@ -21,10 +22,8 @@ public class RelationShip {
 
     private String indexName;
 
-    @StartNode
     private UserGraph userGraph;
 
-    @EndNode
     private DepartmentGraph departmentGraph;
 
     private String post;

@@ -34,7 +34,7 @@ public class SysGlobalExceptionHandler {
 
     @ExceptionHandler(value = UserException.class)
     public Object handleUserException(HttpServletRequest request, HttpServletResponse response, UserException e) {
-        String code = e.getCode();
+        Integer code = e.getCode();
         if (code.equals(ErrorCode.NOUSER.getCode())) {
             return AjaxResult.error(ResultCode.FAILED.getCode(), "用户不存在");
         } else if (code.equals(ErrorCode.NOAUTH.getCode())) {

@@ -20,7 +20,6 @@ import org.springframework.context.annotation.Import;
 @Import({MyBatisConfig.class})
 @MapperScan("com.ares.**.dao")
 @SpringBootApplication(exclude = {RocketMQAutoConfiguration.class, DataSourceAutoConfiguration.class
-        // , SecurityAutoConfiguration.class
 })
 public class AresSystemApplication extends SpringBootServletInitializer {
 

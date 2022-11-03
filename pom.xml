@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ares</groupId>
     <artifactId>ares</artifactId>
     <packaging>pom</packaging>
-    <version>3.0</version>
+    <version>3.0.0</version>
     <description>my first springboot project</description>
 
     <modules>
@@ -29,21 +29,20 @@
 
     <properties>
         <java.version>11</java.version>
-        <mysql.version>8.0.18</mysql.version>
-        <mybatis.version>2.1.1</mybatis.version>
-        <mybatis-generator.version>1.4.0</mybatis-generator.version>
-        <pagehelper.version>1.2.13</pagehelper.version>
+        <mysql.version>8.0.31</mysql.version>
+        <mybatis.version>2.2.2</mybatis.version>
+        <mybatis-generator.version>1.4.1</mybatis-generator.version>
+        <pagehelper.version>1.4.5</pagehelper.version>
         <durid.version>1.2.8</durid.version>
-        <fastjson.version>1.2.74</fastjson.version>
-        <gson.version>2.8.6</gson.version>
-        <swagger.version>2.9.2</swagger.version>
-        <knife4j.version>2.0.4</knife4j.version>
+        <fastjson.version>2.0.17</fastjson.version>
+        <gson.version>2.10</gson.version>
+        <swagger.version>3.0.0</swagger.version>
+        <knife4j.version>3.0.3</knife4j.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons.version>2.6</commons.version>
         <aspectjweaver.version>1.9.6</aspectjweaver.version>
-        <hutool.version>5.1.2</hutool.version>
+        <hutool.version>5.8.9</hutool.version>
         <jython.version>2.7.1</jython.version>
-        <thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
         <oshi-core.version>5.0.0</oshi-core.version>
         <jna.version>5.5.0</jna.version>
         <jwt.version>3.10.3</jwt.version>
@@ -101,7 +100,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -177,11 +175,6 @@
             <groupId>org.python</groupId>
             <artifactId>jython-standalone</artifactId>
             <version>${jython.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.theborakompanioni</groupId>
-            <artifactId>thymeleaf-extras-shiro</artifactId>
-            <version>${thymeleaf-extras-shiro.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.oshi</groupId>

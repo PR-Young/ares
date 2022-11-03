@@ -5,7 +5,7 @@
   "author": "ares",
   "license": "MIT",
   "scripts": {
-    "dev": "vue-cli-service serve --port 9999",
+    "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
     "build:stage": "vue-cli-service build --mode staging",
     "preview": "node build/index.js --preview",

@@ -7,6 +7,9 @@ import org.elasticsearch.index.query.MatchAllQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ import java.util.List;
 public class ElasticsearchService {
 
     private AresDocumentRepository repository;
+    @Autowired
+    private ElasticsearchRestTemplate restTemplate;
 
     @Autowired
     public ElasticsearchService(AresDocumentRepository repository) {
@@ -53,25 +58,38 @@ public class ElasticsearchService {
 
         BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
         queryBuilder.should(key).should(name).should(body).should(content);
+        NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
 
-        Iterable<AresDocument> iterable = repository.search(queryBuilder, Pageable.unpaged());
-        iterable.forEach(document -> {
-            aresDocuments.add(document);
+        SearchHits<AresDocument> iterable = restTemplate.search(query, AresDocument.class);
+        iterable.getSearchHits().forEach(document -> {
+            aresDocuments.add(document.getContent());
         });
 
         return aresDocuments;
     }
 
     public Iterable<AresDocument> queryByFiled(String fieldName, Object value, Pageable pageable) {
+        List<AresDocument> aresDocuments = new ArrayList<>();
         MatchQueryBuilder queryBuilder = new MatchQueryBuilder(fieldName, value);
-        Iterable<AresDocument> documents = repository.search(queryBuilder, pageable);
-        return documents;
+        NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
+        query.setPageable(pageable);
+        SearchHits<AresDocument> documents = restTemplate.search(query, AresDocument.class);
+        documents.getSearchHits().forEach(document -> {
+            aresDocuments.add(document.getContent());
+        });
+        return aresDocuments;
     }
 
     public Iterable<AresDocument> queryAll(Pageable pageable) {
+        List<AresDocument> aresDocuments = new ArrayList<>();
         MatchAllQueryBuilder queryBuilder = new MatchAllQueryBuilder();
-        Iterable<AresDocument> documents = repository.search(queryBuilder, pageable);
-        return documents;
+        NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
+        query.setPageable(pageable);
+        SearchHits<AresDocument> documents = restTemplate.search(query, AresDocument.class);
+        documents.getSearchHits().forEach(document -> {
+            aresDocuments.add(document.getContent());
+        });
+        return aresDocuments;
     }
     
 }

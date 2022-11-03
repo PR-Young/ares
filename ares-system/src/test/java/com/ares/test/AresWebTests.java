@@ -1,7 +1,7 @@
 package com.ares.test;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,7 +28,7 @@ public class AresWebTests extends AresBaseTest {
 
     private MockMvc mockMvc;
 
-    @Before
+    @BeforeAll
     public void setupMockMvc() {
         try {
             log.info("setup mockmvc");

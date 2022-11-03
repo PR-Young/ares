@@ -47,7 +47,7 @@ public class MyWebAppConfigurer implements WebMvcConfigurer {
      **/
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
+        configurer.enable("ares");
     }
 
     @Bean

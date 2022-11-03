@@ -1,6 +1,7 @@
 package com.ares.test.leetcode;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import javax.swing.tree.TreeNode;
 import java.util.HashMap;

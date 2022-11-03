@@ -26,11 +26,14 @@ spring:
       auto-commit-interval: 100
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  data:
+    elasticsearch:
+      repositories:
+        enabled: false
   elasticsearch:
-    rest:
-      uris: http://localhost:9200
-      username:
-      password:
+    uris: http://localhost:9200
+    username:
+    password:
 
 
 rocketmq:
@@ -53,4 +56,3 @@ rocketmq:
     ares-plat-topic: AresPlatTopic
     ares-account-tag: AresAccountTag
     ares-key: ares
-
