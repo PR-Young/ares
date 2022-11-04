@@ -2,9 +2,9 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.persistence.model.system.SysPost;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface ISysPostDao extends IBaseDao<SysPost> {
     SysPost getByName(String postName);
 }

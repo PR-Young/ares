@@ -6,8 +6,7 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/22
  **/
-public abstract interface BaseService<T> {
-
+public abstract interface BaseService<T>{
 
     public void insert(T obj);
 

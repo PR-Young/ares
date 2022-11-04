@@ -2,7 +2,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.persistence.model.system.SysLog;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/27
  **/
-@Repository
+@Mapper
 public interface ISysLogDao {
     int insert(SysLog sysLog);
 

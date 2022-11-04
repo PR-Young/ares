@@ -2,8 +2,8 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.persistence.model.system.SysUser;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/22
  **/
-@Repository
+@Mapper
 public interface ISysUserDao extends IBaseDao<SysUser> {
 
     SysUser getUserByName(String userName);

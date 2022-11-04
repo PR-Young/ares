@@ -2,6 +2,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.persistence.model.system.SysRole;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Map;
  * @description:
  * @author: Young 2020/01/25
  **/
-@Repository
+@Mapper
 public interface ISysRoleDao extends IBaseDao<SysRole> {
     List<SysRole> getRoleByUserId(String userId);
 

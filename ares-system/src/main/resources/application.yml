@@ -36,10 +36,20 @@ spring:
           status-lifetime: 100000
           connect-timeout: 100000
           read-timeout: 100000
-mybatis:
-  mapper-locations: classpath*:mapping/**/*.xml
+#mybatis:
+#  mapper-locations: classpath*:mapping/**/*.xml
+#  type-aliases-package: com.ares.**.**.model
+#  config-location: classpath:mybatis-config.xml
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    call-setters-on-nulls: true
+  global-config:
+    banner: false
   type-aliases-package: com.ares.**.**.model
-  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath*:mapping/**/*.xml
+
 
 #分页配置
 pagehelper:
