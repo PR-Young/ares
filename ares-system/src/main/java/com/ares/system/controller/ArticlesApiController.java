@@ -1,5 +1,6 @@
 package com.ares.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -10,7 +11,6 @@ import com.ares.system.persistence.service.ArticlesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,7 @@ public class ArticlesApiController extends BaseController {
         this.articlesService = articlesService;
     }
 
-    @PreAuthorize("hasAnyAuthority('articles:list')")
+    @SaCheckPermission("articles:list")
     @RequestMapping("list")
     @ApiOperation(value = "列表", response = TableDataInfo.class)
     public TableDataInfo list(Articles articles) {
@@ -45,7 +45,7 @@ public class ArticlesApiController extends BaseController {
         return AjaxResult.successData(articlesService.getById(articlesId));
     }
 
-    @PreAuthorize("hasAnyAuthority('articles:edit')")
+    @SaCheckPermission("articles:edit")
     @PostMapping("edit")
     @ApiOperation(value = "编辑信息", response = Object.class)
     public Object edit(@Validated @RequestBody Articles articles) throws Exception {
@@ -59,7 +59,7 @@ public class ArticlesApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('articles:delete')")
+    @SaCheckPermission("articles:delete")
     @DeleteMapping("{articlesIds}")
     @ApiOperation(value = "删除信息", response = Object.class)
     public Object remove(@PathVariable String[] articlesIds) {

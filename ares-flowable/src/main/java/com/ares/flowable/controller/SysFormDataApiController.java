@@ -1,5 +1,6 @@
 package com.ares.flowable.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -10,7 +11,6 @@ import com.ares.flowable.persistence.service.SysFormDataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,7 @@ public class SysFormDataApiController extends BaseController {
         this.sysFormDataService = sysFormDataService;
     }
 
-    @PreAuthorize("hasAnyAuthority('sysFormData:list')")
+    @SaCheckPermission("sysFormData:list")
     @RequestMapping("list")
     @ApiOperation(value = "列表", response = TableDataInfo.class)
     public TableDataInfo list(SysFormData sysFormData) {
@@ -45,7 +45,7 @@ public class SysFormDataApiController extends BaseController {
         return AjaxResult.successData(sysFormDataService.getById(sysFormDataId));
     }
 
-    @PreAuthorize("hasAnyAuthority('sysFormData:edit')")
+    @SaCheckPermission("sysFormData:edit")
     @PostMapping("edit")
     @ApiOperation(value = "编辑信息", response = Object.class)
     public Object edit(@Validated @RequestBody SysFormData sysFormData) throws Exception {
@@ -59,7 +59,7 @@ public class SysFormDataApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('sysFormData:delete')")
+    @SaCheckPermission("sysFormData:delete")
     @DeleteMapping("{sysFormDataIds}")
     @ApiOperation(value = "删除信息", response = Object.class)
     public Object remove(@PathVariable String[] sysFormDataIds) {

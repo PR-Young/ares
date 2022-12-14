@@ -1,11 +1,12 @@
 package com.ares.system.controller;
 
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.ares.config.base.BaseConfig;
-import com.ares.core.common.jwt.JwtAuthenticationToken;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.base.Constants;
+import com.ares.core.persistence.model.base.ResultCode;
 import com.ares.core.persistence.model.system.SysMenu;
 import com.ares.core.persistence.model.system.SysRole;
 import com.ares.core.persistence.model.system.SysUser;
@@ -13,6 +14,7 @@ import com.ares.core.persistence.service.SysMenuService;
 import com.ares.core.persistence.service.SysRoleService;
 import com.ares.core.persistence.service.SysUserService;
 import com.ares.core.utils.AresCommonUtils;
+import com.ares.core.utils.MD5Util;
 import com.ares.core.utils.ServletUtils;
 import com.ares.redis.utils.RedisUtil;
 import com.wf.captcha.ArithmeticCaptcha;
@@ -54,17 +56,17 @@ public class LoginApiController {
     public LoginApiController(SysUserService userService,
                               SysRoleService roleService,
                               SysMenuService menuService,
-                              BaseConfig config,
-                              AuthenticationManager authenticationManager) {
+                              BaseConfig config
+    ) {
         this.userService = userService;
         this.roleService = roleService;
         this.menuService = menuService;
         this.config = config;
-        this.authenticationManager = authenticationManager;
+        //this.authenticationManager = authenticationManager;
     }
 
     @ApiOperation(value = "登录", response = Object.class)
-    @PostMapping("login")
+    @PostMapping("/login")
     public Object login(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> map = ServletUtils.getParameter();
         String userName = String.valueOf(map.get("username"));
@@ -78,29 +80,35 @@ public class LoginApiController {
         }
 
         // 系统登录认证
-        JwtAuthenticationToken token = SecurityUtils.login(request, userName, password, authenticationManager);
+        //JwtAuthenticationToken token = SecurityUtils.login(request, userName, password, authenticationManager);
+        SysUser user = userService.getUserByName(userName);
+        if (!user.getPassword().equals(MD5Util.encode(password))) {
+            return AjaxResult.error(ResultCode.PWDERROR.getCode(), ResultCode.PWDERROR.getMsg());
+        }
+        StpUtil.login(user.getId());
+        String token = StpUtil.getTokenValue();
         if (rememberMe) {
             RedisUtil.set(Constants.LOGIN_INFO + userName, token, EXPIRE);
         } else {
             RedisUtil.set(Constants.LOGIN_INFO + userName, token, config.getTimeout());
         }
-        return AjaxResult.success().put("token", token.getToken());
+        return AjaxResult.success().put("token", token);
     }
 
 
-    @RequestMapping("unAuth")
+    @RequestMapping("/unAuth")
     @ApiOperation(value = "未登录", response = Object.class)
     public Object unAuth(HttpServletRequest request, HttpServletResponse response) {
         return AjaxResult.unLogin();
     }
 
-    @RequestMapping("unauthorized")
+    @RequestMapping("/unauthorized")
     @ApiOperation(value = "无权限", response = Object.class)
     public Object unauthorized(HttpServletRequest request, HttpServletResponse response) {
         return AjaxResult.error(HttpStatus.UNAUTHORIZED.value(), "用户无权限！");
     }
 
-    @RequestMapping("getInfo")
+    @RequestMapping("/getInfo")
     @ApiOperation(value = "获取登录信息", response = Object.class)
     public Object getInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         SysUser user = SecurityUtils.getUser();
@@ -122,7 +130,7 @@ public class LoginApiController {
         return AjaxResult.success().put("user", user).put("roles", roles).put("permissions", permissions);
     }
 
-    @RequestMapping("getRouters")
+    @RequestMapping("/getRouters")
     @ApiOperation(value = "获取路由", response = Object.class)
     public Object getRouters() throws Exception {
         SysUser user = SecurityUtils.getUser();
@@ -138,4 +146,11 @@ public class LoginApiController {
         RedisUtil.set(Constants.KAPTCHA_SESSION_KEY + uuid, code, 120);
         return AjaxResult.success().put("uuid", uuid).put("img", arithmeticCaptcha.toBase64());
     }
+
+    @RequestMapping("/logout")
+    public Object logout() {
+        StpUtil.logout();
+        return AjaxResult.success();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.ares.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -10,7 +11,6 @@ import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +33,7 @@ public class SysDictTypeApiController extends BaseController {
         this.sysDictTypeService = sysDictTypeService;
     }
 
-    @PreAuthorize("hasAnyAuthority('sysDictType:list')")
+    @SaCheckPermission("sysDictType:list")
     @RequestMapping("list")
     @ApiOperation(value = "字典类别列表", response = TableDataInfo.class)
     public TableDataInfo list(SysDictType sysDictType) {
@@ -48,7 +48,7 @@ public class SysDictTypeApiController extends BaseController {
         return AjaxResult.successData(sysDictTypeService.getById(sysDictTypeId));
     }
 
-    @PreAuthorize("hasAnyAuthority('sysDictType:edit')")
+    @SaCheckPermission("sysDictType:edit")
     @PostMapping("edit")
     @ApiOperation(value = "编辑字典类别", response = Object.class)
     public Object edit(@Validated @RequestBody SysDictType sysDictType) throws Exception {
@@ -62,7 +62,7 @@ public class SysDictTypeApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('sysDictType:delete')")
+    @SaCheckPermission("sysDictType:delete")
     @DeleteMapping("{sysDictTypeIds}")
     @ApiOperation(value = "删除字典类别", response = Object.class)
     public Object remove(@PathVariable String[] sysDictTypeIds) {

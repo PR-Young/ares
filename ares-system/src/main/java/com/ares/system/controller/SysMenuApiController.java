@@ -1,6 +1,7 @@
 package com.ares.system.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.system.SysMenu;
@@ -9,7 +10,6 @@ import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ public class SysMenuApiController {
         this.menuService = menuService;
     }
 
-    @PreAuthorize("hasAnyAuthority('menu:list')")
+    @SaCheckPermission("menu:list")
     @RequestMapping("list")
     @ApiOperation(value = "菜单列表", response = Object.class)
     public Object list(SysMenu menu) throws Exception {
@@ -57,7 +57,7 @@ public class SysMenuApiController {
         return AjaxResult.successData(menuService.buildMenuTreeSelect(menus));
     }
 
-    @PreAuthorize("hasAnyAuthority('menu:edit')")
+    @SaCheckPermission("menu:edit")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改菜单", response = Object.class)
     public Object edit(@Validated @RequestBody SysMenu menu) throws Exception {
@@ -71,7 +71,7 @@ public class SysMenuApiController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('menu:delete')")
+    @SaCheckPermission("menu:delete")
     @DeleteMapping("{menuId}")
     @ApiOperation(value = "删除菜单", response = Object.class)
     public Object remove(@PathVariable String menuId) {

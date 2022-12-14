@@ -1,5 +1,6 @@
 package com.ares.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.exception.UserException;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
@@ -11,7 +12,6 @@ import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +34,7 @@ public class SysNoticeApiController extends BaseController {
         this.sysNoticeService = sysNoticeService;
     }
 
-    @PreAuthorize("hasAnyAuthority('notice:list')")
+    @SaCheckPermission("notice:list")
     @RequestMapping("list")
     @ApiOperation(value = "通知公告列表", response = TableDataInfo.class)
     public TableDataInfo list(SysNotice sysNotice) {
@@ -49,7 +49,7 @@ public class SysNoticeApiController extends BaseController {
         return AjaxResult.successData(sysNoticeService.getById(noticeId));
     }
 
-    @PreAuthorize("hasAnyAuthority('notice:edit')")
+    @SaCheckPermission("notice:edit")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改通知公告", response = Object.class)
     public Object edit(@Validated @RequestBody SysNotice sysNotice) throws Exception {
@@ -63,7 +63,7 @@ public class SysNoticeApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('notice:delete')")
+    @SaCheckPermission("notice:delete")
     @DeleteMapping("{noticeIds}")
     @ApiOperation(value = "删除通知公告", response = Object.class)
     public Object remove(@PathVariable String[] noticeIds) {

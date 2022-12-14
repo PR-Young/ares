@@ -1,5 +1,6 @@
 package com.ares.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -10,7 +11,6 @@ import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +33,7 @@ public class SysPostApiController extends BaseController {
         this.sysPostService = sysPostService;
     }
 
-    @PreAuthorize("hasAnyAuthority('sysPost:list')")
+    @SaCheckPermission("sysPost:list")
     @RequestMapping("list")
     @ApiOperation(value = "岗位列表", response = TableDataInfo.class)
     public TableDataInfo list(SysPost sysPost) {
@@ -48,7 +48,7 @@ public class SysPostApiController extends BaseController {
         return AjaxResult.successData(sysPostService.getById(sysPostId));
     }
 
-    @PreAuthorize("hasAnyAuthority('sysPost:edit')")
+    @SaCheckPermission("sysPost:edit")
     @PostMapping("edit")
     @ApiOperation(value = "编辑岗位信息", response = Object.class)
     public Object edit(@Validated @RequestBody SysPost sysPost) throws Exception {
@@ -62,7 +62,7 @@ public class SysPostApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('sysPost:delete')")
+    @SaCheckPermission("sysPost:delete")
     @DeleteMapping("{sysPostIds}")
     @ApiOperation(value = "删除岗位信息", response = Object.class)
     public Object remove(@PathVariable String[] sysPostIds) {

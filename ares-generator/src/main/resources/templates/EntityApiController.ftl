@@ -10,7 +10,7 @@ import com.ares.core.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +31,7 @@ public ${entityName}ApiController(${entityName}Service ${entityName1}Service){
 this.${entityName1}Service = ${entityName1}Service;
 }
 
-@PreAuthorize("hasAnyAuthority('${entityName1}:list')")
+@SaCheckPermission("${entityName1}:list")
 @RequestMapping("list")
 @ApiOperation(value = "列表", response = TableDataInfo.class)
 public TableDataInfo list(${entityName} ${entityName1}) {
@@ -46,7 +46,7 @@ public Object getInfo(@PathVariable String ${entityName1}Id) {
 return AjaxResult.successData(${entityName1}Service.getById(${entityName1}Id));
 }
 
-@PreAuthorize("hasAnyAuthority('${entityName1}:edit')")
+@SaCheckPermission("${entityName1}:edit")
 @PostMapping("edit")
 @ApiOperation(value = "编辑信息", response = Object.class)
 public Object edit(@Validated @RequestBody ${entityName} ${entityName1}) throws Exception{
@@ -60,7 +60,7 @@ ${entityName1}Service.update(${entityName1});
 return AjaxResult.success();
 }
 
-@PreAuthorize("hasAnyAuthority('${entityName1}:delete')")
+@SaCheckPermission("${entityName1}:delete")
 @DeleteMapping("{${entityName1}Ids}")
 @ApiOperation(value = "删除信息", response = Object.class)
 public Object remove(@PathVariable String[] ${entityName1}Ids) {

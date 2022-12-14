@@ -1,6 +1,7 @@
 package com.ares.system.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -11,7 +12,6 @@ import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +34,7 @@ public class SysPropertiesApiController extends BaseController {
         this.sysPropertiesService = sysPropertiesService;
     }
 
-    @PreAuthorize("hasAnyAuthority('sysProperties:list')")
+    @SaCheckPermission("sysProperties:list")
     @RequestMapping("list")
     @ApiOperation(value = "系统参数列表", response = TableDataInfo.class)
     public TableDataInfo list(SysProperties sysProperties) {
@@ -49,7 +49,7 @@ public class SysPropertiesApiController extends BaseController {
         return AjaxResult.successData(sysPropertiesService.getById(sysPropertiesId));
     }
 
-    @PreAuthorize("hasAnyAuthority('sysProperties:edit')")
+    @SaCheckPermission("sysProperties:edit")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改系统参数", response = Object.class)
     public Object edit(@Validated @RequestBody SysProperties sysProperties) throws Exception {
@@ -63,7 +63,7 @@ public class SysPropertiesApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('sysProperties:delete')")
+    @SaCheckPermission("sysProperties:delete")
     @DeleteMapping("{sysPropertiesIds}")
     @ApiOperation(value = "删除系统参数", response = Object.class)
     public Object remove(@PathVariable String[] sysPropertiesIds) {

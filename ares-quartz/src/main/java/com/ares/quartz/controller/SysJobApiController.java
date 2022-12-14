@@ -1,6 +1,7 @@
 package com.ares.quartz.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -12,7 +13,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,7 @@ public class SysJobApiController extends BaseController {
         this.jobService = jobService;
     }
 
-    @PreAuthorize("hasAnyAuthority('quartz:list')")
+    @SaCheckPermission("quartz:list")
     @RequestMapping("list")
     @ApiOperation(value = "任务列表", response = TableDataInfo.class)
     public TableDataInfo list(SysQuartzJob job) {
@@ -50,7 +50,7 @@ public class SysJobApiController extends BaseController {
         return AjaxResult.successData(jobService.getById(jobId));
     }
 
-    @PreAuthorize("hasAnyAuthority('quartz:edit')")
+    @SaCheckPermission("quartz:edit")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改任务", response = Object.class)
     public Object edit(@Validated @RequestBody SysQuartzJob job) throws Exception {
@@ -67,7 +67,7 @@ public class SysJobApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('quartz:delete')")
+    @SaCheckPermission("quartz:delete")
     @DeleteMapping("{jobIds}")
     @ApiOperation(value = "删除任务", response = Object.class)
     public Object remove(@PathVariable String[] jobIds) {

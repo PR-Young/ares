@@ -2,6 +2,7 @@ package com.ares.flowable.persistence.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.base.BaseModel;
 import com.ares.core.persistence.model.system.SysRole;
@@ -9,7 +10,6 @@ import com.ares.core.persistence.model.system.SysUser;
 import com.ares.core.persistence.service.SysDeptService;
 import com.ares.core.persistence.service.SysRoleService;
 import com.ares.core.persistence.service.SysUserService;
-import com.ares.core.utils.SecurityUtils;
 import com.ares.flowable.common.constant.ProcessConstants;
 import com.ares.flowable.common.enums.FlowComment;
 import com.ares.flowable.common.exception.CustomException;
@@ -102,7 +102,7 @@ public class FlowTaskService extends FlowServiceFactory {
             taskService.resolveTask(taskVo.getTaskId(), taskVo.getValues());
         } else {
             taskService.addComment(taskVo.getTaskId(), taskVo.getInstanceId(), FlowComment.NORMAL.getType(), taskVo.getComment());
-            String userId = SecurityUtils.getLoginUser().getId();
+            String userId = SecurityUtils.getUser().getId();
             taskService.setAssignee(taskVo.getTaskId(), userId);
             taskService.complete(taskVo.getTaskId(), taskVo.getValues());
         }
@@ -417,7 +417,7 @@ public class FlowTaskService extends FlowServiceFactory {
 
     public Page<FlowTaskDto> myProcess(Integer pageNum, Integer pageSize) {
         Page<FlowTaskDto> page = new Page<>();
-        String userId = SecurityUtils.getLoginUser().getId();
+        String userId = SecurityUtils.getUser().getId();
         HistoricProcessInstanceQuery historicProcessInstanceQuery = historyService.createHistoricProcessInstanceQuery()
                 .startedBy(userId)
                 .orderByProcessInstanceStartTime()
@@ -474,7 +474,7 @@ public class FlowTaskService extends FlowServiceFactory {
             throw new CustomException("流程未启动或已执行完成，取消申请失败");
         }
 
-        SysUser loginUser = SecurityUtils.getLoginUser();
+        SysUser loginUser = SecurityUtils.getUser();
         ProcessInstance processInstance =
                 runtimeService.createProcessInstanceQuery().processInstanceId(flowTaskVo.getInstanceId()).singleResult();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
@@ -510,7 +510,7 @@ public class FlowTaskService extends FlowServiceFactory {
             throw new CustomException("流程未启动或已执行完成，无法撤回");
         }
 
-        SysUser loginUser = SecurityUtils.getLoginUser();
+        SysUser loginUser = SecurityUtils.getUser();
         List<HistoricTaskInstance> htiList = historyService.createHistoricTaskInstanceQuery()
                 .processInstanceId(task.getProcessInstanceId())
                 .orderByTaskCreateTime()
@@ -565,7 +565,7 @@ public class FlowTaskService extends FlowServiceFactory {
      */
     public Page<FlowTaskDto> todoList(Integer pageNum, Integer pageSize) {
         Page<FlowTaskDto> page = new Page<>();
-        String userId = SecurityUtils.getLoginUser().getId();
+        String userId = SecurityUtils.getUser().getId();
         List<SysRole> roles = roleService.getRoleByUserId(userId);
         List<String> roleIds = roles.stream().map(BaseModel::getId).collect(Collectors.toList());
         List<String> ids = new ArrayList<>();
@@ -621,7 +621,7 @@ public class FlowTaskService extends FlowServiceFactory {
      */
     public Page<FlowTaskDto> finishedList(Integer pageNum, Integer pageSize) {
         Page<FlowTaskDto> page = new Page<>();
-        String userId = SecurityUtils.getLoginUser().getId();
+        String userId = SecurityUtils.getUser().getId();
         List<String> ids = new ArrayList<>();
         ids.add(userId);
         HistoricTaskInstanceQuery taskInstanceQuery = historyService.createHistoricTaskInstanceQuery()

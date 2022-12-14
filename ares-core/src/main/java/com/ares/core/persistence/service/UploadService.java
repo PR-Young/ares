@@ -1,9 +1,9 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.common.exception.AresCommonException;
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.utils.DateUtils;
 import com.ares.core.utils.MimeTypeUtils;
-import com.ares.core.utils.SecurityUtils;
 import com.ares.core.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
@@ -41,7 +41,7 @@ public class UploadService {
             throw new AresCommonException("文件名最大长度为:" + fileNameLength);
         }
         assertAllowed(file);
-        String user = SecurityUtils.getLoginUser().getAccount();
+        String user = SecurityUtils.getUser().getAccount();
         String fileOriginalName = file.getOriginalFilename();
         String fileName = user + File.separator + DateUtils.datePath() + File.separator + fileOriginalName.replace("_", "") + "." + getExtension(file);
         File desc = getAbsoluteFile(path, fileName);

@@ -1,6 +1,7 @@
 package com.ares.quartz.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
@@ -9,7 +10,6 @@ import com.ares.quartz.persistence.service.SysQuartzJobLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -31,7 +31,7 @@ public class SysJobLogApiController extends BaseController {
         this.jobLogService = jobLogService;
     }
 
-    @PreAuthorize("hasAnyAuthority('quartz:logList')")
+    @SaCheckPermission("quartz:logList")
     @GetMapping("list")
     @ApiOperation(value = "任务日志列表", response = TableDataInfo.class)
     public TableDataInfo list(SysQuartzJobLog jobLog) {
@@ -53,7 +53,7 @@ public class SysJobLogApiController extends BaseController {
     /**
      * 删除定时任务调度日志
      */
-    @PreAuthorize("hasAnyAuthority('quartz:logDelete')")
+    @SaCheckPermission("quartz:logDelete")
     @DeleteMapping("{jobLogIds}")
     @ApiOperation(value = "删除定时任务调度日志", response = Object.class)
     public Object remove(@PathVariable String[] jobLogIds) {
@@ -61,7 +61,7 @@ public class SysJobLogApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('quartz:logDelete')")
+    @SaCheckPermission("quartz:logDelete")
     @DeleteMapping("clean")
     @ApiOperation(value = "清空定时任务调度日志", response = Object.class)
     public Object clean() {

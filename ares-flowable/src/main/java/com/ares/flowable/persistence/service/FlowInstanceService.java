@@ -1,8 +1,8 @@
 package com.ares.flowable.persistence.service;
 
 
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.model.base.AjaxResult;
-import com.ares.core.utils.SecurityUtils;
 import com.ares.flowable.factory.FlowServiceFactory;
 import com.ares.flowable.persistence.model.vo.FlowTaskVo;
 import lombok.extern.slf4j.Slf4j;
@@ -103,7 +103,7 @@ public class FlowInstanceService extends FlowServiceFactory {
     public AjaxResult startProcessInstanceById(String procDefId, Map<String, Object> variables) {
         try {
             // 设置流程发起人Id到流程中
-            String userId = SecurityUtils.getLoginUser().getId();
+            String userId = SecurityUtils.getUser().getId();
             variables.put("initiator", userId);
             variables.put("_FLOWABLE_SKIP_EXPRESSION_ENABLED", true);
             runtimeService.startProcessInstanceById(procDefId, variables);

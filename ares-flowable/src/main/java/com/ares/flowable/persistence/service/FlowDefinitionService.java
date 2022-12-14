@@ -2,12 +2,12 @@ package com.ares.flowable.persistence.service;
 
 
 import cn.hutool.json.JSONUtil;
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.system.SysUser;
 import com.ares.core.persistence.service.SysDeptService;
 import com.ares.core.persistence.service.SysPostService;
 import com.ares.core.persistence.service.SysUserService;
-import com.ares.core.utils.SecurityUtils;
 import com.ares.flowable.common.constant.ProcessConstants;
 import com.ares.flowable.common.enums.FlowComment;
 import com.ares.flowable.factory.FlowServiceFactory;
@@ -170,7 +170,7 @@ public class FlowDefinitionService extends FlowServiceFactory {
                 return AjaxResult.error("流程已被挂起,请先激活流程");
             }
             // 设置流程发起人Id到流程中
-            SysUser sysUser = SecurityUtils.getLoginUser();
+            SysUser sysUser = SecurityUtils.getUser();
             identityService.setAuthenticatedUserId(sysUser.getId());
             variables.put(ProcessConstants.PROCESS_INITIATOR, "");
             ProcessInstance processInstance = runtimeService.startProcessInstanceById(procDefId, variables);

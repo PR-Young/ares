@@ -1,5 +1,6 @@
 package com.ares.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -10,7 +11,6 @@ import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +33,7 @@ public class SysDictDataApiController extends BaseController {
         this.sysDictDataService = sysDictDataService;
     }
 
-    @PreAuthorize("hasAnyAuthority('sysDictData:list')")
+   @SaCheckPermission("sysDictData:list")
     @RequestMapping("list")
     @ApiOperation(value = "字典数据列表", response = TableDataInfo.class)
     public TableDataInfo list(SysDictData sysDictData) {
@@ -48,7 +48,7 @@ public class SysDictDataApiController extends BaseController {
         return AjaxResult.successData(sysDictDataService.getById(sysDictDataId));
     }
 
-    @PreAuthorize("hasAnyAuthority('sysDictData:edit')")
+   @SaCheckPermission("sysDictData:edit")
     @PostMapping("edit")
     @ApiOperation(value = "编辑字典数据", response = Object.class)
     public Object edit(@Validated @RequestBody SysDictData sysDictData) throws Exception {
@@ -62,7 +62,7 @@ public class SysDictDataApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('sysDictData:delete')")
+   @SaCheckPermission("sysDictData:delete")
     @DeleteMapping("{sysDictDataIds}")
     @ApiOperation(value = "删除字典数据", response = Object.class)
     public Object remove(@PathVariable String[] sysDictDataIds) {

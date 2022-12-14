@@ -1,6 +1,8 @@
 package com.ares.system.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.ares.core.common.security.SecurityUtils;
@@ -19,7 +21,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,8 +53,8 @@ public class SysUserApiController extends BaseController {
         this.roleService = roleService;
         this.postService = postService;
     }
-
-    @PreAuthorize("hasAnyAuthority('user:list')")
+    
+    @SaCheckPermission("user:list")
     @RequestMapping("list")
     @ApiOperation(value = "用户列表", response = TableDataInfo.class)
     public TableDataInfo list(SysUser user) {
@@ -76,7 +77,7 @@ public class SysUserApiController extends BaseController {
         return result;
     }
 
-    @PreAuthorize("hasAnyAuthority('user:edit')")
+    @SaCheckPermission("user:edit")
     @PostMapping("edit")
     @ApiOperation(value = "新增/修改用户", response = Object.class)
     public Object edit(@Validated @RequestBody SysUser user) throws Exception {
@@ -98,7 +99,7 @@ public class SysUserApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('user:delete')")
+    @SaCheckPermission("user:delete")
     @DeleteMapping("{userIds}")
     @ApiOperation(value = "删除用户", response = Object.class)
     public Object remove(@PathVariable String[] userIds) {
@@ -143,7 +144,7 @@ public class SysUserApiController extends BaseController {
     }
 
     @RequestMapping("importData")
-    @PreAuthorize("hasAnyAuthority('user:import')")
+    @SaCheckPermission("user:import")
     @ApiOperation(value = "导入用户")
     public Object importData(MultipartFile file, HttpServletRequest request) throws Exception {
         InputStream inputStream = file.getInputStream();
@@ -157,7 +158,9 @@ public class SysUserApiController extends BaseController {
     @RequestMapping("kick")
     @ApiOperation(value = "下线", response = Object.class)
     public Object kickUser(@RequestParam("username") String userName) {
+        SysUser user = userService.getUserByName(userName);
         RedisUtil.del(Constants.LOGIN_INFO + userName);
+        StpUtil.kickout(user.getId());
         return AjaxResult.success();
     }
 }

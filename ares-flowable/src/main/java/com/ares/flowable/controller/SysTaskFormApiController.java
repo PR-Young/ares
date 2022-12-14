@@ -1,5 +1,6 @@
 package com.ares.flowable.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -10,7 +11,6 @@ import com.ares.flowable.persistence.service.SysTaskFormService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,7 @@ public class SysTaskFormApiController extends BaseController {
         this.sysTaskFormService = sysTaskFormService;
     }
 
-    @PreAuthorize("hasAnyAuthority('sysTaskForm:list')")
+    @SaCheckPermission("sysTaskForm:list")
     @RequestMapping("list")
     @ApiOperation(value = "列表", response = TableDataInfo.class)
     public TableDataInfo list(SysTaskForm sysTaskForm) {
@@ -45,7 +45,7 @@ public class SysTaskFormApiController extends BaseController {
         return AjaxResult.successData(sysTaskFormService.getById(sysTaskFormId));
     }
 
-    @PreAuthorize("hasAnyAuthority('sysTaskForm:edit')")
+    @SaCheckPermission("sysTaskForm:edit")
     @PostMapping("edit")
     @ApiOperation(value = "编辑信息", response = Object.class)
     public Object edit(@Validated @RequestBody SysTaskForm sysTaskForm) throws Exception {
@@ -59,7 +59,7 @@ public class SysTaskFormApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PreAuthorize("hasAnyAuthority('sysTaskForm:delete')")
+    @SaCheckPermission("sysTaskForm:delete")
     @DeleteMapping("{sysTaskFormIds}")
     @ApiOperation(value = "删除信息", response = Object.class)
     public Object remove(@PathVariable String[] sysTaskFormIds) {

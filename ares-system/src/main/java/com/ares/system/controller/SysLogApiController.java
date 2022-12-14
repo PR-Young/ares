@@ -1,12 +1,12 @@
 package com.ares.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysLog;
 import com.ares.core.persistence.service.SysLogService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +29,7 @@ public class SysLogApiController extends BaseController {
         this.sysLogService = sysLogService;
     }
 
-    @PreAuthorize("hasAnyAuthority('log:list')")
+    @SaCheckPermission("log:list")
     @RequestMapping("list")
     @ApiOperation(value = "操作日志列表", response = TableDataInfo.class)
     public TableDataInfo list(SysLog sysLog) {

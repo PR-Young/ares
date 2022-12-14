@@ -1,5 +1,6 @@
 package com.ares.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
@@ -10,7 +11,6 @@ import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +35,7 @@ public class SysDeptApiController extends BaseController {
         this.sysDeptService = sysDeptService;
     }
 
-    @PreAuthorize("hasAnyAuthority('sysDept:list')")
+    @SaCheckPermission("sysDept:list")
     @RequestMapping("list")
     @ApiOperation(value = "部门列表", response = TableDataInfo.class)
     public TableDataInfo list(SysDept sysDept) {
@@ -50,7 +50,7 @@ public class SysDeptApiController extends BaseController {
         return AjaxResult.successData(sysDeptService.getByDeptId(sysDeptId));
     }
 
-    //@PreAuthorize("hasAnyAuthority('sysDept:edit')")
+    //@SaCheckPermission("sysDept:edit")
     @PostMapping("edit")
     @ApiOperation(value = "编辑部门信息", response = Object.class)
     public Object edit(@Validated @RequestBody SysDept sysDept) throws Exception {
@@ -64,7 +64,7 @@ public class SysDeptApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    //@PreAuthorize("hasAnyAuthority('sysDept:delete')")
+    //@SaCheckPermission("sysDept:delete")
     @DeleteMapping("{sysDeptIds}")
     @ApiOperation(value = "删除部门", response = Object.class)
     public Object remove(@PathVariable String[] sysDeptIds) {
