@@ -44,4 +44,3 @@ sa-token:
   is-log: true
   is-read-header: true
   is-write-header: true
-#  token-prefix: Bearer
