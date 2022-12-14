@@ -23,10 +23,6 @@ ares
 │
 ├─（※）ares-system 系统模块
 │
-├─（※）ares-ui vue前端 
-│
-├─（※）ares-ui-plus vue3 + element-plus前端 
-│
 ├─doc sql及一些文件说明
 │
 └─pom.xml
