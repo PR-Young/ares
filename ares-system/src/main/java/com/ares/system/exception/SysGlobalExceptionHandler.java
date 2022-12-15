@@ -8,8 +8,6 @@ import com.ares.core.persistence.model.exception.ErrorCode;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -58,13 +56,9 @@ public class SysGlobalExceptionHandler {
         return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
     }
 
-    @ExceptionHandler(value = UsernameNotFoundException.class)
-    public Object handleUsernameNotFoundException(HttpServletRequest request, HttpServletResponse response, UsernameNotFoundException e) {
+    @ExceptionHandler(value = UserException.class)
+    public Object handleUsernameNotFoundException(HttpServletRequest request, HttpServletResponse response, UserException e) {
         return AjaxResult.error(ResultCode.FAILED.getCode(), "用户不存在");
     }
 
-    @ExceptionHandler(value = BadCredentialsException.class)
-    public Object handleBadCredentialsException(HttpServletRequest request, HttpServletResponse response, BadCredentialsException e) {
-        return AjaxResult.error(ResultCode.PWDERROR.getCode(), ResultCode.PWDERROR.getMsg());
-    }
 }

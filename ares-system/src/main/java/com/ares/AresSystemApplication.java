@@ -15,7 +15,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @date: 2020/10/19
  * @see: com.ares.system AresSystemApplication.java
  **/
-//@Import({MyBatisConfig.class})
 @MapperScan("com.ares.**.dao")
 @SpringBootApplication(exclude = {RocketMQAutoConfiguration.class, DataSourceAutoConfiguration.class})
 public class AresSystemApplication extends SpringBootServletInitializer {
