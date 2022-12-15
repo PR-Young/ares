@@ -6,7 +6,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysPost;
-import com.ares.core.persistence.service.SysPostService;
+import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,10 +26,10 @@ import java.util.List;
 @Api(value = "岗位管理API", tags = {"岗位管理"})
 public class SysPostApiController extends BaseController {
 
-    private SysPostService sysPostService;
+    private ISysPostService sysPostService;
 
     @Autowired
-    public SysPostApiController(SysPostService sysPostService) {
+    public SysPostApiController(ISysPostService sysPostService) {
         this.sysPostService = sysPostService;
     }
 

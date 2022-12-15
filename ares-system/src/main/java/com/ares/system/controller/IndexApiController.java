@@ -3,8 +3,8 @@ package com.ares.system.controller;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.utils.ServletUtils;
 import com.ares.message.persistence.model.AresDocument;
-import com.ares.message.persistence.service.ElasticsearchService;
-import com.ares.system.persistence.service.IndexService;
+import com.ares.message.persistence.service.IElasticsearchService;
+import com.ares.system.persistence.service.IIndexService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +25,11 @@ import java.util.Map;
 @RequestMapping("/index/*")
 @Api(value = "index", tags = {"index"})
 public class IndexApiController {
-    private IndexService indexService;
-    private ElasticsearchService elasticsearchService;
+    private IIndexService indexService;
+    private IElasticsearchService elasticsearchService;
 
     @Autowired
-    public IndexApiController(IndexService indexService, ElasticsearchService elasticsearchService) {
+    public IndexApiController(IIndexService indexService, IElasticsearchService elasticsearchService) {
         this.indexService = indexService;
         this.elasticsearchService = elasticsearchService;
     }

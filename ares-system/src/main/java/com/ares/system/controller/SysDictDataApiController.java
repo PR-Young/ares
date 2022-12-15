@@ -6,7 +6,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysDictData;
-import com.ares.core.persistence.service.SysDictDataService;
+import com.ares.core.persistence.service.ISysDictDataService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,10 +26,10 @@ import java.util.List;
 @Api(value = "字典数据API", tags = {"字典数据"})
 public class SysDictDataApiController extends BaseController {
 
-    private SysDictDataService sysDictDataService;
+    private ISysDictDataService sysDictDataService;
 
     @Autowired
-    public SysDictDataApiController(SysDictDataService sysDictDataService) {
+    public SysDictDataApiController(ISysDictDataService sysDictDataService) {
         this.sysDictDataService = sysDictDataService;
     }
 

@@ -8,8 +8,8 @@ import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysRole;
 import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.service.SysRoleService;
-import com.ares.core.persistence.service.SysUserService;
+import com.ares.core.persistence.service.ISysRoleService;
+import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,11 +28,11 @@ import java.util.List;
 @RequestMapping("/system/role/*")
 @Api(value = "系统角色API", tags = {"系统角色"})
 public class SysRoleApiController extends BaseController {
-    private SysRoleService roleService;
-    private SysUserService userService;
+    private ISysRoleService roleService;
+    private ISysUserService userService;
 
     @Autowired
-    public SysRoleApiController(SysRoleService roleService, SysUserService userService) {
+    public SysRoleApiController(ISysRoleService roleService, ISysUserService userService) {
         this.roleService = roleService;
         this.userService = userService;
     }

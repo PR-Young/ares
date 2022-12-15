@@ -7,7 +7,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysTemplate;
-import com.ares.core.persistence.service.SysTemplateService;
+import com.ares.core.persistence.service.ISysTemplateService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,10 +27,10 @@ import java.util.List;
 @Api(value = "系统模版API", tags = {"系统模版"})
 public class SysTemplateApiController extends BaseController {
 
-    private SysTemplateService sysTemplateService;
+    private ISysTemplateService sysTemplateService;
 
     @Autowired
-    public SysTemplateApiController(SysTemplateService sysTemplateService) {
+    public SysTemplateApiController(ISysTemplateService sysTemplateService) {
         this.sysTemplateService = sysTemplateService;
     }
 

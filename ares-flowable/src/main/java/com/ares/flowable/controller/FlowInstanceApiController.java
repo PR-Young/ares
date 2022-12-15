@@ -3,7 +3,7 @@ package com.ares.flowable.controller;
 
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.flowable.persistence.model.vo.FlowTaskVo;
-import com.ares.flowable.persistence.service.FlowInstanceService;
+import com.ares.flowable.persistence.service.IFlowInstanceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -19,10 +19,10 @@ import java.util.Map;
 @RequestMapping("/flowable/instance")
 public class FlowInstanceApiController {
 
-    private FlowInstanceService flowInstanceService;
+    private IFlowInstanceService flowInstanceService;
 
     @Autowired
-    public FlowInstanceApiController(FlowInstanceService flowInstanceService) {
+    public FlowInstanceApiController(IFlowInstanceService flowInstanceService) {
         this.flowInstanceService = flowInstanceService;
     }
 

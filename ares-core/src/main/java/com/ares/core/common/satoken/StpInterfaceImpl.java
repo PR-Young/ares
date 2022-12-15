@@ -4,8 +4,8 @@ import cn.dev33.satoken.stp.StpInterface;
 import com.ares.core.common.exception.UserException;
 import com.ares.core.persistence.model.system.SysRole;
 import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.service.SysRoleService;
-import com.ares.core.persistence.service.SysUserService;
+import com.ares.core.persistence.service.ISysRoleService;
+import com.ares.core.persistence.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +21,12 @@ import java.util.List;
 @Component
 public class StpInterfaceImpl implements StpInterface {
 
-    private SysUserService userService;
-    private SysRoleService roleService;
+    private ISysUserService userService;
+    private ISysRoleService roleService;
 
     @Autowired
-    public StpInterfaceImpl(SysUserService userService,
-                                  SysRoleService roleService) {
+    public StpInterfaceImpl(ISysUserService userService,
+                            ISysRoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }

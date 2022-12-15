@@ -4,7 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.ares.core.common.exception.UserException;
 import com.ares.core.persistence.model.exception.ErrorCode;
 import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.service.SysUserService;
+import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
 
 /**
@@ -23,7 +23,7 @@ public class SecurityUtils {
         if (null == loginId || "null".equalsIgnoreCase(loginId)){
             throw new UserException(ErrorCode.NOLOGIN.getCode(), "用户未登录！");
         }
-        SysUserService userService = SpringUtils.getBean(SysUserService.class);
+        ISysUserService userService = SpringUtils.getBean(ISysUserService.class);
         SysUser user = userService.getById(loginId);
         return user;
     }

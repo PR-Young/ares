@@ -2,7 +2,7 @@ package com.ares.core.common.log;
 
 
 import com.ares.core.persistence.model.system.SysLog;
-import com.ares.core.persistence.service.SysLogService;
+import com.ares.core.persistence.service.ISysLogService;
 
 /**
  * @description:
@@ -10,9 +10,9 @@ import com.ares.core.persistence.service.SysLogService;
  **/
 public class SaveLogThread implements Runnable {
     private SysLog sysLog;
-    private SysLogService sysLogService;
+    private ISysLogService sysLogService;
 
-    public SaveLogThread(SysLog sysLog, SysLogService sysLogService) {
+    public SaveLogThread(SysLog sysLog, ISysLogService sysLogService) {
         this.sysLog = sysLog;
         this.sysLogService = sysLogService;
     }

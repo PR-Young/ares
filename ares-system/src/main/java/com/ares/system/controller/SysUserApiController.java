@@ -9,11 +9,12 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.base.Constants;
+import com.ares.core.persistence.model.listener.UserDataListener;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.service.SysPostService;
-import com.ares.core.persistence.service.SysRoleService;
-import com.ares.core.persistence.service.SysUserService;
+import com.ares.core.persistence.service.ISysPostService;
+import com.ares.core.persistence.service.ISysRoleService;
+import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.ExcelUtils;
 import com.ares.core.utils.StringUtils;
 import com.ares.redis.utils.RedisUtil;
@@ -41,14 +42,14 @@ import java.util.List;
 @Api(value = "系统用户API", tags = {"系统用户"})
 public class SysUserApiController extends BaseController {
 
-    private SysUserService userService;
-    private SysRoleService roleService;
-    private SysPostService postService;
+    private ISysUserService userService;
+    private ISysRoleService roleService;
+    private ISysPostService postService;
 
     @Autowired
-    public SysUserApiController(SysUserService userService,
-                                SysRoleService roleService,
-                                SysPostService postService) {
+    public SysUserApiController(ISysUserService userService,
+                                ISysRoleService roleService,
+                                ISysPostService postService) {
         this.userService = userService;
         this.roleService = roleService;
         this.postService = postService;
@@ -150,7 +151,7 @@ public class SysUserApiController extends BaseController {
         InputStream inputStream = file.getInputStream();
         boolean needUpdate = request.getParameter("updateSupport") == "1" ? true : false;
         String deptId = request.getParameter("deptId");
-        AnalysisEventListener listener = userService.new UserDataListener(needUpdate, deptId);
+        AnalysisEventListener listener = new UserDataListener(needUpdate, deptId);
         EasyExcel.read(inputStream, SysUser.class, listener).sheet().doRead();
         return AjaxResult.success("导入成功");
     }

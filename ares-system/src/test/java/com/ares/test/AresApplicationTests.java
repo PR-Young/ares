@@ -3,8 +3,9 @@ package com.ares.test;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.ares.core.persistence.model.listener.UserDataListener;
 import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.service.SysUserService;
+import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
@@ -39,8 +40,8 @@ public class AresApplicationTests extends AresBaseTest {
     @Test
     public void testExcel() throws Exception {
         InputStream in = new FileInputStream("E:\\GitHub\\ares\\doc\\test.xlsx");
-        SysUserService userService = SpringUtils.getBean(SysUserService.class);
-        AnalysisEventListener listener = userService.new UserDataListener(true, "");
+        ISysUserService userService = SpringUtils.getBean(ISysUserService.class);
+        AnalysisEventListener listener = new UserDataListener(true, "");
         EasyExcel.read(in, SysUser.class, listener).sheet().doRead();
     }
 

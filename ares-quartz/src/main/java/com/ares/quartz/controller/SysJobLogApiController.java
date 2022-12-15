@@ -6,7 +6,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.quartz.persistence.model.SysQuartzJobLog;
-import com.ares.quartz.persistence.service.SysQuartzJobLogService;
+import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ import java.util.List;
 @Api(value = "系统任务日志API", tags = {"系统任务日志"})
 public class SysJobLogApiController extends BaseController {
 
-    private SysQuartzJobLogService jobLogService;
+    private ISysQuartzJobLogService jobLogService;
 
     @Autowired
-    public SysJobLogApiController(SysQuartzJobLogService jobLogService) {
+    public SysJobLogApiController(ISysQuartzJobLogService jobLogService) {
         this.jobLogService = jobLogService;
     }
 

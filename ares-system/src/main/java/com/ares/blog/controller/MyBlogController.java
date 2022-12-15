@@ -1,11 +1,11 @@
 package com.ares.blog.controller;
 
-import com.ares.blog.persistence.service.MyBlogService;
+import com.ares.blog.persistence.service.IMyBlogService;
 import com.ares.core.common.log.Log;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.utils.ServletUtils;
 import com.ares.system.persistence.model.Articles;
-import com.ares.system.persistence.service.ArticlesService;
+import com.ares.system.persistence.service.IArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +21,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/blog/*")
 public class MyBlogController {
-    private MyBlogService blogService;
-    private ArticlesService articlesService;
+    private IMyBlogService blogService;
+    private IArticlesService articlesService;
 
     @Autowired
-    public MyBlogController(MyBlogService blogService, ArticlesService articlesService) {
+    public MyBlogController(IMyBlogService blogService, IArticlesService articlesService) {
         this.blogService = blogService;
         this.articlesService = articlesService;
     }

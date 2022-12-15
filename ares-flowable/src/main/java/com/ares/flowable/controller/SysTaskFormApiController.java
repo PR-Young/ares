@@ -7,7 +7,7 @@ import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.flowable.persistence.model.SysTaskForm;
-import com.ares.flowable.persistence.service.SysTaskFormService;
+import com.ares.flowable.persistence.service.ISysTaskFormService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,10 @@ import java.util.List;
 @Api(value = "API", tags = {"管理"})
 public class SysTaskFormApiController extends BaseController {
 
-    private SysTaskFormService sysTaskFormService;
+    private ISysTaskFormService sysTaskFormService;
 
     @Autowired
-    public SysTaskFormApiController(SysTaskFormService sysTaskFormService) {
+    public SysTaskFormApiController(ISysTaskFormService sysTaskFormService) {
         this.sysTaskFormService = sysTaskFormService;
     }
 

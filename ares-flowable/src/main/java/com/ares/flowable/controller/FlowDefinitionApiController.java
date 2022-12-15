@@ -4,10 +4,10 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.system.SysRole;
 import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.service.SysRoleService;
-import com.ares.core.persistence.service.SysUserService;
+import com.ares.core.persistence.service.ISysRoleService;
+import com.ares.core.persistence.service.ISysUserService;
 import com.ares.flowable.persistence.model.dto.FlowSaveXmlVo;
-import com.ares.flowable.persistence.service.FlowDefinitionService;
+import com.ares.flowable.persistence.service.IFlowDefinitionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -30,12 +30,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/flowable/definition")
 public class FlowDefinitionApiController extends BaseController {
-    private FlowDefinitionService flowDefinitionService;
-    private SysUserService userService;
-    private SysRoleService sysRoleService;
+    private IFlowDefinitionService flowDefinitionService;
+    private ISysUserService userService;
+    private ISysRoleService sysRoleService;
 
     @Autowired
-    public FlowDefinitionApiController(FlowDefinitionService flowDefinitionService, SysUserService userService, SysRoleService sysRoleService) {
+    public FlowDefinitionApiController(IFlowDefinitionService flowDefinitionService, ISysUserService userService, ISysRoleService sysRoleService) {
         this.flowDefinitionService = flowDefinitionService;
         this.userService = userService;
         this.sysRoleService = sysRoleService;

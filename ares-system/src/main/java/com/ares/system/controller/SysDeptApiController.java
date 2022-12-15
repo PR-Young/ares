@@ -6,7 +6,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysDept;
-import com.ares.core.persistence.service.SysDeptService;
+import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,10 +28,10 @@ import java.util.List;
 @Api(value = "部门管理API", tags = {"部门管理"})
 public class SysDeptApiController extends BaseController {
 
-    private SysDeptService sysDeptService;
+    private ISysDeptService sysDeptService;
 
     @Autowired
-    public SysDeptApiController(SysDeptService sysDeptService) {
+    public SysDeptApiController(ISysDeptService sysDeptService) {
         this.sysDeptService = sysDeptService;
     }
 
@@ -50,7 +50,7 @@ public class SysDeptApiController extends BaseController {
         return AjaxResult.successData(sysDeptService.getByDeptId(sysDeptId));
     }
 
-    //@SaCheckPermission("sysDept:edit")
+    @SaCheckPermission("sysDept:edit")
     @PostMapping("edit")
     @ApiOperation(value = "编辑部门信息", response = Object.class)
     public Object edit(@Validated @RequestBody SysDept sysDept) throws Exception {
@@ -64,7 +64,7 @@ public class SysDeptApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    //@SaCheckPermission("sysDept:delete")
+    @SaCheckPermission("sysDept:delete")
     @DeleteMapping("{sysDeptIds}")
     @ApiOperation(value = "删除部门", response = Object.class)
     public Object remove(@PathVariable String[] sysDeptIds) {

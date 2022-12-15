@@ -8,7 +8,7 @@ import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.quartz.persistence.model.SysQuartzJob;
-import com.ares.quartz.persistence.service.SysQuartzJobService;
+import com.ares.quartz.persistence.service.ISysQuartzJobService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.quartz.SchedulerException;
@@ -28,10 +28,10 @@ import java.util.List;
 @Api(value = "系统任务API", tags = {"系统任务"})
 public class SysJobApiController extends BaseController {
 
-    private SysQuartzJobService jobService;
+    private ISysQuartzJobService jobService;
 
     @Autowired
-    public SysJobApiController(SysQuartzJobService jobService) {
+    public SysJobApiController(ISysQuartzJobService jobService) {
         this.jobService = jobService;
     }
 

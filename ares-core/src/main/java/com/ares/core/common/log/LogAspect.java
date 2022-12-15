@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.model.system.SysLog;
 import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.service.SysLogService;
+import com.ares.core.persistence.service.ISysLogService;
 import com.ares.core.utils.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -40,10 +40,10 @@ public class LogAspect {
     private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
     private static final ThreadLocal<Date> dateThreadLocal = new ThreadLocal<>();
-    private SysLogService sysLogService;
+    private ISysLogService sysLogService;
 
     @Autowired
-    public LogAspect(SysLogService sysLogService) {
+    public LogAspect(ISysLogService sysLogService) {
         this.sysLogService = sysLogService;
     }
 

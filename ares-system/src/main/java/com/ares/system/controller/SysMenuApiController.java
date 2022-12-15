@@ -5,7 +5,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.system.SysMenu;
-import com.ares.core.persistence.service.SysMenuService;
+import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,10 +24,10 @@ import java.util.List;
 @Api(value = "系统菜单API", tags = {"系统菜单"})
 public class SysMenuApiController {
 
-    private SysMenuService menuService;
+    private ISysMenuService menuService;
 
     @Autowired
-    public SysMenuApiController(SysMenuService menuService) {
+    public SysMenuApiController(ISysMenuService menuService) {
         this.menuService = menuService;
     }
 

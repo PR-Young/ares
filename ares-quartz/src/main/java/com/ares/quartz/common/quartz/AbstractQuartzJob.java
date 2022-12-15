@@ -5,7 +5,7 @@ import com.ares.core.utils.SpringUtils;
 import com.ares.core.utils.StringUtils;
 import com.ares.quartz.persistence.model.SysQuartzJob;
 import com.ares.quartz.persistence.model.SysQuartzJobLog;
-import com.ares.quartz.persistence.service.SysQuartzJobLogService;
+import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -81,7 +81,7 @@ public abstract class AbstractQuartzJob implements Job {
             sysJobLog.setStatus(ScheduleConstants.SUCCESS_STATUS);
         }
         //  这里获取service然后插入库中
-        SpringUtils.getBean(SysQuartzJobLogService.class).insert(sysJobLog);
+        SpringUtils.getBean(ISysQuartzJobLogService.class).insert(sysJobLog);
     }
 
     /**

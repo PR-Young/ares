@@ -8,8 +8,8 @@ import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.flowable.persistence.model.SysDeployForm;
 import com.ares.flowable.persistence.model.SysForm;
-import com.ares.flowable.persistence.service.SysDeployFormService;
-import com.ares.flowable.persistence.service.SysFormService;
+import com.ares.flowable.persistence.service.ISysDeployFormService;
+import com.ares.flowable.persistence.service.ISysFormService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +25,11 @@ import java.util.List;
 @Api(value = "API", tags = {"管理"})
 public class SysFormApiController extends BaseController {
 
-    private SysFormService sysFormService;
-    private SysDeployFormService deployFormService;
+    private ISysFormService sysFormService;
+    private ISysDeployFormService deployFormService;
 
     @Autowired
-    public SysFormApiController(SysFormService sysFormService, SysDeployFormService deployFormService) {
+    public SysFormApiController(ISysFormService sysFormService, ISysDeployFormService deployFormService) {
         this.sysFormService = sysFormService;
         this.deployFormService = deployFormService;
     }

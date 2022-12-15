@@ -30,18 +30,18 @@ import java.io.OutputStream;
 @RequestMapping("/system/user/profile/*")
 @Api(value = "个人信息API", tags = {"个人信息"})
 public class SysProfileApiController extends BaseController {
-    private SysUserService userService;
-    private UploadService uploadService;
-    private SysPropertiesService propertiesService;
-    private SysPostService postService;
-    private SysDeptService deptService;
+    private ISysUserService userService;
+    private IUploadService uploadService;
+    private ISysPropertiesService propertiesService;
+    private ISysPostService postService;
+    private ISysDeptService deptService;
 
     @Autowired
-    public SysProfileApiController(SysUserService userService,
-                                   UploadService uploadService,
-                                   SysPropertiesService propertiesService,
-                                   SysPostService postService,
-                                   SysDeptService deptService) {
+    public SysProfileApiController(ISysUserService userService,
+                                   IUploadService uploadService,
+                                   ISysPropertiesService propertiesService,
+                                   ISysPostService postService,
+                                   ISysDeptService deptService) {
         this.userService = userService;
         this.uploadService = uploadService;
         this.propertiesService = propertiesService;

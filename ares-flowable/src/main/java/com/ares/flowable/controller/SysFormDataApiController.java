@@ -7,7 +7,7 @@ import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.flowable.persistence.model.SysFormData;
-import com.ares.flowable.persistence.service.SysFormDataService;
+import com.ares.flowable.persistence.service.ISysFormDataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,10 @@ import java.util.List;
 @Api(value = "API", tags = {"管理"})
 public class SysFormDataApiController extends BaseController {
 
-    private SysFormDataService sysFormDataService;
+    private ISysFormDataService sysFormDataService;
 
     @Autowired
-    public SysFormDataApiController(SysFormDataService sysFormDataService) {
+    public SysFormDataApiController(ISysFormDataService sysFormDataService) {
         this.sysFormDataService = sysFormDataService;
     }
 

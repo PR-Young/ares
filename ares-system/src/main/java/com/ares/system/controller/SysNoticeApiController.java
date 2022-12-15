@@ -7,7 +7,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysNotice;
-import com.ares.core.persistence.service.SysNoticeService;
+import com.ares.core.persistence.service.ISysNoticeService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,10 +27,10 @@ import java.util.List;
 @Api(value = "通知公告API", tags = {"通知公告"})
 public class SysNoticeApiController extends BaseController {
 
-    private SysNoticeService sysNoticeService;
+    private ISysNoticeService sysNoticeService;
 
     @Autowired
-    public SysNoticeApiController(SysNoticeService sysNoticeService) {
+    public SysNoticeApiController(ISysNoticeService sysNoticeService) {
         this.sysNoticeService = sysNoticeService;
     }
 

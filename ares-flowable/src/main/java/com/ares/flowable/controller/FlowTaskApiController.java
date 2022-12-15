@@ -4,8 +4,8 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.flowable.persistence.model.dto.FlowTaskDto;
 import com.ares.flowable.persistence.model.vo.FlowTaskVo;
-import com.ares.flowable.persistence.service.FlowDefinitionService;
-import com.ares.flowable.persistence.service.FlowTaskService;
+import com.ares.flowable.persistence.service.IFlowDefinitionService;
+import com.ares.flowable.persistence.service.IFlowTaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -26,12 +26,12 @@ import java.io.OutputStream;
 @RequestMapping("/flowable/task")
 public class FlowTaskApiController extends BaseController {
 
-    private FlowTaskService flowTaskService;
-    private FlowDefinitionService flowDefinitionService;
+    private IFlowTaskService flowTaskService;
+    private IFlowDefinitionService flowDefinitionService;
 
     @Autowired
-    public FlowTaskApiController(FlowTaskService flowTaskService,
-                                 FlowDefinitionService flowDefinitionService) {
+    public FlowTaskApiController(IFlowTaskService flowTaskService,
+                                 IFlowDefinitionService flowDefinitionService) {
         this.flowTaskService = flowTaskService;
         this.flowDefinitionService = flowDefinitionService;
     }

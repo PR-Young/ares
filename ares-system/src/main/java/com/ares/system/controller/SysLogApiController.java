@@ -4,7 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysLog;
-import com.ares.core.persistence.service.SysLogService;
+import com.ares.core.persistence.service.ISysLogService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +22,10 @@ import java.util.List;
 @RestController
 public class SysLogApiController extends BaseController {
 
-    private SysLogService sysLogService;
+    private ISysLogService sysLogService;
 
     @Autowired
-    public SysLogApiController(SysLogService sysLogService) {
+    public SysLogApiController(ISysLogService sysLogService) {
         this.sysLogService = sysLogService;
     }
 

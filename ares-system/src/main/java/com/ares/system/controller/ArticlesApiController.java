@@ -7,7 +7,7 @@ import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.system.persistence.model.Articles;
-import com.ares.system.persistence.service.ArticlesService;
+import com.ares.system.persistence.service.IArticlesService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,10 @@ import java.util.List;
 @Api(value = "API", tags = {"管理"})
 public class ArticlesApiController extends BaseController {
 
-    private ArticlesService articlesService;
+    private IArticlesService articlesService;
 
     @Autowired
-    public ArticlesApiController(ArticlesService articlesService) {
+    public ArticlesApiController(IArticlesService articlesService) {
         this.articlesService = articlesService;
     }
 

@@ -7,7 +7,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.persistence.model.system.SysProperties;
-import com.ares.core.persistence.service.SysPropertiesService;
+import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,10 +27,10 @@ import java.util.List;
 @Api(value = "系统参数API", tags = {"系统参数"})
 public class SysPropertiesApiController extends BaseController {
 
-    private SysPropertiesService sysPropertiesService;
+    private ISysPropertiesService sysPropertiesService;
 
     @Autowired
-    public SysPropertiesApiController(SysPropertiesService sysPropertiesService) {
+    public SysPropertiesApiController(ISysPropertiesService sysPropertiesService) {
         this.sysPropertiesService = sysPropertiesService;
     }
 

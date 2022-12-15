@@ -4,7 +4,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.base.AjaxResult;
 import ${entityPackage}.${entityName};
 import com.ares.core.persistence.model.page.TableDataInfo;
-import ${servicePackage}.${entityName}Service;
+import ${servicePackage}.I${entityName}Service;
 import com.ares.core.utils.StringUtils;
 import com.ares.core.common.security.SecurityUtils;
 import io.swagger.annotations.Api;
@@ -24,10 +24,10 @@ import java.util.List;
 @Api(value = "API", tags = {"管理"})
 public class ${entityName}ApiController extends BaseController {
 
-private ${entityName}Service ${entityName1}Service;
+private I${entityName}Service ${entityName1}Service;
 
 @Autowired
-public ${entityName}ApiController(${entityName}Service ${entityName1}Service){
+public ${entityName}ApiController(I${entityName}Service ${entityName1}Service){
 this.${entityName1}Service = ${entityName1}Service;
 }
 

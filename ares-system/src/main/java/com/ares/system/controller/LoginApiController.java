@@ -10,9 +10,9 @@ import com.ares.core.persistence.model.base.ResultCode;
 import com.ares.core.persistence.model.system.SysMenu;
 import com.ares.core.persistence.model.system.SysRole;
 import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.service.SysMenuService;
-import com.ares.core.persistence.service.SysRoleService;
-import com.ares.core.persistence.service.SysUserService;
+import com.ares.core.persistence.service.ISysMenuService;
+import com.ares.core.persistence.service.ISysRoleService;
+import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.AresCommonUtils;
 import com.ares.core.utils.MD5Util;
 import com.ares.core.utils.ServletUtils;
@@ -24,7 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,23 +45,21 @@ public class LoginApiController {
     // token 过期时间一个月
     private static final long EXPIRE = 30 * 24 * 60 * 60;
 
-    private SysUserService userService;
-    private SysRoleService roleService;
-    private SysMenuService menuService;
+    private ISysUserService userService;
+    private ISysRoleService roleService;
+    private ISysMenuService menuService;
     private BaseConfig config;
-    private AuthenticationManager authenticationManager;
 
     @Autowired
-    public LoginApiController(SysUserService userService,
-                              SysRoleService roleService,
-                              SysMenuService menuService,
+    public LoginApiController(ISysUserService userService,
+                              ISysRoleService roleService,
+                              ISysMenuService menuService,
                               BaseConfig config
     ) {
         this.userService = userService;
         this.roleService = roleService;
         this.menuService = menuService;
         this.config = config;
-        //this.authenticationManager = authenticationManager;
     }
 
     @ApiOperation(value = "登录", response = Object.class)
@@ -80,7 +77,6 @@ public class LoginApiController {
         }
 
         // 系统登录认证
-        //JwtAuthenticationToken token = SecurityUtils.login(request, userName, password, authenticationManager);
         SysUser user = userService.getUserByName(userName);
         if (!user.getPassword().equals(MD5Util.encode(password))) {
             return AjaxResult.error(ResultCode.PWDERROR.getCode(), ResultCode.PWDERROR.getMsg());

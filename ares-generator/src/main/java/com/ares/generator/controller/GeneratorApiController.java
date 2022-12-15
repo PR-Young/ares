@@ -5,8 +5,8 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.persistence.model.page.TableDataInfo;
 import com.ares.core.utils.DateUtils;
 import com.ares.core.utils.ServletUtils;
-import com.ares.generator.persistence.service.AutoGeneratorService;
-import com.ares.generator.persistence.service.GeneratorService;
+import com.ares.generator.persistence.service.IAutoGeneratorService;
+import com.ares.generator.persistence.service.IGeneratorService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
@@ -32,11 +32,11 @@ import java.util.Map;
 @Api(value = "代码生成API", tags = {"代码生成"})
 public class GeneratorApiController extends BaseController {
 
-    private GeneratorService generatorService;
-    private AutoGeneratorService autoGeneratorService;
+    private IGeneratorService generatorService;
+    private IAutoGeneratorService autoGeneratorService;
 
     @Autowired
-    public GeneratorApiController(GeneratorService generatorService, AutoGeneratorService autoGeneratorService) {
+    public GeneratorApiController(IGeneratorService generatorService, IAutoGeneratorService autoGeneratorService) {
         this.generatorService = generatorService;
         this.autoGeneratorService = autoGeneratorService;
     }
