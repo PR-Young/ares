@@ -56,9 +56,4 @@ public class SysGlobalExceptionHandler {
         return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
     }
 
-    @ExceptionHandler(value = UserException.class)
-    public Object handleUsernameNotFoundException(HttpServletRequest request, HttpServletResponse response, UserException e) {
-        return AjaxResult.error(ResultCode.FAILED.getCode(), "用户不存在");
-    }
-
 }

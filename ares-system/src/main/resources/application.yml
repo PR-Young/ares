@@ -36,10 +36,6 @@ spring:
           status-lifetime: 100000
           connect-timeout: 100000
           read-timeout: 100000
-#mybatis:
-#  mapper-locations: classpath*:mapping/**/*.xml
-#  type-aliases-package: com.ares.**.**.model
-#  config-location: classpath:mybatis-config.xml
 
 mybatis-plus:
   configuration:
