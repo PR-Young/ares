@@ -34,15 +34,18 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-    // 注册拦截器
+    /**
+     * 注册拦截器
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册 Sa-Token 拦截器，校验规则为 StpUtil.checkLogin() 登录校验。
         registry.addInterceptor(new SaInterceptor(handle -> {
                     SaRouter.match("/**")
                             .notMatch("/login", "/kaptcha", "/system/user/profile/**",
-                                    "/swagger-ui.html/**", "/swagger-resources/**",
-                                    "/*/api-docs", "/webjars/**", "/doc.html/**",
+                                    "/swagger-ui/index.html", "/swagger-resources/**",
+                                    "/*/api-docs", "/webjars/**", "/doc.html",
                                     "/v2/**", "/error","/favicon.ico",
                                     "/druid/**", "/actuator/**",
                                     "/model/**", "/editor/**", "/blog/**", "/test/**")
@@ -56,14 +59,10 @@ public class SaTokenConfigure implements WebMvcConfigurer {
      **/
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("doc.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("index.html").addResourceLocations("classpath:/META-INF/resources.webjars.springfox-swagger-ui/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
     /**

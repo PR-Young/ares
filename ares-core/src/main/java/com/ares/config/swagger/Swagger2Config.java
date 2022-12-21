@@ -10,7 +10,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
 import org.springframework.boot.actuate.autoconfigure.web.server.ManagementPortType;
@@ -24,22 +26,25 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ReflectionUtils;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.RequestParameterBuilder;
 import springfox.documentation.oas.annotations.EnableOpenApi;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.Parameter;
+import springfox.documentation.service.RequestParameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.schema.ModelPropertyBuilderPlugin;
 import springfox.documentation.spi.schema.contexts.ModelPropertyContext;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.spring.web.plugins.WebFluxRequestHandlerProvider;
+import springfox.documentation.spring.web.plugins.WebMvcRequestHandlerProvider;
 import springfox.documentation.swagger.common.SwaggerPluginSupport;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -54,6 +59,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static springfox.documentation.schema.Annotations.findPropertyAnnotation;
 import static springfox.documentation.swagger.schema.ApiModelProperties.findApiModePropertyAnnotation;
@@ -88,6 +94,7 @@ public class Swagger2Config {
         String[] basePackages = getBasePackages();
         ApiSelectorBuilder apiSelectorBuilder = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .enable(swaggerProperties.isEnable())
                 .select();
         if (ArrayUtils.isEmpty(basePackages)) {
             apiSelectorBuilder.apis(RequestHandlerSelectors.withClassAnnotation(Api.class));
@@ -96,9 +103,8 @@ public class Swagger2Config {
         }
         Docket docket = apiSelectorBuilder.paths(PathSelectors.any())
                 .build()
-                .enable(swaggerProperties.isEnable())
                 .ignoredParameterTypes(ignoredParameterTypes)
-                .globalOperationParameters(getParameters());
+                .globalRequestParameters(getParameters());
         return docket;
     }
 
@@ -127,28 +133,29 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title(swaggerProperties.getTitle()) //设置文档的标题
-                .description(swaggerProperties.getDescription()) // 设置文档的描述
-                .version(swaggerProperties.getVersion()) // 设置文档的版本信息
+                //设置文档的标题
+                .title(swaggerProperties.getTitle())
+                // 设置文档的描述
+                .description(swaggerProperties.getDescription())
+                // 设置文档的版本信息
+                .version(swaggerProperties.getVersion())
                 .termsOfServiceUrl(swaggerProperties.getUrl())
                 .contact(new Contact(swaggerProperties.getContactName(), swaggerProperties.getContactUrl(), swaggerProperties.getContactEmail()))
                 .build();
     }
 
-    private List<Parameter> getParameters() {
+    private List<RequestParameter> getParameters() {
         List<SwaggerProperties.ParameterConfig> parameterConfig = swaggerProperties.getParameterConfig();
         if (CollectionUtils.isEmpty(parameterConfig)) {
             return null;
         }
-        List<Parameter> parameters = new ArrayList<>();
+        List<RequestParameter> parameters = new ArrayList<>();
         parameterConfig.forEach(parameter -> {
-            parameters.add(new ParameterBuilder()
+            parameters.add(new RequestParameterBuilder()
                     .name(parameter.getName())
                     .description(parameter.getDescription())
-                    .modelRef(new ModelRef(parameter.getDateType()))
-                    .parameterType(parameter.getType())
+                    .in(parameter.getType())
                     .required(parameter.isRequired())
-                    .defaultValue(parameter.getDefaultValue())
                     .build());
         });
         return parameters;
@@ -235,5 +242,38 @@ public class Swagger2Config {
         public boolean supports(DocumentationType documentationType) {
             return SwaggerPluginSupport.pluginDoesApply(documentationType);
         }
+    }
+
+    @Bean
+    public static BeanPostProcessor springfoxHandlerProviderBeanPostProcessor() {
+        return new BeanPostProcessor() {
+
+            @Override
+            public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+                if (bean instanceof WebMvcRequestHandlerProvider || bean instanceof WebFluxRequestHandlerProvider) {
+                    customizeSpringfoxHandlerMappings(getHandlerMappings(bean));
+                }
+                return bean;
+            }
+
+            private <T extends RequestMappingInfoHandlerMapping> void customizeSpringfoxHandlerMappings(List<T> mappings) {
+                List<T> copy = mappings.stream()
+                        .filter(mapping -> mapping.getPatternParser() == null)
+                        .collect(Collectors.toList());
+                mappings.clear();
+                mappings.addAll(copy);
+            }
+
+            @SuppressWarnings("unchecked")
+            private List<RequestMappingInfoHandlerMapping> getHandlerMappings(Object bean) {
+                try {
+                    Field field = ReflectionUtils.findField(bean.getClass(), "handlerMappings");
+                    field.setAccessible(true);
+                    return (List<RequestMappingInfoHandlerMapping>) field.get(bean);
+                } catch (IllegalArgumentException | IllegalAccessException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        };
     }
 }

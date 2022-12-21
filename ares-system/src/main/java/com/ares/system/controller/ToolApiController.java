@@ -42,7 +42,7 @@ public class ToolApiController {
     @RequestMapping("tool/swagger/index")
     @ApiOperation(value = "swagger接口", response = String.class)
     public String swagger() {
-        return "redirect:/swagger-ui.html";
+        return "redirect:/swagger-ui/index.html";
     }
 
     @RequestMapping("tool/knife4j/index")
