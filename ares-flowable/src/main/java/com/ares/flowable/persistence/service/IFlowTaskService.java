@@ -25,6 +25,13 @@ public interface IFlowTaskService {
     /**
      * 驳回任务
      *
+     * @param taskVo
+     */
+    public void taskRejectNew(FlowTaskVo taskVo);
+
+    /**
+     * 驳回任务
+     *
      * @param flowTaskVo
      */
     public void taskReject(FlowTaskVo flowTaskVo);

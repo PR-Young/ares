@@ -26,12 +26,12 @@ import java.util.List;
 public class ElasticsearchServiceImpl implements IElasticsearchService {
 
     private AresDocumentRepository repository;
-    @Autowired
     private ElasticsearchRestTemplate restTemplate;
 
     @Autowired
-    public ElasticsearchServiceImpl(AresDocumentRepository repository) {
+    public ElasticsearchServiceImpl(AresDocumentRepository repository, ElasticsearchRestTemplate restTemplate) {
         this.repository = repository;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -99,5 +99,5 @@ public class ElasticsearchServiceImpl implements IElasticsearchService {
         });
         return aresDocuments;
     }
-    
+
 }

@@ -1,6 +1,7 @@
 package com.ares.test;
 
-import com.baomidou.dynamic.datasource.toolkit.CryptoUtils;
+import com.ares.message.handler.AresMessageHandler;
+import com.ares.message.utils.AresMessageUtil;
 
 /*
  * @description:
@@ -16,21 +17,24 @@ public class test {
         //System.out.println("publicKey:" + arr[1]);
         //System.out.println("password:" + ConfigTools.decrypt(arr[0],password));
 
-        Integer keySize = 512;
-        String[] keyArr = CryptoUtils.genKeyPair(keySize);
+        //Integer keySize = 512;
+        //String[] keyArr = CryptoUtils.genKeyPair(keySize);
+        //
+        //String privateKey = keyArr[0];
+        //System.out.println("私钥： "+privateKey);
+        //String publicKey = keyArr[1];
+        //System.out.println("公钥： "+publicKey);
+        //
+        //// 奇异的私钥加密 公钥解密
+        //String encryptPwd = CryptoUtils.encrypt
+        //        ( privateKey,"root1234");
+        //System.out.println("加密后密码: "+encryptPwd);
+        //
+        //String decryptPwd = CryptoUtils.decrypt(publicKey, encryptPwd);
+        //// yourPassWord
+        //System.out.println("解密后密码: "+decryptPwd);
 
-        String privateKey = keyArr[0];
-        System.out.println("私钥： "+privateKey);
-        String publicKey = keyArr[1];
-        System.out.println("公钥： "+publicKey);
+        AresMessageUtil.sendMessage("ares", "success", 1024 * 1024, false, 2, new AresMessageHandler<String>());
 
-        // 奇异的私钥加密 公钥解密
-        String encryptPwd = CryptoUtils.encrypt
-                ( privateKey,"root1234");
-        System.out.println("加密后密码: "+encryptPwd);
-
-        String decryptPwd = CryptoUtils.decrypt(publicKey, encryptPwd);
-        // yourPassWord
-        System.out.println("解密后密码: "+decryptPwd);
     }
 }

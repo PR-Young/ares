@@ -20,7 +20,7 @@ spring:
         idle-timeout: 3600000
         max-pool-size: 12
         min-idle: 4
-        connection-test-query: /**ping**/
+        connection-test-query: select 1
 
   redis:
     host: 127.0.0.1

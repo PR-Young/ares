@@ -89,6 +89,13 @@ public class FlowTaskApiController extends BaseController {
     }
 
     @ApiOperation(value = "驳回任务")
+    @PostMapping(value = "/rejectnew")
+    public AjaxResult taskRejectNew(@RequestBody FlowTaskVo flowTaskVo) {
+        flowTaskService.taskRejectNew(flowTaskVo);
+        return AjaxResult.success();
+    }
+
+    @ApiOperation(value = "驳回任务")
     @PostMapping(value = "/reject")
     public AjaxResult taskReject(@RequestBody FlowTaskVo flowTaskVo) {
         flowTaskService.taskReject(flowTaskVo);

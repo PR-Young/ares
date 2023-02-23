@@ -78,10 +78,10 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
 
     @Autowired
     public FlowTaskServiceImpl(ISysUserService userService,
-                           ISysRoleService roleService,
-                           ISysDeptService deptService,
-                           ISysDeployFormService deployFormService,
-                           ISysFormDataService formDataService) {
+                               ISysRoleService roleService,
+                               ISysDeptService deptService,
+                               ISysDeployFormService deployFormService,
+                               ISysFormDataService formDataService) {
         this.userService = userService;
         this.roleService = roleService;
         this.deployFormService = deployFormService;
@@ -111,6 +111,24 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
             taskService.complete(taskVo.getTaskId(), taskVo.getValues());
         }
         return AjaxResult.success();
+    }
+
+    /**
+     * 驳回任务
+     *
+     * @param taskVo 请求实体参数
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void taskRejectNew(FlowTaskVo taskVo) {
+        Task task = taskService.createTaskQuery().taskId(taskVo.getTaskId()).singleResult();
+        if (task.isSuspended()) {
+            throw new CustomException("任务处于挂起状态");
+        }
+
+        taskService.addComment(taskVo.getTaskId(), taskVo.getInstanceId(), FlowComment.NORMAL.getType(), taskVo.getComment());
+        taskService.complete(taskVo.getTaskId(), taskVo.getValues());
+
     }
 
     /**
@@ -588,11 +606,26 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
         ids.add(userId);
         ids.addAll(roleIds);
         TaskQuery taskQuery = taskService.createTaskQuery()
-                .taskAssigneeIds(ids).active()
+                .taskAssigneeIds(ids)
+                .active()
                 .includeProcessVariables()
                 .orderByTaskCreateTime().desc();
-        page.setTotal(taskQuery.count());
-        List<Task> taskList = taskQuery.listPage(pageNum - 1, pageSize);
+        TaskQuery taskQuery1 = taskService.createTaskQuery()
+                .taskCandidateGroupIn(ids)
+                .active()
+                .includeProcessVariables()
+                .orderByTaskCreateTime().desc();
+        List<Task> taskList = new ArrayList<>();
+        List<Task> tasks = taskQuery.list();
+        List<Task> tasks1 = taskQuery1.list();
+        taskList.addAll(tasks);
+        taskList.addAll(tasks1);
+        page.setTotal(taskList.size());
+        if (taskList.size() < pageNum * pageSize) {
+            taskList = taskList.subList((pageNum - 1) * pageSize, taskList.size());
+        } else {
+            taskList = taskList.subList((pageNum - 1) * pageSize, (pageNum - 1) * pageSize + pageSize);
+        }
         List<FlowTaskDto> flowList = new ArrayList<>();
         for (Task task : taskList) {
             FlowTaskDto flowTask = new FlowTaskDto();

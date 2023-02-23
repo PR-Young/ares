@@ -4,7 +4,6 @@ import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
@@ -16,7 +15,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @see: com.ares.system AresSystemApplication.java
  **/
 @MapperScan("com.ares.**.dao")
-@SpringBootApplication(exclude = {RocketMQAutoConfiguration.class, DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {RocketMQAutoConfiguration.class})
 public class AresSystemApplication extends SpringBootServletInitializer {
 
     /**

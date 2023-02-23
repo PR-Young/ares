@@ -9,7 +9,6 @@ import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.flowable.common.constant.ProcessConstants;
-import com.ares.flowable.common.enums.FlowComment;
 import com.ares.flowable.factory.FlowServiceFactory;
 import com.ares.flowable.persistence.model.SysForm;
 import com.ares.flowable.persistence.model.SysFormData;
@@ -26,7 +25,6 @@ import org.flowable.engine.repository.ProcessDefinition;
 import org.flowable.engine.repository.ProcessDefinitionQuery;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.image.impl.DefaultProcessDiagramGenerator;
-import org.flowable.task.api.Task;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -184,7 +182,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
             // 设置流程发起人Id到流程中
             SysUser sysUser = SecurityUtils.getUser();
             identityService.setAuthenticatedUserId(sysUser.getId());
-            variables.put(ProcessConstants.PROCESS_INITIATOR, "");
+            variables.put(ProcessConstants.PROCESS_INITIATOR, sysUser.getId());
             ProcessInstance processInstance = runtimeService.startProcessInstanceById(procDefId, variables);
 
             //保存表单数据
@@ -195,12 +193,12 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
             formDataService.insert(formData);
 
             // 给第一步申请人节点设置任务执行人和意见 todo:第一个节点不设置为申请人节点有点问题？
-            Task task = taskService.createTaskQuery().processInstanceId(processInstance.getProcessInstanceId()).singleResult();
-            if (Objects.nonNull(task)) {
-                taskService.addComment(task.getId(), processInstance.getProcessInstanceId(), FlowComment.NORMAL.getType(), sysUser.getUserName() + "发起流程申请");
-                //taskService.setAssignee(task.getId(), sysUser.getUserId().toString());
-                taskService.complete(task.getId(), variables);
-            }
+            //Task task = taskService.createTaskQuery().processInstanceId(processInstance.getProcessInstanceId()).singleResult();
+            //if (Objects.nonNull(task)) {
+            //   // taskService.addComment(task.getId(), processInstance.getProcessInstanceId(), FlowComment.NORMAL.getType(), sysUser.getUserName() + "发起流程申请");
+            //    taskService.setOwner(task.getId(), sysUser.getId());
+            //    //taskService.complete(task.getId(), variables);
+            //}
             return AjaxResult.success("流程启动成功");
         } catch (Exception e) {
             e.printStackTrace();
