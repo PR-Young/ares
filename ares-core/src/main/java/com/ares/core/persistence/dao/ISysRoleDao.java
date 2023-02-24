@@ -1,9 +1,8 @@
 package com.ares.core.persistence.dao;
 
 
-import com.ares.core.persistence.model.system.SysRole;
+import com.ares.core.persistence.model.SysRole;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;

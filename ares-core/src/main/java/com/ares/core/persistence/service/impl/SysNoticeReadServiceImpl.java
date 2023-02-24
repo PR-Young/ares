@@ -1,7 +1,7 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.persistence.dao.ISysNoticeReadDao;
-import com.ares.core.persistence.model.system.SysNoticeRead;
+import com.ares.core.persistence.model.SysNoticeRead;
 import com.ares.core.persistence.service.ISysNoticeReadService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;

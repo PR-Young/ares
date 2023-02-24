@@ -1,8 +1,8 @@
 package com.ares.core.controller;
 
-import com.ares.core.persistence.model.page.PageDomain;
-import com.ares.core.persistence.model.page.TableDataInfo;
-import com.ares.core.persistence.model.page.TableSupport;
+import com.ares.core.model.page.PageDomain;
+import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.page.TableSupport;
 import com.ares.core.utils.SqlUtil;
 import com.ares.core.utils.StringUtils;
 import com.github.pagehelper.Page;

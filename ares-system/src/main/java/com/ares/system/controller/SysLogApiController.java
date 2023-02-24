@@ -2,8 +2,8 @@ package com.ares.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.controller.BaseController;
-import com.ares.core.persistence.model.page.TableDataInfo;
-import com.ares.core.persistence.model.system.SysLog;
+import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.persistence.model.SysLog;
 import com.ares.core.persistence.service.ISysLogService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

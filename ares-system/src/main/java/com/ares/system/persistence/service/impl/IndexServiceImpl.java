@@ -1,6 +1,6 @@
 package com.ares.system.persistence.service.impl;
 
-import com.ares.core.persistence.model.base.Constants;
+import com.ares.core.model.base.Constants;
 import com.ares.core.utils.DateUtils;
 import com.ares.redis.utils.RedisUtil;
 import com.ares.system.persistence.dao.IIndexDao;

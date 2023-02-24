@@ -1,9 +1,9 @@
 package com.ares.system.controller;
 
 import com.ares.core.controller.BaseController;
-import com.ares.core.persistence.model.base.AjaxResult;
+import com.ares.core.model.base.AjaxResult;
 import ${entityPackage}.${entityName};
-import com.ares.core.persistence.model.page.TableDataInfo;
+import com.ares.core.model.page.TableDataInfo;
 import ${servicePackage}.I${entityName}Service;
 import com.ares.core.utils.StringUtils;
 import com.ares.core.common.security.SecurityUtils;

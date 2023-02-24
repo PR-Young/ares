@@ -1,6 +1,6 @@
 package com.ares.core.persistence.service;
 
-import com.ares.core.persistence.model.system.SysProperties;
+import com.ares.core.persistence.model.SysProperties;
 
 import java.util.Map;
 

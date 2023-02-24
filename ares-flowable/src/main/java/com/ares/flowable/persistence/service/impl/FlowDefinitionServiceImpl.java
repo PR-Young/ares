@@ -3,8 +3,8 @@ package com.ares.flowable.persistence.service.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.ares.core.common.security.SecurityUtils;
-import com.ares.core.persistence.model.base.AjaxResult;
-import com.ares.core.persistence.model.system.SysUser;
+import com.ares.core.model.base.AjaxResult;
+import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.persistence.service.ISysUserService;

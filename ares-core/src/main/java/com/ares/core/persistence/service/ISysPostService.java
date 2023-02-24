@@ -1,6 +1,6 @@
 package com.ares.core.persistence.service;
 
-import com.ares.core.persistence.model.system.SysPost;
+import com.ares.core.persistence.model.SysPost;
 
 import java.util.List;
 

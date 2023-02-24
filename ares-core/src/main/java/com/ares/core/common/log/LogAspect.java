@@ -2,8 +2,8 @@ package com.ares.core.common.log;
 
 import com.alibaba.fastjson.JSON;
 import com.ares.core.common.security.SecurityUtils;
-import com.ares.core.persistence.model.system.SysLog;
-import com.ares.core.persistence.model.system.SysUser;
+import com.ares.core.persistence.model.SysLog;
+import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysLogService;
 import com.ares.core.utils.*;
 import org.aspectj.lang.JoinPoint;

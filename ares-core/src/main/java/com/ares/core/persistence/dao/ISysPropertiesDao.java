@@ -1,7 +1,7 @@
 package com.ares.core.persistence.dao;
 
 
-import com.ares.core.persistence.model.system.SysProperties;
+import com.ares.core.persistence.model.SysProperties;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

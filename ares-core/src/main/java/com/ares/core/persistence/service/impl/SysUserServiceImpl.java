@@ -2,8 +2,8 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.persistence.dao.ISysRoleDao;
 import com.ares.core.persistence.dao.ISysUserDao;
-import com.ares.core.persistence.model.system.SysRole;
-import com.ares.core.persistence.model.system.SysUser;
+import com.ares.core.persistence.model.SysRole;
+import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.MD5Util;
 import com.ares.core.utils.SnowflakeIdWorker;

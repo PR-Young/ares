@@ -1,7 +1,7 @@
 package com.ares.core.persistence.dao;
 
 
-import com.ares.core.persistence.model.system.SysMenu;
+import com.ares.core.persistence.model.SysMenu;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

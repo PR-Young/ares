@@ -2,11 +2,11 @@ package com.ares.core.persistence.service.impl;
 
 
 import com.ares.core.persistence.dao.ISysMenuDao;
-import com.ares.core.persistence.model.system.MetaVo;
-import com.ares.core.persistence.model.system.RouterVo;
-import com.ares.core.persistence.model.system.SysMenu;
-import com.ares.core.persistence.model.system.SysUser;
-import com.ares.core.persistence.model.tree.TreeSelect;
+import com.ares.core.persistence.model.MetaVo;
+import com.ares.core.persistence.model.RouterVo;
+import com.ares.core.persistence.model.SysMenu;
+import com.ares.core.persistence.model.SysUser;
+import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;

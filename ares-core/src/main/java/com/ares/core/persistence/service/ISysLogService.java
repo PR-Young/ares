@@ -1,6 +1,6 @@
 package com.ares.core.persistence.service;
 
-import com.ares.core.persistence.model.system.SysLog;
+import com.ares.core.persistence.model.SysLog;
 
 import java.util.List;
 

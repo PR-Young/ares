@@ -2,8 +2,8 @@ package com.ares.core.common.security;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.ares.core.common.exception.UserException;
-import com.ares.core.persistence.model.exception.ErrorCode;
-import com.ares.core.persistence.model.system.SysUser;
+import com.ares.core.model.exception.ErrorCode;
+import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
 

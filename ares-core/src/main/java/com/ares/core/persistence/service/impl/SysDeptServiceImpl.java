@@ -1,8 +1,8 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.persistence.dao.ISysDeptDao;
-import com.ares.core.persistence.model.system.SysDept;
-import com.ares.core.persistence.model.tree.TreeSelect;
+import com.ares.core.persistence.model.SysDept;
+import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;

@@ -2,7 +2,7 @@ package com.ares.core.listener;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.ares.core.persistence.model.listener.AresEvent;
+import com.ares.core.model.listener.AresEvent;
 
 /**
  * @description:

@@ -1,7 +1,7 @@
 package com.ares.flowable.controller;
 
 
-import com.ares.core.persistence.model.base.AjaxResult;
+import com.ares.core.model.base.AjaxResult;
 import com.ares.flowable.persistence.model.vo.FlowTaskVo;
 import com.ares.flowable.persistence.service.IFlowInstanceService;
 import io.swagger.annotations.Api;

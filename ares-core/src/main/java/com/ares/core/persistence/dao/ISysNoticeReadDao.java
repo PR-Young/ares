@@ -1,6 +1,6 @@
 package com.ares.core.persistence.dao;
 
-import com.ares.core.persistence.model.system.SysNoticeRead;
+import com.ares.core.persistence.model.SysNoticeRead;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

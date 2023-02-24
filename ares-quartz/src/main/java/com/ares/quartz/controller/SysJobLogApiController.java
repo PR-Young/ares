@@ -3,8 +3,8 @@ package com.ares.quartz.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.controller.BaseController;
-import com.ares.core.persistence.model.base.AjaxResult;
-import com.ares.core.persistence.model.page.TableDataInfo;
+import com.ares.core.model.base.AjaxResult;
+import com.ares.core.model.page.TableDataInfo;
 import com.ares.quartz.persistence.model.SysQuartzJobLog;
 import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
 import io.swagger.annotations.Api;

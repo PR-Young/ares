@@ -1,6 +1,6 @@
 package com.ares.core.persistence.service;
 
-import com.ares.core.persistence.model.system.SysRole;
+import com.ares.core.persistence.model.SysRole;
 
 import java.util.List;
 

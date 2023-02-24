@@ -1,7 +1,7 @@
 package com.ares.core.persistence.service;
 
-import com.ares.core.persistence.model.system.SysDept;
-import com.ares.core.persistence.model.tree.TreeSelect;
+import com.ares.core.persistence.model.SysDept;
+import com.ares.core.model.tree.TreeSelect;
 
 import java.util.List;
 

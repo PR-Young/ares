@@ -2,7 +2,7 @@ package com.ares.generator.controller;
 
 
 import com.ares.core.controller.BaseController;
-import com.ares.core.persistence.model.page.TableDataInfo;
+import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.DateUtils;
 import com.ares.core.utils.ServletUtils;
 import com.ares.generator.persistence.service.IAutoGeneratorService;

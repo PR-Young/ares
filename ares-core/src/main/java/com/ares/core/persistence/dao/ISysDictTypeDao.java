@@ -1,7 +1,7 @@
 package com.ares.core.persistence.dao;
 
 
-import com.ares.core.persistence.model.system.SysDictType;
+import com.ares.core.persistence.model.SysDictType;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

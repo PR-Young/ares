@@ -1,9 +1,9 @@
 package com.ares.flowable.controller;
 
 import com.ares.core.controller.BaseController;
-import com.ares.core.persistence.model.base.AjaxResult;
-import com.ares.core.persistence.model.system.SysRole;
-import com.ares.core.persistence.model.system.SysUser;
+import com.ares.core.model.base.AjaxResult;
+import com.ares.core.persistence.model.SysRole;
+import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.flowable.persistence.model.dto.FlowSaveXmlVo;

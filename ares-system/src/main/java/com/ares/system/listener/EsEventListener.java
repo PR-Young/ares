@@ -1,7 +1,7 @@
 package com.ares.system.listener;
 
 import com.ares.core.listener.DefaultEventListener;
-import com.ares.core.persistence.model.listener.ElasticsearchEvent;
+import com.ares.core.model.listener.ElasticsearchEvent;
 import com.ares.message.persistence.model.AresDocument;
 import lombok.extern.slf4j.Slf4j;
 

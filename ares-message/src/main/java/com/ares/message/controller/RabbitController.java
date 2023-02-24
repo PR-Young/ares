@@ -1,6 +1,6 @@
 package com.ares.message.controller;
 
-import com.ares.core.persistence.model.base.AjaxResult;
+import com.ares.core.model.base.AjaxResult;
 import com.ares.message.persistence.model.QueueConfig;
 import com.ares.message.utils.RabbitUtil;
 import com.rabbitmq.http.client.Client;

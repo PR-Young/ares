@@ -1,6 +1,6 @@
 package com.ares.core.persistence.service;
 
-import com.ares.core.persistence.model.system.SysUser;
+import com.ares.core.persistence.model.SysUser;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.ares.system.controller;
 
 
-import com.ares.core.persistence.model.base.AjaxResult;
-import com.ares.core.persistence.model.server.Server;
+import com.ares.core.model.base.AjaxResult;
+import com.ares.core.model.server.Server;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
 package com.ares.system.controller;
 
-import com.ares.core.persistence.model.base.AjaxResult;
+import com.ares.core.model.base.AjaxResult;
 import com.ares.core.utils.ServletUtils;
 import com.ares.message.persistence.model.AresDocument;
 import com.ares.message.persistence.service.IElasticsearchService;

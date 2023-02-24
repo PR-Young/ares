@@ -1,7 +1,7 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.persistence.dao.ISysPropertiesDao;
-import com.ares.core.persistence.model.system.SysProperties;
+import com.ares.core.persistence.model.SysProperties;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;

@@ -3,10 +3,10 @@ package com.ares.system.controller;
 
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
-import com.ares.core.persistence.model.base.AjaxResult;
-import com.ares.core.persistence.model.system.SysDept;
-import com.ares.core.persistence.model.system.SysPost;
-import com.ares.core.persistence.model.system.SysUser;
+import com.ares.core.model.base.AjaxResult;
+import com.ares.core.persistence.model.SysDept;
+import com.ares.core.persistence.model.SysPost;
+import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.*;
 import com.ares.core.utils.EncryptUtils;
 import com.ares.core.utils.MD5Util;

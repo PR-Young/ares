@@ -1,7 +1,7 @@
 package com.ares.core.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.ares.core.persistence.model.base.Constants;
+import com.ares.core.model.base.Constants;
 import com.ares.redis.utils.RedisUtil;
 
 import javax.servlet.http.HttpServletRequest;

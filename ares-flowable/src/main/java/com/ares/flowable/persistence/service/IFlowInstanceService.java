@@ -1,7 +1,7 @@
 package com.ares.flowable.persistence.service;
 
 
-import com.ares.core.persistence.model.base.AjaxResult;
+import com.ares.core.model.base.AjaxResult;
 import com.ares.flowable.persistence.model.vo.FlowTaskVo;
 import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.task.api.Task;

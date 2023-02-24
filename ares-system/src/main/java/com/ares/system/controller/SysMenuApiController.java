@@ -3,8 +3,8 @@ package com.ares.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
-import com.ares.core.persistence.model.base.AjaxResult;
-import com.ares.core.persistence.model.system.SysMenu;
+import com.ares.core.model.base.AjaxResult;
+import com.ares.core.persistence.model.SysMenu;
 import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;

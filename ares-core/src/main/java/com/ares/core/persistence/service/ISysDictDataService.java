@@ -1,6 +1,6 @@
 package com.ares.core.persistence.service;
 
-import com.ares.core.persistence.model.system.SysDictData;
+import com.ares.core.persistence.model.SysDictData;
 
 import java.util.List;
 

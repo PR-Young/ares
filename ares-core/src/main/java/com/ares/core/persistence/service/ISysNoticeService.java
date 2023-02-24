@@ -1,6 +1,6 @@
 package com.ares.core.persistence.service;
 
-import com.ares.core.persistence.model.system.SysNotice;
+import com.ares.core.persistence.model.SysNotice;
 
 import java.util.List;
 

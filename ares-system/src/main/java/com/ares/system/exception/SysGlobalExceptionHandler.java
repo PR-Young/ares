@@ -3,9 +3,9 @@ package com.ares.system.exception;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import com.ares.core.common.exception.UserException;
-import com.ares.core.persistence.model.base.AjaxResult;
-import com.ares.core.persistence.model.base.ResultCode;
-import com.ares.core.persistence.model.exception.ErrorCode;
+import com.ares.core.model.base.AjaxResult;
+import com.ares.core.model.base.ResultCode;
+import com.ares.core.model.exception.ErrorCode;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

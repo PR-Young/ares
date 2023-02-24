@@ -2,7 +2,7 @@ package com.ares.blog.controller;
 
 import com.ares.blog.persistence.service.IMyBlogService;
 import com.ares.core.common.log.Log;
-import com.ares.core.persistence.model.base.AjaxResult;
+import com.ares.core.model.base.AjaxResult;
 import com.ares.core.utils.ServletUtils;
 import com.ares.system.persistence.model.Articles;
 import com.ares.system.persistence.service.IArticlesService;

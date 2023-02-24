@@ -1,7 +1,7 @@
 package com.ares.quartz.persistence.model;
 
 
-import com.ares.core.persistence.model.base.BaseModel;
+import com.ares.core.model.base.BaseModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
