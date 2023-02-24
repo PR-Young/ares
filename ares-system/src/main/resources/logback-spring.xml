@@ -167,13 +167,22 @@
         不能设置为INHERITED或者同义词NULL。默认是DEBUG
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
-    <root level="info">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="DEBUG_FILE"/>
-        <appender-ref ref="INFO_FILE"/>
-        <appender-ref ref="WARN_FILE"/>
-        <appender-ref ref="ERROR_FILE"/>
-        <appender-ref ref="ASYNC_FILE"/>
-    </root>
+    <logger name="com.baomidou.mybatisplus" level="ERROR" />
+
+    <springProfile name="dev">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="pro">
+        <root level="info">
+            <appender-ref ref="DEBUG_FILE"/>
+            <appender-ref ref="INFO_FILE"/>
+            <appender-ref ref="WARN_FILE"/>
+            <appender-ref ref="ERROR_FILE"/>
+            <appender-ref ref="ASYNC_FILE"/>
+        </root>
+    </springProfile>
 
 </configuration>

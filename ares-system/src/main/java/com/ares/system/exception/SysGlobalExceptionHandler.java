@@ -1,6 +1,7 @@
 package com.ares.system.exception;
 
 
+import cn.dev33.satoken.exception.NotLoginException;
 import com.ares.core.common.exception.UserException;
 import com.ares.core.persistence.model.base.AjaxResult;
 import com.ares.core.persistence.model.base.ResultCode;
@@ -51,9 +52,24 @@ public class SysGlobalExceptionHandler {
         return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
     }
 
+    @ExceptionHandler(value = NotLoginException.class)
+    public Object handleException(HttpServletRequest request, HttpServletResponse response, NotLoginException e) {
+        if(e.getType().equals(NotLoginException.INVALID_TOKEN_MESSAGE) ||
+                e.getType().equals(NotLoginException.BE_REPLACED_MESSAGE)||
+                e.getType().equals(NotLoginException.DEFAULT_MESSAGE)||
+                e.getType().equals(NotLoginException.KICK_OUT_MESSAGE)||
+                e.getType().equals(NotLoginException.TOKEN_TIMEOUT_MESSAGE) ||
+                e.getType().equals(NotLoginException.NOT_TOKEN_MESSAGE)){
+            return AjaxResult.error(ResultCode.NOLOGIN.getCode(), ResultCode.NOLOGIN.getMsg());
+        }
+        return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
+    }
+
     @ExceptionHandler(value = Exception.class)
     public Object handleException(HttpServletRequest request, HttpServletResponse response, Exception e) {
         return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
     }
+
+
 
 }

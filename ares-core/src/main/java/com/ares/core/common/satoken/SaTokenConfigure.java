@@ -36,6 +36,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 
     /**
      * 注册拦截器
+     *
      * @param registry
      */
     @Override
@@ -46,7 +47,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .notMatch("/login", "/kaptcha", "/system/user/profile/**",
                                     "/swagger-ui/index.html", "/swagger-resources/**",
                                     "/*/api-docs", "/webjars/**", "/doc.html",
-                                    "/v2/**", "/error","/favicon.ico",
+                                    "/v2/**", "/error", "/favicon.ico",
                                     "/druid/**", "/actuator/**",
                                     "/model/**", "/editor/**", "/blog/**", "/test/**")
                             .check(r -> StpUtil.checkLogin());
@@ -83,7 +84,6 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(responseBodyStringConverter());
         converters.add(mappingJackson2HttpMessageConverter());
-
     }
 
     @Bean
@@ -99,5 +99,4 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         converter.setObjectMapper(objectMapper);
         return converter;
     }
-
 }

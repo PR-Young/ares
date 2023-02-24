@@ -73,11 +73,14 @@ public class LoginApiController {
         Boolean rememberMe = Boolean.parseBoolean(String.valueOf(map.get("rememberMe")));
 
         if (!AresCommonUtils.checkVerifyCode(code, uuid)) {
-            return AjaxResult.error(500, "验证码错误");
+            return AjaxResult.error(ResultCode.CODEERROR.getCode(), ResultCode.CODEERROR.getMsg());
         }
 
         // 系统登录认证
         SysUser user = userService.getUserByName(userName);
+        if(null == user){
+            return AjaxResult.error(ResultCode.NOUSER.getCode(),ResultCode.NOUSER.getMsg());
+        }
         if (!user.getPassword().equals(MD5Util.encode(password))) {
             return AjaxResult.error(ResultCode.PWDERROR.getCode(), ResultCode.PWDERROR.getMsg());
         }

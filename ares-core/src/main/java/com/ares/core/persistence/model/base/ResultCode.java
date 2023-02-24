@@ -18,6 +18,7 @@ public enum ResultCode {
     LOGINTIMEOUT(90003, "session过期"),
     NOAUTH(90004, "用户没有权限"),
     PWDERROR(90005, "密码错误"),
+    CODEERROR(90006, "验证码错误"),
     NOMODEL(20000, "模型不存在"),
     NOFLOW(20001, "请先设计流程定义并成功保存，再进行部署"),
     ERRORFLOWDEFINITION(20002, "流程定义不符要求，请至少设计一条主线流程");
