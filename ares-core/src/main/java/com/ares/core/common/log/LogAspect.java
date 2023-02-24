@@ -55,10 +55,6 @@ public class LogAspect {
     public void logPointCutController() {
     }
 
-    @Pointcut("execution(* com.ares.*.service.*.*(..))")
-    public void logPointCutService() {
-    }
-
     @AfterReturning("logPointCutController() || logPointCut()")
     public void doBefore(JoinPoint joinPoint) {
         handleLog(joinPoint, null);

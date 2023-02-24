@@ -165,6 +165,7 @@
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
     <springProfile name="dev">
+        <logger name="com.ares" level="DEBUG" />
         <root level="info">
             <appender-ref ref="CONSOLE"/>
         </root>
@@ -186,7 +187,5 @@
     <logger name="java.sql.Statement" level="DEBUG" />
     <logger name="java.sql.PreparedStatement" level="DEBUG" />
     <logger name="cn.dev33.satoken" level="ERROR" />
-
-    <logger name="com.ares" level="INFO" />
 
 </configuration>
