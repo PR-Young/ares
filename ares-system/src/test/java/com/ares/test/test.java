@@ -1,7 +1,6 @@
 package com.ares.test;
 
-import com.ares.message.handler.AresMessageHandler;
-import com.ares.message.utils.AresMessageUtil;
+import com.ares.core.model.server.Server;
 
 /*
  * @description:
@@ -34,7 +33,10 @@ public class test {
         //// yourPassWord
         //System.out.println("解密后密码: "+decryptPwd);
 
-        AresMessageUtil.sendMessage("ares", "success", 1024 * 1024, false, 2, new AresMessageHandler<String>());
+        //AresMessageUtil.sendMessage("ares", "success", 1024 * 1024, false, 2, new AresMessageHandler<String>());
 
+        Server server = new Server();
+        server.copyTo();
+        System.out.println(server);
     }
 }

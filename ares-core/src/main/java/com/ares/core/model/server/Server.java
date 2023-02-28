@@ -11,6 +11,7 @@ import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
 import oshi.software.os.OperatingSystem;
+import oshi.software.os.mac.MacOperatingSystem;
 import oshi.util.Util;
 
 import java.net.UnknownHostException;
@@ -166,6 +167,9 @@ public class Server {
      * 设置磁盘信息
      */
     private void setSysFiles(OperatingSystem os) {
+        if (os instanceof MacOperatingSystem){
+            return;
+        }
         FileSystem fileSystem = os.getFileSystem();
         List<OSFileStore> fsArray = fileSystem.getFileStores();
         for (OSFileStore fs : fsArray) {
