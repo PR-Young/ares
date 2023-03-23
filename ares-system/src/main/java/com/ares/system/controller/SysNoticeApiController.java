@@ -27,6 +27,7 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.persistence.model.SysNotice;
 import com.ares.core.persistence.service.ISysNoticeService;
 import com.ares.core.utils.StringUtils;
+import com.ares.system.websocket.WebSocketServer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,7 @@ public class SysNoticeApiController extends BaseController {
             sysNotice.setModifier(SecurityUtils.getUser().getId());
             sysNoticeService.update(sysNotice);
         }
+        WebSocketServer.sendNotice(true, SecurityUtils.getUser().getAccount());
         return AjaxResult.success();
     }
 
@@ -97,7 +99,8 @@ public class SysNoticeApiController extends BaseController {
 
     @GetMapping("getNotices")
     @ApiOperation(value = "通知公告时间线", response = Object.class)
-    public Object getNotices() throws UserException {
+    public Object getNotices() throws Exception {
+        WebSocketServer.sendInfo(String.valueOf(0), SecurityUtils.getUser().getAccount());
         return AjaxResult.successData(sysNoticeService.getNotices(SecurityUtils.getUser().getId()));
     }
 }
