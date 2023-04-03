@@ -5,7 +5,7 @@ spring:
       strict: false
       datasource:
         master:
-          url: jdbc:mysql://10.211.55.4:3306/ares?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+          url: jdbc:mysql://localhost:3306/ares?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
           username: root
           password: ENC(QHRpFBBFEiZnp0in9N+XBa5nSwJr6NLnegTQHmCYbAYW0ox/Uyb84OcsXcAMMZ2IBEbyCmAdwKLJL8wnxVLRBA==)
           public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIrH/MhPNd8nH3mxpEMSOtj554RmecKDfaOsJa/6+yMBRcFf0bva3npJIm7qNnR5lNFU7kPxENJN95DoPUl032UCAwEAAQ==

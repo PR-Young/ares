@@ -49,15 +49,17 @@ public class WebSocketServer {
     @OnOpen
     public void onOpen(Session session, @PathParam("id") String id) {
         this.session = session;
-        websocketMap.put(id, this);
-        addOnlineCount();
-        log.info("有新窗口开始监听:" + id + ",当前在线人数为" + getOnlineCount());
-        this.id = id;
-        try {
-            sendMessage("连接成功");
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error("websocket IO异常");
+        if(!websocketMap.containsKey(id)) {
+            websocketMap.put(id, this);
+            addOnlineCount();
+            log.info("有新窗口开始监听:" + id + ",当前在线人数为" + getOnlineCount());
+            this.id = id;
+            try {
+                sendMessage("连接成功");
+            } catch (IOException e) {
+                e.printStackTrace();
+                log.error("websocket IO异常");
+            }
         }
     }
 
