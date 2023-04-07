@@ -95,48 +95,49 @@ public class SysPropertiesServiceImpl implements ISysPropertiesService {
         return sysPropertiesDao.getValueByAlias(alias);
     }
 
+
     @Override
-    public boolean saveBatch(Collection entityList, int batchSize) {
+    public boolean saveBatch(Collection<SysProperties> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdateBatch(Collection entityList, int batchSize) {
+    public boolean saveOrUpdateBatch(Collection<SysProperties> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean updateBatchById(Collection entityList, int batchSize) {
+    public boolean updateBatchById(Collection<SysProperties> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdate(Object entity) {
+    public boolean saveOrUpdate(SysProperties entity) {
         return false;
     }
 
     @Override
-    public Object getOne(Wrapper queryWrapper, boolean throwEx) {
+    public SysProperties getOne(Wrapper<SysProperties> queryWrapper, boolean throwEx) {
         return null;
     }
 
     @Override
-    public Map<String, Object> getMap(Wrapper queryWrapper) {
+    public Map<String, Object> getMap(Wrapper<SysProperties> queryWrapper) {
         return null;
     }
 
     @Override
-    public BaseMapper getBaseMapper() {
+    public <V> V getObj(Wrapper<SysProperties> queryWrapper, Function<? super Object, V> mapper) {
         return null;
     }
 
     @Override
-    public Class getEntityClass() {
+    public BaseMapper<SysProperties> getBaseMapper() {
         return null;
     }
 
     @Override
-    public Object getObj(Wrapper queryWrapper, Function mapper) {
+    public Class<SysProperties> getEntityClass() {
         return null;
     }
 }

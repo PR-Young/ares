@@ -112,48 +112,49 @@ public class SysDeptServiceImpl implements ISysDeptService {
         return trees;
     }
 
+
     @Override
-    public boolean saveBatch(Collection entityList, int batchSize) {
+    public boolean saveBatch(Collection<SysDept> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdateBatch(Collection entityList, int batchSize) {
+    public boolean saveOrUpdateBatch(Collection<SysDept> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean updateBatchById(Collection entityList, int batchSize) {
+    public boolean updateBatchById(Collection<SysDept> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdate(Object entity) {
+    public boolean saveOrUpdate(SysDept entity) {
         return false;
     }
 
     @Override
-    public Object getOne(Wrapper queryWrapper, boolean throwEx) {
+    public SysDept getOne(Wrapper<SysDept> queryWrapper, boolean throwEx) {
         return null;
     }
 
     @Override
-    public Map<String, Object> getMap(Wrapper queryWrapper) {
+    public Map<String, Object> getMap(Wrapper<SysDept> queryWrapper) {
         return null;
     }
 
     @Override
-    public BaseMapper getBaseMapper() {
+    public <V> V getObj(Wrapper<SysDept> queryWrapper, Function<? super Object, V> mapper) {
         return null;
     }
 
     @Override
-    public Class getEntityClass() {
+    public BaseMapper<SysDept> getBaseMapper() {
         return null;
     }
 
     @Override
-    public Object getObj(Wrapper queryWrapper, Function mapper) {
+    public Class<SysDept> getEntityClass() {
         return null;
     }
 }

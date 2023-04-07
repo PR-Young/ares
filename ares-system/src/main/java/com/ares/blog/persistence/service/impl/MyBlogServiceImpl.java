@@ -19,11 +19,11 @@
 package com.ares.blog.persistence.service.impl;
 
 import com.ares.blog.persistence.service.IMyBlogService;
+import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.JsonUtils;
 import com.ares.system.persistence.model.Articles;
 import com.ares.system.persistence.service.IArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -38,19 +38,20 @@ import java.util.List;
 @Service
 public class MyBlogServiceImpl implements IMyBlogService {
     private IArticlesService articlesService;
+    private ISysPropertiesService sysPropertiesService;
 
     @Autowired
-    public MyBlogServiceImpl(IArticlesService articlesService) {
+    public MyBlogServiceImpl(IArticlesService articlesService, ISysPropertiesService sysPropertiesService) {
         this.articlesService = articlesService;
+        this.sysPropertiesService = sysPropertiesService;
     }
 
     @Override
     public String getUpdateInfo() {
         StringBuffer sb = new StringBuffer();
         try {
-            ClassPathResource resource = new ClassPathResource("/");
-            String path = resource.getURL().getPath();
-            path = path.replace("target/classes/", "src/main/resources/CHANGELOG.md");
+            String versionInfo = sysPropertiesService.getValueByAlias("version.info");
+            String path = versionInfo.replace("/", File.separator);
             FileInputStream fileInputStream = new FileInputStream(path);
             InputStreamReader reader = new InputStreamReader(fileInputStream, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -71,9 +72,8 @@ public class MyBlogServiceImpl implements IMyBlogService {
     @Override
     public boolean saveUpdateInfo(String content) {
         try {
-            ClassPathResource resource = new ClassPathResource("/");
-            String path = resource.getURL().getPath();
-            path = path.replace("target/classes/", "src/main/resources/CHANGELOG.md");
+            String versionInfo = sysPropertiesService.getValueByAlias("version.info");
+            String path = versionInfo.replace("/", File.separator);
             FileOutputStream fileOutputStream = new FileOutputStream(path);
             OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream, "UTF-8");
             writer.write(content);

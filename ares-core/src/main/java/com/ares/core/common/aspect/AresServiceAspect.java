@@ -36,30 +36,31 @@ import org.springframework.stereotype.Component;
 public class AresServiceAspect {
 
     @Pointcut("execution(* com.ares.*.*.service.*.*(..))")
-    public void servicePointcut(){}
+    public void servicePointcut() {
+    }
 
     @Before(value = "servicePointcut()")
-    public void before(JoinPoint joinPoint){
+    public void before(JoinPoint joinPoint) {
         String name = joinPoint.getSignature().getName();
-        log.debug(name+"方法开始执行...");
+        log.debug(name + "方法开始执行...");
     }
 
     @After(value = "servicePointcut()")
-    public void after(JoinPoint joinPoint){
+    public void after(JoinPoint joinPoint) {
         String name = joinPoint.getSignature().getName();
-        log.debug(name+"方法开始执行结束...");
+        log.debug(name + "方法开始执行结束...");
     }
 
-    @AfterReturning(value = "servicePointcut()",returning = "result")
-    public void before(JoinPoint joinPoint,Object result){
+    @AfterReturning(value = "servicePointcut()", returning = "result")
+    public void before(JoinPoint joinPoint, Object result) {
         String name = joinPoint.getSignature().getName();
-        log.debug(name+"方法返回值为:"+result);
+        log.debug(name + "方法返回值为:" + result);
     }
 
-    @AfterThrowing(value = "servicePointcut()",throwing = "e")
-    public void before(JoinPoint joinPoint,Exception e){
+    @AfterThrowing(value = "servicePointcut()", throwing = "e")
+    public void before(JoinPoint joinPoint, Exception e) {
         String name = joinPoint.getSignature().getName();
-        log.debug(name+"方法出错，异常是:"+e.getMessage());
+        log.debug(name + "方法出错，异常是:" + e.getMessage());
     }
 
     @Around(value = "servicePointcut()")
@@ -68,7 +69,7 @@ public class AresServiceAspect {
         long start = System.currentTimeMillis();
         Object proceed = pjp.proceed();
         long end = System.currentTimeMillis();
-        log.debug(name+"方法执行时间为:"+(end-start)+"ms");
+        log.debug(name + "方法执行时间为:" + (end - start) + "ms");
         return proceed;
     }
 

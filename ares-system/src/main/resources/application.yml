@@ -9,7 +9,8 @@ server:
       min-spare: 30
 spring:
   profiles:
-    include: @profileActive@,ares,quartz,message,neo4j,generator,flowable
+    active: @profileActive@
+    include: ares,quartz,message,neo4j,generator,flowable
   application:
     name: Ares
   devtools:

@@ -594,6 +594,7 @@ INSERT INTO `sys_properties` (`Id`, `Name`, `Alias`, `Value`, `Group`, `Descript
 INSERT INTO `sys_properties` (`Id`, `Name`, `Alias`, `Value`, `Group`, `Description`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES ('9', '文件大小', 'file.maxsize', '5242880000', 'file', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_properties` (`Id`, `Name`, `Alias`, `Value`, `Group`, `Description`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES ('10', '文件名长度', 'file.namelength', '100', 'file', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_properties` (`Id`, `Name`, `Alias`, `Value`, `Group`, `Description`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES ('11', '头像路径', 'avatar.path', '/Users/young/IdeaProjects/ares/upload/avatar', 'avatar', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_properties` (`Id`, `Name`, `Alias`, `Value`, `Group`, `Description`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES ('12', '版本信息', 'version.info', '/Users/young/IdeaProjects/ares/CHANGELOG.md', 'version', NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
 -- ----------------------------

@@ -83,47 +83,47 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
 
 
     @Override
-    public boolean saveBatch(Collection entityList, int batchSize) {
+    public boolean saveBatch(Collection<SysDictType> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdateBatch(Collection entityList, int batchSize) {
+    public boolean saveOrUpdateBatch(Collection<SysDictType> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean updateBatchById(Collection entityList, int batchSize) {
+    public boolean updateBatchById(Collection<SysDictType> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdate(Object entity) {
+    public boolean saveOrUpdate(SysDictType entity) {
         return false;
     }
 
     @Override
-    public Object getOne(Wrapper queryWrapper, boolean throwEx) {
+    public SysDictType getOne(Wrapper<SysDictType> queryWrapper, boolean throwEx) {
         return null;
     }
 
     @Override
-    public Map<String, Object> getMap(Wrapper queryWrapper) {
+    public Map<String, Object> getMap(Wrapper<SysDictType> queryWrapper) {
         return null;
     }
 
     @Override
-    public BaseMapper getBaseMapper() {
+    public <V> V getObj(Wrapper<SysDictType> queryWrapper, Function<? super Object, V> mapper) {
         return null;
     }
 
     @Override
-    public Class getEntityClass() {
+    public BaseMapper<SysDictType> getBaseMapper() {
         return null;
     }
 
     @Override
-    public Object getObj(Wrapper queryWrapper, Function mapper) {
+    public Class<SysDictType> getEntityClass() {
         return null;
     }
 }

@@ -113,48 +113,49 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
         return noticeList;
     }
 
+
     @Override
-    public boolean saveBatch(Collection entityList, int batchSize) {
+    public boolean saveBatch(Collection<SysNotice> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdateBatch(Collection entityList, int batchSize) {
+    public boolean saveOrUpdateBatch(Collection<SysNotice> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean updateBatchById(Collection entityList, int batchSize) {
+    public boolean updateBatchById(Collection<SysNotice> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdate(Object entity) {
+    public boolean saveOrUpdate(SysNotice entity) {
         return false;
     }
 
     @Override
-    public Object getOne(Wrapper queryWrapper, boolean throwEx) {
+    public SysNotice getOne(Wrapper<SysNotice> queryWrapper, boolean throwEx) {
         return null;
     }
 
     @Override
-    public Map<String, Object> getMap(Wrapper queryWrapper) {
+    public Map<String, Object> getMap(Wrapper<SysNotice> queryWrapper) {
         return null;
     }
 
     @Override
-    public BaseMapper getBaseMapper() {
+    public <V> V getObj(Wrapper<SysNotice> queryWrapper, Function<? super Object, V> mapper) {
         return null;
     }
 
     @Override
-    public Class getEntityClass() {
+    public BaseMapper<SysNotice> getBaseMapper() {
         return null;
     }
 
     @Override
-    public Object getObj(Wrapper queryWrapper, Function mapper) {
+    public Class<SysNotice> getEntityClass() {
         return null;
     }
 }

@@ -82,48 +82,49 @@ public class SysNoticeReadServiceImpl implements ISysNoticeReadService {
         return lists;
     }
 
+
     @Override
-    public boolean saveBatch(Collection entityList, int batchSize) {
+    public boolean saveBatch(Collection<SysNoticeRead> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdateBatch(Collection entityList, int batchSize) {
+    public boolean saveOrUpdateBatch(Collection<SysNoticeRead> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean updateBatchById(Collection entityList, int batchSize) {
+    public boolean updateBatchById(Collection<SysNoticeRead> entityList, int batchSize) {
         return false;
     }
 
     @Override
-    public boolean saveOrUpdate(Object entity) {
+    public boolean saveOrUpdate(SysNoticeRead entity) {
         return false;
     }
 
     @Override
-    public Object getOne(Wrapper queryWrapper, boolean throwEx) {
+    public SysNoticeRead getOne(Wrapper<SysNoticeRead> queryWrapper, boolean throwEx) {
         return null;
     }
 
     @Override
-    public Map<String, Object> getMap(Wrapper queryWrapper) {
+    public Map<String, Object> getMap(Wrapper<SysNoticeRead> queryWrapper) {
         return null;
     }
 
     @Override
-    public BaseMapper getBaseMapper() {
+    public <V> V getObj(Wrapper<SysNoticeRead> queryWrapper, Function<? super Object, V> mapper) {
         return null;
     }
 
     @Override
-    public Class getEntityClass() {
+    public BaseMapper<SysNoticeRead> getBaseMapper() {
         return null;
     }
 
     @Override
-    public Object getObj(Wrapper queryWrapper, Function mapper) {
+    public Class<SysNoticeRead> getEntityClass() {
         return null;
     }
 }

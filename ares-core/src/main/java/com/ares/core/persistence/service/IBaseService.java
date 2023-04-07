@@ -28,7 +28,7 @@ import java.util.Map;
  * @description:
  * @author: Young 2020/01/22
  **/
-public abstract interface IBaseService<T> extends IService {
+public abstract interface IBaseService<T> extends IService<T> {
 
     public void insert(T obj);
 
