@@ -14,4 +14,5 @@ ares:
     xmlDir: .src.main.resources.mapping
     servicePackage: com.ares.system.persistence.service
     controllerPackage: com.ares.system.controller
-    templatePath: /ares-generator/src/main/resources/templates
+    templatePath: /Users/young/IdeaProjects/ares/ares-generator/src/main/resources/templates
+    projectPtah: /Users/young/IdeaProjects/ares

@@ -56,7 +56,6 @@ import java.util.zip.ZipOutputStream;
 public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
 
     private GeneratorConfig config;
-    private static String TARGET_PATH = "/target";
 
     @Autowired
     public AutoGeneratorServiceImpl(GeneratorConfig config) {
@@ -89,12 +88,9 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
     public byte[] generator(String driver, String url, String user, String pwd, String tableName, String tablePrefix) {
         Assert.notNull(tableName);
         Connection con = getConn(driver, url, user, pwd);
-        //获取当前项目路径
-        String path = AutoGeneratorServiceImpl.class.getResource("/").getPath();
-        path = StrUtil.sub(path, 1, path.indexOf(TARGET_PATH));
-        log.info("当前项目路径为：{}", path);
         //获取模板路径
-        String templatePath = System.getProperty("user.dir") + config.getTemplatePath();
+        String templatePath = config.getTemplatePath();
+        templatePath = templatePath.replace("/", File.separator).replace("\\", File.separator);
         log.info("当前模板路径为：{}", templatePath);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -242,7 +238,7 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
             throws Exception {
         //查询表属性,格式化生成实体所需属性
         String sql = "SELECT table_name, column_name, column_comment, column_type, column_key, column_default "
-                + "FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" + tableName + "' " + "AND table_schema = '" + config.getDatabaseName() + "'";
+                + " FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" + tableName + "' " + "AND table_schema = '" + config.getDatabaseName() + "'";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -292,7 +288,7 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
         File file = new File(url);
         if (file.isDirectory()) {
             File[] files = file.listFiles();
-            for (File f : files) {
+            for (File f : files != null ? files : new File[0]) {
                 FileUtil.del(f);
             }
         }
@@ -300,10 +296,8 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
 
     @Override
     public String autoCodePath() {
-        //获取当前项目路径
-        String path = AutoGeneratorServiceImpl.class.getResource("/").getPath();
-        path = StrUtil.sub(path, 0, path.indexOf("/ares-system"));
-
+        String path = config.getProjectPtah();
+        path = path.replace("/", File.separator).replace("\\", File.separator);
         return path + File.separator + "autocode";
     }
 }

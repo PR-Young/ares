@@ -107,7 +107,7 @@ public class GeneratorConfig {
     private String xmlDir;
 
     /**
-     * servcie包名 无则使用基本包名
+     * service包名 无则使用基本包名
      */
     @Value("${ares.generator.servicePackage}")
     private String servicePackage;
@@ -121,5 +121,6 @@ public class GeneratorConfig {
     @Value("${ares.generator.templatePath}")
     private String templatePath;
 
-
+    @Value("${ares.generator.projectPtah}")
+    private String projectPtah;
 }
