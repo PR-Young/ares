@@ -31,8 +31,8 @@ ares
 
 # 使用技术
 
-- 前端：vue + element / element-plus
-- 后端：springboot2.7.5, jdk11, mybatis-plus
+- 框架：springboot2.7.5, mybatis-plus
+- java版本：jdk11
 - 数据库：mysql8、redis、neo4j
 - 消息机制：kafka、rabbitmq、rocketmq
 - 全文检索：elasticsearch

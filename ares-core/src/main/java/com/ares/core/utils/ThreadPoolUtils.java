@@ -40,4 +40,11 @@ public class ThreadPoolUtils {
             TimeUnit.SECONDS,
             new ArrayBlockingQueue<>(512),
             new ThreadPoolExecutor.DiscardPolicy());
+
+    public static ExecutorService singleExecutorService = new ThreadPoolExecutor(1,
+            1,
+            0,
+            TimeUnit.SECONDS,
+            new ArrayBlockingQueue<>(10),
+            new ThreadPoolExecutor.DiscardPolicy());
 }

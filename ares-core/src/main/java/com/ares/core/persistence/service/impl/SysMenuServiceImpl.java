@@ -20,8 +20,8 @@ package com.ares.core.persistence.service.impl;
 
 
 import com.ares.core.persistence.dao.ISysMenuDao;
-import com.ares.core.persistence.model.MetaVo;
-import com.ares.core.persistence.model.RouterVo;
+import com.ares.core.model.vo.MetaVo;
+import com.ares.core.model.vo.RouterVo;
 import com.ares.core.persistence.model.SysMenu;
 import com.ares.core.persistence.model.SysUser;
 import com.ares.core.model.tree.TreeSelect;

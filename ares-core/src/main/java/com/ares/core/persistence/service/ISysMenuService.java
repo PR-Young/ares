@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 
-import com.ares.core.persistence.model.RouterVo;
+import com.ares.core.model.vo.RouterVo;
 import com.ares.core.persistence.model.SysMenu;
 import com.ares.core.model.tree.TreeSelect;
 

@@ -44,3 +44,4 @@ sa-token:
   is-log: true
   is-read-header: true
   is-write-header: true
+  is-print: false
