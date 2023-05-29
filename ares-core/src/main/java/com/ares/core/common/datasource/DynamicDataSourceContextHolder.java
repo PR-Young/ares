@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
  * @date: 2020/07/10
  * @see: com.ares.core.common.datasource.DynamicDataSourceContextHolder.java
  **/
+@Deprecated
 public class DynamicDataSourceContextHolder {
     public static final Logger log = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);
 

@@ -24,6 +24,7 @@ package com.ares.core.common.datasource;
  * @date: 2020/07/10
  * @see: com.ares.core.common.datasource.DataSourceType.java
  **/
+@Deprecated
 public enum DataSourceType {
     MYSQL,
     NEO4J,

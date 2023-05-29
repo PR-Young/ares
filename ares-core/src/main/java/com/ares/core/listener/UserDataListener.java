@@ -1,29 +1,25 @@
 /*
- * !******************************************************************************
- *  * Copyright (c) 2021 - 9999, ARES
- *  *
- *  * Licensed under the Apache License, Version 2.0 (the "License");
- *  * you may not use this file except in compliance with the License.
- *  * You may obtain a copy of the License at
- *  *
- *  *        http://www.apache.org/licenses/LICENSE-2.0
- *  *
- *  * Unless required by applicable law or agreed to in writing, software
- *  * distributed under the License is distributed on an "AS IS" BASIS,
- *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  * See the License for the specific language governing permissions and
- *  * limitations under the License.
- *  *****************************************************************************
+ *
+ *  * !******************************************************************************
+ *  *  * Copyright (c) 2021 - 9999, ARES
+ *  *  *
+ *  *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  *  * you may not use this file except in compliance with the License.
+ *  *  * You may obtain a copy of the License at
+ *  *  *
+ *  *  *        http://www.apache.org/licenses/LICENSE-2.0
+ *  *  *
+ *  *  * Unless required by applicable law or agreed to in writing, software
+ *  *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  *  * See the License for the specific language governing permissions and
+ *  *  * limitations under the License.
+ *  *  *****************************************************************************
+ *
  */
 
-package com.ares.core.model.listener;
+package com.ares.core.listener;
 
-/**
- * @description:
- * @author: Young
- * @date: 2022/12/15
- * @see: com.ares.core.persistence.service.impl.UserDataListener.java
- **/
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
@@ -45,9 +41,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户信息导入处理类
- * @author young
- */
+ * @description:
+ * @author: Young
+ * @date: 2022/12/15
+ * @see: com.ares.core.persistence.service.impl.UserDataListener.java
+ **/
 public class UserDataListener extends AnalysisEventListener<SysUser> {
     private Logger logger = LoggerFactory.getLogger(UserDataListener.class);
     private static final int BATCH_COUNT = 100;

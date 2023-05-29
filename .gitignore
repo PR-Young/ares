@@ -5,6 +5,7 @@ target/
 !**/src/test/**
 .obsidian
 .DS_Store
+.workflow
 
 ### STS ###
 .apt_generated

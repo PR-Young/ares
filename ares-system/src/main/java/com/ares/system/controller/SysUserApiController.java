@@ -27,7 +27,7 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.base.Constants;
-import com.ares.core.model.listener.UserDataListener;
+import com.ares.core.listener.UserDataListener;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysPostService;

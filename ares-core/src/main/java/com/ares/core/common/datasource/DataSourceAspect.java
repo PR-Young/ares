@@ -35,6 +35,7 @@ import java.lang.reflect.Method;
  * @date: 2020/07/10
  * @see: com.ares.core.common.datasource.DataSourceAspect.java
  **/
+@Deprecated
 //@Aspect
 //@Order(1)
 //@Component

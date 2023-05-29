@@ -26,6 +26,7 @@ import java.lang.annotation.*;
  * @date: 2020/07/10
  * @see: com.ares.core.common.datasource.DataSource.java
  **/
+@Deprecated
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

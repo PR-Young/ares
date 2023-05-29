@@ -23,7 +23,7 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson.JSON;
 import com.ares.core.model.listener.ElasticsearchEvent;
-import com.ares.core.model.listener.UserDataListener;
+import com.ares.core.listener.UserDataListener;
 import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
