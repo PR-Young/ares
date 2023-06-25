@@ -2,11 +2,11 @@ server:
   servlet:
     context-path: /ares
   port: 8080
-  tomcat:
-    uri-encoding: UTF-8
+  undertow:
+    url-charset: UTF-8
     threads:
-      max: 800
-      min-spare: 30
+      worker: 10
+      io: 10
 spring:
   profiles:
     active: @profileActive@
