@@ -48,14 +48,14 @@ public class JobInvokeUtil {
             if (null != bean) {
                 invokeMethod(bean, methodName, methodParams);
             } else {
-                System.out.println("找不到class[" + beanName + "]");
+                throw new RuntimeException("找不到class[" + beanName + "]");
             }
         } else {
             Object bean = Class.forName(beanName).newInstance();
             if (null != bean) {
                 invokeMethod(bean, methodName, methodParams);
             } else {
-                System.out.println("找不到class[" + beanName + "]");
+                throw new RuntimeException("找不到class[" + beanName + "]");
             }
         }
     }
