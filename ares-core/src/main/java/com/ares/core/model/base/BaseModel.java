@@ -20,6 +20,7 @@ package com.ares.core.model.base;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
@@ -60,26 +61,32 @@ public class BaseModel implements Serializable {
      */
     @JsonIgnore
     @ExcelIgnore
+    @TableField(exist = false)
     private String beginTime;
     /**
      * 结束时间
      */
     @JsonIgnore
     @ExcelIgnore
+    @TableField(exist = false)
     private String endTime;
     @JsonIgnore
     @ExcelIgnore
+    @TableField(exist = false)
     private String sortColumn;
     @JsonIgnore
     @ExcelIgnore
+    @TableField(exist = false)
     private String sortAsc;
     @JsonIgnore
     @ExcelIgnore
+    @TableField(exist = false)
     private String sort;
     /**
      * 请求参数
      */
     @ExcelIgnore
+    @TableField(exist = false)
     private Map<String, Object> params;
 
 }

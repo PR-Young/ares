@@ -799,3 +799,26 @@ INSERT INTO `t_articles` (`Id`, `Title`, `Name`, `Content`, `Type`, `Status`, `C
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- ----------------------------
+-- Table structure for sys_login_info
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_login_info`;
+CREATE TABLE `sys_login_info` (
+                                  `Id` varchar(255) NOT NULL,
+                                  `user_name` varchar(255) DEFAULT NULL,
+                                  `ip_addr` varchar(255) DEFAULT NULL,
+                                  `login_location` varchar(255) DEFAULT NULL,
+                                  `browser` varchar(255) DEFAULT NULL,
+                                  `os` varchar(255) DEFAULT NULL,
+                                  `status` varchar(1) DEFAULT NULL,
+                                  `msg` varchar(255) DEFAULT NULL,
+                                  `login_time` datetime DEFAULT NULL,
+                                  `creator` varchar(255) DEFAULT NULL,
+                                  `create_time` datetime DEFAULT NULL,
+                                  `modifier` varchar(255) DEFAULT NULL,
+                                  `modify_time` datetime DEFAULT NULL,
+                                  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+SET FOREIGN_KEY_CHECKS = 1;

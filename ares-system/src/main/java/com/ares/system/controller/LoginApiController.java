@@ -25,13 +25,16 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.base.Constants;
 import com.ares.core.model.base.ResultCode;
+import com.ares.core.persistence.model.SysLoginInfo;
 import com.ares.core.persistence.model.SysMenu;
 import com.ares.core.persistence.model.SysRole;
 import com.ares.core.persistence.model.SysUser;
+import com.ares.core.persistence.service.ISysLoginInfoService;
 import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.AresCommonUtils;
+import com.ares.core.utils.IpUtils;
 import com.ares.core.utils.MD5Util;
 import com.ares.core.utils.ServletUtils;
 import com.ares.redis.utils.RedisUtil;
@@ -63,21 +66,26 @@ public class LoginApiController {
     // token 过期时间一个月
     private static final long EXPIRE = 30 * 24 * 60 * 60;
 
+    private static final ThreadLocal<String> loginId = new ThreadLocal<>();
+
     private ISysUserService userService;
     private ISysRoleService roleService;
     private ISysMenuService menuService;
     private BaseConfig config;
+    private ISysLoginInfoService loginInfoService;
 
     @Autowired
     public LoginApiController(ISysUserService userService,
                               ISysRoleService roleService,
                               ISysMenuService menuService,
-                              BaseConfig config
+                              BaseConfig config,
+                              ISysLoginInfoService loginInfoService
     ) {
         this.userService = userService;
         this.roleService = roleService;
         this.menuService = menuService;
         this.config = config;
+        this.loginInfoService = loginInfoService;
     }
 
     @ApiOperation(value = "登录", response = Object.class)
@@ -109,6 +117,17 @@ public class LoginApiController {
         } else {
             RedisUtil.set(Constants.LOGIN_INFO + userName, token, config.getTimeout());
         }
+
+        SysLoginInfo sysLoginInfo = new SysLoginInfo();
+        sysLoginInfo.setUserName(user.getUserName());
+        sysLoginInfo.setLoginTime(new Date());
+        sysLoginInfo.setIpAddr(IpUtils.getIpAddr(request));
+        sysLoginInfo.setStatus(Constants.ONLINE);
+        sysLoginInfo.setBrowser(AresCommonUtils.getUserAgent(request,"browser"));
+        sysLoginInfo.setOs(AresCommonUtils.getUserAgent(request,"os"));
+        String id = loginInfoService.saveInfo(sysLoginInfo);
+        loginId.set(id);
+
         return AjaxResult.success().put("token", token);
     }
 
@@ -166,6 +185,11 @@ public class LoginApiController {
 
     @RequestMapping("/logout")
     public Object logout() {
+        String id = loginId.get();
+        SysLoginInfo sysLoginInfo = new SysLoginInfo();
+        sysLoginInfo.setId(id);
+        sysLoginInfo.setStatus(Constants.OFFLINE);
+        loginInfoService.updateById(sysLoginInfo);
         StpUtil.logout();
         return AjaxResult.success();
     }
