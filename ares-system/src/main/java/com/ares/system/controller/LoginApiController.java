@@ -66,8 +66,6 @@ public class LoginApiController {
     // token 过期时间一个月
     private static final long EXPIRE = 30 * 24 * 60 * 60;
 
-    private static final ThreadLocal<String> loginId = new ThreadLocal<>();
-
     private ISysUserService userService;
     private ISysRoleService roleService;
     private ISysMenuService menuService;
@@ -104,8 +102,8 @@ public class LoginApiController {
 
         // 系统登录认证
         SysUser user = userService.getUserByName(userName);
-        if(null == user){
-            return AjaxResult.error(ResultCode.NOUSER.getCode(),ResultCode.NOUSER.getMsg());
+        if (null == user) {
+            return AjaxResult.error(ResultCode.NOUSER.getCode(), ResultCode.NOUSER.getMsg());
         }
         if (!user.getPassword().equals(MD5Util.encode(password))) {
             return AjaxResult.error(ResultCode.PWDERROR.getCode(), ResultCode.PWDERROR.getMsg());
@@ -123,10 +121,10 @@ public class LoginApiController {
         sysLoginInfo.setLoginTime(new Date());
         sysLoginInfo.setIpAddr(IpUtils.getIpAddr(request));
         sysLoginInfo.setStatus(Constants.ONLINE);
-        sysLoginInfo.setBrowser(AresCommonUtils.getUserAgent(request,"browser"));
-        sysLoginInfo.setOs(AresCommonUtils.getUserAgent(request,"os"));
+        sysLoginInfo.setBrowser(AresCommonUtils.getUserAgent(request, "browser"));
+        sysLoginInfo.setOs(AresCommonUtils.getUserAgent(request, "os"));
         String id = loginInfoService.saveInfo(sysLoginInfo);
-        loginId.set(id);
+        RedisUtil.set(token, id, 0);
 
         return AjaxResult.success().put("token", token);
     }
@@ -185,11 +183,13 @@ public class LoginApiController {
 
     @RequestMapping("/logout")
     public Object logout() {
-        String id = loginId.get();
+        String token = StpUtil.getTokenValue();
+        String id = String.valueOf(RedisUtil.get(token));
         SysLoginInfo sysLoginInfo = new SysLoginInfo();
         sysLoginInfo.setId(id);
         sysLoginInfo.setStatus(Constants.OFFLINE);
         loginInfoService.updateById(sysLoginInfo);
+        RedisUtil.del(token);
         StpUtil.logout();
         return AjaxResult.success();
     }
