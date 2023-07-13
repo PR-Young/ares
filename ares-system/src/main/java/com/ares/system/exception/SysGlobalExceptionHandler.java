@@ -20,10 +20,16 @@ package com.ares.system.exception;
 
 
 import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.stp.StpUtil;
 import com.ares.core.common.exception.UserException;
 import com.ares.core.model.base.AjaxResult;
+import com.ares.core.model.base.Constants;
 import com.ares.core.model.base.ResultCode;
 import com.ares.core.model.exception.ErrorCode;
+import com.ares.core.persistence.model.SysLoginInfo;
+import com.ares.core.persistence.service.ISysLoginInfoService;
+import com.ares.core.utils.SpringUtils;
+import com.ares.redis.utils.RedisUtil;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -72,12 +78,20 @@ public class SysGlobalExceptionHandler {
 
     @ExceptionHandler(value = NotLoginException.class)
     public Object handleException(HttpServletRequest request, HttpServletResponse response, NotLoginException e) {
-        if(e.getType().equals(NotLoginException.INVALID_TOKEN_MESSAGE) ||
-                e.getType().equals(NotLoginException.BE_REPLACED_MESSAGE)||
-                e.getType().equals(NotLoginException.DEFAULT_MESSAGE)||
-                e.getType().equals(NotLoginException.KICK_OUT_MESSAGE)||
+        if (e.getType().equals(NotLoginException.INVALID_TOKEN_MESSAGE) ||
+                e.getType().equals(NotLoginException.BE_REPLACED_MESSAGE) ||
+                e.getType().equals(NotLoginException.DEFAULT_MESSAGE) ||
+                e.getType().equals(NotLoginException.KICK_OUT_MESSAGE) ||
                 e.getType().equals(NotLoginException.TOKEN_TIMEOUT_MESSAGE) ||
-                e.getType().equals(NotLoginException.NOT_TOKEN_MESSAGE)){
+                e.getType().equals(NotLoginException.NOT_TOKEN_MESSAGE)) {
+            String token = StpUtil.getTokenValue();
+            String id = String.valueOf(RedisUtil.get(token));
+            SysLoginInfo sysLoginInfo = new SysLoginInfo();
+            sysLoginInfo.setId(id);
+            sysLoginInfo.setStatus(Constants.OFFLINE);
+            ISysLoginInfoService loginInfoService = SpringUtils.getBean(ISysLoginInfoService.class);
+            loginInfoService.updateById(sysLoginInfo);
+            RedisUtil.del(token);
             return AjaxResult.error(ResultCode.NOLOGIN.getCode(), ResultCode.NOLOGIN.getMsg());
         }
         return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
@@ -87,7 +101,6 @@ public class SysGlobalExceptionHandler {
     public Object handleException(HttpServletRequest request, HttpServletResponse response, Exception e) {
         return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
     }
-
 
 
 }
