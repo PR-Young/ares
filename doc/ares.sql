@@ -822,3 +822,6 @@ CREATE TABLE `sys_login_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+INSERT INTO sys_menu` (`Id`, `Name`, `Description`, `Path`, `Url`, `IsBlank`, `PId`, `Icon`, `Order`, `Visible`, `Perms`, `Type`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES ('841514856120193024', '报表', NULL, 'report', '/tool/report/index', NULL, '383838051287306240', 'dashboard', 9, 0, '#', 1, '1', '2023-07-19 05:26:27', NULL, NULL);

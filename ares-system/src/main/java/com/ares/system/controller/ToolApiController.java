@@ -69,4 +69,10 @@ public class ToolApiController {
         return "redirect:/doc.html";
     }
 
+    @RequestMapping("tool/report/index")
+    @ApiOperation(value = "积木报表", response = String.class)
+    public String report() {
+        return "redirect:/jmreport/list";
+    }
+
 }
