@@ -68,7 +68,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                                     "/v2/**", "/error", "/favicon.ico",
                                     "/druid/**", "/actuator/**",
                                     "/model/**", "/editor/**", "/blog/**",
-                                    "/test/**","/ws/**")
+                                    "/test/**", "/ws/**", "/jmreport/**")
                             .check(r -> StpUtil.checkLogin());
                 }))
                 .addPathPatterns("/**");

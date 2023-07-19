@@ -33,7 +33,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @see: com.ares.system AresSystemApplication.java
  **/
 @MapperScan("com.ares.**.dao")
-@SpringBootApplication(exclude = {RocketMQAutoConfiguration.class})
+@SpringBootApplication(exclude = {RocketMQAutoConfiguration.class}, scanBasePackages = {"com.ares", "org.jeecg.modules.jmreport"})
 public class AresSystemApplication extends SpringBootServletInitializer {
 
     /**
@@ -48,7 +48,7 @@ public class AresSystemApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
-        System.setProperty("pagehelper.banner","false");
+        System.setProperty("pagehelper.banner", "false");
         SpringApplication.run(AresSystemApplication.class, args);
         System.out.println("         ______                                     __    __ ");
         System.out.println("		/      \\                                   /  |  /  |");
