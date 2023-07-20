@@ -37,3 +37,6 @@ ares
 - 消息机制：kafka、rabbitmq、rocketmq
 - 全文检索：elasticsearch
 - 流程引擎：flowable
+
+# 更新日志
+[更新日志](CHANGELOG.md)
