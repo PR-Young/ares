@@ -37,7 +37,7 @@ public class KafkaProducer {
     private KafkaTemplate<String, Object> kafkaTemplate;
 
     public void send(String message) {
-        kafkaTemplate.send("test", message);
+        kafkaTemplate.send("ares_topic", message);
     }
 
 

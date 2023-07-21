@@ -33,7 +33,7 @@ import java.util.Optional;
 public class KafkaConsumer {
     private Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
-    @KafkaListener(topics = {"test"})
+    @KafkaListener(topics = {"ares_topic"})
     public void listen(ConsumerRecord<?, ?> record) {
         Optional<?> message = Optional.ofNullable(record.value());
         if (message.isPresent()) {

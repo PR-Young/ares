@@ -1,15 +1,4 @@
 spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-    #    listener:
-    #      simple:
-    #        concurrency: 10
-    #        max-concurrency: 20
-    #        prefetch: 5
-    virtual-host: /
   kafka:
     bootstrap-servers: 127.0.0.1:9092
     producer:
@@ -20,7 +9,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
     consumer:
-      group-id: testGroup
+      group-id: AresGroup
       auto-offset-reset: earliest
       enable-auto-commit: true
       auto-commit-interval: 100
@@ -34,25 +23,3 @@ spring:
     uris: http://localhost:9200
     username:
     password:
-
-
-rocketmq:
-  name-server: 127.0.0.1:9876
-  producer:
-    group: AresPlatGroup
-    retry-times-when-send-async-failed: 10
-    retry-times-when-send-failed: 10
-    send-message-timeout: 30000
-    max-message-size: 4194304
-  consumer:
-    topics: AresPlatTopic~*;
-    consumeThreadMin: 20
-    consumeThreadMax: 64
-    # 设置一次消费消息的条数，默认为1条
-    consumeMessageBatchMaxSize: 1
-  # 配置 Group  Topic  Tag
-  ares-plat:
-    ares-plat-group: AresPlatGroup
-    ares-plat-topic: AresPlatTopic
-    ares-account-tag: AresAccountTag
-    ares-key: ares
