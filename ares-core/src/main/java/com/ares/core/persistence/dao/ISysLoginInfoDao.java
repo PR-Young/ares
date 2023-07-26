@@ -23,9 +23,9 @@ package com.ares.core.persistence.dao;
 
 import com.ares.core.persistence.model.SysLoginInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface ISysLoginInfoDao extends BaseMapper<SysLoginInfo> {
 
 }

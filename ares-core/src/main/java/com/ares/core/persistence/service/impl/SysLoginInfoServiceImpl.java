@@ -72,36 +72,4 @@ public class SysLoginInfoServiceImpl extends ServiceImpl<ISysLoginInfoDao, SysLo
         return true;
     }
 
-    //public PageInfo<SysLoginInfo> list(int pageNo, int pageSize, Map<String, Object> map) {
-    //    PageHelper.startPage(pageNo, pageSize);
-    //    List<SysLoginInfo> lists = sysLoginInfoDao.list(map);
-    //    PageInfo<SysLoginInfo> pageInfo = new PageInfo<>(lists);
-    //    return pageInfo;
-    //}
-    //
-    //public void insert(SysLoginInfo obj) {
-    //    obj.setId(SnowflakeIdWorker.getUUID());
-    //    obj.setCreateTime(new Date());
-    //    sysLoginInfoDao.insert(obj);
-    //}
-    //
-    //public void update(SysLoginInfo obj) {
-    //    obj.setModifyTime(new Date());
-    //    sysLoginInfoDao.update(obj);
-    //}
-    //
-    //public void deleteByIds(List<String> ids) {
-    //    sysLoginInfoDao.deleteByIds(ids);
-    //}
-    //
-    //public SysLoginInfo getById(String id) {
-    //    return sysLoginInfoDao.getById(id);
-    //}
-    //
-    //public List<SysLoginInfo> list(SysLoginInfo obj) {
-    //    List<SysLoginInfo> lists = sysLoginInfoDao.selectList(obj);
-    //    return lists;
-    //}
-
-
 }
