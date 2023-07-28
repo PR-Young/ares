@@ -68,6 +68,7 @@ public class SysLoginInfoApiController extends BaseController {
         if (null != sysLoginInfo.getStatus()) {
             wrapper.eq("status", sysLoginInfo.getStatus());
         }
+        wrapper.orderByDesc("login_time");
         List<SysLoginInfo> sysLoginInfoList = sysLoginInfoService.list(wrapper);
         return getDataTable(sysLoginInfoList);
     }

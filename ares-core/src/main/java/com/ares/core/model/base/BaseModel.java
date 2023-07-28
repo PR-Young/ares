@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.apache.ibatis.type.JdbcType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -44,17 +45,21 @@ public class BaseModel implements Serializable {
     private String id;
     @ApiModelProperty("创建人")
     @ExcelIgnore
+    @TableField(value = "`Creator`", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String creator;
     @ApiModelProperty("创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ExcelIgnore
+    @TableField(value = "`CreateTime`", jdbcType = JdbcType.TIMESTAMP, javaType = true)
     private Date createTime;
     @ApiModelProperty("修改人")
     @ExcelIgnore
+    @TableField(value = "`Modifier`", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String modifier;
     @ApiModelProperty("修改时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ExcelIgnore
+    @TableField(value = "`ModifyTime`", jdbcType = JdbcType.TIMESTAMP, javaType = true)
     private Date modifyTime;
 
     /** =============================查询参数================================= */

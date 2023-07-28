@@ -814,10 +814,10 @@ CREATE TABLE `sys_login_info` (
                                   `status` varchar(1) DEFAULT NULL,
                                   `msg` varchar(255) DEFAULT NULL,
                                   `login_time` datetime DEFAULT NULL,
-                                  `creator` varchar(255) DEFAULT NULL,
-                                  `create_time` datetime DEFAULT NULL,
-                                  `modifier` varchar(255) DEFAULT NULL,
-                                  `modify_time` datetime DEFAULT NULL,
+                                  `Creator` varchar(255) DEFAULT NULL,
+                                  `CreateTime` datetime DEFAULT NULL,
+                                  `Modifier` varchar(255) DEFAULT NULL,
+                                  `ModifyTime` datetime DEFAULT NULL,
                                   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

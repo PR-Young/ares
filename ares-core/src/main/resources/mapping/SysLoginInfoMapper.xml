@@ -4,22 +4,22 @@
     <resultMap id="SysLoginInfo" type="com.ares.core.persistence.model.SysLoginInfo">
         <id column="Id" jdbcType="VARCHAR" property="id"/>
         <result column="browser" jdbcType="VARCHAR" property="browser"/>
-        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr"/>
         <result column="login_location" jdbcType="VARCHAR" property="loginLocation"/>
         <result column="login_time" jdbcType="VARCHAR" property="loginTime"/>
-        <result column="modify_time" jdbcType="VARCHAR" property="modifyTime"/>
+        <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
         <result column="msg" jdbcType="VARCHAR" property="msg"/>
         <result column="os" jdbcType="VARCHAR" property="os"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
-        <result column="creator" jdbcType="VARCHAR" property="creator"/>
-        <result column="modifier" jdbcType="VARCHAR" property="modifier"/>
+        <result column="Creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="Modifier" jdbcType="VARCHAR" property="modifier"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         `Id`
-        ,`browser`,`create_time`,`ip_addr`,`login_location`,`login_time`,`modify_time`,`msg`,`os`,`status`,`user_name`, `creator`,`modifier`
+        ,`browser`,`CreateTime`,`ip_addr`,`login_location`,`login_time`,`ModifyTime`,`msg`,`os`,`status`,`user_name`, `Creator`,`Modifier`
     </sql>
 
 
