@@ -26,25 +26,22 @@ import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.MD5Util;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 /**
  * @description:
  * @author: Young 2020/01/22
  **/
 @Service
-public class SysUserServiceImpl implements ISysUserService {
+public class SysUserServiceImpl extends ServiceImpl<ISysUserDao, SysUser> implements ISysUserService {
 
     private ISysUserDao sysUserDao;
     private ISysRoleDao roleDao;
@@ -157,51 +154,5 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     public int updateUserByAccount(SysUser sysUser) {
         return 0;
-    }
-
-
-    @Override
-    public boolean saveBatch(Collection<SysUser> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysUser> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysUser> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysUser entity) {
-        return false;
-    }
-
-    @Override
-    public SysUser getOne(Wrapper<SysUser> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysUser> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysUser> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysUser> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysUser> getEntityClass() {
-        return null;
     }
 }

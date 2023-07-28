@@ -22,21 +22,18 @@ import com.ares.core.persistence.dao.ISysTemplateDao;
 import com.ares.core.persistence.model.SysTemplate;
 import com.ares.core.persistence.service.ISysTemplateService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 @Service
-public class SysTemplateServiceImpl implements ISysTemplateService {
+public class SysTemplateServiceImpl extends ServiceImpl<ISysTemplateDao, SysTemplate> implements ISysTemplateService {
 
     private ISysTemplateDao sysTemplateDao;
 
@@ -80,51 +77,5 @@ public class SysTemplateServiceImpl implements ISysTemplateService {
     public List<SysTemplate> list(SysTemplate obj) {
         List<SysTemplate> lists = sysTemplateDao.selectList(obj);
         return lists;
-    }
-
-
-    @Override
-    public boolean saveBatch(Collection<SysTemplate> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysTemplate> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysTemplate> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysTemplate entity) {
-        return false;
-    }
-
-    @Override
-    public SysTemplate getOne(Wrapper<SysTemplate> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysTemplate> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysTemplate> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysTemplate> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysTemplate> getEntityClass() {
-        return null;
     }
 }

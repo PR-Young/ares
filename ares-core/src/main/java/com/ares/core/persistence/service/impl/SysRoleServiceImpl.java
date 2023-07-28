@@ -23,16 +23,17 @@ import com.ares.core.persistence.model.SysRole;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -40,7 +41,7 @@ import java.util.stream.Collectors;
  * @author: Young 2020/01/26
  **/
 @Service
-public class SysRoleServiceImpl implements ISysRoleService {
+public class SysRoleServiceImpl extends ServiceImpl<ISysRoleDao, SysRole> implements ISysRoleService {
 
     private ISysRoleDao sysRoleDao;
 
@@ -210,51 +211,5 @@ public class SysRoleServiceImpl implements ISysRoleService {
                 sysRoleDao.insertRoleUser(map);
             }
         }
-    }
-
-
-    @Override
-    public boolean saveBatch(Collection<SysRole> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysRole> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysRole> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysRole entity) {
-        return false;
-    }
-
-    @Override
-    public SysRole getOne(Wrapper<SysRole> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysRole> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysRole> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysRole> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysRole> getEntityClass() {
-        return null;
     }
 }

@@ -22,21 +22,18 @@ import com.ares.core.persistence.dao.ISysDictDataDao;
 import com.ares.core.persistence.model.SysDictData;
 import com.ares.core.persistence.service.ISysDictDataService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 @Service
-public class SysDictDataServiceImpl implements ISysDictDataService {
+public class SysDictDataServiceImpl extends ServiceImpl<ISysDictDataDao, SysDictData> implements ISysDictDataService {
 
     private ISysDictDataDao sysDictDataDao;
 
@@ -87,49 +84,4 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
         return sysDictDataDao.getDicts(dictType);
     }
 
-
-    @Override
-    public boolean saveBatch(Collection<SysDictData> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysDictData> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysDictData> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysDictData entity) {
-        return false;
-    }
-
-    @Override
-    public SysDictData getOne(Wrapper<SysDictData> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysDictData> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysDictData> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysDictData> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysDictData> getEntityClass() {
-        return null;
-    }
 }

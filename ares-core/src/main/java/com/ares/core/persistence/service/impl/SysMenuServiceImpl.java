@@ -19,22 +19,20 @@
 package com.ares.core.persistence.service.impl;
 
 
-import com.ares.core.persistence.dao.ISysMenuDao;
+import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.model.vo.MetaVo;
 import com.ares.core.model.vo.RouterVo;
+import com.ares.core.persistence.dao.ISysMenuDao;
 import com.ares.core.persistence.model.SysMenu;
 import com.ares.core.persistence.model.SysUser;
-import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -42,7 +40,7 @@ import java.util.stream.Collectors;
  * @author: Young 2020/01/23
  **/
 @Service
-public class SysMenuServiceImpl implements ISysMenuService {
+public class SysMenuServiceImpl extends ServiceImpl<ISysMenuDao, SysMenu> implements ISysMenuService {
 
     private ISysMenuDao sysMenuDao;
 
@@ -224,51 +222,5 @@ public class SysMenuServiceImpl implements ISysMenuService {
     @Override
     public List<String> selectMenuByRole(String roleId) {
         return sysMenuDao.getMenuByRole(roleId);
-    }
-
-
-    @Override
-    public boolean saveBatch(Collection<SysMenu> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysMenu> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysMenu> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysMenu entity) {
-        return false;
-    }
-
-    @Override
-    public SysMenu getOne(Wrapper<SysMenu> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysMenu> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysMenu> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysMenu> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysMenu> getEntityClass() {
-        return null;
     }
 }

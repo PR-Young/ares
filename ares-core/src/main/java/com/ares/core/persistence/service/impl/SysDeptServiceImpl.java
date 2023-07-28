@@ -18,26 +18,27 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.persistence.dao.ISysDeptDao;
 import com.ares.core.persistence.model.SysDept;
-import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author young
  */
 @Service
-public class SysDeptServiceImpl implements ISysDeptService {
+public class SysDeptServiceImpl extends ServiceImpl<ISysDeptDao, SysDept> implements ISysDeptService {
 
     private ISysDeptDao sysDeptDao;
 
@@ -110,51 +111,5 @@ public class SysDeptServiceImpl implements ISysDeptService {
             }
         }
         return trees;
-    }
-
-
-    @Override
-    public boolean saveBatch(Collection<SysDept> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysDept> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysDept> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysDept entity) {
-        return false;
-    }
-
-    @Override
-    public SysDept getOne(Wrapper<SysDept> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysDept> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysDept> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysDept> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysDept> getEntityClass() {
-        return null;
     }
 }
