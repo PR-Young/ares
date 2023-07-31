@@ -7,7 +7,6 @@ import com.github.pagehelper.PageInfo;
 import ${entityPackage}.${entityName};
 import ${daoPackage}.I${entityName}Dao;
 import ${servicePackage}.I${entityName}Service;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ${entityName}Service extends ServiceImpl< I${entityName}Dao , ${entityName} > implements I${entityName}Service {
+public class ${entityName}Service implements I${entityName}Service {
 
     private I${entityName}Dao ${entityName1}Dao;
 

@@ -1,9 +1,9 @@
 package ${daoPackage};
 
 import ${entityPackage}.${entityName};
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
+@Mapper
 public interface I${entityName}Dao extends IBaseDao<${entityName}>{
 
 }
