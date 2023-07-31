@@ -31,10 +31,10 @@ ares
 
 # 使用技术
 
-- 框架：springboot2.7.5, mybatis-plus
+- 框架：springboot2.7.5, mybatis
 - java版本：jdk11
 - 数据库：mysql8、redis、neo4j
-- 消息机制：kafka、rabbitmq、rocketmq
+- 消息机制：kafka
 - 全文检索：elasticsearch
 - 流程引擎：flowable
 
