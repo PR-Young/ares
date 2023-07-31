@@ -26,7 +26,7 @@ spring:
       max-evictable-idle-time-millis: 900000
       remove-abandoned: true
       remove-abandoned-timeout-millis: 1800
-      validation-query: SELECT 1 FROM DURL
+      validation-query: SELECT 1
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
