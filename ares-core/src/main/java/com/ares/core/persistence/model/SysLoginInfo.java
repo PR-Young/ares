@@ -21,41 +21,29 @@
 package com.ares.core.persistence.model;
 
 import com.ares.core.model.base.BaseModel;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.apache.ibatis.type.JdbcType;
 
 import java.util.Date;
 
 @Data
 @ApiModel(value = "SysLoginInfo对象", description = "")
-@TableName("sys_login_info")
 public class SysLoginInfo extends BaseModel {
     @ApiModelProperty("")
-    @TableField(value = "browser", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String browser;
     @ApiModelProperty("")
-    @TableField(value = "ip_addr", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String ipAddr;
     @ApiModelProperty("")
-    @TableField(value = "login_location", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String loginLocation;
     @ApiModelProperty("")
-    @TableField(value = "login_time", jdbcType = JdbcType.TIMESTAMP, javaType = true)
     private Date loginTime;
     @ApiModelProperty("")
-    @TableField(value = "msg", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String msg;
     @ApiModelProperty("")
-    @TableField(value = "os", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String os;
     @ApiModelProperty("")
-    @TableField(value = "`status`", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String status;
     @ApiModelProperty("")
-    @TableField(value = "user_name", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String userName;
 }

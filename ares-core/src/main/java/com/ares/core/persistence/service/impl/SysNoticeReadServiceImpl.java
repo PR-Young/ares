@@ -22,7 +22,6 @@ import com.ares.core.persistence.dao.ISysNoticeReadDao;
 import com.ares.core.persistence.model.SysNoticeRead;
 import com.ares.core.persistence.service.ISysNoticeReadService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysNoticeReadServiceImpl extends ServiceImpl<ISysNoticeReadDao, SysNoticeRead> implements ISysNoticeReadService {
+public class SysNoticeReadServiceImpl implements ISysNoticeReadService {
 
     private ISysNoticeReadDao sysNoticeReadDao;
 

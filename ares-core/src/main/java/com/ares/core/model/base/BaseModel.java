@@ -20,13 +20,10 @@ package com.ares.core.model.base;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.apache.ibatis.type.JdbcType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -41,25 +38,20 @@ public class BaseModel implements Serializable {
     private static final long serialVersionUID = 2513447910190608371L;
     @ApiModelProperty("主键")
     @ExcelProperty(value = "序号", index = 0)
-    @TableId
     private String id;
     @ApiModelProperty("创建人")
     @ExcelIgnore
-    @TableField(value = "`Creator`", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String creator;
     @ApiModelProperty("创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ExcelIgnore
-    @TableField(value = "`CreateTime`", jdbcType = JdbcType.TIMESTAMP, javaType = true)
     private Date createTime;
     @ApiModelProperty("修改人")
     @ExcelIgnore
-    @TableField(value = "`Modifier`", jdbcType = JdbcType.VARCHAR, javaType = true)
     private String modifier;
     @ApiModelProperty("修改时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ExcelIgnore
-    @TableField(value = "`ModifyTime`", jdbcType = JdbcType.TIMESTAMP, javaType = true)
     private Date modifyTime;
 
     /** =============================查询参数================================= */
@@ -68,32 +60,26 @@ public class BaseModel implements Serializable {
      */
     @JsonIgnore
     @ExcelIgnore
-    @TableField(exist = false)
     private String beginTime;
     /**
      * 结束时间
      */
     @JsonIgnore
     @ExcelIgnore
-    @TableField(exist = false)
     private String endTime;
     @JsonIgnore
     @ExcelIgnore
-    @TableField(exist = false)
     private String sortColumn;
     @JsonIgnore
     @ExcelIgnore
-    @TableField(exist = false)
     private String sortAsc;
     @JsonIgnore
     @ExcelIgnore
-    @TableField(exist = false)
     private String sort;
     /**
      * 请求参数
      */
     @ExcelIgnore
-    @TableField(exist = false)
     private Map<String, Object> params;
 
 }

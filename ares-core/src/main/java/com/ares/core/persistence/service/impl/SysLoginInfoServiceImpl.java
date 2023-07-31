@@ -20,22 +20,21 @@
 
 package com.ares.core.persistence.service.impl;
 
-import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.persistence.dao.ISysLoginInfoDao;
 import com.ares.core.persistence.model.SysLoginInfo;
 import com.ares.core.persistence.service.ISysLoginInfoService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.ares.core.utils.StringUtils;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service
-public class SysLoginInfoServiceImpl extends ServiceImpl<ISysLoginInfoDao, SysLoginInfo> implements ISysLoginInfoService {
+public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
 
     private ISysLoginInfoDao sysLoginInfoDao;
 
@@ -47,29 +46,49 @@ public class SysLoginInfoServiceImpl extends ServiceImpl<ISysLoginInfoDao, SysLo
     public String saveInfo(SysLoginInfo sysLoginInfo) {
         String id = SnowflakeIdWorker.getUUID();
         sysLoginInfo.setId(id);
-        SqlHelper.retBool(this.getBaseMapper().insert(sysLoginInfo));
+        sysLoginInfoDao.insert(sysLoginInfo);
         return id;
     }
 
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
-    public boolean saveOrUpdate(SysLoginInfo sysLoginInfo) {
-        if (null == sysLoginInfo) {
-            return false;
-        } else {
-            if (StringUtils.isEmpty(sysLoginInfo.getId())) {
-                sysLoginInfo.setId(SnowflakeIdWorker.getUUID());
-                sysLoginInfo.setCreator(SecurityUtils.getUser().getId());
-                sysLoginInfo.setCreateTime(new Date());
-                sysLoginInfoDao.insert(sysLoginInfo);
-            } else {
-                sysLoginInfo.setModifier(SecurityUtils.getUser().getId());
-                sysLoginInfo.setModifyTime(new Date());
-                sysLoginInfoDao.updateById(sysLoginInfo);
-            }
-        }
-        return true;
+    @Override
+    public void remove() {
+        sysLoginInfoDao.remove();
     }
 
+    @Override
+    public PageInfo<SysLoginInfo> list(int pageNo, int pageSize, Map<String, Object> map) {
+        PageHelper.startPage(pageNo, pageSize);
+        List<SysLoginInfo> lists = sysLoginInfoDao.list(map);
+        PageInfo<SysLoginInfo> pageInfo = new PageInfo<>(lists);
+        return pageInfo;
+    }
+
+    @Override
+    public void insert(SysLoginInfo obj) {
+        obj.setId(SnowflakeIdWorker.getUUID());
+        obj.setCreateTime(new Date());
+        sysLoginInfoDao.insert(obj);
+    }
+
+    @Override
+    public void update(SysLoginInfo obj) {
+        obj.setModifyTime(new Date());
+        sysLoginInfoDao.update(obj);
+    }
+
+    @Override
+    public void deleteByIds(List<String> ids) {
+        sysLoginInfoDao.deleteByIds(ids);
+    }
+
+    @Override
+    public SysLoginInfo getById(String id) {
+        return sysLoginInfoDao.getById(id);
+    }
+
+    @Override
+    public List<SysLoginInfo> list(SysLoginInfo obj) {
+        List<SysLoginInfo> lists = sysLoginInfoDao.selectList(obj);
+        return lists;
+    }
 }

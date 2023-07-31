@@ -23,18 +23,14 @@ import com.ares.flowable.persistence.dao.ISysDeployFormDao;
 import com.ares.flowable.persistence.model.SysDeployForm;
 import com.ares.flowable.persistence.model.SysForm;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 @Service
 public class SysDeployFormServiceImpl implements ISysDeployFormService {
@@ -93,49 +89,4 @@ public class SysDeployFormServiceImpl implements ISysDeployFormService {
         return sysDeployFormDao.selectSysDeployFormByDeployId(id);
     }
 
-
-    @Override
-    public boolean saveBatch(Collection<SysDeployForm> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysDeployForm> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysDeployForm> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysDeployForm entity) {
-        return false;
-    }
-
-    @Override
-    public SysDeployForm getOne(Wrapper<SysDeployForm> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysDeployForm> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysDeployForm> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysDeployForm> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysDeployForm> getEntityClass() {
-        return null;
-    }
 }

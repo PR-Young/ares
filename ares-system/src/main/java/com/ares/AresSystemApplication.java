@@ -18,11 +18,13 @@
 
 package com.ares;
 
+import com.ares.config.mybatis.MyBatisConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Import;
 
 
 /**
@@ -31,6 +33,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @date: 2020/10/19
  * @see: com.ares.system AresSystemApplication.java
  **/
+@Import({MyBatisConfig.class})
 @MapperScan("com.ares.**.dao")
 @SpringBootApplication(scanBasePackages = {"com.ares", "org.jeecg.modules.jmreport"})
 public class AresSystemApplication extends SpringBootServletInitializer {

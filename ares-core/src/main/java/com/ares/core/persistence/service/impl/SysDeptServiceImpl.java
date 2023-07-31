@@ -23,7 +23,6 @@ import com.ares.core.persistence.dao.ISysDeptDao;
 import com.ares.core.persistence.model.SysDept;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ import java.util.Map;
  * @author young
  */
 @Service
-public class SysDeptServiceImpl extends ServiceImpl<ISysDeptDao, SysDept> implements ISysDeptService {
+public class SysDeptServiceImpl implements ISysDeptService {
 
     private ISysDeptDao sysDeptDao;
 

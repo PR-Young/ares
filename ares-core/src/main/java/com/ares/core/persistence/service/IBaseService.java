@@ -18,7 +18,6 @@
 
 package com.ares.core.persistence.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.Map;
  * @description:
  * @author: Young 2020/01/22
  **/
-public abstract interface IBaseService<T> extends IService<T> {
+public abstract interface IBaseService<T> {
 
     public void insert(T obj);
 

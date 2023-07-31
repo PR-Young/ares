@@ -22,10 +22,10 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.persistence.model.SysLoginInfo;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ISysLoginInfoDao extends BaseMapper<SysLoginInfo> {
+public interface ISysLoginInfoDao extends IBaseDao<SysLoginInfo> {
 
+    void remove();
 }

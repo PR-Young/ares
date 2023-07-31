@@ -38,15 +38,10 @@ spring:
           connect-timeout: 100000
           read-timeout: 100000
 
-mybatis-plus:
-  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    call-setters-on-nulls: true
-  global-config:
-    banner: false
-  type-aliases-package: com.ares.**.**.model
+mybatis:
   mapper-locations: classpath*:mapping/**/*.xml
-
+  type-aliases-package: com.ares.**.**.model
+  config-location: classpath:mybatis-config.xml
 
 #分页配置
 pagehelper:

@@ -21,12 +21,13 @@
 package com.ares.system.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.persistence.model.SysLoginInfo;
 import com.ares.core.persistence.service.ISysLoginInfoService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.ares.core.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,22 +55,7 @@ public class SysLoginInfoApiController extends BaseController {
     @ApiOperation(value = "列表", response = TableDataInfo.class)
     public TableDataInfo list(SysLoginInfo sysLoginInfo) {
         startPage();
-        QueryWrapper<SysLoginInfo> wrapper = new QueryWrapper<>();
-        if (!"".equals(sysLoginInfo.getBeginTime()) && !"".equals(sysLoginInfo.getEndTime())) {
-            wrapper.gt("create_time", sysLoginInfo.getBeginTime());
-            wrapper.lt("create_time", sysLoginInfo.getEndTime());
-        }
-        if (null != sysLoginInfo.getIpAddr()) {
-            wrapper.like("ip_addr", sysLoginInfo.getIpAddr());
-        }
-        if (null != sysLoginInfo.getUserName()) {
-            wrapper.like("user_name", sysLoginInfo.getUserName());
-        }
-        if (null != sysLoginInfo.getStatus()) {
-            wrapper.eq("status", sysLoginInfo.getStatus());
-        }
-        wrapper.orderByDesc("login_time");
-        List<SysLoginInfo> sysLoginInfoList = sysLoginInfoService.list(wrapper);
+        List<SysLoginInfo> sysLoginInfoList = sysLoginInfoService.list(sysLoginInfo);
         return getDataTable(sysLoginInfoList);
     }
 
@@ -83,7 +69,13 @@ public class SysLoginInfoApiController extends BaseController {
     @PostMapping("edit")
     @ApiOperation(value = "编辑信息", response = Object.class)
     public Object edit(@Validated @RequestBody SysLoginInfo sysLoginInfo) throws Exception {
-        sysLoginInfoService.saveOrUpdate(sysLoginInfo);
+        if (StringUtils.isEmpty(sysLoginInfo.getId())) {
+            sysLoginInfo.setCreator(SecurityUtils.getUser().getId());
+            sysLoginInfoService.insert(sysLoginInfo);
+        } else {
+            sysLoginInfo.setModifier(SecurityUtils.getUser().getId());
+            sysLoginInfoService.update(sysLoginInfo);
+        }
         return AjaxResult.success();
     }
 
@@ -91,7 +83,7 @@ public class SysLoginInfoApiController extends BaseController {
     @DeleteMapping("{sysLoginInfoIds}")
     @ApiOperation(value = "删除信息", response = Object.class)
     public Object remove(@PathVariable String[] sysLoginInfoIds) {
-        sysLoginInfoService.removeByIds(Arrays.asList(sysLoginInfoIds));
+        sysLoginInfoService.deleteByIds(Arrays.asList(sysLoginInfoIds));
         return AjaxResult.success();
     }
 
@@ -99,7 +91,7 @@ public class SysLoginInfoApiController extends BaseController {
     @DeleteMapping("clean")
     @ApiOperation(value = "删除信息", response = Object.class)
     public Object clean() {
-        sysLoginInfoService.remove(null);
+        sysLoginInfoService.remove();
         return AjaxResult.success();
     }
 }

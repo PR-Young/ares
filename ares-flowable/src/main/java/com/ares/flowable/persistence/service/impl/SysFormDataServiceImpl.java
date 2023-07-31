@@ -23,18 +23,14 @@ import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.flowable.persistence.dao.ISysFormDataDao;
 import com.ares.flowable.persistence.model.SysFormData;
 import com.ares.flowable.persistence.service.ISysFormDataService;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 @Service
 public class SysFormDataServiceImpl implements ISysFormDataService {
@@ -88,49 +84,4 @@ public class SysFormDataServiceImpl implements ISysFormDataService {
         return sysFormDataDao.getFormDataByProInstId(proInstId);
     }
 
-
-    @Override
-    public boolean saveBatch(Collection<SysFormData> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysFormData> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysFormData> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysFormData entity) {
-        return false;
-    }
-
-    @Override
-    public SysFormData getOne(Wrapper<SysFormData> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysFormData> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysFormData> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysFormData> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysFormData> getEntityClass() {
-        return null;
-    }
 }

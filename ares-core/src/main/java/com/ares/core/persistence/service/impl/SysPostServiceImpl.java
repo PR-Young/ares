@@ -22,7 +22,6 @@ import com.ares.core.persistence.dao.ISysPostDao;
 import com.ares.core.persistence.model.SysPost;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysPostServiceImpl extends ServiceImpl<ISysPostDao, SysPost> implements ISysPostService {
+public class SysPostServiceImpl implements ISysPostService {
 
     private ISysPostDao sysPostDao;
 

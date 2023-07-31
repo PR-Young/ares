@@ -26,7 +26,6 @@ import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.MD5Util;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ import java.util.Map;
  * @author: Young 2020/01/22
  **/
 @Service
-public class SysUserServiceImpl extends ServiceImpl<ISysUserDao, SysUser> implements ISysUserService {
+public class SysUserServiceImpl implements ISysUserService {
 
     private ISysUserDao sysUserDao;
     private ISysRoleDao roleDao;

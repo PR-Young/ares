@@ -23,7 +23,6 @@ import com.ares.core.persistence.model.SysRole;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ import java.util.stream.Collectors;
  * @author: Young 2020/01/26
  **/
 @Service
-public class SysRoleServiceImpl extends ServiceImpl<ISysRoleDao, SysRole> implements ISysRoleService {
+public class SysRoleServiceImpl implements ISysRoleService {
 
     private ISysRoleDao sysRoleDao;
 

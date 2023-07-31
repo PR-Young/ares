@@ -22,18 +22,14 @@ import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.system.persistence.dao.IArticlesDao;
 import com.ares.system.persistence.model.Articles;
 import com.ares.system.persistence.service.IArticlesService;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 
 @Service
@@ -83,49 +79,4 @@ public class ArticlesServiceImpl implements IArticlesService {
         return lists;
     }
 
-
-    @Override
-    public boolean saveBatch(Collection<Articles> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<Articles> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<Articles> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(Articles entity) {
-        return false;
-    }
-
-    @Override
-    public Articles getOne(Wrapper<Articles> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<Articles> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<Articles> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<Articles> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<Articles> getEntityClass() {
-        return null;
-    }
 }

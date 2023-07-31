@@ -22,7 +22,6 @@ import com.ares.core.persistence.dao.ISysPropertiesDao;
 import com.ares.core.persistence.model.SysProperties;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class SysPropertiesServiceImpl extends ServiceImpl<ISysPropertiesDao, SysProperties> implements ISysPropertiesService {
+public class SysPropertiesServiceImpl implements ISysPropertiesService {
 
     private ISysPropertiesDao sysPropertiesDao;
 

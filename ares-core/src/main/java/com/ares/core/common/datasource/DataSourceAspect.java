@@ -22,10 +22,13 @@ package com.ares.core.common.datasource;
 import com.ares.core.utils.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
@@ -35,10 +38,9 @@ import java.lang.reflect.Method;
  * @date: 2020/07/10
  * @see: com.ares.core.common.datasource.DataSourceAspect.java
  **/
-@Deprecated
-//@Aspect
-//@Order(1)
-//@Component
+@Aspect
+@Order(1)
+@Component
 public class DataSourceAspect {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());

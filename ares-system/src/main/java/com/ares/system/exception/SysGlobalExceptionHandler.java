@@ -90,7 +90,7 @@ public class SysGlobalExceptionHandler {
             sysLoginInfo.setId(id);
             sysLoginInfo.setStatus(Constants.OFFLINE);
             ISysLoginInfoService loginInfoService = SpringUtils.getBean(ISysLoginInfoService.class);
-            loginInfoService.updateById(sysLoginInfo);
+            loginInfoService.update(sysLoginInfo);
             RedisUtil.del(token);
             return AjaxResult.error(ResultCode.NOLOGIN.getCode(), ResultCode.NOLOGIN.getMsg());
         }

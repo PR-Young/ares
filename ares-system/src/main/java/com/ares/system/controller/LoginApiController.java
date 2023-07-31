@@ -188,7 +188,7 @@ public class LoginApiController {
         SysLoginInfo sysLoginInfo = new SysLoginInfo();
         sysLoginInfo.setId(id);
         sysLoginInfo.setStatus(Constants.OFFLINE);
-        loginInfoService.updateById(sysLoginInfo);
+        loginInfoService.update(sysLoginInfo);
         RedisUtil.del(token);
         StpUtil.logout();
         return AjaxResult.success();

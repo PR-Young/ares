@@ -22,7 +22,6 @@ import com.ares.core.persistence.dao.ISysTemplateDao;
 import com.ares.core.persistence.model.SysTemplate;
 import com.ares.core.persistence.service.ISysTemplateService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysTemplateServiceImpl extends ServiceImpl<ISysTemplateDao, SysTemplate> implements ISysTemplateService {
+public class SysTemplateServiceImpl implements ISysTemplateService {
 
     private ISysTemplateDao sysTemplateDao;
 

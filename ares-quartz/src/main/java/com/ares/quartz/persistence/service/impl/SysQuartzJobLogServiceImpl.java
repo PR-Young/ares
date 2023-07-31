@@ -22,17 +22,13 @@ import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.quartz.persistence.dao.ISysQuartzJobLogDao;
 import com.ares.quartz.persistence.model.SysQuartzJobLog;
 import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 /**
  * @description:
@@ -92,49 +88,4 @@ public class SysQuartzJobLogServiceImpl implements ISysQuartzJobLogService {
         sysQuartzJobLogDao.cleanJobLog();
     }
 
-
-    @Override
-    public boolean saveBatch(Collection<SysQuartzJobLog> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<SysQuartzJobLog> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<SysQuartzJobLog> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(SysQuartzJobLog entity) {
-        return false;
-    }
-
-    @Override
-    public SysQuartzJobLog getOne(Wrapper<SysQuartzJobLog> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<SysQuartzJobLog> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<SysQuartzJobLog> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<SysQuartzJobLog> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<SysQuartzJobLog> getEntityClass() {
-        return null;
-    }
 }

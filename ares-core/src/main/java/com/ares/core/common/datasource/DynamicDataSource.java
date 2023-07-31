@@ -29,7 +29,6 @@ import java.util.Map;
  * @date: 2020/07/10
  * @see: com.ares.core.common.datasource.DynamicDataSource.java
  **/
-@Deprecated
 public class DynamicDataSource extends AbstractRoutingDataSource {
     public DynamicDataSource(DataSource defaultTargetDataSource, Map<Object, Object> targetDataSources) {
         super.setDefaultTargetDataSource(defaultTargetDataSource);

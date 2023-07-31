@@ -22,7 +22,6 @@ import com.ares.core.persistence.dao.ISysDictTypeDao;
 import com.ares.core.persistence.model.SysDictType;
 import com.ares.core.persistence.service.ISysDictTypeService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysDictTypeServiceImpl extends ServiceImpl<ISysDictTypeDao, SysDictType> implements ISysDictTypeService {
+public class SysDictTypeServiceImpl implements ISysDictTypeService {
 
     private ISysDictTypeDao sysDictTypeDao;
 

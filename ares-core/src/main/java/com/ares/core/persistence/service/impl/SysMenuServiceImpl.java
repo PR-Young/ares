@@ -27,7 +27,6 @@ import com.ares.core.persistence.model.SysMenu;
 import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ import java.util.stream.Collectors;
  * @author: Young 2020/01/23
  **/
 @Service
-public class SysMenuServiceImpl extends ServiceImpl<ISysMenuDao, SysMenu> implements ISysMenuService {
+public class SysMenuServiceImpl implements ISysMenuService {
 
     private ISysMenuDao sysMenuDao;
 

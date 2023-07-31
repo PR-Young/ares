@@ -22,9 +22,10 @@ package com.ares.core.persistence.service;
 
 
 import com.ares.core.persistence.model.SysLoginInfo;
-import com.baomidou.mybatisplus.extension.service.IService;
 
-public interface ISysLoginInfoService extends IService<SysLoginInfo> {
+public interface ISysLoginInfoService extends IBaseService<SysLoginInfo> {
     public String saveInfo(SysLoginInfo sysLoginInfo);
+
+    public void remove();
 
 }
