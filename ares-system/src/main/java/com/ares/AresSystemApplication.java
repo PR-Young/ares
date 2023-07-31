@@ -49,15 +49,19 @@ public class AresSystemApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         System.setProperty("pagehelper.banner", "false");
         SpringApplication.run(AresSystemApplication.class, args);
+        printBanner();
+    }
+
+    private static void printBanner(){
         System.out.println("         ______                                     __    __ ");
-        System.out.println("		/      \\                                   /  |  /  |");
-        System.out.println("       /$$$$$$  |  ______   _____  ____    ______  $$ | _$$ |_     _____");
-        System.out.println("       $$ |  $$/  /      \\ /     \\/   \\  /     \\   $$ |/ $$   |   /     \\");
+        System.out.println("		/     \\                                   /  |  /  |");
+        System.out.println("       /$$$$$$  |  ______   _____  ____    ______ |$$ | _$$ |_     _____");
+        System.out.println("       $$ |  $$/  /        /      /         /     |$$ |/ $$   |   /    \\");
         System.out.println("       $$ |      /$$$$$$  |$$$$$$ $$$$  |/$$$$$$  |$$ |$$$$$$/   /$$$$$$ |");
         System.out.println("	   $$ |   __ $$ |  $$ |$$ | $$ | $$ |$$ |  $$ |$$ |  $$ | __ $$    $$|");
-        System.out.println("       $$ \\__/  |$$ \\__$$ |$$ | $$ | $$ |$$ |__$$ |$$ |  $$ |/  |$$$$$$$$/");
+        System.out.println("       $$\\__/  |$$\\__$$ |$$ | $$ | $$ |$$ |__$$ |$$ |  $$ |/  |$$$$$$$$/");
         System.out.println("	   $$    $$/ $$    $$/ $$ | $$ | $$ |$$    $$/ $$ |  $$  $$/ $$      |");
-        System.out.println("	   $$$$$$/    $$$$$$/  $$/  $$/  $$/ $$$$$$$/  $$/    $$$$/   $$$$$$$/");
+        System.out.println("	    $$$$$$/   $$$$$$/  $$/  $$/  $$/ $$$$$$$/  $$/    $$$$/  $$$$$$$/");
         System.out.println("				                         $$ |");
         System.out.println("		                                 $$ |");
         System.out.println("		                                 $$/");
