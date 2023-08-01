@@ -61,13 +61,13 @@ public class ToolApiController {
     }
 
     @RequestMapping("tool/swagger/index")
-    @Operation(summary = "swagger接口", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
+    @Operation(summary = "swagger接口", deprecated = true, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
     public String swagger() {
         return "redirect:/swagger-ui/index.html";
     }
 
     @RequestMapping("tool/knife4j/index")
-    @Operation(summary = "knife4j接口", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
+    @Operation(summary = "knife4j接口", deprecated = true, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
     public String knife4j() {
         return "redirect:/doc.html";
     }

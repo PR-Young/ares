@@ -89,7 +89,7 @@ public class LoginApiController {
         this.loginInfoService = loginInfoService;
     }
 
-    @Operation(summary = "登录", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
+    @Operation(summary = "登录", method = "POST", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     @PostMapping("/login")
     public Object login(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> map = ServletUtils.getParameter();
@@ -134,19 +134,19 @@ public class LoginApiController {
 
 
     @RequestMapping("/unAuth")
-    @Operation(summary = "未登录", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
+    @Operation(summary = "未登录", hidden = true, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object unAuth(HttpServletRequest request, HttpServletResponse response) {
         return AjaxResult.unLogin();
     }
 
     @RequestMapping("/unauthorized")
-    @Operation(summary = "无权限", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
+    @Operation(summary = "无权限", hidden = true, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object unauthorized(HttpServletRequest request, HttpServletResponse response) {
         return AjaxResult.error(HttpStatus.UNAUTHORIZED.value(), "用户无权限！");
     }
 
     @RequestMapping("/getInfo")
-    @Operation(summary = "获取登录信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
+    @Operation(summary = "获取登录信息", method = "GET", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         SysUser user = SecurityUtils.getUser();
         List<SysRole> roleList = roleService.getRoleByUserId(user.getId());
@@ -168,7 +168,7 @@ public class LoginApiController {
     }
 
     @RequestMapping("/getRouters")
-    @Operation(summary = "获取路由", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
+    @Operation(summary = "获取路由", method = "GET", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getRouters() throws Exception {
         SysUser user = SecurityUtils.getUser();
         List<SysMenu> menus = menuService.getAll(user.getId());
@@ -176,6 +176,7 @@ public class LoginApiController {
     }
 
     @RequestMapping("/kaptcha")
+    @Operation(summary = "获取验证码", method = "GET", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getKaptchaImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ArithmeticCaptcha arithmeticCaptcha = new ArithmeticCaptcha(120, 40);
         String code = arithmeticCaptcha.text();
@@ -185,6 +186,7 @@ public class LoginApiController {
     }
 
     @RequestMapping("/logout")
+    @Operation(summary = "退出登录", method = "POST", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object logout() {
         String token = StpUtil.getTokenValue();
         String id = String.valueOf(RedisUtil.get(token));

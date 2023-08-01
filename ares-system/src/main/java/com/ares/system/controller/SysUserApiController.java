@@ -37,6 +37,7 @@ import com.ares.core.utils.ExcelUtils;
 import com.ares.core.utils.StringUtils;
 import com.ares.redis.utils.RedisUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -75,10 +76,10 @@ public class SysUserApiController extends BaseController {
         this.roleService = roleService;
         this.postService = postService;
     }
-    
+
     @SaCheckPermission("user:list")
     @RequestMapping("list")
-    @Operation(summary = "用户列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
+    @Operation(summary = "用户列表", parameters = {@Parameter(schema = @Schema(name = "SysUser"))}, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysUser user) {
         startPage();
         List<SysUser> userList = userService.selectUserList(user);

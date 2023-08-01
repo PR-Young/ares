@@ -60,26 +60,32 @@ public class BaseModel implements Serializable {
      */
     @JsonIgnore
     @ExcelIgnore
+    @Schema(hidden = true)
     private String beginTime;
     /**
      * 结束时间
      */
     @JsonIgnore
     @ExcelIgnore
+    @Schema(hidden = true)
     private String endTime;
     @JsonIgnore
     @ExcelIgnore
+    @Schema(hidden = true)
     private String sortColumn;
     @JsonIgnore
     @ExcelIgnore
+    @Schema(hidden = true)
     private String sortAsc;
     @JsonIgnore
     @ExcelIgnore
+    @Schema(hidden = true)
     private String sort;
     /**
      * 请求参数
      */
     @ExcelIgnore
+    @Schema(hidden = true)
     private Map<String, Object> params;
 
 }

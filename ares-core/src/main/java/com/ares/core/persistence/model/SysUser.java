@@ -30,7 +30,7 @@ import java.io.Serializable;
  * @description:
  * @author: Young 2020/01/22
  **/
-@Schema(title = "SysUser对象", description = "系统用户")
+@Schema(name = "SysUser", title = "SysUser对象", description = "系统用户")
 public class SysUser extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1335150848291052716L;
@@ -53,12 +53,16 @@ public class SysUser extends BaseModel implements Serializable {
     @ExcelIgnore
     private String avatar;
     @ExcelIgnore
+    @Schema(hidden = true)
     private String[] roleIds;
     @ExcelIgnore
+    @Schema(hidden = true)
     private boolean isAdmin;
     @ExcelIgnore
+    @Schema(hidden = true)
     private String deptId;
     @ExcelIgnore
+    @Schema(hidden = true)
     private String postId;
     @Schema(description = "状态")
     @ExcelIgnore
