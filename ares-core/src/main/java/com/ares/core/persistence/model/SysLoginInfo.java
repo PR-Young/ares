@@ -21,29 +21,28 @@
 package com.ares.core.persistence.model;
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-@ApiModel(value = "SysLoginInfo对象", description = "")
+@Schema(title = "SysLoginInfo对象", description = "")
 public class SysLoginInfo extends BaseModel {
-    @ApiModelProperty("")
+    @Schema(description = "")
     private String browser;
-    @ApiModelProperty("")
+    @Schema(description = "")
     private String ipAddr;
-    @ApiModelProperty("")
+    @Schema(description = "")
     private String loginLocation;
-    @ApiModelProperty("")
+    @Schema(description = "")
     private Date loginTime;
-    @ApiModelProperty("")
+    @Schema(description = "")
     private String msg;
-    @ApiModelProperty("")
+    @Schema(description = "")
     private String os;
-    @ApiModelProperty("")
+    @Schema(description = "")
     private String status;
-    @ApiModelProperty("")
+    @Schema(description = "")
     private String userName;
 }

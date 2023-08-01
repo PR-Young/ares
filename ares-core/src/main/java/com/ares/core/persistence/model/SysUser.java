@@ -22,8 +22,7 @@ package com.ares.core.persistence.model;
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.ares.core.model.base.BaseModel;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 
@@ -31,26 +30,26 @@ import java.io.Serializable;
  * @description:
  * @author: Young 2020/01/22
  **/
-@ApiModel(value = "SysUser对象", description = "系统用户")
+@Schema(title = "SysUser对象", description = "系统用户")
 public class SysUser extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1335150848291052716L;
-    @ApiModelProperty("帐号")
+    @Schema(description = "帐号")
     @ExcelProperty(value = "帐号", index = 1)
     private String account;
-    @ApiModelProperty("用户名")
+    @Schema(description = "用户名")
     @ExcelProperty(value = "用户名", index = 2)
     private String userName;
-    @ApiModelProperty("密码")
+    @Schema(description = "密码")
     @ExcelIgnore
     private String password;
-    @ApiModelProperty("电话")
+    @Schema(description = "电话")
     @ExcelProperty(value = "电话", index = 3)
     private String phoneNumber;
-    @ApiModelProperty("邮箱")
+    @Schema(description = "邮箱")
     @ExcelProperty(value = "邮箱", index = 4)
     private String email;
-    @ApiModelProperty("头像")
+    @Schema(description = "头像")
     @ExcelIgnore
     private String avatar;
     @ExcelIgnore
@@ -61,7 +60,7 @@ public class SysUser extends BaseModel implements Serializable {
     private String deptId;
     @ExcelIgnore
     private String postId;
-    @ApiModelProperty("状态")
+    @Schema(description = "状态")
     @ExcelIgnore
     private int status;
 

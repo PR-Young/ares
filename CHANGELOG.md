@@ -1,6 +1,19 @@
 # 更新日志
 
 ## 🚀 ✈️ 🚕 🚲 ⚡ 🐞 🚢 🐅 🐘 🦁 🦒
+### 🚀 v4.0.1.230801
+- spring-boot 2.7.5 -> 2.7.14
+- mybatis 2.2.2 -> 2.3.1
+- mybatis-generator 1.4.1 -> 1.4.2
+- pagehelper 1.4.5 -> 1.4.7
+- hutool 5.8.9 -> 5.8.21
+- durid 1.2.8 -> 1.2.18
+- easyexcel 2.2.8 -> 3.3.2
+- fastjson 2.0.17 -> 2.0.38
+- gson 2.10 -> 2.10.1
+- mysql-connector-java 8.0.31 -> 8.0.33
+- spring-boot-admin-starter-client 2.7.7 -> 2.7.10
+- openapi 替换swagger和knife4j
 ### 🚕 v4.0.0.230731
 -  回滚部分代码
 ### 🚕 v4.0.0.230720

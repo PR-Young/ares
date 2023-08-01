@@ -26,8 +26,11 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.persistence.model.SysDictData;
 import com.ares.core.persistence.service.ISysDictDataService;
 import com.ares.core.utils.StringUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +44,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/system/dict/data/*")
-@Api(value = "字典数据API", tags = {"字典数据"})
+@Tag(name = "SysDictDataApiController",description = "字典数据API")
 public class SysDictDataApiController extends BaseController {
 
     private ISysDictDataService sysDictDataService;
@@ -53,7 +56,7 @@ public class SysDictDataApiController extends BaseController {
 
    @SaCheckPermission("sysDictData:list")
     @RequestMapping("list")
-    @ApiOperation(value = "字典数据列表", response = TableDataInfo.class)
+    @Operation(summary = "字典数据列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysDictData sysDictData) {
         startPage();
         List<SysDictData> sysDictDataList = sysDictDataService.list(sysDictData);
@@ -61,14 +64,14 @@ public class SysDictDataApiController extends BaseController {
     }
 
     @GetMapping("{sysDictDataId}")
-    @ApiOperation(value = "根据Id获取字典数据", response = Object.class)
+    @Operation(summary = "根据Id获取字典数据", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String sysDictDataId) {
         return AjaxResult.successData(sysDictDataService.getById(sysDictDataId));
     }
 
    @SaCheckPermission("sysDictData:edit")
     @PostMapping("edit")
-    @ApiOperation(value = "编辑字典数据", response = Object.class)
+    @Operation(summary = "编辑字典数据", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysDictData sysDictData) throws Exception {
         if (StringUtils.isEmpty(sysDictData.getId())) {
             sysDictData.setCreator(SecurityUtils.getUser().getId());
@@ -82,14 +85,14 @@ public class SysDictDataApiController extends BaseController {
 
    @SaCheckPermission("sysDictData:delete")
     @DeleteMapping("{sysDictDataIds}")
-    @ApiOperation(value = "删除字典数据", response = Object.class)
+    @Operation(summary = "删除字典数据", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] sysDictDataIds) {
         sysDictDataService.deleteByIds(Arrays.asList(sysDictDataIds));
         return AjaxResult.success();
     }
 
     @GetMapping("dictType/{dictType}")
-    @ApiOperation(value = "根据类别获取字典数据", response = Object.class)
+    @Operation(summary = "根据类别获取字典数据", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getDicts(@PathVariable String dictType) {
         return AjaxResult.successData(sysDictDataService.getDicts(dictType));
     }

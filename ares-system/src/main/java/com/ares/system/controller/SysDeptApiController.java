@@ -26,8 +26,11 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.persistence.model.SysDept;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.StringUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +46,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysDept/*")
-@Api(value = "部门管理API", tags = {"部门管理"})
+@Tag(name = "SysDeptApiController", description = "部门管理API")
 public class SysDeptApiController extends BaseController {
 
     private ISysDeptService sysDeptService;
@@ -55,7 +58,7 @@ public class SysDeptApiController extends BaseController {
 
     @SaCheckPermission("sysDept:list")
     @RequestMapping("list")
-    @ApiOperation(value = "部门列表", response = TableDataInfo.class)
+    @Operation(summary = "部门列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysDept sysDept) {
         startPage();
         List<SysDept> sysDeptList = sysDeptService.list(sysDept);
@@ -63,14 +66,14 @@ public class SysDeptApiController extends BaseController {
     }
 
     @GetMapping("{sysDeptId}")
-    @ApiOperation(value = "根据Id获取部门信息", response = Object.class)
+    @Operation(summary = "根据Id获取部门信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String sysDeptId) {
         return AjaxResult.successData(sysDeptService.getByDeptId(sysDeptId));
     }
 
     @SaCheckPermission("sysDept:edit")
     @PostMapping("edit")
-    @ApiOperation(value = "编辑部门信息", response = Object.class)
+    @Operation(summary = "编辑部门信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysDept sysDept) throws Exception {
         if (StringUtils.isEmpty(sysDept.getId())) {
             sysDept.setCreator(SecurityUtils.getUser().getId());
@@ -84,14 +87,14 @@ public class SysDeptApiController extends BaseController {
 
     @SaCheckPermission("sysDept:delete")
     @DeleteMapping("{sysDeptIds}")
-    @ApiOperation(value = "删除部门", response = Object.class)
+    @Operation(summary = "删除部门", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] sysDeptIds) {
         sysDeptService.deleteByIds(Arrays.asList(sysDeptIds));
         return AjaxResult.success();
     }
 
     @RequestMapping("treeselect")
-    @ApiOperation(value = "部门树列表", response = Object.class)
+    @Operation(summary = "部门树列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object tree(HttpServletRequest request, HttpServletResponse response) {
         return AjaxResult.successData(sysDeptService.buildDeptTree());
     }

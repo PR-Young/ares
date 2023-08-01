@@ -26,8 +26,11 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.system.persistence.model.Articles;
 import com.ares.system.persistence.service.IArticlesService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +41,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/articles/*")
-@Api(value = "API", tags = {"管理"})
+@Tag(name = "ArticlesApiController", description = "API")
 public class ArticlesApiController extends BaseController {
 
     private IArticlesService articlesService;
@@ -50,7 +53,7 @@ public class ArticlesApiController extends BaseController {
 
     @SaCheckPermission("articles:list")
     @RequestMapping("list")
-    @ApiOperation(value = "列表", response = TableDataInfo.class)
+    @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(Articles articles) {
         startPage();
         List<Articles> articlesList = articlesService.list(articles);
@@ -58,14 +61,14 @@ public class ArticlesApiController extends BaseController {
     }
 
     @GetMapping("{articlesId}")
-    @ApiOperation(value = "根据Id获取信息", response = Object.class)
+    @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String articlesId) {
         return AjaxResult.successData(articlesService.getById(articlesId));
     }
 
     @SaCheckPermission("articles:edit")
     @PostMapping("edit")
-    @ApiOperation(value = "编辑信息", response = Object.class)
+    @Operation(summary = "编辑信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody Articles articles) throws Exception {
         if (StringUtils.isEmpty(articles.getId())) {
             articles.setCreator(SecurityUtils.getUser().getId());
@@ -79,7 +82,7 @@ public class ArticlesApiController extends BaseController {
 
     @SaCheckPermission("articles:delete")
     @DeleteMapping("{articlesIds}")
-    @ApiOperation(value = "删除信息", response = Object.class)
+    @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] articlesIds) {
         articlesService.deleteByIds(Arrays.asList(articlesIds));
         return AjaxResult.success();

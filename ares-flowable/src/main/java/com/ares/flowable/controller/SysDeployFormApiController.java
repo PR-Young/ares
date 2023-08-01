@@ -26,8 +26,11 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.flowable.persistence.model.SysDeployForm;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +41,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sysDeployForm/*")
-@Api(value = "API", tags = {"管理"})
+@Tag(name = "SysDeployFormApiController",description = "API")
 public class SysDeployFormApiController extends BaseController {
 
     private ISysDeployFormService sysDeployFormService;
@@ -50,7 +53,7 @@ public class SysDeployFormApiController extends BaseController {
 
     @SaCheckPermission("sysDeployForm:list")
     @RequestMapping("list")
-    @ApiOperation(value = "列表", response = TableDataInfo.class)
+    @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysDeployForm sysDeployForm) {
         startPage();
         List<SysDeployForm> sysDeployFormList = sysDeployFormService.list(sysDeployForm);
@@ -58,14 +61,14 @@ public class SysDeployFormApiController extends BaseController {
     }
 
     @GetMapping("{sysDeployFormId}")
-    @ApiOperation(value = "根据Id获取信息", response = Object.class)
+    @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String sysDeployFormId) {
         return AjaxResult.successData(sysDeployFormService.getById(sysDeployFormId));
     }
 
     @SaCheckPermission("sysDeployForm:edit")
     @PostMapping("edit")
-    @ApiOperation(value = "编辑信息", response = Object.class)
+    @Operation(summary = "编辑信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysDeployForm sysDeployForm) throws Exception {
         if (StringUtils.isEmpty(sysDeployForm.getId())) {
             sysDeployForm.setCreator(SecurityUtils.getUser().getId());
@@ -79,7 +82,7 @@ public class SysDeployFormApiController extends BaseController {
 
     @SaCheckPermission("sysDeployForm:delete")
     @DeleteMapping("{sysDeployFormIds}")
-    @ApiOperation(value = "删除信息", response = Object.class)
+    @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] sysDeployFormIds) {
         sysDeployFormService.deleteByIds(Arrays.asList(sysDeployFormIds));
         return AjaxResult.success();

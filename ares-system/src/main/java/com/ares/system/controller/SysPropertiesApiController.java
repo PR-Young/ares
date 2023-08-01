@@ -27,8 +27,11 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.persistence.model.SysProperties;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.StringUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +45,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysProperties/*")
-@Api(value = "系统参数API", tags = {"系统参数"})
+@Tag(name = "SysPropertiesApiController", description = "系统参数API")
 public class SysPropertiesApiController extends BaseController {
 
     private ISysPropertiesService sysPropertiesService;
@@ -54,7 +57,7 @@ public class SysPropertiesApiController extends BaseController {
 
     @SaCheckPermission("sysProperties:list")
     @RequestMapping("list")
-    @ApiOperation(value = "系统参数列表", response = TableDataInfo.class)
+    @Operation(summary = "系统参数列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysProperties sysProperties) {
         startPage();
         List<SysProperties> sysPropertiesList = sysPropertiesService.list(sysProperties);
@@ -62,14 +65,14 @@ public class SysPropertiesApiController extends BaseController {
     }
 
     @GetMapping("{sysPropertiesId}")
-    @ApiOperation(value = "根据参数Id获取系统参数", response = Object.class)
+    @Operation(summary = "根据参数Id获取系统参数", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String sysPropertiesId) {
         return AjaxResult.successData(sysPropertiesService.getById(sysPropertiesId));
     }
 
     @SaCheckPermission("sysProperties:edit")
     @PostMapping("edit")
-    @ApiOperation(value = "新增/修改系统参数", response = Object.class)
+    @Operation(summary = "新增/修改系统参数", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysProperties sysProperties) throws Exception {
         if (StringUtils.isEmpty(sysProperties.getId())) {
             sysProperties.setCreator(SecurityUtils.getUser().getId());
@@ -83,7 +86,7 @@ public class SysPropertiesApiController extends BaseController {
 
     @SaCheckPermission("sysProperties:delete")
     @DeleteMapping("{sysPropertiesIds}")
-    @ApiOperation(value = "删除系统参数", response = Object.class)
+    @Operation(summary = "删除系统参数", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] sysPropertiesIds) {
         sysPropertiesService.deleteByIds(Arrays.asList(sysPropertiesIds));
         return AjaxResult.success();

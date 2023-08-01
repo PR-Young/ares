@@ -23,7 +23,7 @@ import com.ares.core.utils.ServletUtils;
 import com.ares.message.persistence.model.AresDocument;
 import com.ares.message.persistence.service.IElasticsearchService;
 import com.ares.system.persistence.service.IIndexService;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +41,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/index/*")
-@Api(value = "index", tags = {"index"})
+@Tag(name = "IndexApiController", description = "index")
 public class IndexApiController {
     private IIndexService indexService;
     private IElasticsearchService elasticsearchService;

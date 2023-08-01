@@ -27,8 +27,11 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.quartz.persistence.model.SysQuartzJob;
 import com.ares.quartz.persistence.service.ISysQuartzJobService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -43,7 +46,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/monitor/job/*")
-@Api(value = "系统任务API", tags = {"系统任务"})
+@Tag(name = "SysJobApiController", description = "系统任务API")
 public class SysJobApiController extends BaseController {
 
     private ISysQuartzJobService jobService;
@@ -55,7 +58,7 @@ public class SysJobApiController extends BaseController {
 
     @SaCheckPermission("quartz:list")
     @RequestMapping("list")
-    @ApiOperation(value = "任务列表", response = TableDataInfo.class)
+    @Operation(summary = "任务列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysQuartzJob job) {
         startPage();
         List<SysQuartzJob> jobList = jobService.selectJobList(job);
@@ -63,14 +66,14 @@ public class SysJobApiController extends BaseController {
     }
 
     @GetMapping("{jobId}")
-    @ApiOperation(value = "根据任务Id获取任务", response = Object.class)
+    @Operation(summary = "根据任务Id获取任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String jobId) {
         return AjaxResult.successData(jobService.getById(jobId));
     }
 
     @SaCheckPermission("quartz:edit")
     @PostMapping("edit")
-    @ApiOperation(value = "新增/修改任务", response = Object.class)
+    @Operation(summary = "新增/修改任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysQuartzJob job) throws Exception {
         if (StringUtils.isEmpty(job.getId())) {
             if (jobService.checkUnique(job.getJobName()) != 0) {
@@ -87,14 +90,14 @@ public class SysJobApiController extends BaseController {
 
     @SaCheckPermission("quartz:delete")
     @DeleteMapping("{jobIds}")
-    @ApiOperation(value = "删除任务", response = Object.class)
+    @Operation(summary = "删除任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] jobIds) {
         jobService.deleteByIds(Arrays.asList(jobIds));
         return AjaxResult.success();
     }
 
     @PutMapping("changeStatus")
-    @ApiOperation(value = "启停任务", response = Object.class)
+    @Operation(summary = "启停任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object changeStatus(@RequestBody SysQuartzJob job) throws Exception {
         SysQuartzJob newJob = jobService.getById(job.getId());
         newJob.setStatus(job.getStatus());
@@ -107,7 +110,7 @@ public class SysJobApiController extends BaseController {
      * 定时任务立即执行一次
      */
     @PutMapping("run")
-    @ApiOperation(value = "执行任务", response = Object.class)
+    @Operation(summary = "执行任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object run(@RequestBody SysQuartzJob job) throws SchedulerException {
         SysQuartzJob newJob = jobService.getById(job.getId());
         jobService.run(newJob);

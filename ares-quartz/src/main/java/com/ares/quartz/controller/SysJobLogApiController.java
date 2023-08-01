@@ -25,8 +25,11 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.quartz.persistence.model.SysQuartzJobLog;
 import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +42,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/monitor/jobLog/*")
-@Api(value = "系统任务日志API", tags = {"系统任务日志"})
+@Tag(name = "SysJobLogApiController", description = "系统任务日志API")
 public class SysJobLogApiController extends BaseController {
 
     private ISysQuartzJobLogService jobLogService;
@@ -51,7 +54,7 @@ public class SysJobLogApiController extends BaseController {
 
     @SaCheckPermission("quartz:logList")
     @GetMapping("list")
-    @ApiOperation(value = "任务日志列表", response = TableDataInfo.class)
+    @Operation(summary = "任务日志列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysQuartzJobLog jobLog) {
         startPage();
         List<SysQuartzJobLog> list = jobLogService.selectJobLogList(jobLog);
@@ -62,7 +65,7 @@ public class SysJobLogApiController extends BaseController {
      * 根据调度编号获取详细信息
      */
     @GetMapping(value = "{jobLogId}")
-    @ApiOperation(value = "根据调度编号获取详细信息", response = Object.class)
+    @Operation(summary = "根据调度编号获取详细信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String jobLogId) {
         return AjaxResult.successData(jobLogService.getById(jobLogId));
     }
@@ -73,7 +76,7 @@ public class SysJobLogApiController extends BaseController {
      */
     @SaCheckPermission("quartz:logDelete")
     @DeleteMapping("{jobLogIds}")
-    @ApiOperation(value = "删除定时任务调度日志", response = Object.class)
+    @Operation(summary = "删除定时任务调度日志", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] jobLogIds) {
         jobLogService.deleteByIds(Arrays.asList(jobLogIds));
         return AjaxResult.success();
@@ -81,7 +84,7 @@ public class SysJobLogApiController extends BaseController {
 
     @SaCheckPermission("quartz:logDelete")
     @DeleteMapping("clean")
-    @ApiOperation(value = "清空定时任务调度日志", response = Object.class)
+    @Operation(summary = "清空定时任务调度日志", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object clean() {
         jobLogService.cleanJobLog();
         return AjaxResult.success();

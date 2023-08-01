@@ -26,8 +26,11 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.persistence.model.SysPost;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.utils.StringUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +44,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysPost/*")
-@Api(value = "岗位管理API", tags = {"岗位管理"})
+@Tag(name = "SysPostApiController", description = "岗位管理API")
 public class SysPostApiController extends BaseController {
 
     private ISysPostService sysPostService;
@@ -53,7 +56,7 @@ public class SysPostApiController extends BaseController {
 
     @SaCheckPermission("sysPost:list")
     @RequestMapping("list")
-    @ApiOperation(value = "岗位列表", response = TableDataInfo.class)
+    @Operation(summary = "岗位列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysPost sysPost) {
         startPage();
         List<SysPost> sysPostList = sysPostService.list(sysPost);
@@ -61,14 +64,14 @@ public class SysPostApiController extends BaseController {
     }
 
     @GetMapping("{sysPostId}")
-    @ApiOperation(value = "根据Id获取岗位信息", response = Object.class)
+    @Operation(summary = "根据Id获取岗位信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String sysPostId) {
         return AjaxResult.successData(sysPostService.getById(sysPostId));
     }
 
     @SaCheckPermission("sysPost:edit")
     @PostMapping("edit")
-    @ApiOperation(value = "编辑岗位信息", response = Object.class)
+    @Operation(summary = "编辑岗位信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysPost sysPost) throws Exception {
         if (StringUtils.isEmpty(sysPost.getId())) {
             sysPost.setCreator(SecurityUtils.getUser().getId());
@@ -82,14 +85,14 @@ public class SysPostApiController extends BaseController {
 
     @SaCheckPermission("sysPost:delete")
     @DeleteMapping("{sysPostIds}")
-    @ApiOperation(value = "删除岗位信息", response = Object.class)
+    @Operation(summary = "删除岗位信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] sysPostIds) {
         sysPostService.deleteByIds(Arrays.asList(sysPostIds));
         return AjaxResult.success();
     }
 
     @GetMapping("optionselect")
-    @ApiOperation(value = "岗位下拉数据", response = Object.class)
+    @Operation(summary = "岗位下拉数据", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object optionSelect() {
         return AjaxResult.successData(sysPostService.getAll());
     }

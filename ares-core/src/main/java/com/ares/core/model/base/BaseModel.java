@@ -22,7 +22,7 @@ import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -36,20 +36,20 @@ import java.util.Map;
 @Data
 public class BaseModel implements Serializable {
     private static final long serialVersionUID = 2513447910190608371L;
-    @ApiModelProperty("主键")
+    @Schema(description = "主键")
     @ExcelProperty(value = "序号", index = 0)
     private String id;
-    @ApiModelProperty("创建人")
+    @Schema(description = "创建人")
     @ExcelIgnore
     private String creator;
-    @ApiModelProperty("创建时间")
+    @Schema(description = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ExcelIgnore
     private Date createTime;
-    @ApiModelProperty("修改人")
+    @Schema(description = "修改人")
     @ExcelIgnore
     private String modifier;
-    @ApiModelProperty("修改时间")
+    @Schema(description = "修改时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ExcelIgnore
     private Date modifyTime;

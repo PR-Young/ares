@@ -62,7 +62,7 @@ public class AresSystemApplication extends SpringBootServletInitializer {
         System.out.println("       $$ |  $$/  /        /      /         /     |$$ |/ $$   |   /    \\");
         System.out.println("       $$ |      /$$$$$$  |$$$$$$ $$$$  |/$$$$$$  |$$ |$$$$$$/   /$$$$$$ |");
         System.out.println("	   $$ |   __ $$ |  $$ |$$ | $$ | $$ |$$ |  $$ |$$ |  $$ | __ $$    $$|");
-        System.out.println("       $$\\__/  |$$\\__$$ |$$ | $$ | $$ |$$ |__$$ |$$ |  $$ |/  |$$$$$$$$/");
+        System.out.println("       $$ \\__/  |$$ \\__$$ |$$ | $$ | $$ |$$ |__$$ |$$ |  $$ |/  |$$$$$$$$/");
         System.out.println("	   $$    $$/ $$    $$/ $$ | $$ | $$ |$$    $$/ $$ |  $$  $$/ $$      |");
         System.out.println("	    $$$$$$/   $$$$$$/  $$/  $$/  $$/ $$$$$$$/  $$/    $$$$/  $$$$$$$/");
         System.out.println("				                         $$ |");

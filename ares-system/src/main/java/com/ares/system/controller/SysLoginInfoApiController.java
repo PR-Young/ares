@@ -28,8 +28,11 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.persistence.model.SysLoginInfo;
 import com.ares.core.persistence.service.ISysLoginInfoService;
 import com.ares.core.utils.StringUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +43,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sysLoginInfo/*")
-@Api(value = "API", tags = {"管理"})
+@Tag(name = "SysLoginInfoApiController", description = "API")
 public class SysLoginInfoApiController extends BaseController {
 
     private ISysLoginInfoService sysLoginInfoService;
@@ -52,7 +55,7 @@ public class SysLoginInfoApiController extends BaseController {
 
     @SaCheckPermission("sysLoginInfo:list")
     @RequestMapping("list")
-    @ApiOperation(value = "列表", response = TableDataInfo.class)
+    @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysLoginInfo sysLoginInfo) {
         startPage();
         List<SysLoginInfo> sysLoginInfoList = sysLoginInfoService.list(sysLoginInfo);
@@ -60,14 +63,14 @@ public class SysLoginInfoApiController extends BaseController {
     }
 
     @GetMapping("{sysLoginInfoId}")
-    @ApiOperation(value = "根据Id获取信息", response = Object.class)
+    @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(@PathVariable String sysLoginInfoId) {
         return AjaxResult.successData(sysLoginInfoService.getById(sysLoginInfoId));
     }
 
     @SaCheckPermission("sysLoginInfo:edit")
     @PostMapping("edit")
-    @ApiOperation(value = "编辑信息", response = Object.class)
+    @Operation(summary = "编辑信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysLoginInfo sysLoginInfo) throws Exception {
         if (StringUtils.isEmpty(sysLoginInfo.getId())) {
             sysLoginInfo.setCreator(SecurityUtils.getUser().getId());
@@ -81,7 +84,7 @@ public class SysLoginInfoApiController extends BaseController {
 
     @SaCheckPermission("sysLoginInfo:delete")
     @DeleteMapping("{sysLoginInfoIds}")
-    @ApiOperation(value = "删除信息", response = Object.class)
+    @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] sysLoginInfoIds) {
         sysLoginInfoService.deleteByIds(Arrays.asList(sysLoginInfoIds));
         return AjaxResult.success();
@@ -89,7 +92,7 @@ public class SysLoginInfoApiController extends BaseController {
 
     @SaCheckPermission("sysLoginInfo:clean")
     @DeleteMapping("clean")
-    @ApiOperation(value = "删除信息", response = Object.class)
+    @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object clean() {
         sysLoginInfoService.remove();
         return AjaxResult.success();

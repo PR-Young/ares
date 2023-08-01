@@ -28,8 +28,11 @@ import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.*;
 import com.ares.core.utils.EncryptUtils;
 import com.ares.core.utils.MD5Util;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,7 +49,7 @@ import java.io.OutputStream;
  */
 @RestController
 @RequestMapping("/system/user/profile/*")
-@Api(value = "个人信息API", tags = {"个人信息"})
+@Tag(name = "SysProfileApiController", description = "个人信息API")
 public class SysProfileApiController extends BaseController {
     private ISysUserService userService;
     private IUploadService uploadService;
@@ -71,7 +74,7 @@ public class SysProfileApiController extends BaseController {
      * 个人信息
      */
     @GetMapping("info")
-    @ApiOperation(value = "获取个人信息", response = Object.class)
+    @Operation(summary = "获取个人信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object profile() throws Exception {
         SysUser user = SecurityUtils.getUser();
         SysDept sysDept = deptService.getById(user.getDeptId());
@@ -87,7 +90,7 @@ public class SysProfileApiController extends BaseController {
      * 修改用户
      */
     @PutMapping("update")
-    @ApiOperation(value = "修改用户信息", response = Object.class)
+    @Operation(summary = "修改用户信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object updateProfile(@RequestBody SysUser user) {
         userService.update(user);
         return AjaxResult.success();
@@ -97,7 +100,7 @@ public class SysProfileApiController extends BaseController {
      * 重置密码
      */
     @PutMapping("updatePwd")
-    @ApiOperation(value = "重置密码", response = Object.class)
+    @Operation(summary = "重置密码", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object updatePwd(String oldPassword, String newPassword) throws Exception {
         SysUser user = SecurityUtils.getUser();
         if (!user.getPassword().equals(MD5Util.encode(oldPassword))) {
@@ -117,7 +120,7 @@ public class SysProfileApiController extends BaseController {
      * 头像上传
      */
     @PostMapping("avatar")
-    @ApiOperation(value = "头像上传", response = Object.class)
+    @Operation(summary = "头像上传", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object avatar(@RequestParam("avatarfile") MultipartFile file) throws Exception {
         if (!file.isEmpty()) {
             SysUser user = SecurityUtils.getUser();
@@ -131,7 +134,7 @@ public class SysProfileApiController extends BaseController {
     }
 
     @GetMapping("{path}")
-    @ApiOperation(value = "获取头像")
+    @Operation(summary = "获取头像")
     public void getAvatar(HttpServletRequest request, HttpServletResponse response, @PathVariable String path) throws Exception {
         File file = new File(EncryptUtils.decode(path));
         OutputStream toClient = response.getOutputStream();
