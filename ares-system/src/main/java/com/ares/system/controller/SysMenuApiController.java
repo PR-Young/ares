@@ -53,7 +53,7 @@ public class SysMenuApiController {
     }
 
     @SaCheckPermission("menu:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "菜单列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object list(SysMenu menu) throws Exception {
         String userId = SecurityUtils.getUser().getId();

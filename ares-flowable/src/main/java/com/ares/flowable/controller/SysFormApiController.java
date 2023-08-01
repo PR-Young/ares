@@ -56,7 +56,7 @@ public class SysFormApiController extends BaseController {
     }
 
     @SaCheckPermission("sysForm:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysForm sysForm) {
         startPage();

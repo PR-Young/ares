@@ -44,7 +44,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/system/dict/data/*")
-@Tag(name = "SysDictDataApiController",description = "字典数据API")
+@Tag(name = "SysDictDataApiController", description = "字典数据API")
 public class SysDictDataApiController extends BaseController {
 
     private ISysDictDataService sysDictDataService;
@@ -54,8 +54,8 @@ public class SysDictDataApiController extends BaseController {
         this.sysDictDataService = sysDictDataService;
     }
 
-   @SaCheckPermission("sysDictData:list")
-    @RequestMapping("list")
+    @SaCheckPermission("sysDictData:list")
+    @GetMapping("list")
     @Operation(summary = "字典数据列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysDictData sysDictData) {
         startPage();
@@ -69,7 +69,7 @@ public class SysDictDataApiController extends BaseController {
         return AjaxResult.successData(sysDictDataService.getById(sysDictDataId));
     }
 
-   @SaCheckPermission("sysDictData:edit")
+    @SaCheckPermission("sysDictData:edit")
     @PostMapping("edit")
     @Operation(summary = "编辑字典数据", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysDictData sysDictData) throws Exception {
@@ -83,7 +83,7 @@ public class SysDictDataApiController extends BaseController {
         return AjaxResult.success();
     }
 
-   @SaCheckPermission("sysDictData:delete")
+    @SaCheckPermission("sysDictData:delete")
     @DeleteMapping("{sysDictDataIds}")
     @Operation(summary = "删除字典数据", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object remove(@PathVariable String[] sysDictDataIds) {

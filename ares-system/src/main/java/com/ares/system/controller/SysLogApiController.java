@@ -28,6 +28,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +52,7 @@ public class SysLogApiController extends BaseController {
     }
 
     @SaCheckPermission("log:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "操作日志列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysLog sysLog) {
         startPage();

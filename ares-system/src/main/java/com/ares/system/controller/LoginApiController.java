@@ -48,6 +48,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -89,7 +90,7 @@ public class LoginApiController {
         this.loginInfoService = loginInfoService;
     }
 
-    @Operation(summary = "登录", method = "POST", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
+    @Operation(summary = "登录", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     @PostMapping("/login")
     public Object login(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> map = ServletUtils.getParameter();
@@ -145,7 +146,7 @@ public class LoginApiController {
         return AjaxResult.error(HttpStatus.UNAUTHORIZED.value(), "用户无权限！");
     }
 
-    @RequestMapping("/getInfo")
+    @GetMapping("/getInfo")
     @Operation(summary = "获取登录信息", method = "GET", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
         SysUser user = SecurityUtils.getUser();
@@ -167,7 +168,7 @@ public class LoginApiController {
         return AjaxResult.success().put("user", user).put("roles", roles).put("permissions", permissions);
     }
 
-    @RequestMapping("/getRouters")
+    @GetMapping("/getRouters")
     @Operation(summary = "获取路由", method = "GET", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getRouters() throws Exception {
         SysUser user = SecurityUtils.getUser();
@@ -175,7 +176,7 @@ public class LoginApiController {
         return AjaxResult.successData(HttpStatus.OK.value(), menuService.buildMenus(menus, "0"));
     }
 
-    @RequestMapping("/kaptcha")
+    @GetMapping("/kaptcha")
     @Operation(summary = "获取验证码", method = "GET", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object getKaptchaImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ArithmeticCaptcha arithmeticCaptcha = new ArithmeticCaptcha(120, 40);
@@ -185,7 +186,7 @@ public class LoginApiController {
         return AjaxResult.success().put("uuid", uuid).put("img", arithmeticCaptcha.toBase64());
     }
 
-    @RequestMapping("/logout")
+    @PostMapping("/logout")
     @Operation(summary = "退出登录", method = "POST", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object logout() {
         String token = StpUtil.getTokenValue();

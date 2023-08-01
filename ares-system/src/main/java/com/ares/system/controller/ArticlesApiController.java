@@ -52,7 +52,7 @@ public class ArticlesApiController extends BaseController {
     }
 
     @SaCheckPermission("articles:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(Articles articles) {
         startPage();

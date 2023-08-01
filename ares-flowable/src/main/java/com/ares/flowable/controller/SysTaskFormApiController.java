@@ -52,7 +52,7 @@ public class SysTaskFormApiController extends BaseController {
     }
 
     @SaCheckPermission("sysTaskForm:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysTaskForm sysTaskForm) {
         startPage();

@@ -55,7 +55,7 @@ public class SysDictTypeApiController extends BaseController {
     }
 
     @SaCheckPermission("sysDictType:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "字典类别列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysDictType sysDictType) {
         startPage();

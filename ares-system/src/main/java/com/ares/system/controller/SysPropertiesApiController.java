@@ -56,7 +56,7 @@ public class SysPropertiesApiController extends BaseController {
     }
 
     @SaCheckPermission("sysProperties:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "系统参数列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysProperties sysProperties) {
         startPage();

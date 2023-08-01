@@ -57,7 +57,7 @@ public class SysJobApiController extends BaseController {
     }
 
     @SaCheckPermission("quartz:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "任务列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysQuartzJob job) {
         startPage();

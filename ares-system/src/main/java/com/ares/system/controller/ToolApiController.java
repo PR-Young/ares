@@ -27,6 +27,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,19 +40,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Tag(name = "ToolApiController", description = "通用工具API")
 public class ToolApiController {
 
-    @RequestMapping("monitor/druid/index")
+    @GetMapping("monitor/druid/index")
     @Operation(summary = "druid监控", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
     public String druid() {
         return "redirect:/druid";
     }
 
-    @RequestMapping("monitor/actuator/index")
+    @GetMapping("monitor/actuator/index")
     @Operation(summary = "actuator监控", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
     public String actuator() {
         return "redirect:/actuator";
     }
 
-    @RequestMapping("monitor/server")
+    @GetMapping("monitor/server")
     @ResponseBody
     @Operation(summary = "服务器信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object server() throws Exception {
@@ -60,19 +61,19 @@ public class ToolApiController {
         return AjaxResult.successData(server);
     }
 
-    @RequestMapping("tool/swagger/index")
+    @GetMapping("tool/swagger/index")
     @Operation(summary = "swagger接口", deprecated = true, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
     public String swagger() {
         return "redirect:/swagger-ui/index.html";
     }
 
-    @RequestMapping("tool/knife4j/index")
+    @GetMapping("tool/knife4j/index")
     @Operation(summary = "knife4j接口", deprecated = true, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
     public String knife4j() {
         return "redirect:/doc.html";
     }
 
-    @RequestMapping("tool/report/index")
+    @GetMapping("tool/report/index")
     @Operation(summary = "积木报表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
     public String report() {
         return "redirect:/jmreport/list";

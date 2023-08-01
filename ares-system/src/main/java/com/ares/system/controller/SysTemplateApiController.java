@@ -56,7 +56,7 @@ public class SysTemplateApiController extends BaseController {
     }
 
     @SaCheckPermission("sysTemplate:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "模版列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysTemplate sysTemplate) {
         startPage();

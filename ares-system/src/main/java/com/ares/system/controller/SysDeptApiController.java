@@ -57,7 +57,7 @@ public class SysDeptApiController extends BaseController {
     }
 
     @SaCheckPermission("sysDept:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "部门列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysDept sysDept) {
         startPage();
@@ -93,7 +93,7 @@ public class SysDeptApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @RequestMapping("treeselect")
+    @GetMapping("treeselect")
     @Operation(summary = "部门树列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object tree(HttpServletRequest request, HttpServletResponse response) {
         return AjaxResult.successData(sysDeptService.buildDeptTree());

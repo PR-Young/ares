@@ -57,7 +57,7 @@ public class SysNoticeApiController extends BaseController {
     }
 
     @SaCheckPermission("notice:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "通知公告列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysNotice sysNotice) {
         startPage();

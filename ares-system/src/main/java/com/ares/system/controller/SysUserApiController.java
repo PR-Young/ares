@@ -78,7 +78,7 @@ public class SysUserApiController extends BaseController {
     }
 
     @SaCheckPermission("user:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "用户列表", parameters = {@Parameter(schema = @Schema(name = "SysUser"))}, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysUser user) {
         startPage();
@@ -140,7 +140,7 @@ public class SysUserApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @RequestMapping("export")
+    @GetMapping("export")
     @Operation(summary = "导出用户")
     public void export(SysUser user, HttpServletResponse response) {
         List<SysUser> userList = userService.selectUserList(user);
@@ -153,7 +153,7 @@ public class SysUserApiController extends BaseController {
         }
     }
 
-    @RequestMapping("importTemplate")
+    @GetMapping("importTemplate")
     @Operation(summary = "导入模版")
     public void importTemplate(HttpServletResponse response) {
         List<SysUser> userList = new ArrayList<>();
@@ -166,7 +166,7 @@ public class SysUserApiController extends BaseController {
         }
     }
 
-    @RequestMapping("importData")
+    @PostMapping("importData")
     @SaCheckPermission("user:import")
     @Operation(summary = "导入用户")
     public Object importData(MultipartFile file, HttpServletRequest request) throws Exception {
@@ -178,7 +178,7 @@ public class SysUserApiController extends BaseController {
         return AjaxResult.success("导入成功");
     }
 
-    @RequestMapping("kick")
+    @PostMapping("kick")
     @Operation(summary = "下线", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object kickUser(@RequestParam("username") String userName) {
         SysUser user = userService.getUserByName(userName);

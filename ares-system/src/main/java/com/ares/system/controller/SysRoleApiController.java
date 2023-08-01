@@ -59,7 +59,7 @@ public class SysRoleApiController extends BaseController {
     }
 
     @SaCheckPermission("role:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "角色列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysRole role) {
         startPage();

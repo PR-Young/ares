@@ -55,7 +55,7 @@ public class SysPostApiController extends BaseController {
     }
 
     @SaCheckPermission("sysPost:list")
-    @RequestMapping("list")
+    @GetMapping("list")
     @Operation(summary = "岗位列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysPost sysPost) {
         startPage();

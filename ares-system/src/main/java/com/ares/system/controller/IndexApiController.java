@@ -27,6 +27,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -67,7 +68,7 @@ public class IndexApiController {
         return AjaxResult.successData(indexService.getLineChart());
     }
 
-    @RequestMapping("query")
+    @PostMapping("query")
     public Object query() {
         Map<String, Object> parameter = ServletUtils.getParameter();
         String searchValue = String.valueOf(parameter.get("searchValue"));
