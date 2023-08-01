@@ -16,6 +16,7 @@
 
     <properties>
         <ares.version>1.0</ares.version>
+        <disruptor.version>3.4.4</disruptor.version>
     </properties>
 
     <dependencies>
@@ -33,14 +34,8 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.rabbitmq</groupId>
-            <artifactId>http-client</artifactId>
-            <version>3.2.0.RELEASE</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.13</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,7 +44,7 @@
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
-            <version>3.4.4</version>
+            <version>${disruptor.version}</version>
         </dependency>
     </dependencies>
 
