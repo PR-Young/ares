@@ -66,10 +66,10 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
 
     @Autowired
     public FlowDefinitionServiceImpl(ISysDeployFormService deployFormService,
-                                 ISysUserService sysUserService,
-                                 ISysDeptService sysDeptService,
-                                 ISysPostService postService,
-                                 ISysFormDataService formDataService) {
+                                     ISysUserService sysUserService,
+                                     ISysDeptService sysDeptService,
+                                     ISysPostService postService,
+                                     ISysFormDataService formDataService) {
         this.sysDeployFormService = deployFormService;
         this.sysUserService = sysUserService;
         this.sysDeptService = sysDeptService;
@@ -101,7 +101,8 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
         Page<FlowProcDefDto> page = new Page<>();
         // 流程定义列表数据查询
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery()
-                .latestVersion()
+                //.latestVersion()
+                .orderByProcessDefinitionVersion().desc()
                 .orderByProcessDefinitionKey().asc();
         page.setTotal(processDefinitionQuery.count());
         List<ProcessDefinition> processDefinitionList = processDefinitionQuery.listPage(pageNum - 1, pageSize);
@@ -253,7 +254,10 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
     @Override
     public void delete(String deployId) {
         // true 允许级联删除 ,不设置会导致数据库外键关联异常
-        repositoryService.deleteDeployment(deployId, true);
+        String[] ids = deployId.split(",");
+        for (String id : ids) {
+            repositoryService.deleteDeployment(id, true);
+        }
     }
 
     /**

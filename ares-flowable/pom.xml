@@ -20,6 +20,7 @@
         <ares.version>1.0</ares.version>
         <flowable.version>6.7.2</flowable.version>
         <fel.version>0.8</fel.version>
+        <xercesImpl.version>2.12.2</xercesImpl.version>
     </properties>
     <dependencies>
         <dependency>
@@ -36,6 +37,11 @@
             <groupId>org.eweb4j</groupId>
             <artifactId>fel</artifactId>
             <version>${fel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>${xercesImpl.version}</version>
         </dependency>
     </dependencies>
 
