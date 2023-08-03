@@ -72,7 +72,14 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .check(r -> StpUtil.checkLogin());
                 }))
                 .addPathPatterns("/**");
-        registry.addInterceptor(new AresInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new AresInterceptor()).addPathPatterns("/**").excludePathPatterns(
+                "/login", "/kaptcha", "/system/user/profile/**",
+                "/swagger-ui/index.html", "/swagger-resources/**",
+                "/*/api-docs", "/webjars/**", "/doc.html",
+                "/v2/**", "/error", "/favicon.ico",
+                "/druid/**", "/actuator/**",
+                "/model/**", "/editor/**", "/blog/**",
+                "/test/**", "/ws/**", "/jmreport/**");
     }
 
     /**

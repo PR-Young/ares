@@ -25,8 +25,8 @@ import java.util.List;
 
 public interface ISysNoticeService extends IBaseService<SysNotice, SysNoticeQuery> {
 
-    public int noticeNum(String userId);
+    int noticeNum(String userId);
 
-    public List<SysNotice> getNotices(String userId);
+    List<SysNotice> getNotices(String userId);
 
 }

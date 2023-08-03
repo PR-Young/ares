@@ -155,7 +155,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     @Override
     public boolean checkRoleName(String roleName) {
         int count = sysRoleDao.checkRoleName(roleName);
-        return count == 0 ? true : false;
+        return count == 0;
     }
 
     @Override

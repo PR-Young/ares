@@ -21,6 +21,7 @@ package com.ares.core.listener;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.ares.core.model.listener.AresEvent;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @description:
@@ -28,10 +29,11 @@ import com.ares.core.model.listener.AresEvent;
  * @date: 2021/01/06
  * @see: com.ares.core.listener AresEventListener.java
  **/
+@Slf4j
 public class AresEventListener extends DefaultEventListener<AresEvent> {
 
     @Override
     public void onApplicationEvent(AresEvent aresEvent) {
-        logger.info(JSON.toJSONString(aresEvent.getSource(), SerializerFeature.WriteMapNullValue));
+        log.info(JSON.toJSONString(aresEvent.getSource(), SerializerFeature.WriteMapNullValue));
     }
 }

@@ -57,7 +57,7 @@ import java.util.Map;
 public class LogAspect {
     private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-    private static final ThreadLocal<Date> dateThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Date> DATE_THREAD_LOCAL = new ThreadLocal<>();
     private ISysLogService sysLogService;
 
     @Autowired
@@ -87,8 +87,8 @@ public class LogAspect {
     @Async
     public void handleLog(JoinPoint joinPoint, Exception e) {
         logger.debug("用户行为日志记录开始！");
-        dateThreadLocal.remove();
-        dateThreadLocal.set(new Date());
+        DATE_THREAD_LOCAL.remove();
+        DATE_THREAD_LOCAL.set(new Date());
         logger.debug("开始计时:{}", DateUtils.getTime());
         SysLog sysLog = new SysLog();
         try {
@@ -123,14 +123,14 @@ public class LogAspect {
                     }
                 }
             }
-            long beginTime = dateThreadLocal.get().getTime();
+            long beginTime = DATE_THREAD_LOCAL.get().getTime();
             long endTime = System.currentTimeMillis();
             logger.debug("计时结束:{} 耗时:{}", DateUtils.format(endTime), (endTime - beginTime) / 1000 + "s");
         } catch (Exception ex) {
             sysLog.setNotes(StringUtils.substring(ex.getMessage(), 0, 2000));
         } finally {
             if (null != sysLog.getUrl()) {
-                ThreadPoolUtils.singleExecutorService.execute(new SaveLogThread(sysLog, sysLogService));
+                ThreadPoolUtils.SINGLE_EXECUTOR_SERVICE.execute(new SaveLogThread(sysLog, sysLogService));
             }
             logger.debug("用户行为日志记录结束！");
         }

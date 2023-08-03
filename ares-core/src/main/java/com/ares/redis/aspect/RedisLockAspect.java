@@ -106,8 +106,7 @@ public class RedisLockAspect {
             }
             RedisUtil.expire(uniqueKey, redisLock.lockTime());
             Thread currentThread = Thread.currentThread();
-            holderList.add(new RedisLockDefinitionHolder(uniqueKey, redisLock.lockTime(), System.currentTimeMillis()
-                    , currentThread, redisLock.tryCount()));
+            holderList.add(new RedisLockDefinitionHolder(uniqueKey, redisLock.lockTime(), System.currentTimeMillis(), currentThread, redisLock.tryCount()));
             result = point.proceed();
             if (currentThread.isInterrupted()) {
                 throw new InterruptedException("you had been interrupted ==");

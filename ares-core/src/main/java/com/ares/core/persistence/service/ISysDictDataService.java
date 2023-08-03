@@ -25,6 +25,6 @@ import java.util.List;
 
 public interface ISysDictDataService extends IBaseService<SysDictData, SysDictDataQuery> {
 
-    public List<SysDictData> getDicts(String dictType);
+    List<SysDictData> getDicts(String dictType);
 
 }

@@ -18,12 +18,15 @@
 
 package com.ares.core.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.security.MessageDigest;
 
 /**
  * MD5 工具类
  */
-public class MD5Util {
+@Slf4j
+public final class MD5Util {
 
 
     //工具类不允许被实例化
@@ -59,7 +62,7 @@ public class MD5Util {
     }
 
     public static void main(String[] args) {
-        System.out.println(MD5Util.encode("admin"));
+        log.info(MD5Util.encode("admin"));
     }
 
 }

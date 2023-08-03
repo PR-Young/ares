@@ -28,6 +28,6 @@ import java.util.List;
  */
 public interface ISysPostService extends IBaseService<SysPost, SysPostQuery> {
 
-    public List<SysPost> getAll();
+    List<SysPost> getAll();
 
 }

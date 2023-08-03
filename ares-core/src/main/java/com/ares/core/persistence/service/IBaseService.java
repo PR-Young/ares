@@ -26,6 +26,8 @@ import java.util.Map;
 /**
  * @description:
  * @author: Young 2020/01/22
+ * @param <T>
+ * @param <Q>
  **/
 public interface IBaseService<T, Q> {
 

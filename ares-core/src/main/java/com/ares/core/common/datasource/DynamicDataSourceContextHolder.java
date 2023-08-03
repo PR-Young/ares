@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * @see: com.ares.core.common.datasource.DynamicDataSourceContextHolder.java
  **/
 public class DynamicDataSourceContextHolder {
-    public static final Logger log = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);
 
     /**
      * 使用ThreadLocal维护变量，ThreadLocal为每个使用该变量的线程提供独立的变量副本，
@@ -40,7 +40,7 @@ public class DynamicDataSourceContextHolder {
      * 设置数据源的变量
      */
     public static void setDataSourceType(String dsType) {
-        log.info("切换到{}数据源", dsType);
+        LOGGER.info("切换到{}数据源", dsType);
         CONTEXT_HOLDER.set(dsType);
     }
 

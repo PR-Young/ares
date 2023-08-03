@@ -148,9 +148,7 @@ public class SnowflakeIdWorker {
                 //阻塞到下一个毫秒,获得新的时间戳
                 timestamp = tilNextMillis(lastTimestamp);
             }
-        }
-        //时间戳改变，毫秒内序列重置
-        else {
+        } else { //时间戳改变，毫秒内序列重置
             sequence = 0L;
         }
 
@@ -192,16 +190,16 @@ public class SnowflakeIdWorker {
     /**
      * 测试
      */
-    public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
-        SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1, 1);
-        long startTime = System.nanoTime();
-        for (int i = 0; i < 500; i++) {
-            long id = idWorker.nextId();
-            System.out.println(id);
-        }
-        System.out.println((System.nanoTime() - startTime) / 1000000 + "ms");
-    }
+    //public static void main(String[] args) {
+    //    System.out.println(System.currentTimeMillis());
+    //    SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1, 1);
+    //    long startTime = System.nanoTime();
+    //    for (int i = 0; i < 500; i++) {
+    //        long id = idWorker.nextId();
+    //        System.out.println(id);
+    //    }
+    //    System.out.println((System.nanoTime() - startTime) / 1000000 + "ms");
+    //}
 
     public static String getUUID() {
         long id = idWorker.nextId();

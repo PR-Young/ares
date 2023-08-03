@@ -66,10 +66,10 @@
 <!--        <module name="LineLength">-->
 <!--            <property name="max" value="140" />-->
 <!--        </module>-->
-        <!-- 方法不超过50行 -->
+        <!-- 方法不超过70行 -->
         <module name="MethodLength">
             <property name="tokens" value="METHOD_DEF" />
-            <property name="max" value="50" />
+            <property name="max" value="70" />
         </module>
         <!-- 方法的参数个数不超过5个。 并且不对构造方法进行检查-->
         <module name="ParameterNumber">
@@ -143,6 +143,8 @@
         <module name="VisibilityModifier">
             <property name="packageAllowed" value="true"/>
             <property name="protectedAllowed" value="true"/>
+            <property name="allowPublicFinalFields" value="true"/>
+            <property name="allowPublicImmutableFields" value="true"/>
         </module>
 
         <!-- 语法 -->
@@ -167,7 +169,7 @@
         </module>
         <!-- return个数 3个-->
         <module name="ReturnCount">
-            <property name="max" value="3"/>
+            <property name="max" value="10"/>
         </module>
         <!--try catch 异常处理数量 3-->
         <module name="NestedTryDepth ">

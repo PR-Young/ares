@@ -44,15 +44,17 @@ public final class AresCommonUtils {
     }
 
     public static boolean isNotEmpty(Object obj) {
+        boolean result;
         if (obj instanceof Map) {
-            return ((Map) obj).size() > 0;
+            result = ((Map) obj).size() > 0;
         } else if (obj instanceof Collection) {
-            return !((Collection) obj).isEmpty();
+            result = !((Collection) obj).isEmpty();
         } else if (obj instanceof String) {
-            return !"".equals(((String) obj).trim());
+            result = !"".equals(((String) obj).trim());
         } else {
-            return null != obj;
+            result = null != obj;
         }
+        return result;
     }
 
     public static boolean isEmpty(Object obj) {

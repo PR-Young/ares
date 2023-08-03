@@ -116,28 +116,23 @@ public class ServletUtils {
      * @param request
      */
     public static boolean isAjaxRequest(HttpServletRequest request) {
+        boolean result = true;
 
         String accept = request.getHeader("accept");
-        if (accept != null && accept.indexOf("application/json") != -1) {
-            return true;
+        if (accept == null || accept.indexOf("application/json") == -1) {
+            String xRequestedWith = request.getHeader("X-Requested-With");
+            if (xRequestedWith == null || xRequestedWith.indexOf("XMLHttpRequest") == -1) {
+                String uri = request.getRequestURI();
+                if (!StringUtils.inStringIgnoreCase(uri, ".json", ".xml")) {
+                    String ajax = request.getParameter("__ajax");
+                    if (!StringUtils.inStringIgnoreCase(ajax, "json", "xml")) {
+                        result = false;
+                    }
+                }
+            }
         }
 
-        String xRequestedWith = request.getHeader("X-Requested-With");
-        if (xRequestedWith != null && xRequestedWith.indexOf("XMLHttpRequest") != -1) {
-            return true;
-        }
-
-        String uri = request.getRequestURI();
-        if (StringUtils.inStringIgnoreCase(uri, ".json", ".xml")) {
-            return true;
-        }
-
-        String ajax = request.getParameter("__ajax");
-        if (StringUtils.inStringIgnoreCase(ajax, "json", "xml")) {
-            return true;
-        }
-
-        return false;
+        return result;
     }
 
     public static Map<String, Object> getQueryParams() {

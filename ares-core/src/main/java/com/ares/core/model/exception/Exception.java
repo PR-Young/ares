@@ -25,6 +25,7 @@ import java.util.List;
 /**
  * @description:
  * @author: Young 2020/06/19
+ * @param <T> 
  **/
 @Data
 public class Exception<T> {

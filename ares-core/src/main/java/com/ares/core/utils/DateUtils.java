@@ -34,14 +34,14 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     /**
      * 时间格式(yyyy-MM-dd)
      */
-    public final static String DATE_PATTERN = "yyyy-MM-dd";
+    public static final String DATE_PATTERN = "yyyy-MM-dd";
     /**
      * 时间格式(yyyy-MM-dd HH:mm:ss)
      */
-    public final static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
 
-    public final static String DATE_TIME_MIN_PATTERN = "yyyy-MM-dd HH:mm";
+    public static final String DATE_TIME_MIN_PATTERN = "yyyy-MM-dd HH:mm";
 
     public static String format(Date date) {
         return format(date, DATE_PATTERN);
@@ -63,15 +63,15 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     }
 
 
-    public static String YYYY = "yyyy";
+    public static final String YYYY = "yyyy";
 
-    public static String YYYY_MM = "yyyy-MM";
+    public static final String YYYY_MM = "yyyy-MM";
 
-    public static String YYYY_MM_DD = "yyyy-MM-dd";
+    public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
-    public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
+    public static final String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
 
-    public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     private static String[] parsePatterns = {
             "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",

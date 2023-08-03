@@ -40,8 +40,8 @@ import java.util.Map;
 @Slf4j
 public class JsonUtils {
 
-    public static GsonBuilder builder = new GsonBuilder();
-    public static Gson gson = builder.serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+    private static GsonBuilder builder = new GsonBuilder();
+    public static final Gson GSON = builder.serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     static {
         builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
@@ -74,7 +74,7 @@ public class JsonUtils {
                 return null;
             }
             if (json instanceof JsonObject) {
-                map = gson.fromJson((JsonElement) json, new TypeToken<Map<String, Object>>() {
+                map = GSON.fromJson((JsonElement) json, new TypeToken<Map<String, Object>>() {
                 }.getType());
             } else if (json instanceof JSONObject) {
                 map = JSON.parseObject(json.toString(), Map.class);

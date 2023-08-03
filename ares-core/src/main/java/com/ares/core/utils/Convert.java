@@ -491,35 +491,42 @@ public class Convert {
      * @return 结果
      */
     public static Boolean toBool(Object value, Boolean defaultValue) {
+        Boolean result = true;
         if (value == null) {
-            return defaultValue;
+            result = defaultValue;
+        } else if (value instanceof Boolean) {
+            result = (Boolean) value;
+        } else {
+            String valueStr = toStr(value, null);
+            if (StringUtils.isEmpty(valueStr)) {
+                result = defaultValue;
+            } else {
+                valueStr = valueStr.trim().toLowerCase();
+                switch (valueStr) {
+                    case "true":
+                        break;
+                    case "false":
+                        result = false;
+                        break;
+                    case "yes":
+                        break;
+                    case "ok":
+                        break;
+                    case "no":
+                        result = false;
+                        break;
+                    case "1":
+                        break;
+                    case "0":
+                        result = false;
+                        break;
+                    default:
+                        result = defaultValue;
+                        break;
+                }
+            }
         }
-        if (value instanceof Boolean) {
-            return (Boolean) value;
-        }
-        String valueStr = toStr(value, null);
-        if (StringUtils.isEmpty(valueStr)) {
-            return defaultValue;
-        }
-        valueStr = valueStr.trim().toLowerCase();
-        switch (valueStr) {
-            case "true":
-                return true;
-            case "false":
-                return false;
-            case "yes":
-                return true;
-            case "ok":
-                return true;
-            case "no":
-                return false;
-            case "1":
-                return true;
-            case "0":
-                return false;
-            default:
-                return defaultValue;
-        }
+        return result;
     }
 
     /**
@@ -824,7 +831,8 @@ public class Convert {
      * @return 替换后的字符
      */
     public static String toDBC(String text, Set<Character> notConvertSet) {
-        char c[] = text.toCharArray();
+        char[] c;
+        c = text.toCharArray();
         for (int i = 0; i < c.length; i++) {
             if (null != notConvertSet && notConvertSet.contains(c[i])) {
                 // 跳过不替换的字符

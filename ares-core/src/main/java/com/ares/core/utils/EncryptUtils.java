@@ -18,6 +18,7 @@
 
 package com.ares.core.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -35,6 +36,7 @@ import java.util.Map;
  * @date: 2020/10/13
  * @see: com.ares.core.utils EncryptUtils.java
  **/
+@Slf4j
 public class EncryptUtils {
 
     /**
@@ -127,22 +129,22 @@ public class EncryptUtils {
         String string = "qianyang123/dasd/dasda";
         //编码
         String encode = encode(string);
-        System.out.println(string + "\t编码后的字符串为：" + encode);
+        log.info(string + "\t编码后的字符串为：" + encode);
         //解码
         String decode = decode(encode);
-        System.out.println(encode + "\t字符串解码后为：" + decode);
+        log.info(encode + "\t字符串解码后为：" + decode);
 
 
         //生成公钥和私钥
         genKeyPair();
         //加密字符串
         String message = "df723820";
-        System.out.println("随机生成的公钥为:" + keyMap.get(0));
-        System.out.println("随机生成的私钥为:" + keyMap.get(1));
+        log.info("随机生成的公钥为:" + keyMap.get(0));
+        log.info("随机生成的私钥为:" + keyMap.get(1));
         String messageEn = encrypt(message, keyMap.get(0));
-        System.out.println(message + "\t加密后的字符串为:" + messageEn);
+        log.info(message + "\t加密后的字符串为:" + messageEn);
         String messageDe = decrypt(messageEn, keyMap.get(1));
-        System.out.println("还原后的字符串为:" + messageDe);
+        log.info("还原后的字符串为:" + messageDe);
 
 
     }

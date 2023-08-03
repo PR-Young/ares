@@ -25,6 +25,7 @@ import java.util.List;
 /**
  * @description:
  * @author: Young 2020/01/24
+ * @param <T>
  **/
 @Data
 public class TableResult<T> {

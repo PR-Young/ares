@@ -29,7 +29,7 @@ import java.util.List;
 @Mapper
 public interface ISysPropertiesDao extends IBaseDao<SysProperties, SysPropertiesQuery> {
 
-    public List<SysProperties> getByGroup(@Param("group") String group);
+    List<SysProperties> getByGroup(@Param("group") String group);
 
-    public String getValueByAlias(@Param("alias") String alias);
+    String getValueByAlias(@Param("alias") String alias);
 }

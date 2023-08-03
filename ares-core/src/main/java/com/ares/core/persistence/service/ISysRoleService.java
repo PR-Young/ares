@@ -29,25 +29,25 @@ import java.util.List;
  **/
 public interface ISysRoleService extends IBaseService<SysRole, SysRoleQuery> {
 
-    public void saveAssign(String users, String menus, String roleId);
+    void saveAssign(String users, String menus, String roleId);
 
-    public List<SysRole> getRoleByUserId(String userId);
+    List<SysRole> getRoleByUserId(String userId);
 
-    public List<String> getPermsByRoleId(String roleId);
+    List<String> getPermsByRoleId(String roleId);
 
-    public List<String> getRoleIdsByUser(String userId);
+    List<String> getRoleIdsByUser(String userId);
 
-    public List<SysRole> getAll();
+    List<SysRole> getAll();
 
-    public void saveRoleUser(String[] roleIds, String userId);
+    void saveRoleUser(String[] roleIds, String userId);
 
-    public List<SysRole> selectRoleList(SysRoleQuery role);
+    List<SysRole> selectRoleList(SysRoleQuery role);
 
-    public boolean checkRoleName(String roleName);
+    boolean checkRoleName(String roleName);
 
-    public String insertRole(SysRole obj);
+    String insertRole(SysRole obj);
 
-    public void updateRole(SysRole obj);
+    void updateRole(SysRole obj);
 
-    public void authDataScope(SysRole role);
+    void authDataScope(SysRole role);
 }

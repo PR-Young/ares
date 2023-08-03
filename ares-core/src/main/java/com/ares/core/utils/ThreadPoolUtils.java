@@ -24,24 +24,24 @@ import java.util.concurrent.*;
  * @description:
  * @author: Young 2020/05/08
  **/
-public class ThreadPoolUtils {
+public final class ThreadPoolUtils {
     private ThreadPoolUtils() {
     }
 
-    public static ExecutorService cacheThreadPool = Executors.newCachedThreadPool();
+    public static final ExecutorService CACHED_THREAD_POOL = Executors.newCachedThreadPool();
 
-    public static ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+    public static final ExecutorService FIXED_THREAD_POOL = Executors.newFixedThreadPool(5);
 
-    public static ExecutorService singleThreadPool = Executors.newSingleThreadExecutor();
+    public static final ExecutorService SINGLE_THREAD_POOL = Executors.newSingleThreadExecutor();
 
-    public static ExecutorService executorService = new ThreadPoolExecutor(5,
+    public static final ExecutorService EXECUTOR_SERVICE = new ThreadPoolExecutor(5,
             10,
             0,
             TimeUnit.SECONDS,
             new ArrayBlockingQueue<>(512),
             new ThreadPoolExecutor.DiscardPolicy());
 
-    public static ExecutorService singleExecutorService = new ThreadPoolExecutor(1,
+    public static final ExecutorService SINGLE_EXECUTOR_SERVICE = new ThreadPoolExecutor(1,
             1,
             0,
             TimeUnit.SECONDS,
