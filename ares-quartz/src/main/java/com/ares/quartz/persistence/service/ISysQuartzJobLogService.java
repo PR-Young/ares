@@ -30,7 +30,7 @@ import java.util.List;
  **/
 public interface ISysQuartzJobLogService extends IBaseService<SysQuartzJobLog, SysQuartzJobLogQuery> {
 
-    public List<SysQuartzJobLog> selectJobLogList(SysQuartzJobLogQuery jobLog) ;
+    List<SysQuartzJobLog> selectJobLogList(SysQuartzJobLogQuery jobLog);
 
-    public void cleanJobLog();
+    void cleanJobLog();
 }

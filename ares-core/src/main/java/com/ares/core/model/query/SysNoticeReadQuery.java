@@ -31,5 +31,5 @@ import lombok.Data;
  **/
 @Data
 @Schema(description = "查询实体")
-public class SysNoticeReadQuery extends BaseQuery{
+public class SysNoticeReadQuery extends BaseQuery {
 }

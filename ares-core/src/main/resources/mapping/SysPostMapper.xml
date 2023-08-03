@@ -12,7 +12,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        `Id`,`PostCode`,`PostName`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
+        `Id`
+        ,`PostCode`,`PostName`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysPost">

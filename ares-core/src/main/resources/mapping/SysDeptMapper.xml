@@ -15,7 +15,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        `Id`,`Code`,`DeptName`,`ParentDeptId`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
+        `Id`
+        ,`Code`,`DeptName`,`ParentDeptId`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysDept">
@@ -107,12 +108,12 @@
     </select>
 
     <select id="getAllDept" resultMap="SysDept">
-        select dept.*,(select count(1) from `sys_dept` where `ParentDeptId` = dept.`Id`) as ChildCount
+        select dept.*, (select count(1) from `sys_dept` where `ParentDeptId` = dept.`Id`) as ChildCount
         from `sys_dept` dept
     </select>
 
     <select id="getByDeptId" parameterType="java.lang.String" resultMap="SysDept">
-        select dept.*,(select `DeptName` from `sys_dept` where `Id` = dept.ParentDeptId) as ParentDeptName
+        select dept.*, (select `DeptName` from `sys_dept` where `Id` = dept.ParentDeptId) as ParentDeptName
         from `sys_dept` dept
         where `Id` = #{id,jdbcType=VARCHAR}
     </select>

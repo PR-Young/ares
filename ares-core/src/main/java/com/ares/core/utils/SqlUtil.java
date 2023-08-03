@@ -28,7 +28,7 @@ public class SqlUtil {
     public static String SQL_PATTERN = "[a-zA-Z0-9_\\ \\,]+";
 
     /**
-     * 检查字符，防止注入绕过
+     * 检查字符，
      */
     public static String escapeOrderBySql(String value) {
         if (StringUtils.isNotEmpty(value) && !isValidOrderBySql(value)) {

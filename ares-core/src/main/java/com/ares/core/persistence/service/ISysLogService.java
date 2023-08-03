@@ -27,10 +27,10 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/27
  **/
-public interface ISysLogService{
+public interface ISysLogService {
 
-    public void insert(SysLog sysLog);
+    void insert(SysLog sysLog);
 
-    public List<SysLog> list(SysLogQuery sysLog);
+    List<SysLog> list(SysLogQuery sysLog);
 
 }

@@ -16,7 +16,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        `Id`,`DictSort`,`DictLabel`,`DictValue`,`DictType`,`Status`,`Remark`, `Creator`,`CreateTime`,`Modifier`,
+        `Id`
+        ,`DictSort`,`DictLabel`,`DictValue`,`DictType`,`Status`,`Remark`, `Creator`,`CreateTime`,`Modifier`,
         `ModifyTime`
     </sql>
 

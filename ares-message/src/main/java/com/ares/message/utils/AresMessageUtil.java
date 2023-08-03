@@ -37,9 +37,9 @@ public class AresMessageUtil {
 
     private static ExecutorService executorService = Executors.newCachedThreadPool();
 
-    public static void sendMessage(String name, Object data, int bufferSize, boolean isMoreProducer,int frequency, AresMessageHandler... handler) {
+    public static void sendMessage(String name, Object data, int bufferSize, boolean isMoreProducer, int frequency, AresMessageHandler... handler) {
         DisruptorQueue<String> disruptorQueue = DisruptorQueueFactory.getHandleEventsQueue(bufferSize, isMoreProducer, handler);
-        AresMessageProducer<String> producer = new AresMessageProducer(name, disruptorQueue, data,new AtomicInteger(frequency));
+        AresMessageProducer<String> producer = new AresMessageProducer(name, disruptorQueue, data, new AtomicInteger(frequency));
         executorService.execute(producer);
     }
 

@@ -51,7 +51,7 @@ public class StrFormatter {
         StringBuilder sbuf = new StringBuilder(strPatternLength + 50);
 
         int handledPosition = 0;
-        int delimIndex;// 占位符所在位置
+        int delimIndex; // 占位符所在位置
         for (int argIndex = 0; argIndex < argArray.length; argIndex++) {
             delimIndex = strPattern.indexOf(EMPTY_JSON, handledPosition);
             if (delimIndex == -1) {

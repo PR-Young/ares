@@ -69,11 +69,11 @@ public class DisruptorQueue<T> {
         }
     }
 
-    public long cursor(){
+    public long cursor() {
         return this.disruptor.getRingBuffer().getCursor();
     }
 
-    public void shutdown(){
+    public void shutdown() {
         this.disruptor.shutdown();
     }
 }

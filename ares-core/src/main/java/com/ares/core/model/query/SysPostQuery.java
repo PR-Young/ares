@@ -31,5 +31,5 @@ import lombok.Data;
  **/
 @Data
 @Schema(description = "查询实体")
-public class SysPostQuery extends BaseQuery{
+public class SysPostQuery extends BaseQuery {
 }

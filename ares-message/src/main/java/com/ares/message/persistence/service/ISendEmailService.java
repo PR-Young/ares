@@ -27,8 +27,8 @@ import java.util.Map;
  **/
 public interface ISendEmailService {
 
-    public void sendEmail() ;
+    void sendEmail();
 
-    public void send(String template, List<String> receivers, Map<String, Object> vars) ;
+    void send(String template, List<String> receivers, Map<String, Object> vars);
 
 }

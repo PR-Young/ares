@@ -46,7 +46,7 @@
     </select>
 
     <select id="selectTableColumnListByTableName" resultType="java.util.HashMap">
-        select `COLUMN_NAME`,`COLUMN_COMMENT`,`COLUMN_TYPE`,`TABLE_CATALOG`,`TABLE_SCHEMA`
+        select `COLUMN_NAME`, `COLUMN_COMMENT`, `COLUMN_TYPE`, `TABLE_CATALOG`, `TABLE_SCHEMA`
         from information_schema.`COLUMNS`
         where `TABLE_NAME` = #{tableName}
     </select>

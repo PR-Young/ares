@@ -16,7 +16,8 @@
         <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        Id, JobName, JobGroup, Description, InvokeTarget, CronExpression, ConCurrent, Status,Creator,
+        Id
+        , JobName, JobGroup, Description, InvokeTarget, CronExpression, ConCurrent, Status,Creator,
         CreateTime,Modifier, ModifyTime
     </sql>
     <select id="list" parameterType="java.util.Map" resultMap="SysQuartzJob">
@@ -49,13 +50,13 @@
     </delete>
     <insert id="insert" parameterType="com.ares.quartz.persistence.model.SysQuartzJob">
         insert into sys_quartz_job (Id, JobName, JobGroup, Description,
-        InvokeTarget, CronExpression,
-        ConCurrent, Status,Creator, CreateTime, Modifier,
-        ModifyTime)
+                                    InvokeTarget, CronExpression,
+                                    ConCurrent, Status, Creator, CreateTime, Modifier,
+                                    ModifyTime)
         values (#{id,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR},
-        #{description,jdbcType=VARCHAR},#{invokeTarget,jdbcType=VARCHAR}, #{cronExpression,jdbcType=VARCHAR},
-        #{conCurrent,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},#{creator,jdbcType=VARCHAR},
-        #{createTime,jdbcType=TIMESTAMP},#{modifier,jdbcType=VARCHAR},#{modifyTime,jdbcType=TIMESTAMP})
+                #{description,jdbcType=VARCHAR}, #{invokeTarget,jdbcType=VARCHAR}, #{cronExpression,jdbcType=VARCHAR},
+                #{conCurrent,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
     <update id="update" parameterType="com.ares.quartz.persistence.model.SysQuartzJob">
         update sys_quartz_job

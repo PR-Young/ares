@@ -51,7 +51,7 @@ public class UserDataListener extends AnalysisEventListener<SysUser> {
     private static final int BATCH_COUNT = 100;
     private static final String POST_NAME = "员工";
     private static final String ROLE_NAME = "user";
-    List<SysUser> userList = new ArrayList<>();
+    private List<SysUser> userList = new ArrayList<>();
     private boolean needUpdate = true;
     private String deptId;
 

@@ -45,7 +45,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/system/dict/type/*")
-@Tag(name = "SysDictTypeApiController",description = "字典类别API")
+@Tag(name = "SysDictTypeApiController", description = "字典类别API")
 public class SysDictTypeApiController extends BaseController {
 
     private ISysDictTypeService sysDictTypeService;

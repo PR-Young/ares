@@ -50,7 +50,7 @@ public class AresMessageTest extends AresBaseTest {
     public static void main(String[] args) throws InterruptedException {
         AresMessageHandler<String> handler = new AresMessageHandler<String>();
         DisruptorQueue<String> disruptorQueue = DisruptorQueueFactory.getHandleEventsQueue(1, false, handler);
-        AresMessageProducer<String> producer = new AresMessageProducer("生产者1", disruptorQueue, "test",new AtomicInteger(1));
+        AresMessageProducer<String> producer = new AresMessageProducer("生产者1", disruptorQueue, "test", new AtomicInteger(1));
         Thread thread = new Thread(producer);
         thread.start();
 

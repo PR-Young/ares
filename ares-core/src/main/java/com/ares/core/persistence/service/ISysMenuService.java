@@ -20,9 +20,9 @@ package com.ares.core.persistence.service;
 
 
 import com.ares.core.model.query.SysMenuQuery;
+import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.model.vo.RouterVo;
 import com.ares.core.persistence.model.SysMenu;
-import com.ares.core.model.tree.TreeSelect;
 
 import java.util.List;
 import java.util.Map;
@@ -38,26 +38,26 @@ public interface ISysMenuService extends IBaseService<SysMenu, SysMenuQuery> {
      *
      * @return
      */
-    public List<SysMenu> getAll(String userId);
+    List<SysMenu> getAll(String userId);
 
-    public List<SysMenu> list(Map<String, Object> map);
+    List<SysMenu> list(Map<String, Object> map);
 
-    public SysMenu getByPId(String pid);
+    SysMenu getByPId(String pid);
 
-    public List<RouterVo> buildMenus(List<SysMenu> menus, String parentId);
+    List<RouterVo> buildMenus(List<SysMenu> menus, String parentId);
 
-    public String getRouterPath(SysMenu menu);
+    String getRouterPath(SysMenu menu);
 
-    public List<SysMenu> selectMenuList(SysMenuQuery menu, String userId);
+    List<SysMenu> selectMenuList(SysMenuQuery menu, String userId);
 
-    public List<TreeSelect> buildMenuTreeSelect(List<SysMenu> menus);
+    List<TreeSelect> buildMenuTreeSelect(List<SysMenu> menus);
 
-    public List<SysMenu> buildMenuTree(List<SysMenu> menus);
+    List<SysMenu> buildMenuTree(List<SysMenu> menus);
 
-    public void remove(String menuId);
+    void remove(String menuId);
 
-    public boolean hasChildByMenuId(String menuId);
+    boolean hasChildByMenuId(String menuId);
 
-    public List<String> selectMenuByRole(String roleId);
+    List<String> selectMenuByRole(String roleId);
 
 }

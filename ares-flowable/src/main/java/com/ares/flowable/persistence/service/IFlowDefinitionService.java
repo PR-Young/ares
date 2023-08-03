@@ -30,7 +30,7 @@ import java.util.Map;
 
 public interface IFlowDefinitionService {
 
-    public boolean exist(String processDefinitionKey) ;
+    boolean exist(String processDefinitionKey);
 
     /**
      * 流程定义列表
@@ -39,7 +39,7 @@ public interface IFlowDefinitionService {
      * @param pageSize 每页条数
      * @return 流程定义分页列表数据
      */
-    public Page<FlowProcDefDto> list(Integer pageNum, Integer pageSize);
+    Page<FlowProcDefDto> list(Integer pageNum, Integer pageSize);
 
 
     /**
@@ -49,7 +49,7 @@ public interface IFlowDefinitionService {
      * @param category
      * @param in
      */
-    public void importFile(String name, String category, InputStream in);
+    void importFile(String name, String category, InputStream in);
 
     /**
      * 读取xml
@@ -57,7 +57,7 @@ public interface IFlowDefinitionService {
      * @param deployId
      * @return
      */
-    public AjaxResult readXml(String deployId) throws IOException ;
+    AjaxResult readXml(String deployId) throws IOException;
 
     /**
      * 读取xml
@@ -65,7 +65,7 @@ public interface IFlowDefinitionService {
      * @param deployId
      * @return
      */
-    public InputStream readImage(String deployId) ;
+    InputStream readImage(String deployId);
 
     /**
      * 根据流程定义ID启动流程实例
@@ -74,7 +74,7 @@ public interface IFlowDefinitionService {
      * @param variables 流程变量
      * @return
      */
-    public AjaxResult startProcessInstanceById(String procDefId, Map<String, Object> variables);
+    AjaxResult startProcessInstanceById(String procDefId, Map<String, Object> variables);
 
 
     /**
@@ -83,7 +83,7 @@ public interface IFlowDefinitionService {
      * @param state    状态
      * @param deployId 流程部署ID
      */
-    public void updateState(Integer state, String deployId);
+    void updateState(Integer state, String deployId);
 
 
     /**
@@ -91,7 +91,8 @@ public interface IFlowDefinitionService {
      *
      * @param deployId 流程部署ID act_ge_bytearray 表中 deployment_id值
      */
-    public void delete(String deployId);
+    void delete(String deployId);
+
     /**
      * 发起流程列表
      *
@@ -99,13 +100,13 @@ public interface IFlowDefinitionService {
      * @param pageSize
      * @return
      */
-    public Page<FlowProcDefDto> applyFlowList(Integer pageNum, Integer pageSize) ;
+    Page<FlowProcDefDto> applyFlowList(Integer pageNum, Integer pageSize);
 
     /**
      * 发起流程列表
      *
      * @return
      */
-    public List<FlowProcDefDto> applyFlowList() ;
+    List<FlowProcDefDto> applyFlowList();
 
 }

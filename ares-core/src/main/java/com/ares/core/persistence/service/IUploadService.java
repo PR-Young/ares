@@ -28,5 +28,5 @@ import org.springframework.web.multipart.MultipartFile;
  **/
 public interface IUploadService {
 
-    public String upload(String path, MultipartFile file) throws Exception ;
+    String upload(String path, MultipartFile file) throws Exception;
 }

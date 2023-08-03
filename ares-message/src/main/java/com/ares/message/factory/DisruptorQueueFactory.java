@@ -72,6 +72,7 @@ public class DisruptorQueueFactory {
 
     /**
      * 直接通过传入的 Disruptor 对象创建操作队列（如果消费者有依赖关系的话可以用此方法）
+     *
      * @param disruptor
      * @param <T>
      * @return

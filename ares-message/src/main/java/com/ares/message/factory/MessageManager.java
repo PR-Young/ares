@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
 public class MessageManager {
 
     @Bean("aresStringMessageModel")
-    public RingBuffer<AresMessageEvent<String>> messageEventRingBuffer(){
+    public RingBuffer<AresMessageEvent<String>> messageEventRingBuffer() {
         int bufferSize = 1024 * 1024;
         DisruptorQueue<String> disruptorQueue = DisruptorQueueFactory.getHandleEventsQueue(bufferSize, false, new AresMessageHandler<String>());
         return disruptorQueue.getRingBuffer();

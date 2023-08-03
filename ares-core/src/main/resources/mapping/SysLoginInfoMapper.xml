@@ -18,7 +18,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        `Id`,`user_name`,`ip_addr`,`login_location`,`browser`,`os`,`status`,`msg`,`login_time`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
+        `Id`
+        ,`user_name`,`ip_addr`,`login_location`,`browser`,`os`,`status`,`msg`,`login_time`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysLoginInfo">

@@ -76,7 +76,7 @@ public class StpInterfaceImpl implements StpInterface {
         }
         List<SysRole> roleList = roleService.getRoleByUserId(String.valueOf(loginId));
         for (SysRole role : roleList) {
-           roles.add(role.getRoleName());
+            roles.add(role.getRoleName());
         }
         return roles;
     }

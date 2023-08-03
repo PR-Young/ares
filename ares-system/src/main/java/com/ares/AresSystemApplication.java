@@ -55,7 +55,7 @@ public class AresSystemApplication extends SpringBootServletInitializer {
         printBanner();
     }
 
-    private static void printBanner(){
+    private static void printBanner() {
         System.out.println("         ______                                     __    __ ");
         System.out.println("		/     \\                                   /  |  /  |");
         System.out.println("       /$$$$$$  |  ______   _____  ____    ______ |$$ | _$$ |_     _____");

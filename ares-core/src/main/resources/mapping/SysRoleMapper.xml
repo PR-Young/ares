@@ -17,8 +17,8 @@
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysRole">
         insert into `sys_role` (`Id`, `RoleName`, `Description`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`)
         values (#{id,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
-        #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-        #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
+                #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+                #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
     <update id="update" parameterType="com.ares.core.persistence.model.SysRole">
         update `sys_role`
@@ -53,12 +53,12 @@
     </delete>
     <select id="getRoleByUserId" parameterType="java.lang.String" resultMap="SysRole">
         select role.`Id`,
-        role.`RoleName`,
-        role.`Description`,
-        role.`CreateTime`,
-        role.`ModifyTime`
+               role.`RoleName`,
+               role.`Description`,
+               role.`CreateTime`,
+               role.`ModifyTime`
         from `sys_role` role
-        left join `sys_role_user` roleuser on role.Id = roleuser.RoleId
+                 left join `sys_role_user` roleuser on role.Id = roleuser.RoleId
         where roleuser.UserId = #{userId,jdbcType=VARCHAR}
     </select>
     <select id="getPermsByRoleId" parameterType="java.lang.String" resultType="java.lang.String">

@@ -31,16 +31,16 @@ import java.util.List;
  **/
 public interface ISysQuartzJobService extends IBaseService<SysQuartzJob, SysQuartzJobQuery> {
 
-    public int checkUnique(String jobName);
+    int checkUnique(String jobName);
 
-    public int resumeJob(SysQuartzJob job);
+    int resumeJob(SysQuartzJob job);
 
-    public int pauseJob(SysQuartzJob job);
+    int pauseJob(SysQuartzJob job);
 
-    public int changeStatus(SysQuartzJob job);
+    int changeStatus(SysQuartzJob job);
 
-    public void run(SysQuartzJob job) throws SchedulerException ;
+    void run(SysQuartzJob job) throws SchedulerException;
 
-    public List<SysQuartzJob> selectJobList(SysQuartzJobQuery job);
+    List<SysQuartzJob> selectJobList(SysQuartzJobQuery job);
 
 }

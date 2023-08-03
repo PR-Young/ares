@@ -16,7 +16,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        `Id`,`Deadline`,`NoticeContent`,`NoticeStatus`,`NoticeTitle`,`NoticeType`,`Remark`,
+        `Id`
+        ,`Deadline`,`NoticeContent`,`NoticeStatus`,`NoticeTitle`,`NoticeType`,`Remark`,
         `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
@@ -130,29 +131,27 @@
         select count(1)
         from `sys_notice`
         where `NoticeStatus` = 0
-        and `Id` not in (
-        select `NoticeId`
-        from `sys_notice_read`
-        WHERE `UserId` = #{userId}
-        )
-        AND `Deadline` > CURRENT_TIMESTAMP
+          and `Id` not in (select `NoticeId`
+                           from `sys_notice_read`
+                           WHERE `UserId` = #{userId})
+          AND `Deadline` > CURRENT_TIMESTAMP
     </select>
 
     <select id="getNotices" resultMap="SysNotice">
-        SELECT
-        notice.`Id`,
-        notice.`NoticeContent`,
-        notice.`NoticeTitle`,
-        notice.`NoticeType`,
-        notice.`Remark`,
-        notice.`CreateTime`,
-        user.`UserName` AS `Creator`
-        FROM
-        `sys_notice` notice
-        LEFT JOIN `sys_user` user ON notice.`Creator` = USER.`Id`
+        SELECT notice.`Id`,
+               notice.`NoticeContent`,
+               notice.`NoticeTitle`,
+               notice.`NoticeType`,
+               notice.`Remark`,
+               notice.`CreateTime`,
+               user.`UserName` AS `Creator`
+        FROM `sys_notice` notice
+                 LEFT JOIN `sys_user` user
+        ON notice.`Creator` = USER.`Id`
         WHERE
-        notice.`NoticeStatus` = 0
-        AND notice.`Deadline` > CURRENT_TIMESTAMP
+            notice.`NoticeStatus` = 0
+          AND notice.`Deadline`
+            > CURRENT_TIMESTAMP
         order by notice.`CreateTime` desc
     </select>
 

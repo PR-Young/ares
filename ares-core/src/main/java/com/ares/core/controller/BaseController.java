@@ -80,7 +80,7 @@ public class BaseController {
     }
 
     protected class MapBuilder {
-        Map<String, Object> map = new HashMap<>();
+        private Map<String, Object> map = new HashMap<>();
 
         protected MapBuilder() {
         }

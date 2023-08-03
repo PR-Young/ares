@@ -27,26 +27,26 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/22
  **/
-public interface ISysUserService extends IBaseService<SysUser,SysUserQuery> {
+public interface ISysUserService extends IBaseService<SysUser, SysUserQuery> {
 
-    public List<SysUser> assignAllUser(String roleId) ;
+    List<SysUser> assignAllUser(String roleId);
 
-    public List<SysUser> getUserByRole(String roleId) ;
+    List<SysUser> getUserByRole(String roleId);
 
-    public int checkAccount(String account) ;
+    int checkAccount(String account);
 
-    public int resetPassword(String id);
+    int resetPassword(String id);
 
-    public List<SysUser> selectUserList(SysUserQuery user);
+    List<SysUser> selectUserList(SysUserQuery user);
 
-    public String insertUser(SysUser sysUser);
+    String insertUser(SysUser sysUser);
 
-    public String selectUserRoleGroup(String userId) ;
+    String selectUserRoleGroup(String userId);
 
-    public int updatePassword(SysUser user, String passWord);
+    int updatePassword(SysUser user, String passWord);
 
-    public SysUser getUserByName(String userName);
+    SysUser getUserByName(String userName);
 
-    public int updateUserByAccount(SysUser sysUser);
+    int updateUserByAccount(SysUser sysUser);
 
 }

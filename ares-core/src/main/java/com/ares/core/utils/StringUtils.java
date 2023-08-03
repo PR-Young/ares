@@ -254,8 +254,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * 驼峰首字符小写 NameVc>>nameVc
      */
     public static String uncapitalize(String str) {
-        int strLen;
-        if (str == null || (strLen = str.length()) == 0) {
+        int strLen = str.length();
+        if (str == null || strLen == 0) {
             return str;
         }
         return new StrBuilder(strLen).append(Character.toLowerCase(str.charAt(0))).append(str.substring(1)).toString();
@@ -373,7 +373,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param firstCase 首字母是否大写 true:大写 false;小写
      * @return
      */
-    public static String upperCase_(String name, boolean firstCase) {
+    public static String upperCase(String name, boolean firstCase) {
         if (isEmpty(name)) {
             return "";
         }

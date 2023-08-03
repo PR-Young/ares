@@ -27,18 +27,18 @@ import java.util.Map;
  * @description:
  * @author: Young 2020/01/22
  **/
-public abstract interface IBaseService<T,Q> {
+public interface IBaseService<T, Q> {
 
-    public void insert(T obj);
+    void insert(T obj);
 
-    public void update(T obj);
+    void update(T obj);
 
-    public void deleteByIds(List<String> ids);
+    void deleteByIds(List<String> ids);
 
-    public T getById(String id);
+    T getById(String id);
 
-    public PageInfo<T> list(int pageNo, int pageSize, Map<String, Object> map);
+    PageInfo<T> list(int pageNo, int pageSize, Map<String, Object> map);
 
-    public List<T> list(Q obj) ;
+    List<T> list(Q obj);
 
 }

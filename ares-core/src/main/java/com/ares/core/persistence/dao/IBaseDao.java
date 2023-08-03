@@ -27,9 +27,10 @@ import java.util.Map;
  * @description:
  * @author: Young 2020/01/22
  **/
-public interface IBaseDao<T,Q> {
+public interface IBaseDao<T, Q> {
 
     int insert(T obj);
+
     int update(T obj);
 
     int deleteByIds(List<String> ids);

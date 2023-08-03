@@ -88,7 +88,7 @@ info:
   project-sourceEncoding: '@project.build.sourceEncoding@'
   project-version: '@project.version@'
 
-jeecg :
+jeecg:
   jmreport:
     #只看自己创建数据 (报表、数据源、数据集、字典)
     saas: false

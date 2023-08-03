@@ -42,7 +42,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sysDeployForm/*")
-@Tag(name = "SysDeployFormApiController",description = "API")
+@Tag(name = "SysDeployFormApiController", description = "API")
 public class SysDeployFormApiController extends BaseController {
 
     private ISysDeployFormService sysDeployFormService;

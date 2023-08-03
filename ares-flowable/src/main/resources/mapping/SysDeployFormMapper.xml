@@ -121,7 +121,7 @@
     <select id="selectSysDeployFormByDeployId" resultType="com.ares.flowable.persistence.model.SysForm">
         select t1.FormContent as formContent, t1.FormName as formName, t1.Id as id
         from sys_form t1
-        left join sys_deploy_form t2 on t1.Id = t2.FormId
+                 left join sys_deploy_form t2 on t1.Id = t2.FormId
         where t2.DeployId = #{deployId} limit 1
     </select>
 

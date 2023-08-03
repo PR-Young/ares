@@ -26,10 +26,10 @@ package com.ares.generator.persistence.service;
  **/
 public interface IAutoGeneratorService {
 
-    public byte[] generator(String tableName);
+    byte[] generator(String tableName);
 
 
-    public byte[] generator(String driver, String url, String user, String pwd, String tableName, String tablePrefix) ;
+    byte[] generator(String driver, String url, String user, String pwd, String tableName, String tablePrefix);
 
-    public String autoCodePath();
+    String autoCodePath();
 }

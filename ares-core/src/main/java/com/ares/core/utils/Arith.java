@@ -23,8 +23,9 @@ import java.math.RoundingMode;
 
 /**
  * 精确的浮点数运算
+ * @author young
  */
-public class Arith {
+public final class Arith {
 
     /**
      * 默认除法运算精度

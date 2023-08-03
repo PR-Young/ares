@@ -38,7 +38,7 @@ public class DisruptorMessageServiceImpl implements IDisruptorMessageService {
     private RingBuffer<AresMessageEvent<String>> aresStringMessageModel;
 
     @Autowired
-    public DisruptorMessageServiceImpl(RingBuffer<AresMessageEvent<String>> aresStringMessageModel){
+    public DisruptorMessageServiceImpl(RingBuffer<AresMessageEvent<String>> aresStringMessageModel) {
         this.aresStringMessageModel = aresStringMessageModel;
     }
 

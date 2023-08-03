@@ -49,7 +49,7 @@ public class WebSocketServer {
     @OnOpen
     public void onOpen(Session session, @PathParam("id") String id) {
         this.session = session;
-        if(!websocketMap.containsKey(id)) {
+        if (!websocketMap.containsKey(id)) {
             websocketMap.put(id, this);
             addOnlineCount();
             log.info("有新窗口开始监听:" + id + ",当前在线人数为" + getOnlineCount());

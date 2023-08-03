@@ -31,10 +31,10 @@ import java.util.Map;
 public interface IGeneratorService {
 
 
-    public List<Map<String, Object>> tables(Map<String, Object> map) ;
+    List<Map<String, Object>> tables(Map<String, Object> map);
 
-    public PageInfo<Map<String, Object>> columns(int pageNo, int pageSize, Map<String, Object> map);
+    PageInfo<Map<String, Object>> columns(int pageNo, int pageSize, Map<String, Object> map);
 
-    public List<Map<String, Object>> selectTableColumnListByTableName(String tableName);
+    List<Map<String, Object>> selectTableColumnListByTableName(String tableName);
 
 }

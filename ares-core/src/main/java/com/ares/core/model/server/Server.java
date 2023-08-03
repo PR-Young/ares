@@ -185,7 +185,7 @@ public class Server {
      * 设置磁盘信息
      */
     private void setSysFiles(OperatingSystem os) {
-        if (os instanceof MacOperatingSystem){
+        if (os instanceof MacOperatingSystem) {
             return;
         }
         FileSystem fileSystem = os.getFileSystem();

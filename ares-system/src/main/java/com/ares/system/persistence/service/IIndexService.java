@@ -33,10 +33,10 @@ import java.util.Map;
 public interface IIndexService {
 
 
-    public List<PanelGroup> getPanelGroup() ;
+    List<PanelGroup> getPanelGroup();
 
 
-    public Map<String, Object> getLineChartData();
+    Map<String, Object> getLineChartData();
 
-    public LineChart getLineChart() ;
+    LineChart getLineChart();
 }

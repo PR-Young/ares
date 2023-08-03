@@ -15,7 +15,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        `Id`,`Alias`,`Creator`,`Description`,`Group`,`Modifier`,`Name`,`Value`, `CreateTime`, `ModifyTime`
+        `Id`
+        ,`Alias`,`Creator`,`Description`,`Group`,`Modifier`,`Name`,`Value`, `CreateTime`, `ModifyTime`
     </sql>
 
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysProperties">

@@ -26,7 +26,7 @@ import com.ares.flowable.persistence.model.SysForm;
 
 public interface ISysDeployFormService extends IBaseService<SysDeployForm, SysDeployFormQuery> {
 
-    public SysDeployForm selectSysDeployFormById(String id);
+    SysDeployForm selectSysDeployFormById(String id);
 
-    public SysForm selectSysDeployFormByDeployId(String id) ;
+    SysForm selectSysDeployFormByDeployId(String id);
 }

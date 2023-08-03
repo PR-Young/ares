@@ -14,7 +14,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        `Id`,`DictName`,`DictType`,`Status`,`Remark`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
+        `Id`
+        ,`DictName`,`DictType`,`Status`,`Remark`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysDictType">

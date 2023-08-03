@@ -38,28 +38,28 @@ public interface IFlowTaskService {
      *
      * @param taskVo 请求实体参数
      */
-    public AjaxResult complete(FlowTaskVo taskVo) ;
+    AjaxResult complete(FlowTaskVo taskVo);
 
     /**
      * 驳回任务
      *
      * @param taskVo
      */
-    public void taskRejectNew(FlowTaskVo taskVo);
+    void taskRejectNew(FlowTaskVo taskVo);
 
     /**
      * 驳回任务
      *
      * @param flowTaskVo
      */
-    public void taskReject(FlowTaskVo flowTaskVo);
+    void taskReject(FlowTaskVo flowTaskVo);
 
     /**
      * 退回任务
      *
      * @param flowTaskVo 请求实体参数
      */
-    public void taskReturn(FlowTaskVo flowTaskVo);
+    void taskReturn(FlowTaskVo flowTaskVo);
 
 
     /**
@@ -68,7 +68,7 @@ public interface IFlowTaskService {
      * @param flowTaskVo
      * @return
      */
-    public AjaxResult findReturnTaskList(FlowTaskVo flowTaskVo);
+    AjaxResult findReturnTaskList(FlowTaskVo flowTaskVo);
 
     /**
      * 删除任务
@@ -76,28 +76,28 @@ public interface IFlowTaskService {
      * @param flowTaskVo 请求实体参数
      */
 
-    public void deleteTask(FlowTaskVo flowTaskVo);
+    void deleteTask(FlowTaskVo flowTaskVo);
 
     /**
      * 认领/签收任务
      *
      * @param flowTaskVo 请求实体参数
      */
-    public void claim(FlowTaskVo flowTaskVo);
+    void claim(FlowTaskVo flowTaskVo);
 
     /**
      * 取消认领/签收任务
      *
      * @param flowTaskVo 请求实体参数
      */
-    public void unClaim(FlowTaskVo flowTaskVo);
+    void unClaim(FlowTaskVo flowTaskVo);
 
     /**
      * 委派任务
      *
      * @param flowTaskVo 请求实体参数
      */
-    public void delegateTask(FlowTaskVo flowTaskVo);
+    void delegateTask(FlowTaskVo flowTaskVo);
 
 
     /**
@@ -105,7 +105,7 @@ public interface IFlowTaskService {
      *
      * @param flowTaskVo 请求实体参数
      */
-    public void assignTask(FlowTaskVo flowTaskVo);
+    void assignTask(FlowTaskVo flowTaskVo);
 
     /**
      * 我发起的流程
@@ -114,7 +114,7 @@ public interface IFlowTaskService {
      * @param pageSize
      * @return
      */
-    public Page<FlowTaskDto> myProcess(Integer pageNum, Integer pageSize);
+    Page<FlowTaskDto> myProcess(Integer pageNum, Integer pageSize);
 
     /**
      * 取消申请
@@ -122,7 +122,7 @@ public interface IFlowTaskService {
      * @param flowTaskVo
      * @return
      */
-    public AjaxResult stopProcess(FlowTaskVo flowTaskVo);
+    AjaxResult stopProcess(FlowTaskVo flowTaskVo);
 
     /**
      * 撤回流程  目前存在错误
@@ -130,7 +130,7 @@ public interface IFlowTaskService {
      * @param flowTaskVo
      * @return
      */
-    public AjaxResult revokeProcess(FlowTaskVo flowTaskVo);
+    AjaxResult revokeProcess(FlowTaskVo flowTaskVo);
 
     /**
      * 代办任务列表
@@ -139,7 +139,7 @@ public interface IFlowTaskService {
      * @param pageSize 每页条数
      * @return
      */
-    public Page<FlowTaskDto> todoList(Integer pageNum, Integer pageSize);
+    Page<FlowTaskDto> todoList(Integer pageNum, Integer pageSize);
 
 
     /**
@@ -149,7 +149,7 @@ public interface IFlowTaskService {
      * @param pageSize 每页条数
      * @return
      */
-    public Page<FlowTaskDto> finishedList(Integer pageNum, Integer pageSize) ;
+    Page<FlowTaskDto> finishedList(Integer pageNum, Integer pageSize);
 
 
     /**
@@ -158,7 +158,7 @@ public interface IFlowTaskService {
      * @param procInsId 流程实例Id
      * @return
      */
-    public AjaxResult flowRecord(String procInsId, String deployId);
+    AjaxResult flowRecord(String procInsId, String deployId);
 
     /**
      * 根据任务ID查询挂载的表单信息
@@ -167,7 +167,7 @@ public interface IFlowTaskService {
      * @return
      */
 
-    public Task getTaskForm(String taskId);
+    Task getTaskForm(String taskId);
 
     /**
      * 获取流程过程图
@@ -175,7 +175,7 @@ public interface IFlowTaskService {
      * @param processId
      * @return
      */
-    public InputStream diagram(String processId);
+    InputStream diagram(String processId);
 
     /**
      * 获取流程执行过程
@@ -183,7 +183,7 @@ public interface IFlowTaskService {
      * @param procInsId
      * @return
      */
-    public AjaxResult getFlowViewer(String procInsId);
+    AjaxResult getFlowViewer(String procInsId);
 
     /**
      * 获取流程变量
@@ -191,7 +191,7 @@ public interface IFlowTaskService {
      * @param taskId
      * @return
      */
-    public AjaxResult processVariables(String taskId);
+    AjaxResult processVariables(String taskId);
 
     /**
      * 获取下一节点
@@ -199,7 +199,7 @@ public interface IFlowTaskService {
      * @param flowTaskVo 任务
      * @return
      */
-    public AjaxResult getNextFlowNode(FlowTaskVo flowTaskVo);
+    AjaxResult getNextFlowNode(FlowTaskVo flowTaskVo);
 
 
 }

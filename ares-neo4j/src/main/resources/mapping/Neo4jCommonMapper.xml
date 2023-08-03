@@ -6,7 +6,14 @@
     </resultMap>
 
     <insert id="add">
-        create(u:book{name:#{model.name},author:#{model.author}})
+        create
+        (u:book{name:
+        #{model.name},
+        author
+        :
+        #{model.author}
+        }
+        )
     </insert>
 
     <insert id="create" parameterType="com.ares.neo4j.persistence.model.Neo4jCommon">
@@ -18,8 +25,29 @@
     </insert>
 
     <insert id="createRelationShip" parameterType="com.ares.neo4j.persistence.model.Neo4jCommon">
-        match (#{nodeLabelName1}:#{nodeName1},#{nodeLabelName2}:#{nodeName2})
-        create (#{nodeLabelName1})-[#{relationshipLabelName}:#{relationshipName}]-(#{nodeLabelName2})
-        return #{relationshipLabelName}
+        match (
+        #{nodeLabelName1}
+        :
+        #{nodeName1},
+        #{nodeLabelName2}
+        :
+        #{nodeName2}
+        )
+        create
+        (
+        #{nodeLabelName1}
+        )
+        -
+        [
+        #{relationshipLabelName}
+        :
+        #{relationshipName}
+        ]
+        -
+        (
+        #{nodeLabelName2}
+        )
+        return
+        #{relationshipLabelName}
     </insert>
 </mapper>

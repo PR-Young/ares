@@ -50,7 +50,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("/tool/gen/*")
-@Tag(name = "GeneratorApiController",description = "代码生成API")
+@Tag(name = "GeneratorApiController", description = "代码生成API")
 public class GeneratorApiController extends BaseController {
 
     private IGeneratorService generatorService;

@@ -31,18 +31,18 @@ import java.util.List;
  */
 public interface IElasticsearchService {
 
-    public void save(AresDocument document) ;
+    void save(AresDocument document);
 
-    public void saveAll(List<AresDocument> documents);
+    void saveAll(List<AresDocument> documents);
 
-    public void delete(AresDocument document) ;
+    void delete(AresDocument document);
 
-    public void deleteById(String id) ;
+    void deleteById(String id);
 
-    public List<AresDocument> query(String value);
+    List<AresDocument> query(String value);
 
-    public Iterable<AresDocument> queryByFiled(String fieldName, Object value, Pageable pageable);
+    Iterable<AresDocument> queryByFiled(String fieldName, Object value, Pageable pageable);
 
-    public Iterable<AresDocument> queryAll(Pageable pageable);
-    
+    Iterable<AresDocument> queryAll(Pageable pageable);
+
 }

@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAdminServer
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, JdbcRepositoriesAutoConfiguration.class,
-       RedisAutoConfiguration.class})
+        RedisAutoConfiguration.class})
 public class AresAdminApplication {
     public static void main(String[] args) {
         SpringApplication.run(AresAdminApplication.class, args);

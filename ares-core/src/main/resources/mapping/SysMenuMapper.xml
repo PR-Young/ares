@@ -21,7 +21,8 @@
         <result column="childCount" jdbcType="INTEGER" property="childCount"/>
     </resultMap>
     <sql id="Base_Column_List">
-        `Id`, `Name`, `Description`, `Url`,`Path`,`IsBlank`,`PId`,`Perms`,`Type`,`Icon`,`Order`,`Visible`,`Creator`,
+        `Id`
+        , `Name`, `Description`, `Url`,`Path`,`IsBlank`,`PId`,`Perms`,`Type`,`Icon`,`Order`,`Visible`,`Creator`,
         `CreateTime`,`Modifier`, `ModifyTime`
     </sql>
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysMenu">
@@ -184,10 +185,14 @@
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String">
-        delete from `sys_menu` where `Id` = #{menuId}
+        delete
+        from `sys_menu`
+        where `Id` = #{menuId}
     </delete>
 
     <select id="hasChildByMenuId" parameterType="java.lang.String" resultType="Integer">
-        select count(1) from `sys_menu` where `PId` = #{menuId}
+        select count(1)
+        from `sys_menu`
+        where `PId` = #{menuId}
     </select>
 </mapper>

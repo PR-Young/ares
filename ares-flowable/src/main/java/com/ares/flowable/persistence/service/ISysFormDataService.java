@@ -25,6 +25,6 @@ import com.ares.flowable.persistence.model.SysFormData;
 
 public interface ISysFormDataService extends IBaseService<SysFormData, SysFormDataQuery> {
 
-    public SysFormData getFormDataByProInstId(String proInstId) ;
+    SysFormData getFormDataByProInstId(String proInstId);
 
 }

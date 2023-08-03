@@ -25,7 +25,8 @@ import java.util.Map;
 
 public interface ISysPropertiesService extends IBaseService<SysProperties, SysPropertiesQuery> {
 
-    public Map<String, Object> getByGroup(String group);
-    public String getValueByAlias(String alias);
+    Map<String, Object> getByGroup(String group);
+
+    String getValueByAlias(String alias);
 
 }

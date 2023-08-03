@@ -29,9 +29,10 @@ import org.springframework.core.Ordered;
  * @author: Young
  * @date: 2021/01/29
  * @see: com.ares.core.listener DefaultEventListener.java
+ * @param <T>
  **/
 public abstract class DefaultEventListener<T extends ApplicationEvent> implements ApplicationListener<T>, Ordered {
-    public Logger logger = LoggerFactory.getLogger(DefaultEventListener.class);
+    private Logger logger = LoggerFactory.getLogger(DefaultEventListener.class);
 
     @Override
     public int getOrder() {

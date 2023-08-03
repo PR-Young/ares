@@ -39,7 +39,7 @@ import java.util.Map;
  * @description: 公共方法
  * @author: Young 2020/05/15
  **/
-public class AresCommonUtils {
+public final class AresCommonUtils {
     private AresCommonUtils() {
     }
 
@@ -152,10 +152,10 @@ public class AresCommonUtils {
         return sb.toString();
     }
 
-    public static String getUserAgent(HttpServletRequest request,String type){
+    public static String getUserAgent(HttpServletRequest request, String type) {
         UserAgent userAgent = UserAgentUtil.parse(request.getHeader("user-agent"));
         String result = "";
-        switch (type){
+        switch (type) {
             case "browser":
                 result = userAgent.getBrowser().getName();
                 break;

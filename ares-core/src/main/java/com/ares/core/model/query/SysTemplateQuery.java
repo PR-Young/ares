@@ -31,6 +31,6 @@ import lombok.Data;
  **/
 @Data
 @Schema(description = "查询实体")
-public class SysTemplateQuery extends BaseQuery{
+public class SysTemplateQuery extends BaseQuery {
     private String subject;
 }

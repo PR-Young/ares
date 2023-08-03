@@ -13,7 +13,8 @@
         <result column="FinishTime" jdbcType="TIMESTAMP" property="finishTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        Id, JobName, JobGroup, InvokeTarget, JobMessage, Status, ExceptionInfo, StartTime,
+        Id
+        , JobName, JobGroup, InvokeTarget, JobMessage, Status, ExceptionInfo, StartTime,
         FinishTime
     </sql>
     <select id="list" parameterType="java.util.Map" resultMap="SysQuartzJobLog">
@@ -40,13 +41,11 @@
     </delete>
     <insert id="insert" parameterType="com.ares.quartz.persistence.model.SysQuartzJobLog">
         insert into sys_quartz_job_log (Id, JobName, JobGroup,
-        InvokeTarget, JobMessage, Status,
-        ExceptionInfo, StartTime, FinishTime
-        )
+                                        InvokeTarget, JobMessage, Status,
+                                        ExceptionInfo, StartTime, FinishTime)
         values (#{id,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR},
-        #{invokeTarget,jdbcType=VARCHAR}, #{jobMessage,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
-        #{exceptionInfo,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}
-        )
+                #{invokeTarget,jdbcType=VARCHAR}, #{jobMessage,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+                #{exceptionInfo,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP})
     </insert>
     <update id="update" parameterType="com.ares.quartz.persistence.model.SysQuartzJobLog">
         update sys_quartz_job_log

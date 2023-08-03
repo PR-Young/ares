@@ -18,10 +18,10 @@
     </sql>
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysLog">
         insert into `sys_log` (`Id`, `HostIP`, `UserName`, `Url`, `Params`, `RequestMethod`, `Notes`, `CreateTime`,
-        `ModifyTime`)
+                               `ModifyTime`)
         values (#{id,jdbcType=VARCHAR}, #{hostIp,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
-        #{url,jdbcType=VARCHAR}, #{operParams,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR},
-        #{notes,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+                #{url,jdbcType=VARCHAR}, #{operParams,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR},
+                #{notes,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
 
     <select id="list" parameterType="com.ares.core.model.query.SysLogQuery" resultMap="SysLog">
