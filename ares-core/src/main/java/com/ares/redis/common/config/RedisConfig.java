@@ -46,6 +46,7 @@ import java.time.Duration;
 public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
+    @Override
     public KeyGenerator keyGenerator() {
         return new KeyGenerator() {
             @Override

@@ -172,7 +172,7 @@ public class SysUserApiController extends BaseController {
     @Operation(summary = "导入用户")
     public Object importData(MultipartFile file, HttpServletRequest request) throws Exception {
         InputStream inputStream = file.getInputStream();
-        boolean needUpdate = request.getParameter("updateSupport").equals("1");
+        boolean needUpdate = "1".equals(request.getParameter("updateSupport"));
         String deptId = request.getParameter("deptId");
         AnalysisEventListener listener = new UserDataListener(needUpdate, deptId);
         EasyExcel.read(inputStream, SysUser.class, listener).sheet().doRead();

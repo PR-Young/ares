@@ -44,6 +44,7 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
         this.sysLoginInfoDao = sysLoginInfoDao;
     }
 
+    @Override
     public String saveInfo(SysLoginInfo sysLoginInfo) {
         String id = SnowflakeIdWorker.getUUID();
         sysLoginInfo.setId(id);

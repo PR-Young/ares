@@ -517,7 +517,7 @@ public class FlowableUtils {
             }
             // 删除原因不为空，说明从这条数据开始回跳或者回退的
             // MI_END：会签完成后，其他未签到节点的删除原因，不在处理范围内
-            if (stack.peek().getDeleteReason() != null && !stack.peek().getDeleteReason().equals("MI_END")) {
+            if (stack.peek().getDeleteReason() != null && !"MI_END".equals(stack.peek().getDeleteReason())) {
                 // 可以理解为脏线路起点
                 String dirtyPoint = "";
                 if (stack.peek().getDeleteReason().indexOf("Change activity to ") >= 0) {

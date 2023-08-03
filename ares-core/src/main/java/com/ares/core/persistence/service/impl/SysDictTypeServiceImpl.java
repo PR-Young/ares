@@ -42,6 +42,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
         this.sysDictTypeDao = sysDictTypeDao;
     }
 
+    @Override
     public PageInfo<SysDictType> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
         List<SysDictType> lists = sysDictTypeDao.list(map);
