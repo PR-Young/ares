@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service;
 
+import com.ares.core.model.query.SysDeptQuery;
 import com.ares.core.persistence.model.SysDept;
 import com.ares.core.model.tree.TreeSelect;
 
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * @author young
  */
-public interface ISysDeptService extends IBaseService<SysDept> {
+public interface ISysDeptService extends IBaseService<SysDept, SysDeptQuery> {
 
     public SysDept getByDeptId(String id);
 

@@ -72,6 +72,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                             .check(r -> StpUtil.checkLogin());
                 }))
                 .addPathPatterns("/**");
+        registry.addInterceptor(new AresInterceptor()).addPathPatterns("/**");
     }
 
     /**

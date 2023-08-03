@@ -18,12 +18,13 @@
 
 package com.ares.core.persistence.service;
 
+import com.ares.core.model.query.SysTemplateQuery;
 import com.ares.core.persistence.model.SysTemplate;
 
 
 /**
  * @author young
  */
-public interface ISysTemplateService extends IBaseService<SysTemplate> {
+public interface ISysTemplateService extends IBaseService<SysTemplate, SysTemplateQuery> {
 
 }

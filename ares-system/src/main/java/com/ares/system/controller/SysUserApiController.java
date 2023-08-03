@@ -29,6 +29,7 @@ import com.ares.core.listener.UserDataListener;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.base.Constants;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysUserQuery;
 import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.persistence.service.ISysRoleService;
@@ -79,8 +80,8 @@ public class SysUserApiController extends BaseController {
 
     @SaCheckPermission("user:list")
     @GetMapping("list")
-    @Operation(summary = "用户列表", parameters = {@Parameter(schema = @Schema(name = "SysUser"))}, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysUser user) {
+    @Operation(summary = "用户列表", parameters = {@Parameter(schema = @Schema(name = "SysUserQuery"))}, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
+    public TableDataInfo list(SysUserQuery user) {
         startPage();
         List<SysUser> userList = userService.selectUserList(user);
         return getDataTable(userList);
@@ -142,7 +143,7 @@ public class SysUserApiController extends BaseController {
 
     @GetMapping("export")
     @Operation(summary = "导出用户")
-    public void export(SysUser user, HttpServletResponse response) {
+    public void export(SysUserQuery user, HttpServletResponse response) {
         List<SysUser> userList = userService.selectUserList(user);
         String fileName = "用户信息" + System.currentTimeMillis();
         String sheetName = "用户";

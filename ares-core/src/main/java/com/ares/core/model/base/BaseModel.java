@@ -21,13 +21,11 @@ package com.ares.core.model.base;
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * @description:
@@ -53,39 +51,5 @@ public class BaseModel implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @ExcelIgnore
     private Date modifyTime;
-
-    /** =============================查询参数================================= */
-    /**
-     * 开始时间
-     */
-    @JsonIgnore
-    @ExcelIgnore
-    @Schema(hidden = true)
-    private String beginTime;
-    /**
-     * 结束时间
-     */
-    @JsonIgnore
-    @ExcelIgnore
-    @Schema(hidden = true)
-    private String endTime;
-    @JsonIgnore
-    @ExcelIgnore
-    @Schema(hidden = true)
-    private String sortColumn;
-    @JsonIgnore
-    @ExcelIgnore
-    @Schema(hidden = true)
-    private String sortAsc;
-    @JsonIgnore
-    @ExcelIgnore
-    @Schema(hidden = true)
-    private String sort;
-    /**
-     * 请求参数
-     */
-    @ExcelIgnore
-    @Schema(hidden = true)
-    private Map<String, Object> params;
 
 }

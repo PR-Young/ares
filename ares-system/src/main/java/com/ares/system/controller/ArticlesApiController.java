@@ -24,6 +24,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
+import com.ares.system.model.query.ArticlesQuery;
 import com.ares.system.persistence.model.Articles;
 import com.ares.system.persistence.service.IArticlesService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,7 +55,7 @@ public class ArticlesApiController extends BaseController {
     @SaCheckPermission("articles:list")
     @GetMapping("list")
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(Articles articles) {
+    public TableDataInfo list(ArticlesQuery articles) {
         startPage();
         List<Articles> articlesList = articlesService.list(articles);
         return getDataTable(articlesList);

@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysDictTypeQuery;
 import com.ares.core.persistence.dao.ISysDictTypeDao;
 import com.ares.core.persistence.model.SysDictType;
 import com.ares.core.persistence.service.ISysDictTypeService;
@@ -72,7 +73,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
     }
 
     @Override
-    public List<SysDictType> list(SysDictType obj) {
+    public List<SysDictType> list(SysDictTypeQuery obj) {
         List<SysDictType> lists = sysDictTypeDao.selectList(obj);
         return lists;
     }

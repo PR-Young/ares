@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service;
 
+import com.ares.core.model.query.SysRoleQuery;
 import com.ares.core.persistence.model.SysRole;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/26
  **/
-public interface ISysRoleService extends IBaseService<SysRole> {
+public interface ISysRoleService extends IBaseService<SysRole, SysRoleQuery> {
 
     public void saveAssign(String users, String menus, String roleId);
 
@@ -36,15 +37,15 @@ public interface ISysRoleService extends IBaseService<SysRole> {
 
     public List<String> getRoleIdsByUser(String userId);
 
-    public List<SysRole> getAll() ;
+    public List<SysRole> getAll();
 
-    public void saveRoleUser(String[] roleIds, String userId) ;
+    public void saveRoleUser(String[] roleIds, String userId);
 
-    public List<SysRole> selectRoleList(SysRole role);
+    public List<SysRole> selectRoleList(SysRoleQuery role);
 
     public boolean checkRoleName(String roleName);
 
-    public String insertRole(SysRole obj) ;
+    public String insertRole(SysRole obj);
 
     public void updateRole(SysRole obj);
 

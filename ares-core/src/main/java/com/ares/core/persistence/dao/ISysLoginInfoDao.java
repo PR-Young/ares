@@ -21,11 +21,12 @@
 package com.ares.core.persistence.dao;
 
 
+import com.ares.core.model.query.SysLoginInfoQuery;
 import com.ares.core.persistence.model.SysLoginInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ISysLoginInfoDao extends IBaseDao<SysLoginInfo> {
+public interface ISysLoginInfoDao extends IBaseDao<SysLoginInfo, SysLoginInfoQuery> {
 
     void remove();
 }

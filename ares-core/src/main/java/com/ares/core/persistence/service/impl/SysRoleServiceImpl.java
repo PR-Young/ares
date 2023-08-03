@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysRoleQuery;
 import com.ares.core.persistence.dao.ISysRoleDao;
 import com.ares.core.persistence.model.SysRole;
 import com.ares.core.persistence.service.ISysRoleService;
@@ -58,7 +59,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     }
 
     @Override
-    public List<SysRole> list(SysRole obj) {
+    public List<SysRole> list(SysRoleQuery obj) {
         return null;
     }
 
@@ -147,7 +148,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     }
 
     @Override
-    public List<SysRole> selectRoleList(SysRole role) {
+    public List<SysRole> selectRoleList(SysRoleQuery role) {
         return sysRoleDao.selectList(role);
     }
 

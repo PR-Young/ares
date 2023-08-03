@@ -22,7 +22,7 @@ import com.ares.blog.persistence.service.IMyBlogService;
 import com.ares.core.common.log.Log;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.utils.ServletUtils;
-import com.ares.system.persistence.model.Articles;
+import com.ares.system.model.query.ArticlesQuery;
 import com.ares.system.persistence.service.IArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +68,7 @@ public class MyBlogController {
 
     @GetMapping("getArticles")
     public AjaxResult getArticles() {
-        Articles articles = new Articles();
+        ArticlesQuery articles = new ArticlesQuery();
         articles.setStatus("1");
         return AjaxResult.successData(articlesService.list(articles));
     }

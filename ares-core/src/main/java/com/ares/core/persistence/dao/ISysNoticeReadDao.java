@@ -18,13 +18,14 @@
 
 package com.ares.core.persistence.dao;
 
+import com.ares.core.model.query.SysNoticeReadQuery;
 import com.ares.core.persistence.model.SysNoticeRead;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
-public interface ISysNoticeReadDao extends IBaseDao<SysNoticeRead> {
+public interface ISysNoticeReadDao extends IBaseDao<SysNoticeRead, SysNoticeReadQuery> {
 
     int batchInsert(List<SysNoticeRead> noticeReadList);
 

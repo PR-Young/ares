@@ -24,6 +24,7 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysNoticeQuery;
 import com.ares.core.persistence.model.SysNotice;
 import com.ares.core.persistence.service.ISysNoticeService;
 import com.ares.core.utils.StringUtils;
@@ -59,7 +60,7 @@ public class SysNoticeApiController extends BaseController {
     @SaCheckPermission("notice:list")
     @GetMapping("list")
     @Operation(summary = "通知公告列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysNotice sysNotice) {
+    public TableDataInfo list(SysNoticeQuery sysNotice) {
         startPage();
         List<SysNotice> sysNoticeList = sysNoticeService.list(sysNotice);
         return getDataTable(sysNoticeList);

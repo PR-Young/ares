@@ -19,6 +19,7 @@
 package com.ares.system.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.system.model.query.ArticlesQuery;
 import com.ares.system.persistence.dao.IArticlesDao;
 import com.ares.system.persistence.model.Articles;
 import com.ares.system.persistence.service.IArticlesService;
@@ -74,7 +75,7 @@ public class ArticlesServiceImpl implements IArticlesService {
     }
 
     @Override
-    public List<Articles> list(Articles obj) {
+    public List<Articles> list(ArticlesQuery obj) {
         List<Articles> lists = articlesDao.selectList(obj);
         return lists;
     }

@@ -20,6 +20,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysLoginInfoQuery;
 import com.ares.core.persistence.dao.ISysLoginInfoDao;
 import com.ares.core.persistence.model.SysLoginInfo;
 import com.ares.core.persistence.service.ISysLoginInfoService;
@@ -87,7 +88,7 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
     }
 
     @Override
-    public List<SysLoginInfo> list(SysLoginInfo obj) {
+    public List<SysLoginInfo> list(SysLoginInfoQuery obj) {
         List<SysLoginInfo> lists = sysLoginInfoDao.selectList(obj);
         return lists;
     }

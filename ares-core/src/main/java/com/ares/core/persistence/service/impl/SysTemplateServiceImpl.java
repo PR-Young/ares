@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysTemplateQuery;
 import com.ares.core.persistence.dao.ISysTemplateDao;
 import com.ares.core.persistence.model.SysTemplate;
 import com.ares.core.persistence.service.ISysTemplateService;
@@ -73,7 +74,7 @@ public class SysTemplateServiceImpl implements ISysTemplateService {
     }
 
     @Override
-    public List<SysTemplate> list(SysTemplate obj) {
+    public List<SysTemplate> list(SysTemplateQuery obj) {
         List<SysTemplate> lists = sysTemplateDao.selectList(obj);
         return lists;
     }

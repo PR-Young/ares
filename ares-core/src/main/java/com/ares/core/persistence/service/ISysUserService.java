@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service;
 
+import com.ares.core.model.query.SysUserQuery;
 import com.ares.core.persistence.model.SysUser;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/22
  **/
-public interface ISysUserService extends IBaseService<SysUser> {
+public interface ISysUserService extends IBaseService<SysUser,SysUserQuery> {
 
     public List<SysUser> assignAllUser(String roleId) ;
 
@@ -36,7 +37,7 @@ public interface ISysUserService extends IBaseService<SysUser> {
 
     public int resetPassword(String id);
 
-    public List<SysUser> selectUserList(SysUser user);
+    public List<SysUser> selectUserList(SysUserQuery user);
 
     public String insertUser(SysUser sysUser);
 

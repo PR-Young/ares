@@ -18,12 +18,13 @@
 
 package com.ares.core.persistence.service;
 
+import com.ares.core.model.query.SysDictTypeQuery;
 import com.ares.core.persistence.model.SysDictType;
 
 /**
  * @author young
  */
-public interface ISysDictTypeService extends IBaseService<SysDictType> {
+public interface ISysDictTypeService extends IBaseService<SysDictType, SysDictTypeQuery> {
 
 
 }

@@ -5,8 +5,8 @@
         SELECT
         `TABLE_NAME`,
         `TABLE_COMMENT`,
-        `CREATE_TIME`,
-        `UPDATE_TIME`
+        DATE_FORMAT(`CREATE_TIME`,'%Y-%m-%d %h:%m:%s') as CREATE_TIME,
+        DATE_FORMAT(`UPDATE_TIME`,'%Y-%m-%d %h:%m:%s') as UPDATE_TIME
         FROM
         information_schema.`TABLES`
         WHERE

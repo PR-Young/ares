@@ -23,6 +23,7 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysDeptQuery;
 import com.ares.core.persistence.model.SysDept;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.StringUtils;
@@ -59,7 +60,7 @@ public class SysDeptApiController extends BaseController {
     @SaCheckPermission("sysDept:list")
     @GetMapping("list")
     @Operation(summary = "部门列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysDept sysDept) {
+    public TableDataInfo list(SysDeptQuery sysDept) {
         startPage();
         List<SysDept> sysDeptList = sysDeptService.list(sysDept);
         return getDataTable(sysDeptList);

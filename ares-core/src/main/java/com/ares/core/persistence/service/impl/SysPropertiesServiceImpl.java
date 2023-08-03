@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysPropertiesQuery;
 import com.ares.core.persistence.dao.ISysPropertiesDao;
 import com.ares.core.persistence.model.SysProperties;
 import com.ares.core.persistence.service.ISysPropertiesService;
@@ -74,7 +75,7 @@ public class SysPropertiesServiceImpl implements ISysPropertiesService {
     }
 
     @Override
-    public List<SysProperties> list(SysProperties obj) {
+    public List<SysProperties> list(SysPropertiesQuery obj) {
         List<SysProperties> lists = sysPropertiesDao.selectList(obj);
         return lists;
     }

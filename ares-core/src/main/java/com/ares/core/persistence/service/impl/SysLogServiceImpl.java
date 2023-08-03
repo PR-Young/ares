@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysLogQuery;
 import com.ares.core.persistence.dao.ISysLogDao;
 import com.ares.core.persistence.model.SysLog;
 import com.ares.core.persistence.service.ISysLogService;
@@ -50,7 +51,7 @@ public class SysLogServiceImpl implements ISysLogService {
     }
 
     @Override
-    public List<SysLog> list(SysLog sysLog) {
+    public List<SysLog> list(SysLogQuery sysLog) {
         List<SysLog> logList = sysLogDao.list(sysLog);
         return logList;
     }

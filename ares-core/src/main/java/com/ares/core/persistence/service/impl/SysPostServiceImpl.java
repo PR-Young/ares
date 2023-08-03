@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysPostQuery;
 import com.ares.core.persistence.dao.ISysPostDao;
 import com.ares.core.persistence.model.SysPost;
 import com.ares.core.persistence.service.ISysPostService;
@@ -74,7 +75,7 @@ public class SysPostServiceImpl implements ISysPostService {
     }
 
     @Override
-    public List<SysPost> list(SysPost obj) {
+    public List<SysPost> list(SysPostQuery obj) {
         List<SysPost> lists = sysPostDao.selectList(obj);
         return lists;
     }

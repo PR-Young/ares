@@ -19,6 +19,7 @@
 package com.ares.quartz.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.quartz.model.query.SysQuartzJobLogQuery;
 import com.ares.quartz.persistence.dao.ISysQuartzJobLogDao;
 import com.ares.quartz.persistence.model.SysQuartzJobLog;
 import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
@@ -74,12 +75,12 @@ public class SysQuartzJobLogServiceImpl implements ISysQuartzJobLogService {
     }
 
     @Override
-    public List<SysQuartzJobLog> list(SysQuartzJobLog obj) {
+    public List<SysQuartzJobLog> list(SysQuartzJobLogQuery obj) {
         return null;
     }
 
     @Override
-    public List<SysQuartzJobLog> selectJobLogList(SysQuartzJobLog jobLog) {
+    public List<SysQuartzJobLog> selectJobLogList(SysQuartzJobLogQuery jobLog) {
         return sysQuartzJobLogDao.selectList(jobLog);
     }
 

@@ -19,6 +19,7 @@
 package com.ares.core.persistence.dao;
 
 
+import com.ares.core.model.query.SysUserQuery;
 import com.ares.core.persistence.model.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -30,7 +31,7 @@ import java.util.List;
  * @author: Young 2020/01/22
  **/
 @Mapper
-public interface ISysUserDao extends IBaseDao<SysUser> {
+public interface ISysUserDao extends IBaseDao<SysUser, SysUserQuery> {
 
     SysUser getUserByName(String userName);
 

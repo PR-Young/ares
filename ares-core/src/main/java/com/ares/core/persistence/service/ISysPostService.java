@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service;
 
+import com.ares.core.model.query.SysPostQuery;
 import com.ares.core.persistence.model.SysPost;
 
 import java.util.List;
@@ -25,7 +26,7 @@ import java.util.List;
 /**
  * @author young
  */
-public interface ISysPostService extends IBaseService<SysPost> {
+public interface ISysPostService extends IBaseService<SysPost, SysPostQuery> {
 
     public List<SysPost> getAll();
 

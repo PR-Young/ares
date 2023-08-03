@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysDeptQuery;
 import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.persistence.dao.ISysDeptDao;
 import com.ares.core.persistence.model.SysDept;
@@ -79,7 +80,7 @@ public class SysDeptServiceImpl implements ISysDeptService {
     }
 
     @Override
-    public List<SysDept> list(SysDept obj) {
+    public List<SysDept> list(SysDeptQuery obj) {
         List<SysDept> lists = sysDeptDao.selectList(obj);
         return lists;
     }

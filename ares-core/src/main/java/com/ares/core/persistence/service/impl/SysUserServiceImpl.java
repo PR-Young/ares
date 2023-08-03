@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysUserQuery;
 import com.ares.core.persistence.dao.ISysRoleDao;
 import com.ares.core.persistence.dao.ISysUserDao;
 import com.ares.core.persistence.model.SysRole;
@@ -68,7 +69,7 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public List<SysUser> list(SysUser obj) {
+    public List<SysUser> list(SysUserQuery obj) {
         return null;
     }
 
@@ -112,7 +113,7 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public List<SysUser> selectUserList(SysUser user) {
+    public List<SysUser> selectUserList(SysUserQuery user) {
         return sysUserDao.selectList(user);
     }
 

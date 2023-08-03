@@ -19,6 +19,7 @@
 package com.ares.quartz.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
+import com.ares.quartz.model.query.SysQuartzJobLogQuery;
 import com.ares.quartz.persistence.model.SysQuartzJobLog;
 
 import java.util.List;
@@ -27,9 +28,9 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/29
  **/
-public interface ISysQuartzJobLogService extends IBaseService<SysQuartzJobLog> {
+public interface ISysQuartzJobLogService extends IBaseService<SysQuartzJobLog, SysQuartzJobLogQuery> {
 
-    public List<SysQuartzJobLog> selectJobLogList(SysQuartzJobLog jobLog) ;
+    public List<SysQuartzJobLog> selectJobLogList(SysQuartzJobLogQuery jobLog) ;
 
     public void cleanJobLog();
 }

@@ -37,7 +37,7 @@ this.${entityName1}Service = ${entityName1}Service;
 @SaCheckPermission("${entityName1}:list")
 @GetMapping("list")
 @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-public TableDataInfo list(${entityName} ${entityName1}) {
+public TableDataInfo list(${entityName}Query ${entityName1}) {
 startPage();
 List<${entityName}> ${entityName1}List = ${entityName1}Service.list(${entityName1});
 return getDataTable(${entityName1}List);

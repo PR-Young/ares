@@ -22,6 +22,7 @@ package com.ares.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.model.base.AjaxResult;
+import com.ares.core.model.query.SysMenuQuery;
 import com.ares.core.persistence.model.SysMenu;
 import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.utils.StringUtils;
@@ -55,7 +56,7 @@ public class SysMenuApiController {
     @SaCheckPermission("menu:list")
     @GetMapping("list")
     @Operation(summary = "菜单列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object list(SysMenu menu) throws Exception {
+    public Object list(SysMenuQuery menu) throws Exception {
         String userId = SecurityUtils.getUser().getId();
         List<SysMenu> menuList = menuService.selectMenuList(menu, userId);
         return AjaxResult.successData(menuList);
@@ -72,7 +73,7 @@ public class SysMenuApiController {
      */
     @GetMapping("treeselect")
     @Operation(summary = "获取菜单下拉树列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object treeselect(SysMenu menu) throws Exception {
+    public Object treeselect(SysMenuQuery menu) throws Exception {
         String userId = SecurityUtils.getUser().getId();
         List<SysMenu> menus = menuService.selectMenuList(menu, userId);
         return AjaxResult.successData(menuService.buildMenuTreeSelect(menus));
@@ -107,7 +108,7 @@ public class SysMenuApiController {
     @Operation(summary = "根据角色Id获取菜单", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object roleMenuTreeselect(@PathVariable("roleId") String roleId) throws Exception {
         String userId = SecurityUtils.getUser().getId();
-        List<SysMenu> menus = menuService.selectMenuList(new SysMenu(), userId);
+        List<SysMenu> menus = menuService.selectMenuList(new SysMenuQuery(), userId);
         AjaxResult result = AjaxResult.success();
         result.put("checkedKeys", menuService.selectMenuByRole(roleId));
         result.put("menus", menuService.buildMenuTreeSelect(menus));

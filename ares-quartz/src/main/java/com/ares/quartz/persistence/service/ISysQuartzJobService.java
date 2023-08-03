@@ -19,6 +19,7 @@
 package com.ares.quartz.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
+import com.ares.quartz.model.query.SysQuartzJobQuery;
 import com.ares.quartz.persistence.model.SysQuartzJob;
 import org.quartz.SchedulerException;
 
@@ -28,7 +29,7 @@ import java.util.List;
  * @description:
  * @author: Young 2020/01/29
  **/
-public interface ISysQuartzJobService extends IBaseService<SysQuartzJob> {
+public interface ISysQuartzJobService extends IBaseService<SysQuartzJob, SysQuartzJobQuery> {
 
     public int checkUnique(String jobName);
 
@@ -40,6 +41,6 @@ public interface ISysQuartzJobService extends IBaseService<SysQuartzJob> {
 
     public void run(SysQuartzJob job) throws SchedulerException ;
 
-    public List<SysQuartzJob> selectJobList(SysQuartzJob job);
+    public List<SysQuartzJob> selectJobList(SysQuartzJobQuery job);
 
 }

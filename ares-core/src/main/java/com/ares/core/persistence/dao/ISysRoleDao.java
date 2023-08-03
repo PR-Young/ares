@@ -19,6 +19,7 @@
 package com.ares.core.persistence.dao;
 
 
+import com.ares.core.model.query.SysRoleQuery;
 import com.ares.core.persistence.model.SysRole;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -30,7 +31,7 @@ import java.util.Map;
  * @author: Young 2020/01/25
  **/
 @Mapper
-public interface ISysRoleDao extends IBaseDao<SysRole> {
+public interface ISysRoleDao extends IBaseDao<SysRole, SysRoleQuery> {
     List<SysRole> getRoleByUserId(String userId);
 
     List<String> getPermsByRoleId(String roleId);

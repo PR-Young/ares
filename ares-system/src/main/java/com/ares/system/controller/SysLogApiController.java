@@ -21,6 +21,7 @@ package com.ares.system.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysLogQuery;
 import com.ares.core.persistence.model.SysLog;
 import com.ares.core.persistence.service.ISysLogService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,7 +55,7 @@ public class SysLogApiController extends BaseController {
     @SaCheckPermission("log:list")
     @GetMapping("list")
     @Operation(summary = "操作日志列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysLog sysLog) {
+    public TableDataInfo list(SysLogQuery sysLog) {
         startPage();
         List<SysLog> sysLogList = sysLogService.list(sysLog);
         return getDataTable(sysLogList);

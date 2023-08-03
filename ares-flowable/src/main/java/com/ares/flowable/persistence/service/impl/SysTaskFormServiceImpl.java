@@ -19,6 +19,7 @@
 package com.ares.flowable.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.flowable.model.query.SysTaskFormQuery;
 import com.ares.flowable.persistence.dao.ISysTaskFormDao;
 import com.ares.flowable.persistence.model.SysTaskForm;
 import com.ares.flowable.persistence.service.ISysTaskFormService;
@@ -60,7 +61,7 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
      */
 
     @Override
-    public List<SysTaskForm> selectSysTaskFormList(SysTaskForm sysTaskForm) {
+    public List<SysTaskForm> selectSysTaskFormList(SysTaskFormQuery sysTaskForm) {
         return sysTaskFormDao.selectList(sysTaskForm);
     }
 
@@ -96,7 +97,7 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
     }
 
     @Override
-    public List<SysTaskForm> list(SysTaskForm obj) {
+    public List<SysTaskForm> list(SysTaskFormQuery obj) {
         List<SysTaskForm> lists = sysTaskFormDao.selectList(obj);
         return lists;
     }

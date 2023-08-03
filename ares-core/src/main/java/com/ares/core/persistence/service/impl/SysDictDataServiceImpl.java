@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysDictDataQuery;
 import com.ares.core.persistence.dao.ISysDictDataDao;
 import com.ares.core.persistence.model.SysDictData;
 import com.ares.core.persistence.service.ISysDictDataService;
@@ -73,7 +74,7 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
     }
 
     @Override
-    public List<SysDictData> list(SysDictData obj) {
+    public List<SysDictData> list(SysDictDataQuery obj) {
         List<SysDictData> lists = sysDictDataDao.selectList(obj);
         return lists;
     }

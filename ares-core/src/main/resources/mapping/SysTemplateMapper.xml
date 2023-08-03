@@ -98,13 +98,13 @@
         </if>
     </select>
 
-    <select id="selectList" parameterType="com.ares.core.persistence.model.SysTemplate" resultMap="SysTemplate">
+    <select id="selectList" parameterType="com.ares.core.model.query.SysTemplateQuery" resultMap="SysTemplate">
         select
         <include refid="Base_Column_List"/>
         from `sys_template`
         where 1=1
         <if test="subject != null and subject != ''"><!-- 开始时间检索 -->
-            AND `Subject` like concat('%', #{name}, '%')
+            AND `Subject` like concat('%', #{subject}, '%')
         </if>
         <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
             AND date_format(`CreateTime`,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')

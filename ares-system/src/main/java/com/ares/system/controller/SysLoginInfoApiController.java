@@ -25,6 +25,7 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysLoginInfoQuery;
 import com.ares.core.persistence.model.SysLoginInfo;
 import com.ares.core.persistence.service.ISysLoginInfoService;
 import com.ares.core.utils.StringUtils;
@@ -56,7 +57,7 @@ public class SysLoginInfoApiController extends BaseController {
     @SaCheckPermission("sysLoginInfo:list")
     @GetMapping("list")
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysLoginInfo sysLoginInfo) {
+    public TableDataInfo list(SysLoginInfoQuery sysLoginInfo) {
         startPage();
         List<SysLoginInfo> sysLoginInfoList = sysLoginInfoService.list(sysLoginInfo);
         return getDataTable(sysLoginInfoList);

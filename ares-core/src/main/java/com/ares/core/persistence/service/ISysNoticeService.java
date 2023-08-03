@@ -18,11 +18,12 @@
 
 package com.ares.core.persistence.service;
 
+import com.ares.core.model.query.SysNoticeQuery;
 import com.ares.core.persistence.model.SysNotice;
 
 import java.util.List;
 
-public interface ISysNoticeService extends IBaseService<SysNotice> {
+public interface ISysNoticeService extends IBaseService<SysNotice, SysNoticeQuery> {
 
     public int noticeNum(String userId);
 

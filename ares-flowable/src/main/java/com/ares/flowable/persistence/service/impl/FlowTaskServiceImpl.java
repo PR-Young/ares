@@ -23,6 +23,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.base.BaseModel;
+import com.ares.core.model.query.SysUserQuery;
 import com.ares.core.persistence.model.SysRole;
 import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysDeptService;
@@ -965,7 +966,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                     MultiInstanceLoopCharacteristics multiInstance = userTask.getLoopCharacteristics();
                     // 会签节点
                     if (Objects.nonNull(multiInstance)) {
-                        List<SysUser> list = userService.selectUserList(new SysUser());
+                        List<SysUser> list = userService.selectUserList(new SysUserQuery());
 
                         flowNextDto.setVars(ProcessConstants.PROCESS_MULTI_INSTANCE_USER);
                         flowNextDto.setType(ProcessConstants.PROCESS_MULTI_INSTANCE);
@@ -979,7 +980,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                         if (ProcessConstants.DATA_TYPE.equals(dataType)) {
                             // 指定单个人员
                             if (ProcessConstants.USER_TYPE_ASSIGNEE.equals(userType)) {
-                                List<SysUser> list = userService.selectUserList(new SysUser());
+                                List<SysUser> list = userService.selectUserList(new SysUserQuery());
 
                                 flowNextDto.setVars(ProcessConstants.PROCESS_APPROVAL);
                                 flowNextDto.setType(ProcessConstants.USER_TYPE_ASSIGNEE);
@@ -987,7 +988,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                             }
                             // 候选人员(多个)
                             if (ProcessConstants.USER_TYPE_USERS.equals(userType)) {
-                                List<SysUser> list = userService.selectUserList(new SysUser());
+                                List<SysUser> list = userService.selectUserList(new SysUserQuery());
 
                                 flowNextDto.setVars(ProcessConstants.PROCESS_APPROVAL);
                                 flowNextDto.setType(ProcessConstants.USER_TYPE_USERS);

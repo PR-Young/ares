@@ -25,6 +25,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
+import com.ares.quartz.model.query.SysQuartzJobQuery;
 import com.ares.quartz.persistence.model.SysQuartzJob;
 import com.ares.quartz.persistence.service.ISysQuartzJobService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,7 +60,7 @@ public class SysJobApiController extends BaseController {
     @SaCheckPermission("quartz:list")
     @GetMapping("list")
     @Operation(summary = "任务列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysQuartzJob job) {
+    public TableDataInfo list(SysQuartzJobQuery job) {
         startPage();
         List<SysQuartzJob> jobList = jobService.selectJobList(job);
         return getDataTable(jobList);

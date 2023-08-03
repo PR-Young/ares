@@ -23,6 +23,7 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysDictTypeQuery;
 import com.ares.core.persistence.model.SysDictType;
 import com.ares.core.persistence.service.ISysDictTypeService;
 import com.ares.core.utils.StringUtils;
@@ -57,7 +58,7 @@ public class SysDictTypeApiController extends BaseController {
     @SaCheckPermission("sysDictType:list")
     @GetMapping("list")
     @Operation(summary = "字典类别列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysDictType sysDictType) {
+    public TableDataInfo list(SysDictTypeQuery sysDictType) {
         startPage();
         List<SysDictType> sysDictTypeList = sysDictTypeService.list(sysDictType);
         return getDataTable(sysDictTypeList);

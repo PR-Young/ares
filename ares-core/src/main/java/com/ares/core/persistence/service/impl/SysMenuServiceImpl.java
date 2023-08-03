@@ -19,6 +19,7 @@
 package com.ares.core.persistence.service.impl;
 
 
+import com.ares.core.model.query.SysMenuQuery;
 import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.model.vo.MetaVo;
 import com.ares.core.model.vo.RouterVo;
@@ -92,7 +93,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
     }
 
     @Override
-    public List<SysMenu> list(SysMenu obj) {
+    public List<SysMenu> list(SysMenuQuery obj) {
         return null;
     }
 
@@ -135,7 +136,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
     }
 
     @Override
-    public List<SysMenu> selectMenuList(SysMenu menu, String userId) {
+    public List<SysMenu> selectMenuList(SysMenuQuery menu, String userId) {
         List<SysMenu> menuList = null;
         if (SysUser.isAdmin(userId)) {
             menuList = sysMenuDao.selectList(menu);

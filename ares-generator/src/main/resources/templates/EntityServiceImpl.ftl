@@ -58,7 +58,7 @@ public class ${entityName}Service implements I${entityName}Service {
     }
 
     @Override
-    public List<${entityName}> list(${entityName} obj) {
+    public List<${entityName}> list(${entityName}Query obj) {
         List<${entityName}> lists = ${entityName1}Dao.selectList(obj);
         return lists;
     }

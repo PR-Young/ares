@@ -196,7 +196,7 @@
         )
     </select>
 
-    <select id="selectList" parameterType="com.ares.core.persistence.model.SysUser" resultMap="SysUser">
+    <select id="selectList" parameterType="com.ares.core.model.query.SysUserQuery" resultMap="SysUser">
         select
         <include refid="Base_Column_List"/>
         from `sys_user`

@@ -27,7 +27,7 @@ import java.util.Map;
  * @description:
  * @author: Young 2020/01/22
  **/
-public abstract interface IBaseService<T> {
+public abstract interface IBaseService<T,Q> {
 
     public void insert(T obj);
 
@@ -39,6 +39,6 @@ public abstract interface IBaseService<T> {
 
     public PageInfo<T> list(int pageNo, int pageSize, Map<String, Object> map);
 
-    public List<T> list(T obj) ;
+    public List<T> list(Q obj) ;
 
 }

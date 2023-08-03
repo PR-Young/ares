@@ -19,6 +19,7 @@
 package com.ares.flowable.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
+import com.ares.flowable.model.query.SysTaskFormQuery;
 import com.ares.flowable.persistence.model.SysTaskForm;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * @author young
  */
-public interface ISysTaskFormService extends IBaseService<SysTaskForm> {
+public interface ISysTaskFormService extends IBaseService<SysTaskForm, SysTaskFormQuery> {
 
     /**
      * 查询流程任务关联单
@@ -43,6 +44,6 @@ public interface ISysTaskFormService extends IBaseService<SysTaskForm> {
      * @return 流程任务关联单
      */
 
-    public List<SysTaskForm> selectSysTaskFormList(SysTaskForm sysTaskForm) ;
+    public List<SysTaskForm> selectSysTaskFormList(SysTaskFormQuery sysTaskForm) ;
 
 }

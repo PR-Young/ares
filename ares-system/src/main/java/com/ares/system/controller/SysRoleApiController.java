@@ -24,8 +24,9 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysRoleQuery;
+import com.ares.core.model.query.SysUserQuery;
 import com.ares.core.persistence.model.SysRole;
-import com.ares.core.persistence.model.SysUser;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.StringUtils;
@@ -61,7 +62,7 @@ public class SysRoleApiController extends BaseController {
     @SaCheckPermission("role:list")
     @GetMapping("list")
     @Operation(summary = "角色列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysRole role) {
+    public TableDataInfo list(SysRoleQuery role) {
         startPage();
         List<SysRole> roleList = roleService.selectRoleList(role);
         return getDataTable(roleList);
@@ -118,7 +119,7 @@ public class SysRoleApiController extends BaseController {
     @Operation(summary = "根据角色Id获取用户", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object roleUserselect(@PathVariable String roleId) {
         AjaxResult result = AjaxResult.success();
-        result.put("allUser", userService.selectUserList(new SysUser()));
+        result.put("allUser", userService.selectUserList(new SysUserQuery()));
         result.put("checkedKeys", userService.getUserByRole(roleId));
         return result;
     }

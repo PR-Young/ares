@@ -24,6 +24,7 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysPropertiesQuery;
 import com.ares.core.persistence.model.SysProperties;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.StringUtils;
@@ -58,7 +59,7 @@ public class SysPropertiesApiController extends BaseController {
     @SaCheckPermission("sysProperties:list")
     @GetMapping("list")
     @Operation(summary = "系统参数列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysProperties sysProperties) {
+    public TableDataInfo list(SysPropertiesQuery sysProperties) {
         startPage();
         List<SysProperties> sysPropertiesList = sysPropertiesService.list(sysProperties);
         return getDataTable(sysPropertiesList);

@@ -23,6 +23,7 @@ import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
+import com.ares.core.model.query.SysDictDataQuery;
 import com.ares.core.persistence.model.SysDictData;
 import com.ares.core.persistence.service.ISysDictDataService;
 import com.ares.core.utils.StringUtils;
@@ -57,7 +58,7 @@ public class SysDictDataApiController extends BaseController {
     @SaCheckPermission("sysDictData:list")
     @GetMapping("list")
     @Operation(summary = "字典数据列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo list(SysDictData sysDictData) {
+    public TableDataInfo list(SysDictDataQuery sysDictData) {
         startPage();
         List<SysDictData> sysDictDataList = sysDictDataService.list(sysDictData);
         return getDataTable(sysDictDataList);

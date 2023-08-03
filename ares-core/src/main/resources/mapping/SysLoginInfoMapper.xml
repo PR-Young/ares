@@ -116,7 +116,7 @@
         </if>
     </select>
 
-    <select id="selectList" parameterType="com.ares.core.persistence.model.SysLoginInfo" resultMap="SysLoginInfo">
+    <select id="selectList" parameterType="com.ares.core.model.query.SysLoginInfoQuery" resultMap="SysLoginInfo">
         select
         <include refid="Base_Column_List"/>
         from `sys_login_info`

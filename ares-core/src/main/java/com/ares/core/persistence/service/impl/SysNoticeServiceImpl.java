@@ -18,6 +18,7 @@
 
 package com.ares.core.persistence.service.impl;
 
+import com.ares.core.model.query.SysNoticeQuery;
 import com.ares.core.persistence.dao.ISysNoticeDao;
 import com.ares.core.persistence.dao.ISysNoticeReadDao;
 import com.ares.core.persistence.model.SysNotice;
@@ -78,7 +79,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
     }
 
     @Override
-    public List<SysNotice> list(SysNotice obj) {
+    public List<SysNotice> list(SysNoticeQuery obj) {
         List<SysNotice> lists = sysNoticeDao.selectList(obj);
         return lists;
     }

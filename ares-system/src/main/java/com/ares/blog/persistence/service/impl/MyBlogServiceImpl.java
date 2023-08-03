@@ -21,6 +21,7 @@ package com.ares.blog.persistence.service.impl;
 import com.ares.blog.persistence.service.IMyBlogService;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.JsonUtils;
+import com.ares.system.model.query.ArticlesQuery;
 import com.ares.system.persistence.model.Articles;
 import com.ares.system.persistence.service.IArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class MyBlogServiceImpl implements IMyBlogService {
 
     @Override
     public String getUpdateInfo1() {
-        Articles articles = new Articles();
+        ArticlesQuery articles = new ArticlesQuery();
         articles.setType("1");
         articles.setStatus("1");
         List<Articles> list = articlesService.list(articles);
