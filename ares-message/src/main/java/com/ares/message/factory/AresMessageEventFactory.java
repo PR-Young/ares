@@ -26,6 +26,7 @@ import com.lmax.disruptor.EventFactory;
  * @author: Young
  * @date: 2023/1/30
  * @see: com.ares.message.factory.AresMessageEventFactory.java
+ * @param <T>
  **/
 public class AresMessageEventFactory<T> implements EventFactory<AresMessageEvent<T>> {
     @Override

@@ -141,7 +141,8 @@ public class SysProfileApiController extends BaseController {
         if (file.exists()) {
             FileInputStream fileInputStream = new FileInputStream(file);
             int i = fileInputStream.available();
-            byte data[] = new byte[i];
+            byte[] data;
+            data = new byte[i];
             fileInputStream.read(data);
             fileInputStream.close();
             response.setContentType("image/*");

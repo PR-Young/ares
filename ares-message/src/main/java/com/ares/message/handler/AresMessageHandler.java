@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
  * @author: Young
  * @date: 2023/1/30
  * @see: com.ares.message.handler.AresMessageHandler.java
+ * @param <T>
  **/
 public class AresMessageHandler<T> implements EventHandler<AresMessageEvent<T>>, WorkHandler<AresMessageEvent<T>> {
     private static Logger logger = LoggerFactory.getLogger(AresMessageHandler.class);

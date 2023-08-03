@@ -30,6 +30,7 @@ import java.util.List;
  * @author: Young
  * @date: 2023/1/30
  * @see: com.ares.message.utils.DisruptorQueueUtil.java
+ * @param <T>
  **/
 @Data
 public class DisruptorQueue<T> {

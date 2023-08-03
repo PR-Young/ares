@@ -26,5 +26,5 @@ package com.ares.message.persistence.service;
  **/
 public interface IDisruptorMessageService {
 
-    public void send(String message);
+    void send(String message);
 }

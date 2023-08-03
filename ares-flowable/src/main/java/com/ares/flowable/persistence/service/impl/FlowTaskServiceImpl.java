@@ -872,7 +872,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
             HistoricProcessInstance pi = historyService.createHistoricProcessInstanceQuery().processInstanceId(processId).singleResult();
 
             processDefinitionId = pi.getProcessDefinitionId();
-        } else {// 如果流程没有结束，则取当前活动节点
+        } else { // 如果流程没有结束，则取当前活动节点
             // 根据流程实例ID获得当前处于活动状态的ActivityId合集
             ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
             processDefinitionId = pi.getProcessDefinitionId();

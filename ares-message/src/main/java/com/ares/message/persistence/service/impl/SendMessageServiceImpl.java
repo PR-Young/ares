@@ -66,7 +66,7 @@ public class SendMessageServiceImpl implements ISendMessageService {
         future.thenAcceptAsync(map -> emailService.send(String.valueOf(map.get("template")), (List<String>) map.get("receivers"), (Map<String, Object>) map.get("vars")));
 
         try {
-            System.out.println(future.get());
+            logger.info(String.valueOf(future.get()));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

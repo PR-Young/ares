@@ -407,7 +407,7 @@ public class FlowableUtils {
                 // 添加已经走过的连线
                 hasSequenceFlow.add(sequenceFlow.getId());
                 // 如果目标节点已被判断为并行，后面都不需要执行，直接返回
-                if (isSequential == false) {
+                if (!isSequential) {
                     break;
                 }
                 // 这条线路存在目标节点，这条线路完成，进入下个线路

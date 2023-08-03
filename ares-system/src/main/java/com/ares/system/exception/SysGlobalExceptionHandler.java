@@ -78,12 +78,12 @@ public class SysGlobalExceptionHandler {
 
     @ExceptionHandler(value = NotLoginException.class)
     public Object handleException(HttpServletRequest request, HttpServletResponse response, NotLoginException e) {
-        if (e.getType().equals(NotLoginException.INVALID_TOKEN_MESSAGE) ||
-                e.getType().equals(NotLoginException.BE_REPLACED_MESSAGE) ||
-                e.getType().equals(NotLoginException.DEFAULT_MESSAGE) ||
-                e.getType().equals(NotLoginException.KICK_OUT_MESSAGE) ||
-                e.getType().equals(NotLoginException.TOKEN_TIMEOUT_MESSAGE) ||
-                e.getType().equals(NotLoginException.NOT_TOKEN_MESSAGE)) {
+        if (e.getType().equals(NotLoginException.INVALID_TOKEN_MESSAGE)
+                || e.getType().equals(NotLoginException.BE_REPLACED_MESSAGE)
+                || e.getType().equals(NotLoginException.DEFAULT_MESSAGE)
+                || e.getType().equals(NotLoginException.KICK_OUT_MESSAGE)
+                || e.getType().equals(NotLoginException.TOKEN_TIMEOUT_MESSAGE)
+                || e.getType().equals(NotLoginException.NOT_TOKEN_MESSAGE)) {
             String token = StpUtil.getTokenValue();
             String id = String.valueOf(RedisUtil.get(token));
             SysLoginInfo sysLoginInfo = new SysLoginInfo();

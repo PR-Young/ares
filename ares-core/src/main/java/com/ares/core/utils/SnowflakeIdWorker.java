@@ -18,6 +18,8 @@
 
 package com.ares.core.utils;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Twitter_Snowflake<br>
  * SnowFlake的结构如下(每部分用-分开):<br>
@@ -30,6 +32,7 @@ package com.ares.core.utils;
  * 加起来刚好64位，为一个Long型。<br>
  * SnowFlake的优点是，整体上按照时间自增排序，并且整个分布式系统内不会产生ID碰撞(由数据中心ID和机器ID作区分)，并且效率较高，经测试，SnowFlake每秒能够产生26万ID左右。
  */
+@Slf4j
 public class SnowflakeIdWorker {
 
     // ==============================Fields===========================================
@@ -191,14 +194,14 @@ public class SnowflakeIdWorker {
      * 测试
      */
     //public static void main(String[] args) {
-    //    System.out.println(System.currentTimeMillis());
+    //    log.info("start time" + System.currentTimeMillis());
     //    SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1, 1);
     //    long startTime = System.nanoTime();
     //    for (int i = 0; i < 500; i++) {
     //        long id = idWorker.nextId();
-    //        System.out.println(id);
+    //        log.info("id=" + id);
     //    }
-    //    System.out.println((System.nanoTime() - startTime) / 1000000 + "ms");
+    //    log.info("end time" + (System.nanoTime() - startTime) / 1000000 + "ms");
     //}
 
     public static String getUUID() {

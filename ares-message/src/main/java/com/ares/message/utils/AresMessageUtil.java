@@ -20,6 +20,7 @@ package com.ares.message.utils;
 
 import com.ares.message.factory.DisruptorQueueFactory;
 import com.ares.message.handler.AresMessageHandler;
+import com.ares.message.persistence.model.AresMessage;
 import com.ares.message.persistence.model.DisruptorQueue;
 import com.ares.message.producer.AresMessageProducer;
 
@@ -37,9 +38,9 @@ public class AresMessageUtil {
 
     private static ExecutorService executorService = Executors.newCachedThreadPool();
 
-    public static void sendMessage(String name, Object data, int bufferSize, boolean isMoreProducer, int frequency, AresMessageHandler... handler) {
-        DisruptorQueue<String> disruptorQueue = DisruptorQueueFactory.getHandleEventsQueue(bufferSize, isMoreProducer, handler);
-        AresMessageProducer<String> producer = new AresMessageProducer(name, disruptorQueue, data, new AtomicInteger(frequency));
+    public static void sendMessage(AresMessage message, AresMessageHandler... handler) {
+        DisruptorQueue<String> disruptorQueue = DisruptorQueueFactory.getHandleEventsQueue(message.getBufferSize(), message.isMoreProducer(), handler);
+        AresMessageProducer<String> producer = new AresMessageProducer(message.getName(), disruptorQueue, message.getData(), new AtomicInteger(message.getFrequency()));
         executorService.execute(producer);
     }
 

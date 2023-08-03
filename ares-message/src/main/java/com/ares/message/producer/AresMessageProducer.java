@@ -31,6 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author: Young
  * @date: 2023/1/30
  * @see: com.ares.message.producer.AresMessageProducer.java
+ * @param <T> 
  **/
 public class AresMessageProducer<T> implements Runnable {
     private static Logger logger = LoggerFactory.getLogger(AresMessageProducer.class);

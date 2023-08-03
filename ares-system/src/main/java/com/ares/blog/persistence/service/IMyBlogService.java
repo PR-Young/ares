@@ -26,9 +26,9 @@ package com.ares.blog.persistence.service;
  **/
 public interface IMyBlogService {
 
-    public String getUpdateInfo();
+    String getUpdateInfo();
 
-    public boolean saveUpdateInfo(String content);
+    boolean saveUpdateInfo(String content);
 
-    public String getUpdateInfo1();
+    String getUpdateInfo1();
 }

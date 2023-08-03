@@ -39,14 +39,14 @@ import java.text.AttributedString;
 
 public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
     //定义走过流程连线颜色为绿色
-    protected static Color HIGHLIGHT_SequenceFlow_COLOR = Color.GREEN;
+    protected static final Color HIGHLIGHT_SEQUENCEFLOW_COLOR = Color.GREEN;
     //设置未走过流程的连接线颜色
-    protected static Color CONNECTION_COLOR = Color.BLACK;
+    protected static final Color CONNECTION_COLOR = Color.BLACK;
     //设置flows连接线字体颜色red
-    protected static Color LABEL_COLOR = new Color(0, 0, 0);
+    protected static final Color LABEL_COLOR = new Color(0, 0, 0);
     //高亮显示task框颜色
-    protected static Color HIGHLIGHT_COLOR = Color.GREEN;
-    protected static Color HIGHLIGHT_COLOR1 = Color.RED;
+    protected static final Color HIGHLIGHT_COLOR = Color.GREEN;
+    protected static final Color HIGHLIGHT_COLOR1 = Color.RED;
 
     public CustomProcessDiagramCanvas(int width, int height, int minX, int minY, String imageType, String activityFontName, String labelFontName, String annotationFontName, ClassLoader customClassLoader) {
         super(width, height, minX, minY, imageType, activityFontName, labelFontName, annotationFontName, customClassLoader);
@@ -73,7 +73,7 @@ public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
         if (connectionType.equals("association")) {
             this.g.setStroke(ASSOCIATION_STROKE);
         } else if (highLighted) {
-            this.g.setPaint(HIGHLIGHT_SequenceFlow_COLOR);
+            this.g.setPaint(HIGHLIGHT_SEQUENCEFLOW_COLOR);
             this.g.setStroke(HIGHLIGHT_FLOW_STROKE);
         }
 
@@ -336,7 +336,7 @@ public class CustomProcessDiagramCanvas extends DefaultProcessDiagramCanvas {
         }
     }
 
-    protected static Color EVENT_COLOR = new Color(255, 255, 255);
+    protected static final Color EVENT_COLOR = new Color(255, 255, 255);
 
     /**
      * 重写开始事件

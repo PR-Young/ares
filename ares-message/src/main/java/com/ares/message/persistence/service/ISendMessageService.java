@@ -28,5 +28,5 @@ public interface ISendMessageService {
     /**
      * 异步发送
      */
-    public void sendAsync();
+    void sendAsync();
 }

@@ -25,6 +25,7 @@ import lombok.Data;
  * @author: Young
  * @date: 2023/1/30
  * @see: com.ares.message.persistence.model.AresMessageEvent.java
+ * @param <T>
  **/
 @Data
 public class AresMessageEvent<T> {

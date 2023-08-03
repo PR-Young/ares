@@ -85,7 +85,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
         ProcessDefinitionQuery processDefinitionQuery
                 = repositoryService.createProcessDefinitionQuery().processDefinitionKey(processDefinitionKey);
         long count = processDefinitionQuery.count();
-        return count > 0 ? true : false;
+        return count > 0;
     }
 
 

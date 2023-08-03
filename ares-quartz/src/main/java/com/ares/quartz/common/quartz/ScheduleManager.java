@@ -51,39 +51,27 @@ public class ScheduleManager {
     }
 
     public void addJob(SysQuartzJob job) {
-        addJob(createTaskName(job.getJobName()),
-                job.getJobGroup(),
-                getQuartzJobClass(job),
-                false,
-                job.getCronExpression(),
-                60,
-                job);
+        addJob(false, 60, job);
 
     }
 
     public void edit(SysQuartzJob job) {
-        modify("1",
-                createTaskName(job.getJobName()),
-                job.getJobGroup(),
-                createTaskName(job.getJobName()) + ScheduleConstants.TRIGGER,
-                job.getJobGroup() + ScheduleConstants.TRIGGER_GROUP,
-                job.getCronExpression(),
-                job);
+        modify("1", job);
     }
 
     /**
      * 使用SimpleScheduleBuilder创建一个定时任务
      *
-     * @param jobName      job名称
-     * @param jobGroupName job分组名称
-     * @param jobClass     job的class名
      * @param durability   是否持久化
      * @param interval     间隔时间，单位秒
      * @param delay        延迟启动时间，单位秒
      * @return
      */
-    public Boolean addJob(String jobName, String jobGroupName, Class jobClass, boolean durability, int interval, int delay, SysQuartzJob job) {
+    public Boolean addJob(boolean durability, int interval, int delay, SysQuartzJob job) {
         try {
+            String jobName = createTaskName(job.getJobName());
+            String jobGroupName = job.getJobGroup();
+            Class jobClass = getQuartzJobClass(job);
             JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(jobName, jobGroupName).storeDurably(durability).build();
             SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(interval).repeatForever();
             Trigger trigger = TriggerBuilder.newTrigger()
@@ -102,23 +90,23 @@ public class ScheduleManager {
     /**
      * 使用CronScheduleBuilder创建一个定时任务
      *
-     * @param jobName        job名称
-     * @param jobGroupName   job分组名称
-     * @param jobClass       job的class名
-     * @param durability     是否持久化
-     * @param cronExpression 定时表达式
-     * @param delay          延迟启动时间，单位秒
+     * @param durability 是否持久化
+     * @param delay      延迟启动时间，单位秒
      * @return
      */
-    public Boolean addJob(String jobName, String jobGroupName, Class jobClass,
-                          boolean durability, String cronExpression, int delay, SysQuartzJob job) {
+    public Boolean addJob(boolean durability, int delay, SysQuartzJob job) {
         /*
-         * 1.取到任务调度器Scheduler
-         * 2.定义jobDetail;
-         * 3.定义trigger;
-         * 4.使用Scheduler添加任务;
-         */
+         ** 1.取到任务调度器Scheduler
+         ** 2.定义jobDetail;
+         ** 3.定义trigger;
+         ** 4.使用Scheduler添加任务;
+         **/
         try {
+            String jobName = createTaskName(job.getJobName());
+            String jobGroupName = job.getJobGroup();
+            Class jobClass = getQuartzJobClass(job);
+            String cronExpression = job.getCronExpression();
+
             JobDetail jobDetail = JobBuilder.newJob(jobClass).
                     withDescription(job.getDescription()).
                     withIdentity(jobName, jobGroupName).
@@ -212,16 +200,21 @@ public class ScheduleManager {
     /**
      * 动态修改任务执行的时间
      *
-     * @param type             创建类型，1-cron,2-simple
-     * @param jobName          job名称
-     * @param jobGroupName     job分组名称
-     * @param triggerName      触发器名称
-     * @param triggerGroupName 触发器分组名称
-     * @param time             type为1时-填cron表达式，为2-整数
+     * @param type 创建类型，1-cron,2-simple
+     *             jobName          job名称
+     *             jobGroupName     job分组名称
+     *             triggerName      触发器名称
+     *             triggerGroupName 触发器分组名称
+     *             time             type为1时-填cron表达式，为2-整数
      * @return
      */
-    public Boolean modify(String type, String jobName, String jobGroupName, String triggerName, String triggerGroupName, String time, SysQuartzJob job) {
+    public Boolean modify(String type, SysQuartzJob job) {
         try {
+            String jobName = createTaskName(job.getJobName());
+            String jobGroupName = job.getJobGroup();
+            String triggerName = createTaskName(job.getJobName()) + ScheduleConstants.TRIGGER;
+            String triggerGroupName = job.getJobGroup() + ScheduleConstants.TRIGGER_GROUP;
+            String time = job.getCronExpression();
             Integer status = getJobStatus(triggerName, triggerGroupName);
             if (status == 0) {
                 //NONE - 0,该job不存在

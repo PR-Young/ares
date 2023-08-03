@@ -30,9 +30,9 @@ import java.util.Map;
 @Repository
 public interface IGeneratorDao {
 
-    public List<Map<String, Object>> getTables(Map<String, Object> map);
+    List<Map<String, Object>> getTables(Map<String, Object> map);
 
-    public List<Map<String, Object>> getColumnsByTable(Map<String, Object> map);
+    List<Map<String, Object>> getColumnsByTable(Map<String, Object> map);
 
-    public List<Map<String, Object>> selectTableColumnListByTableName(String tableName);
+    List<Map<String, Object>> selectTableColumnListByTableName(String tableName);
 }

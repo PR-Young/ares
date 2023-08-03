@@ -21,7 +21,7 @@ package com.ares.quartz.common.quartz;
 /**
  * 任务调度通用常量
  */
-public interface ScheduleConstants {
+public class ScheduleConstants {
     public static final String TASK_CLASS_NAME = "TASK_CLASS_NAME_";
 
     /**
@@ -79,9 +79,9 @@ public interface ScheduleConstants {
          */
         PAUSE(1);
 
-        private Integer value;
+        private final Integer value;
 
-        private Status(Integer value) {
+        Status(Integer value) {
             this.value = value;
         }
 

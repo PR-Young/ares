@@ -128,21 +128,17 @@ public class JobInvokeUtil {
             // String字符串类型，包含'
             if (StringUtils.contains(str, "'")) {
                 classs.add(new Object[]{StringUtils.replace(str, "'", ""), String.class});
-            }
-            // boolean布尔类型，等于true或者false
-            else if (StringUtils.equals(str, "true") || StringUtils.equalsIgnoreCase(str, "false")) {
+            } else if (StringUtils.equals(str, "true") || StringUtils.equalsIgnoreCase(str, "false")) {
+                // boolean布尔类型，等于true或者false
                 classs.add(new Object[]{Boolean.valueOf(str), Boolean.class});
-            }
-            // long长整形，包含L
-            else if (StringUtils.containsIgnoreCase(str, "L")) {
+            } else if (StringUtils.containsIgnoreCase(str, "L")) {
+                // long长整形，包含L
                 classs.add(new Object[]{Long.valueOf(StringUtils.replaceIgnoreCase(str, "L", "")), Long.class});
-            }
-            // double浮点类型，包含D
-            else if (StringUtils.containsIgnoreCase(str, "D")) {
+            } else if (StringUtils.containsIgnoreCase(str, "D")) {
+                // double浮点类型，包含D
                 classs.add(new Object[]{Double.valueOf(StringUtils.replaceIgnoreCase(str, "D", "")), Double.class});
-            }
-            // 其他类型归类为整形
-            else {
+            } else {
+                // 其他类型归类为整形
                 classs.add(new Object[]{Integer.valueOf(str), Integer.class});
             }
         }
