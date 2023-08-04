@@ -481,7 +481,6 @@ public class FlowableUtils {
         List<String> multiTask = new ArrayList<>();
         allElements.forEach(flowElement -> {
             if (flowElement instanceof UserTask) {
-                // 如果该节点的行为为会签行为，说明该节点为会签节点
                 if (((UserTask) flowElement).getBehavior() instanceof ParallelMultiInstanceBehavior || ((UserTask) flowElement).getBehavior() instanceof SequentialMultiInstanceBehavior) {
                     multiTask.add(flowElement.getId());
                 }
@@ -489,7 +488,7 @@ public class FlowableUtils {
         });
         // 循环放入栈，栈 LIFO：后进先出
         Stack<HistoricTaskInstance> stack = new Stack<>();
-        historicTaskInstanceList.forEach(item -> stack.push(item));
+        historicTaskInstanceList.forEach(stack::push);
         // 清洗后的历史任务实例
         List<String> lastHistoricTaskInstanceList = new ArrayList<>();
         // 网关存在可能只走了部分分支情况，且还存在跳转废弃数据以及其他分支数据的干扰，因此需要对历史节点数据进行清洗
@@ -520,11 +519,11 @@ public class FlowableUtils {
             if (stack.peek().getDeleteReason() != null && !"MI_END".equals(stack.peek().getDeleteReason())) {
                 // 可以理解为脏线路起点
                 String dirtyPoint = "";
-                if (stack.peek().getDeleteReason().indexOf("Change activity to ") >= 0) {
+                if (stack.peek().getDeleteReason().contains("Change activity to ")) {
                     dirtyPoint = stack.peek().getDeleteReason().replace("Change activity to ", "");
                 }
                 // 会签回退删除原因有点不同
-                if (stack.peek().getDeleteReason().indexOf("Change parent activity to ") >= 0) {
+                if (stack.peek().getDeleteReason().contains("Change parent activity to ")) {
                     dirtyPoint = stack.peek().getDeleteReason().replace("Change parent activity to ", "");
                 }
                 FlowElement dirtyTask = null;

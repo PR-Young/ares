@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+        "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+
+<suppressions>
+    <suppress files="[\\/]com[\\/]ares[\\/]admin[\\/].*" checks="[a-zA-Z0-9]*"/>
+    <suppress files="[\\/]resources[\\/]" checks="[a-zA-Z0-9]*"/>
+    <suppress files="CustomProcessDiagramGenerator.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="FlowableUtils.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="AresSystemApplication.java" checks="[a-zA-Z0-9]*"/>
+<!--    <suppress files=".*(Switch|Enum|ErrorCode).java" checks="[a-zA-Z0-9]*"/>-->
+</suppressions>

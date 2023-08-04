@@ -28,8 +28,4 @@ public interface IAutoGeneratorService {
 
     byte[] generator(String tableName);
 
-
-    byte[] generator(String driver, String url, String user, String pwd, String tableName, String tablePrefix);
-
-    String autoCodePath();
 }

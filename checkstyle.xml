@@ -12,8 +12,18 @@
         <property name="max" value="1500"/>
     </module>
 
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="^(module|package)\-info\.java$" />
+    </module>
+    <module name="SuppressWarningsFilter" />
+    <!--排除不需要扫描的路径-->
+    <module name="SuppressionFilter">
+        <property name="file" value="checkstyle-suppressions.xml"/>
+    </module>
+
     <!-- 每个java文件一个语法树 -->
     <module name="TreeWalker">
+        <module name="SuppressWarningsHolder" />
         <!-- import检查-->
         <!-- 检查是否从非法的包中导入了类 -->
         <module name="IllegalImport"/>

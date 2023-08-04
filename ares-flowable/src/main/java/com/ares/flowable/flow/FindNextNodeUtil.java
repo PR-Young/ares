@@ -81,15 +81,12 @@ public class FindNextNodeUtil {
                 //2.无表达式
                 String expression = sequenceFlow.getConditionExpression();
                 if (expression == null
-                        || Boolean.parseBoolean(
-                        String.valueOf(
-                                result(map, expression.substring(expression.lastIndexOf("{") + 1, expression.lastIndexOf("}")))))) {
+                        || Boolean.parseBoolean(String.valueOf(result(map, expression.substring(expression.lastIndexOf("{") + 1, expression.lastIndexOf("}")))))) {
                     //出线的下一节点
                     String nextFlowElementID = sequenceFlow.getTargetRef();
                     if (checkSubProcess(nextFlowElementID, flowElements, nextUser)) {
                         continue;
                     }
-
                     //查询下一节点的信息
                     FlowElement nextFlowElement = getFlowElementById(nextFlowElementID, flowElements);
                     //调用流程
@@ -98,34 +95,25 @@ public class FindNextNodeUtil {
                         if (ca.getLoopCharacteristics() != null) {
                             UserTask userTask = new UserTask();
                             userTask.setId(ca.getId());
-
-                            userTask.setId(ca.getId());
                             userTask.setLoopCharacteristics(ca.getLoopCharacteristics());
                             userTask.setName(ca.getName());
                             nextUser.add(userTask);
                         }
                         next(flowElements, nextFlowElement, map, nextUser);
                     }
-                    //用户任务
-                    if (nextFlowElement instanceof UserTask) {
+                    if (nextFlowElement instanceof UserTask) { //用户任务
                         nextUser.add((UserTask) nextFlowElement);
-                    } else if (nextFlowElement instanceof ExclusiveGateway) {
-                        //排他网关
+                    } else if (nextFlowElement instanceof ExclusiveGateway) { //排他网关
                         next(flowElements, nextFlowElement, map, nextUser);
-                    } else if (nextFlowElement instanceof ParallelGateway) {
-                        //并行网关
+                    } else if (nextFlowElement instanceof ParallelGateway) { //并行网关
                         next(flowElements, nextFlowElement, map, nextUser);
-                    } else if (nextFlowElement instanceof ReceiveTask) {
-                        //接收任务
+                    } else if (nextFlowElement instanceof ReceiveTask) { //接收任务
                         next(flowElements, nextFlowElement, map, nextUser);
-                    } else if (nextFlowElement instanceof ServiceTask) {
-                        //服务任务
+                    } else if (nextFlowElement instanceof ServiceTask) { //服务任务
                         next(flowElements, nextFlowElement, map, nextUser);
-                    } else if (nextFlowElement instanceof StartEvent) {
-                        //子任务的起点
+                    } else if (nextFlowElement instanceof StartEvent) { //子任务的起点
                         next(flowElements, nextFlowElement, map, nextUser);
-                    } else if (nextFlowElement instanceof EndEvent) {
-                        //结束节点
+                    } else if (nextFlowElement instanceof EndEvent) { //结束节点
                         next(flowElements, nextFlowElement, map, nextUser);
                     }
                 }
