@@ -45,8 +45,8 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
     }
 
     @Override
-    public String saveInfo(SysLoginInfo sysLoginInfo) {
-        String id = SnowflakeIdWorker.getUUID();
+    public Long saveInfo(SysLoginInfo sysLoginInfo) {
+        Long id = SnowflakeIdWorker.getUUID();
         sysLoginInfo.setId(id);
         sysLoginInfoDao.insert(sysLoginInfo);
         return id;
@@ -79,12 +79,12 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
+    public void deleteByIds(List<Long> ids) {
         sysLoginInfoDao.deleteByIds(ids);
     }
 
     @Override
-    public SysLoginInfo getById(String id) {
+    public SysLoginInfo getById(Long id) {
         return sysLoginInfoDao.getById(id);
     }
 

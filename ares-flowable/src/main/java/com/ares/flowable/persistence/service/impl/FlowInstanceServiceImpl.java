@@ -130,7 +130,7 @@ public class FlowInstanceServiceImpl extends FlowServiceFactory implements IFlow
     public AjaxResult startProcessInstanceById(String procDefId, Map<String, Object> variables) {
         try {
             // 设置流程发起人Id到流程中
-            String userId = SecurityUtils.getUser().getId();
+            Long userId = SecurityUtils.getUser().getId();
             variables.put("initiator", userId);
             variables.put("_FLOWABLE_SKIP_EXPRESSION_ENABLED", true);
             runtimeService.startProcessInstanceById(procDefId, variables);

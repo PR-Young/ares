@@ -65,12 +65,12 @@ public class SysDeployFormServiceImpl implements ISysDeployFormService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
+    public void deleteByIds(List<Long> ids) {
         sysDeployFormDao.deleteByIds(ids);
     }
 
     @Override
-    public SysDeployForm getById(String id) {
+    public SysDeployForm getById(Long id) {
         return sysDeployFormDao.getById(id);
     }
 
@@ -81,7 +81,7 @@ public class SysDeployFormServiceImpl implements ISysDeployFormService {
     }
 
     @Override
-    public SysDeployForm selectSysDeployFormById(String id) {
+    public SysDeployForm selectSysDeployFormById(Long id) {
         return sysDeployFormDao.selectSysDeployFormById(id);
     }
 

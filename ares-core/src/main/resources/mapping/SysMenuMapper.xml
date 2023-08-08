@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysMenuDao">
     <resultMap id="SysMenu" type="com.ares.core.persistence.model.SysMenu">
-        <id column="Id" jdbcType="VARCHAR" property="id"/>
+        <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="Name" jdbcType="VARCHAR" property="name"/>
         <result column="Description" jdbcType="VARCHAR" property="description"/>
         <result column="Url" jdbcType="VARCHAR" property="url"/>
         <result column="Path" jdbcType="VARCHAR" property="path"/>
         <result column="IsBlank" jdbcType="INTEGER" property="isBlank"/>
-        <result column="PId" jdbcType="VARCHAR" property="pId"/>
+        <result column="PId" jdbcType="BIGINT" property="pId"/>
         <result column="Icon" jdbcType="VARCHAR" property="icon"/>
         <result column="Perms" jdbcType="VARCHAR" property="perms"/>
         <result column="Type" jdbcType="INTEGER" property="type"/>
         <result column="Order" jdbcType="INTEGER" property="order"/>
         <result column="Visible" jdbcType="INTEGER" property="visible"/>
-        <result column="Creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="Creator" jdbcType="BIGINT" property="creator"/>
         <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="Modifier" jdbcType="VARCHAR" property="modifier"/>
+        <result column="Modifier" jdbcType="BIGINT" property="modifier"/>
         <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
         <result column="childCount" jdbcType="INTEGER" property="childCount"/>
     </resultMap>
@@ -25,24 +25,29 @@
         , `Name`, `Description`, `Url`,`Path`,`IsBlank`,`PId`,`Perms`,`Type`,`Icon`,`Order`,`Visible`,`Creator`,
         `CreateTime`,`Modifier`, `ModifyTime`
     </sql>
+    <sql id="Select_Column_List">
+        menu.`Id`
+        , menu.`Name`, menu.`Description`, menu.`Url`,menu.`Path`,menu.`IsBlank`,menu.`PId`,menu.`Perms`,menu.`Type`,
+            menu.`Icon`,menu.`Order`,menu.`Visible`,menu.`Creator`,menu.`CreateTime`,menu.`Modifier`, menu.`ModifyTime`
+    </sql>
     <insert id="insert" parameterType="com.ares.core.persistence.model.SysMenu">
         insert into sys_menu (<include refid="Base_Column_List"/>)
         values (
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=BIGINT},
         #{name,jdbcType=VARCHAR},
         #{description,jdbcType=VARCHAR},
         #{url,jdbcType=VARCHAR},
         #{path,jdbcType=VARCHAR},
         #{isBlank,jdbcType=INTEGER},
-        #{pId,jdbcType=VARCHAR},
+        #{pId,jdbcType=BIGINT},
         #{perms,jdbcType=VARCHAR},
         #{type,jdbcType=INTEGER},
         #{icon,jdbcType=VARCHAR},
         #{order,jdbcType=INTEGER},
         #{visible,jdbcType=INTEGER},
-        #{creator,jdbcType=VARCHAR},
+        #{creator,jdbcType=BIGINT},
         #{createTime,jdbcType=TIMESTAMP},
-        #{modifier,jdbcType=VARCHAR},
+        #{modifier,jdbcType=BIGINT},
         #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
     <update id="update" parameterType="com.ares.core.persistence.model.SysMenu">
@@ -82,19 +87,19 @@
                 `Visible` = #{visible,jdbcType=INTEGER},
             </if>
             <if test="creator != null">
-                `Creator` = #{creator,jdbcType=VARCHAR},
+                `Creator` = #{creator,jdbcType=BIGINT},
             </if>
             <if test="createTime != null">
                 `CreateTime` = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="modifier != null">
-                `Modifier` = #{modifier,jdbcType=VARCHAR},
+                `Modifier` = #{modifier,jdbcType=BIGINT},
             </if>
             <if test="modifyTime != null">
                 `ModifyTime` = #{modifyTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where Id = #{id,jdbcType=VARCHAR}
+        where Id = #{id,jdbcType=BIGINT}
     </update>
     <delete id="deleteByIds" parameterType="java.util.List">
         delete from `sys_menu`
@@ -104,7 +109,7 @@
         </foreach>
 
     </delete>
-    <select id="getMenuByUserId" parameterType="java.lang.String" resultMap="SysMenu">
+    <select id="getMenuByUserId" parameterType="java.lang.Long" resultMap="SysMenu">
         select
         menu.*, (SELECT count(1)FROM sys_menu WHERE PId = menu.Id and `Type` != 2) as childCount
         from sys_menu menu
@@ -116,7 +121,7 @@
         </if>
         where menu.Type != 2
         <if test="userId != 1 and userId != null">
-            and user.Id = #{userId,jdbcType=VARCHAR}
+            and user.Id = #{userId,jdbcType=BIGINT}
         </if>
         order by menu.Order asc
     </select>
@@ -128,22 +133,22 @@
         where 1=1
         order by `Order` asc
     </select>
-    <select id="getById" parameterType="java.lang.String" resultMap="SysMenu">
+    <select id="getById" parameterType="java.lang.Long"  resultMap="SysMenu">
         select
         <include refid="Base_Column_List"/>
         from `sys_menu`
-        where `Id` = #{id,jdbcType=VARCHAR}
+        where `Id` = #{id,jdbcType=BIGINT}
     </select>
-    <select id="getByPId" parameterType="java.lang.String" resultMap="SysMenu">
+    <select id="getByPId" parameterType="java.lang.Long" resultMap="SysMenu">
         select
         <include refid="Base_Column_List"/>
         from `sys_menu`
-        where `PId` = #{pid,jdbcType=VARCHAR}
+        where `PId` = #{pid,jdbcType=BIGINT}
     </select>
-    <select id="getMenuByRole" parameterType="java.lang.String" resultType="java.lang.String">
+    <select id="getMenuByRole" parameterType="java.lang.Long" resultType="java.lang.Long">
         select `MenuId`
         from `sys_permission`
-        where `RoleId` = #{roleId,jdbcType=VARCHAR}
+        where `RoleId` = #{roleId,jdbcType=BIGINT}
     </select>
 
     <select id="selectList" parameterType="com.ares.core.persistence.model.SysMenu" resultMap="SysMenu">
@@ -165,7 +170,7 @@
 
     <select id="selectListByUser" parameterType="com.ares.core.model.query.SysMenuQuery" resultMap="SysMenu">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Select_Column_List"/>
         from `sys_menu` menu
         left join sys_permission permission on menu.Id = permission.MenuId
         LEFT JOIN sys_role role on permission.RoleId = role.Id
@@ -184,13 +189,13 @@
         order by menu.`Order` asc
     </select>
 
-    <delete id="deleteById" parameterType="java.lang.String">
+    <delete id="deleteById" parameterType="java.lang.Long">
         delete
         from `sys_menu`
         where `Id` = #{menuId}
     </delete>
 
-    <select id="hasChildByMenuId" parameterType="java.lang.String" resultType="Integer">
+    <select id="hasChildByMenuId" parameterType="java.lang.Long" resultType="Integer">
         select count(1)
         from `sys_menu`
         where `PId` = #{menuId}

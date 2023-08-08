@@ -35,9 +35,9 @@ public interface IBaseService<T, Q> {
 
     void update(T obj);
 
-    void deleteByIds(List<String> ids);
+    void deleteByIds(List<Long> ids);
 
-    T getById(String id);
+    T getById(Long id);
 
     PageInfo<T> list(int pageNo, int pageSize, Map<String, Object> map);
 

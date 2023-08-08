@@ -31,5 +31,5 @@ public interface ISysDeptDao extends IBaseDao<SysDept, SysDeptQuery> {
 
     List<SysDept> getAllDept();
 
-    SysDept getByDeptId(@Param("id") String id);
+    SysDept getByDeptId(@Param("id") Long id);
 }

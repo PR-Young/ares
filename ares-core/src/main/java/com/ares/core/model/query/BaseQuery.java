@@ -23,6 +23,7 @@ package com.ares.core.model.query;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -54,6 +55,6 @@ public class BaseQuery {
      * 请求参数
      */
     @Schema(hidden = true)
-    private Map<String, Object> params;
+    private Map<String, Object> params = new HashMap<>();
 
 }

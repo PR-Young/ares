@@ -37,8 +37,8 @@ public final class SecurityUtils {
     }
 
     public static SysUser getUser() throws UserException {
-        String loginId = String.valueOf(StpUtil.getLoginId());
-        if (null == loginId || "null".equalsIgnoreCase(loginId)) {
+        Long loginId = Long.valueOf(String.valueOf(StpUtil.getLoginId()));
+        if (loginId == 0) {
             throw new UserException(ErrorCode.NOLOGIN.getCode(), "用户未登录！");
         }
         ISysUserService userService = SpringUtils.getBean(ISysUserService.class);

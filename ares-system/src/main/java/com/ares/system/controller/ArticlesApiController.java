@@ -63,7 +63,7 @@ public class ArticlesApiController extends BaseController {
 
     @GetMapping("{articlesId}")
     @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String articlesId) {
+    public Object getInfo(@PathVariable Long articlesId) {
         return AjaxResult.successData(articlesService.getById(articlesId));
     }
 
@@ -84,7 +84,7 @@ public class ArticlesApiController extends BaseController {
     @SaCheckPermission("articles:delete")
     @DeleteMapping("{articlesIds}")
     @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] articlesIds) {
+    public Object remove(@PathVariable Long[] articlesIds) {
         articlesService.deleteByIds(Arrays.asList(articlesIds));
         return AjaxResult.success();
     }

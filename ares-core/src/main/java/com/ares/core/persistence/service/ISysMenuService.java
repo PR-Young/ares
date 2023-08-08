@@ -38,26 +38,26 @@ public interface ISysMenuService extends IBaseService<SysMenu, SysMenuQuery> {
      *
      * @return
      */
-    List<SysMenu> getAll(String userId);
+    List<SysMenu> getAll(Long userId);
 
     List<SysMenu> list(Map<String, Object> map);
 
-    SysMenu getByPId(String pid);
+    SysMenu getByPId(Long pid);
 
-    List<RouterVo> buildMenus(List<SysMenu> menus, String parentId);
+    List<RouterVo> buildMenus(List<SysMenu> menus, Long parentId);
 
     String getRouterPath(SysMenu menu);
 
-    List<SysMenu> selectMenuList(SysMenuQuery menu, String userId);
+    List<SysMenu> selectMenuList(SysMenuQuery menu, Long userId);
 
     List<TreeSelect> buildMenuTreeSelect(List<SysMenu> menus);
 
     List<SysMenu> buildMenuTree(List<SysMenu> menus);
 
-    void remove(String menuId);
+    void remove(Long menuId);
 
-    boolean hasChildByMenuId(String menuId);
+    boolean hasChildByMenuId(Long menuId);
 
-    List<String> selectMenuByRole(String roleId);
+    List<Long> selectMenuByRole(Long roleId);
 
 }

@@ -64,12 +64,12 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
+    public void deleteByIds(List<Long> ids) {
         sysDictTypeDao.deleteByIds(ids);
     }
 
     @Override
-    public SysDictType getById(String id) {
+    public SysDictType getById(Long id) {
         return sysDictTypeDao.getById(id);
     }
 

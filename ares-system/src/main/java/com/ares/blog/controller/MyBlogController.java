@@ -74,7 +74,7 @@ public class MyBlogController {
     }
 
     @GetMapping("getArticle/{id}")
-    public AjaxResult getArticles(@PathVariable String id) {
+    public AjaxResult getArticles(@PathVariable Long id) {
         return AjaxResult.successData(articlesService.getById(id));
     }
 }

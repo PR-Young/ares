@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysUserDao">
     <resultMap id="SysUser" type="com.ares.core.persistence.model.SysUser">
-        <id column="Id" jdbcType="VARCHAR" property="id"/>
+        <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="Account" jdbcType="VARCHAR" property="account"/>
         <result column="UserName" jdbcType="VARCHAR" property="userName"/>
         <result column="Password" jdbcType="VARCHAR" property="password"/>
@@ -12,9 +12,9 @@
         <result column="PostId" jdbcType="VARCHAR" property="postId"/>
         <result column="Avatar" jdbcType="VARCHAR" property="avatar"/>
         <result column="Status" jdbcType="INTEGER" property="status"/>
-        <result column="Creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="Creator" jdbcType="BIGINT" property="creator"/>
         <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="Modifier" jdbcType="VARCHAR" property="modifier"/>
+        <result column="Modifier" jdbcType="BIGINT" property="modifier"/>
         <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -29,11 +29,11 @@
                                 `Creator`,
                                 `CreateTime`, `Modifier`,
                                 `ModifyTime`)
-        values (#{id,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+        values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
                 #{password,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
                 #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{deptId,jdbcType=VARCHAR},
-                #{postId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
-                #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
+                #{postId,jdbcType=VARCHAR}, #{creator,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+                #{modifier,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
     <update id="update" parameterType="com.ares.core.persistence.model.SysUser">
         update `sys_user`
@@ -66,19 +66,19 @@
                 `PostId` = #{postId,jdbcType=VARCHAR},
             </if>
             <if test="creator != null">
-                `Creator` = #{creator,jdbcType=VARCHAR},
+                `Creator` = #{creator,jdbcType=BIGINT},
             </if>
             <if test="createTime != null">
                 `CreateTime` = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="modifier != null">
-                `Modifier` = #{modifier,jdbcType=VARCHAR},
+                `Modifier` = #{modifier,jdbcType=BIGINT},
             </if>
             <if test="modifyTime != null">
                 `ModifyTime` = #{modifyTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where `Id` = #{id,jdbcType=VARCHAR}
+        where `Id` = #{id,jdbcType=BIGINT}
     </update>
     <delete id="deleteByIds" parameterType="java.util.List">
         delete from `sys_user`
@@ -94,11 +94,11 @@
         from `sys_user`
         where `Status` = 1 and `Account` = #{userName,jdbcType=VARCHAR}
     </select>
-    <select id="getById" parameterType="java.lang.String" resultMap="SysUser">
+    <select id="getById" parameterType="java.lang.Long" resultMap="SysUser">
         select
         <include refid="Base_Column_List"/>
         from `sys_user`
-        where `Id` = #{id,jdbcType=VARCHAR}
+        where `Id` = #{id,jdbcType=BIGINT}
     </select>
 
     <select id="list" parameterType="java.util.Map" resultMap="SysUser">
@@ -127,7 +127,7 @@
     <update id="resetPassword">
         update `sys_user`
         set `Password` = #{password}
-        where `Id` = #{id,jdbcType=VARCHAR}
+        where `Id` = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateUserByAccount" parameterType="com.ares.core.persistence.model.SysUser">
         update `sys_user`
@@ -154,13 +154,13 @@
                 `PostId` = #{postId,jdbcType=VARCHAR},
             </if>
             <if test="creator != null">
-                `Creator` = #{creator,jdbcType=VARCHAR},
+                `Creator` = #{creator,jdbcType=BIGINT},
             </if>
             <if test="createTime != null">
                 `CreateTime` = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="modifier != null">
-                `Modifier` = #{modifier,jdbcType=VARCHAR},
+                `Modifier` = #{modifier,jdbcType=BIGINT},
             </if>
             <if test="modifyTime != null">
                 `ModifyTime` = #{modifyTime,jdbcType=TIMESTAMP},
@@ -169,7 +169,7 @@
         where `Account` = #{account,jdbcType=VARCHAR}
     </update>
 
-    <select id="getUserByRole" parameterType="java.lang.String" resultMap="SysUser">
+    <select id="getUserByRole" parameterType="java.lang.Long" resultMap="SysUser">
         select user.`Id`,
                user.`Account`,
                user.`UserName`,
@@ -185,7 +185,7 @@
         where user.`Status` = 1 and roleuser.RoleId = #{roleId,jdbcType=VARCHAR}
     </select>
 
-    <select id="allUser" parameterType="java.lang.String" resultMap="SysUser">
+    <select id="allUser" parameterType="java.lang.Long" resultMap="SysUser">
         select
         <include refid="Base_Column_List"/>
         from `sys_user`

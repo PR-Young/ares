@@ -32,7 +32,7 @@ public class BaseConfig {
     private String name;
     private String version;
     private String copyright;
-    private long timeout;
+    private Long timeout;
 
     public String getName() {
         return name;

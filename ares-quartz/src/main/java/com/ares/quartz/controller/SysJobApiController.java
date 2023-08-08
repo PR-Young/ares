@@ -68,7 +68,7 @@ public class SysJobApiController extends BaseController {
 
     @GetMapping("{jobId}")
     @Operation(summary = "根据任务Id获取任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String jobId) {
+    public Object getInfo(@PathVariable Long jobId) {
         return AjaxResult.successData(jobService.getById(jobId));
     }
 
@@ -92,7 +92,7 @@ public class SysJobApiController extends BaseController {
     @SaCheckPermission("quartz:delete")
     @DeleteMapping("{jobIds}")
     @Operation(summary = "删除任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] jobIds) {
+    public Object remove(@PathVariable Long[] jobIds) {
         jobService.deleteByIds(Arrays.asList(jobIds));
         return AjaxResult.success();
     }

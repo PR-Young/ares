@@ -66,7 +66,7 @@ public class SysPostApiController extends BaseController {
 
     @GetMapping("{sysPostId}")
     @Operation(summary = "根据Id获取岗位信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String sysPostId) {
+    public Object getInfo(@PathVariable Long sysPostId) {
         return AjaxResult.successData(sysPostService.getById(sysPostId));
     }
 
@@ -87,7 +87,7 @@ public class SysPostApiController extends BaseController {
     @SaCheckPermission("sysPost:delete")
     @DeleteMapping("{sysPostIds}")
     @Operation(summary = "删除岗位信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] sysPostIds) {
+    public Object remove(@PathVariable Long[] sysPostIds) {
         sysPostService.deleteByIds(Arrays.asList(sysPostIds));
         return AjaxResult.success();
     }

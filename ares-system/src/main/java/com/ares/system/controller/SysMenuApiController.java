@@ -57,14 +57,14 @@ public class SysMenuApiController {
     @GetMapping("list")
     @Operation(summary = "菜单列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object list(SysMenuQuery menu) throws Exception {
-        String userId = SecurityUtils.getUser().getId();
+        Long userId = SecurityUtils.getUser().getId();
         List<SysMenu> menuList = menuService.selectMenuList(menu, userId);
         return AjaxResult.successData(menuList);
     }
 
     @GetMapping(value = "{menuId}")
     @Operation(summary = "根据菜单Id获取菜单", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String menuId) {
+    public Object getInfo(@PathVariable Long menuId) {
         return AjaxResult.successData(menuService.getById(menuId));
     }
 
@@ -74,7 +74,7 @@ public class SysMenuApiController {
     @GetMapping("treeselect")
     @Operation(summary = "获取菜单下拉树列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object treeselect(SysMenuQuery menu) throws Exception {
-        String userId = SecurityUtils.getUser().getId();
+        Long userId = SecurityUtils.getUser().getId();
         List<SysMenu> menus = menuService.selectMenuList(menu, userId);
         return AjaxResult.successData(menuService.buildMenuTreeSelect(menus));
     }
@@ -96,7 +96,7 @@ public class SysMenuApiController {
     @SaCheckPermission("menu:delete")
     @DeleteMapping("{menuId}")
     @Operation(summary = "删除菜单", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String menuId) {
+    public Object remove(@PathVariable Long menuId) {
         if (menuService.hasChildByMenuId(menuId)) {
             return AjaxResult.error("存在子菜单,不允许删除");
         }
@@ -106,8 +106,8 @@ public class SysMenuApiController {
 
     @GetMapping(value = "roleMenuTreeselect/{roleId}")
     @Operation(summary = "根据角色Id获取菜单", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object roleMenuTreeselect(@PathVariable("roleId") String roleId) throws Exception {
-        String userId = SecurityUtils.getUser().getId();
+    public Object roleMenuTreeselect(@PathVariable("roleId") Long roleId) throws Exception {
+        Long userId = SecurityUtils.getUser().getId();
         List<SysMenu> menus = menuService.selectMenuList(new SysMenuQuery(), userId);
         AjaxResult result = AjaxResult.success();
         result.put("checkedKeys", menuService.selectMenuByRole(roleId));

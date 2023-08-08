@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysLoginInfoDao">
     <resultMap id="SysLoginInfo" type="com.ares.core.persistence.model.SysLoginInfo">
-        <id column="Id" jdbcType="VARCHAR" property="id"/>
+        <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr"/>
         <result column="login_location" jdbcType="VARCHAR" property="loginLocation"/>
@@ -11,9 +11,9 @@
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="msg" jdbcType="VARCHAR" property="msg"/>
         <result column="login_time" jdbcType="VARCHAR" property="loginTime"/>
-        <result column="Creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="Creator" jdbcType="BIGINT" property="creator"/>
         <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="Modifier" jdbcType="VARCHAR" property="modifier"/>
+        <result column="Modifier" jdbcType="BIGINT" property="modifier"/>
         <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
 
@@ -27,7 +27,7 @@
         <include refid="Base_Column_List"/>
         )
         values (
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=BIGINT},
         #{userName,jdbcType=VARCHAR},
         #{ipAddr,jdbcType=VARCHAR},
         #{loginLocation,jdbcType=VARCHAR},
@@ -36,9 +36,9 @@
         #{status,jdbcType=VARCHAR},
         #{msg,jdbcType=VARCHAR},
         #{loginTime,jdbcType=VARCHAR},
-        #{creator,jdbcType=VARCHAR},
+        #{creator,jdbcType=BIGINT},
         #{createTime,jdbcType=TIMESTAMP},
-        #{modifier,jdbcType=VARCHAR},
+        #{modifier,jdbcType=BIGINT},
         #{modifyTime,jdbcType=TIMESTAMP}
         )
     </insert>
@@ -83,7 +83,7 @@
                 `ModifyTime` = #{modifyTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where `Id` = #{id,jdbcType=VARCHAR}
+        where `Id` = #{id,jdbcType=BIGINT}
     </update>
 
     <delete id="deleteByIds" parameterType="java.util.List">
@@ -94,11 +94,11 @@
         </foreach>
     </delete>
 
-    <select id="getById" parameterType="java.lang.String" resultMap="SysLoginInfo">
+    <select id="getById" parameterType="java.lang.Long" resultMap="SysLoginInfo">
         select
         <include refid="Base_Column_List"/>
         from `sys_login_info`
-        where `Id` = #{id,jdbcType=VARCHAR}
+        where `Id` = #{id,jdbcType=BIGINT}
     </select>
 
     <select id="list" parameterType="java.util.Map" resultMap="SysLoginInfo">

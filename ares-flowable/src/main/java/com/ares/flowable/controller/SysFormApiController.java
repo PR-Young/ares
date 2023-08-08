@@ -67,7 +67,7 @@ public class SysFormApiController extends BaseController {
 
     @GetMapping("{sysFormId}")
     @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String sysFormId) {
+    public Object getInfo(@PathVariable Long sysFormId) {
         return AjaxResult.successData(sysFormService.getById(sysFormId));
     }
 
@@ -88,7 +88,7 @@ public class SysFormApiController extends BaseController {
     @SaCheckPermission("sysForm:delete")
     @DeleteMapping("{sysFormIds}")
     @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] sysFormIds) {
+    public Object remove(@PathVariable Long[] sysFormIds) {
         sysFormService.deleteByIds(Arrays.asList(sysFormIds));
         return AjaxResult.success();
     }

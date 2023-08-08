@@ -89,22 +89,22 @@ public class SnowflakeIdWorker {
     /**
      * 工作机器ID(0~31)
      */
-    private long workerId;
+    private Long workerId;
 
     /**
      * 数据中心ID(0~31)
      */
-    private long dataCenterId;
+    private Long dataCenterId;
 
     /**
      * 毫秒内序列(0~4095)
      */
-    private long sequence = 0L;
+    private Long sequence = 0L;
 
     /**
      * 上次生成ID的时间截
      */
-    private long lastTimestamp = -1L;
+    private Long lastTimestamp = -1L;
 
 
     static SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1, 1);
@@ -202,9 +202,13 @@ public class SnowflakeIdWorker {
     //        log.info("id=" + id);
     //    }
     //    log.info("end time" + (System.nanoTime() - startTime) / 1000000 + "ms");
+    //
     //}
 
-    public static String getUUID() {
+    public static long getUUID() {
+        return idWorker.nextId();
+    }
+    public static String getSUID() {
         long id = idWorker.nextId();
         return String.valueOf(id);
     }

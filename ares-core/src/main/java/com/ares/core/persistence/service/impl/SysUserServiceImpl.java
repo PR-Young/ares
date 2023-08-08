@@ -74,13 +74,13 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public List<SysUser> assignAllUser(String roleId) {
+    public List<SysUser> assignAllUser(Long roleId) {
         List<SysUser> userList = sysUserDao.allUser(roleId);
         return userList;
     }
 
     @Override
-    public List<SysUser> getUserByRole(String roleId) {
+    public List<SysUser> getUserByRole(Long roleId) {
         List<SysUser> userList = sysUserDao.getUserByRole(roleId);
         return userList;
     }
@@ -92,12 +92,12 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
+    public void deleteByIds(List<Long> ids) {
         sysUserDao.deleteByIds(ids);
     }
 
     @Override
-    public SysUser getById(String id) {
+    public SysUser getById(Long id) {
         return sysUserDao.getById(id);
     }
 
@@ -108,7 +108,7 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public int resetPassword(String id) {
+    public int resetPassword(Long id) {
         return sysUserDao.resetPassword(MD5Util.encode("123456"), id);
     }
 
@@ -118,8 +118,8 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public String insertUser(SysUser sysUser) {
-        String id = SnowflakeIdWorker.getUUID();
+    public Long insertUser(SysUser sysUser) {
+        Long id = SnowflakeIdWorker.getUUID();
         sysUser.setId(id);
         sysUser.setPassword(MD5Util.encode("123456"));
         sysUser.setCreateTime(new Date());
@@ -128,7 +128,7 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public String selectUserRoleGroup(String userId) {
+    public String selectUserRoleGroup(Long userId) {
         List<SysRole> roleList = roleDao.getRoleByUserId(userId);
         StringBuffer idsStr = new StringBuffer();
         for (SysRole role : roleList) {

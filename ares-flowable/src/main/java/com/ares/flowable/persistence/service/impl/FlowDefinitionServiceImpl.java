@@ -115,7 +115,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
             SysForm sysForm = sysDeployFormService.selectSysDeployFormByDeployId(deploymentId);
             if (Objects.nonNull(sysForm)) {
                 reProcDef.setFormName(sysForm.getFormName());
-                reProcDef.setFormId(sysForm.getId());
+                reProcDef.setFormId(String.valueOf(sysForm.getId()));
             }
             // 流程定义时间
             reProcDef.setDeploymentTime(deployment.getDeploymentTime());
@@ -200,7 +200,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
             }
             // 设置流程发起人Id到流程中
             SysUser sysUser = SecurityUtils.getUser();
-            identityService.setAuthenticatedUserId(sysUser.getId());
+            identityService.setAuthenticatedUserId(String.valueOf(sysUser.getId()));
             variables.put(ProcessConstants.PROCESS_INITIATOR, sysUser.getId());
             ProcessInstance processInstance = runtimeService.startProcessInstanceById(procDefId, variables);
 
@@ -286,7 +286,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
             SysForm sysForm = sysDeployFormService.selectSysDeployFormByDeployId(deploymentId);
             if (Objects.nonNull(sysForm)) {
                 reProcDef.setFormName(sysForm.getFormName());
-                reProcDef.setFormId(sysForm.getId());
+                reProcDef.setFormId(String.valueOf(sysForm.getId()));
             }
             // 流程定义时间
             reProcDef.setDeploymentTime(deployment.getDeploymentTime());
@@ -319,7 +319,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
             SysForm sysForm = sysDeployFormService.selectSysDeployFormByDeployId(deploymentId);
             if (Objects.nonNull(sysForm)) {
                 reProcDef.setFormName(sysForm.getFormName());
-                reProcDef.setFormId(sysForm.getId());
+                reProcDef.setFormId(String.valueOf(sysForm.getId()));
             }
             // 流程定义时间
             reProcDef.setDeploymentTime(deployment.getDeploymentTime());

@@ -65,12 +65,12 @@ public class ArticlesServiceImpl implements IArticlesService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
+    public void deleteByIds(List<Long> ids) {
         articlesDao.deleteByIds(ids);
     }
 
     @Override
-    public Articles getById(String id) {
+    public Articles getById(Long id) {
         return articlesDao.getById(id);
     }
 

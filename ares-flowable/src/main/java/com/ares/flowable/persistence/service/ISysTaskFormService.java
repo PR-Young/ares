@@ -35,7 +35,7 @@ public interface ISysTaskFormService extends IBaseService<SysTaskForm, SysTaskFo
      * @param id 流程任务关联单ID
      * @return 流程任务关联单
      */
-    SysTaskForm selectSysTaskFormById(String id);
+    SysTaskForm selectSysTaskFormById(Long id);
 
     /**
      * 查询流程任务关联单列表

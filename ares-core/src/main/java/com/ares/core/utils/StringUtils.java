@@ -119,6 +119,19 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return isNull(str) || NULLSTR.equals(str.trim());
     }
 
+
+    public static boolean isNull(Long object) {
+        return object == null;
+    }
+
+    public static boolean isEmpty(Long str) {
+        return isNull(str) || str == 0;
+    }
+
+    public static boolean isNotEmpty(Long str) {
+        return !isEmpty(str);
+    }
+
     /**
      * * 判断一个字符串是否为非空串
      *

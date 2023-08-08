@@ -53,9 +53,9 @@ public class UserDataListener extends AnalysisEventListener<SysUser> {
     private static final String ROLE_NAME = "user";
     private List<SysUser> userList = new ArrayList<>();
     private boolean needUpdate = true;
-    private String deptId;
+    private Long deptId;
 
-    public UserDataListener(boolean needUpdate, String deptId) {
+    public UserDataListener(boolean needUpdate, long deptId) {
         this.needUpdate = needUpdate;
         this.deptId = deptId;
     }
@@ -95,7 +95,7 @@ public class UserDataListener extends AnalysisEventListener<SysUser> {
             } else {
                 user.setDeptId(this.deptId);
                 user.setPostId(post.getId());
-                String userId = userService.insertUser(user);
+                Long userId = userService.insertUser(user);
                 Map<String, Object> map = new HashMap<>();
                 map.put("id", SnowflakeIdWorker.getUUID());
                 map.put("userId", userId);

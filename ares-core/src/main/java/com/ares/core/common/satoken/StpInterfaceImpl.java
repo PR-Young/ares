@@ -52,11 +52,11 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
         List<String> perms = new ArrayList<>();
-        SysUser user = userService.getById(String.valueOf(loginId));
+        SysUser user = userService.getById(Long.valueOf(String.valueOf(loginId)));
         if (null == user) {
             throw new UserException("该用户不存在");
         }
-        List<SysRole> roleList = roleService.getRoleByUserId(String.valueOf(loginId));
+        List<SysRole> roleList = roleService.getRoleByUserId(Long.valueOf(String.valueOf(loginId)));
         for (SysRole role : roleList) {
             if ("gly".equalsIgnoreCase(role.getRoleName())) {
                 perms = roleService.getPermsByRoleId(null);
@@ -70,11 +70,11 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
         List<String> roles = new ArrayList<>();
-        SysUser user = userService.getById(String.valueOf(loginId));
+        SysUser user = userService.getById(Long.valueOf(String.valueOf(loginId)));
         if (null == user) {
             throw new UserException("该用户不存在");
         }
-        List<SysRole> roleList = roleService.getRoleByUserId(String.valueOf(loginId));
+        List<SysRole> roleList = roleService.getRoleByUserId(Long.valueOf(String.valueOf(loginId)));
         for (SysRole role : roleList) {
             roles.add(role.getRoleName());
         }

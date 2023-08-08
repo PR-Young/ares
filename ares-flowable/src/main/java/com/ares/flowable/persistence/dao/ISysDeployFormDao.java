@@ -35,7 +35,7 @@ public interface ISysDeployFormDao extends IBaseDao<SysDeployForm, SysDeployForm
      * @param id 流程实例关联表单ID
      * @return 流程实例关联表单
      */
-    SysDeployForm selectSysDeployFormById(String id);
+    SysDeployForm selectSysDeployFormById(Long id);
 
     /**
      * 查询流程实例关联表单列表

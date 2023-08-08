@@ -68,7 +68,7 @@ public class SysDeptApiController extends BaseController {
 
     @GetMapping("{sysDeptId}")
     @Operation(summary = "根据Id获取部门信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String sysDeptId) {
+    public Object getInfo(@PathVariable Long sysDeptId) {
         return AjaxResult.successData(sysDeptService.getByDeptId(sysDeptId));
     }
 
@@ -89,7 +89,7 @@ public class SysDeptApiController extends BaseController {
     @SaCheckPermission("sysDept:delete")
     @DeleteMapping("{sysDeptIds}")
     @Operation(summary = "删除部门", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] sysDeptIds) {
+    public Object remove(@PathVariable Long[] sysDeptIds) {
         sysDeptService.deleteByIds(Arrays.asList(sysDeptIds));
         return AjaxResult.success();
     }

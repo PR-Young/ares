@@ -55,7 +55,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
      * @return
      */
     @Override
-    public List<SysMenu> getAll(String userId) {
+    public List<SysMenu> getAll(Long userId) {
         return sysMenuDao.getMenuByUserId(userId);
     }
 
@@ -78,12 +78,12 @@ public class SysMenuServiceImpl implements ISysMenuService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
+    public void deleteByIds(List<Long> ids) {
         sysMenuDao.deleteByIds(ids);
     }
 
     @Override
-    public SysMenu getById(String id) {
+    public SysMenu getById(Long id) {
         return sysMenuDao.getById(id);
     }
 
@@ -98,13 +98,13 @@ public class SysMenuServiceImpl implements ISysMenuService {
     }
 
     @Override
-    public SysMenu getByPId(String pid) {
+    public SysMenu getByPId(Long pid) {
         return sysMenuDao.getByPId(pid);
     }
 
 
     @Override
-    public List<RouterVo> buildMenus(List<SysMenu> menus, String parentId) {
+    public List<RouterVo> buildMenus(List<SysMenu> menus, Long parentId) {
         List<RouterVo> routers = new LinkedList<RouterVo>();
         for (SysMenu menu : menus) {
             RouterVo router = new RouterVo();
@@ -136,7 +136,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
     }
 
     @Override
-    public List<SysMenu> selectMenuList(SysMenuQuery menu, String userId) {
+    public List<SysMenu> selectMenuList(SysMenuQuery menu, Long userId) {
         List<SysMenu> menuList = null;
         if (SysUser.isAdmin(userId)) {
             menuList = sysMenuDao.selectList(menu);
@@ -209,18 +209,18 @@ public class SysMenuServiceImpl implements ISysMenuService {
     }
 
     @Override
-    public void remove(String menuId) {
+    public void remove(Long menuId) {
         sysMenuDao.deleteById(menuId);
     }
 
     @Override
-    public boolean hasChildByMenuId(String menuId) {
+    public boolean hasChildByMenuId(Long menuId) {
         int result = sysMenuDao.hasChildByMenuId(menuId);
         return result > 0;
     }
 
     @Override
-    public List<String> selectMenuByRole(String roleId) {
+    public List<Long> selectMenuByRole(Long roleId) {
         return sysMenuDao.getMenuByRole(roleId);
     }
 }

@@ -29,7 +29,7 @@ import java.util.Date;
 @Schema(title = "SysQuartzJobLog对象", description = "任务日志")
 public class SysQuartzJobLog implements Serializable {
     @Schema(description = "主键")
-    private String id;
+    private Long id;
     @Schema(description = "任务名称")
     private String jobName;
     @Schema(description = "任务分组")

@@ -66,7 +66,7 @@ public class SysDictTypeApiController extends BaseController {
 
     @GetMapping("{sysDictTypeId}")
     @Operation(summary = "根据Id获取字典类别", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String sysDictTypeId) {
+    public Object getInfo(@PathVariable Long sysDictTypeId) {
         return AjaxResult.successData(sysDictTypeService.getById(sysDictTypeId));
     }
 
@@ -87,7 +87,7 @@ public class SysDictTypeApiController extends BaseController {
     @SaCheckPermission("sysDictType:delete")
     @DeleteMapping("{sysDictTypeIds}")
     @Operation(summary = "删除字典类别", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] sysDictTypeIds) {
+    public Object remove(@PathVariable Long[] sysDictTypeIds) {
         sysDictTypeService.deleteByIds(Arrays.asList(sysDictTypeIds));
         return AjaxResult.success();
     }

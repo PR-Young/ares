@@ -25,7 +25,7 @@ import com.ares.core.model.query.SysLoginInfoQuery;
 import com.ares.core.persistence.model.SysLoginInfo;
 
 public interface ISysLoginInfoService extends IBaseService<SysLoginInfo, SysLoginInfoQuery> {
-    String saveInfo(SysLoginInfo sysLoginInfo);
+    Long saveInfo(SysLoginInfo sysLoginInfo);
 
     void remove();
 

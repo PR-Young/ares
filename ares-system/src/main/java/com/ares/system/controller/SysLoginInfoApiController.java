@@ -65,7 +65,7 @@ public class SysLoginInfoApiController extends BaseController {
 
     @GetMapping("{sysLoginInfoId}")
     @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String sysLoginInfoId) {
+    public Object getInfo(@PathVariable Long sysLoginInfoId) {
         return AjaxResult.successData(sysLoginInfoService.getById(sysLoginInfoId));
     }
 
@@ -86,7 +86,7 @@ public class SysLoginInfoApiController extends BaseController {
     @SaCheckPermission("sysLoginInfo:delete")
     @DeleteMapping("{sysLoginInfoIds}")
     @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] sysLoginInfoIds) {
+    public Object remove(@PathVariable Long[] sysLoginInfoIds) {
         sysLoginInfoService.deleteByIds(Arrays.asList(sysLoginInfoIds));
         return AjaxResult.success();
     }

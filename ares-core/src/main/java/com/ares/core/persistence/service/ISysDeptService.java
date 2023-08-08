@@ -29,10 +29,10 @@ import java.util.List;
  */
 public interface ISysDeptService extends IBaseService<SysDept, SysDeptQuery> {
 
-    SysDept getByDeptId(String id);
+    SysDept getByDeptId(Long id);
 
     List<TreeSelect> buildDeptTree();
 
-    List<TreeSelect> buildTree(String parentId, List<SysDept> deptList);
+    List<TreeSelect> buildTree(Long parentId, List<SysDept> deptList);
 
 }

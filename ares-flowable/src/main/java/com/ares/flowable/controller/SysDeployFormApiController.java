@@ -63,7 +63,7 @@ public class SysDeployFormApiController extends BaseController {
 
     @GetMapping("{sysDeployFormId}")
     @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable String sysDeployFormId) {
+    public Object getInfo(@PathVariable Long sysDeployFormId) {
         return AjaxResult.successData(sysDeployFormService.getById(sysDeployFormId));
     }
 
@@ -84,7 +84,7 @@ public class SysDeployFormApiController extends BaseController {
     @SaCheckPermission("sysDeployForm:delete")
     @DeleteMapping("{sysDeployFormIds}")
     @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] sysDeployFormIds) {
+    public Object remove(@PathVariable Long[] sysDeployFormIds) {
         sysDeployFormService.deleteByIds(Arrays.asList(sysDeployFormIds));
         return AjaxResult.success();
     }

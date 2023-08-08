@@ -89,7 +89,7 @@ public class SysUserApiController extends BaseController {
 
     @GetMapping(value = {"", "{userId}"})
     @Operation(summary = "根据用户Id获取用户", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable(value = "userId", required = false) String userId) {
+    public Object getInfo(@PathVariable(value = "userId", required = false) Long userId) {
         AjaxResult result = new AjaxResult();
         result.put("code", HttpStatus.OK.value());
         result.put("data", userService.getById(userId));
@@ -105,7 +105,7 @@ public class SysUserApiController extends BaseController {
     @PostMapping("edit")
     @Operation(summary = "新增/修改用户", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody SysUser user) throws Exception {
-        String userId = "";
+        Long userId = null;
         if (StringUtils.isEmpty(user.getId())) {
             if (userService.checkAccount(user.getAccount()) != 0) {
                 return AjaxResult.error("新增用户'" + user.getUserName() + "'失败，登录账号已存在");
@@ -126,7 +126,7 @@ public class SysUserApiController extends BaseController {
     @SaCheckPermission("user:delete")
     @DeleteMapping("{userIds}")
     @Operation(summary = "删除用户", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object remove(@PathVariable String[] userIds) {
+    public Object remove(@PathVariable Long[] userIds) {
         userService.deleteByIds(Arrays.asList(userIds));
         return AjaxResult.success();
     }
@@ -173,7 +173,7 @@ public class SysUserApiController extends BaseController {
     public Object importData(MultipartFile file, HttpServletRequest request) throws Exception {
         InputStream inputStream = file.getInputStream();
         boolean needUpdate = "1".equals(request.getParameter("updateSupport"));
-        String deptId = request.getParameter("deptId");
+        Long deptId = Long.valueOf(request.getParameter("deptId"));
         AnalysisEventListener listener = new UserDataListener(needUpdate, deptId);
         EasyExcel.read(inputStream, SysUser.class, listener).sheet().doRead();
         return AjaxResult.success("导入成功");

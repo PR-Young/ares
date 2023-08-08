@@ -127,7 +127,7 @@ public class LoginApiController {
         sysLoginInfo.setStatus(Constants.ONLINE);
         sysLoginInfo.setBrowser(AresCommonUtils.getUserAgent(request, "browser"));
         sysLoginInfo.setOs(AresCommonUtils.getUserAgent(request, "os"));
-        String id = loginInfoService.saveInfo(sysLoginInfo);
+        Long id = loginInfoService.saveInfo(sysLoginInfo);
         RedisUtil.set(token, id, 0);
 
         return AjaxResult.success().put("token", token);
@@ -173,7 +173,7 @@ public class LoginApiController {
     public Object getRouters() throws Exception {
         SysUser user = SecurityUtils.getUser();
         List<SysMenu> menus = menuService.getAll(user.getId());
-        return AjaxResult.successData(HttpStatus.OK.value(), menuService.buildMenus(menus, "0"));
+        return AjaxResult.successData(HttpStatus.OK.value(), menuService.buildMenus(menus, 0L));
     }
 
     @GetMapping("/kaptcha")
@@ -190,7 +190,7 @@ public class LoginApiController {
     @Operation(summary = "退出登录", method = "POST", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object logout() {
         String token = StpUtil.getTokenValue();
-        String id = String.valueOf(RedisUtil.get(token));
+        Long id = (Long) RedisUtil.get(token);
         SysLoginInfo sysLoginInfo = new SysLoginInfo();
         sysLoginInfo.setId(id);
         sysLoginInfo.setStatus(Constants.OFFLINE);

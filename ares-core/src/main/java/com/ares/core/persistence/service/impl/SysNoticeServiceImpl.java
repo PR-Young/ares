@@ -69,12 +69,12 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
+    public void deleteByIds(List<Long> ids) {
         sysNoticeDao.deleteByIds(ids);
     }
 
     @Override
-    public SysNotice getById(String id) {
+    public SysNotice getById(Long id) {
         return sysNoticeDao.getById(id);
     }
 
@@ -85,16 +85,16 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
     }
 
     @Override
-    public int noticeNum(String userId) {
+    public int noticeNum(Long userId) {
         return sysNoticeDao.noticeNum(userId);
     }
 
     @Override
-    public List<SysNotice> getNotices(String userId) {
+    public List<SysNotice> getNotices(Long userId) {
         List<SysNotice> noticeList = sysNoticeDao.getNotices();
         List<SysNoticeRead> noticeReads = new ArrayList<>();
         if (null != noticeList && noticeList.size() > 0) {
-            List<String> noticeReadList = noticeReadDao.getByUser(userId);
+            List<Long> noticeReadList = noticeReadDao.getByUser(userId);
             for (SysNotice sysNotice : noticeList) {
                 if (noticeReadList.contains(sysNotice.getId())) {
                     continue;

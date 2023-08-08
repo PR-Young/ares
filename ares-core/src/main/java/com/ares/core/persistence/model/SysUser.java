@@ -22,6 +22,10 @@ package com.ares.core.persistence.model;
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.ares.core.model.base.BaseModel;
+import com.ares.core.serializer.LongJsonDeserializer;
+import com.ares.core.serializer.LongJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
@@ -54,16 +58,20 @@ public class SysUser extends BaseModel implements Serializable {
     private String avatar;
     @ExcelIgnore
     @Schema(hidden = true)
-    private String[] roleIds;
+    private Long[] roleIds;
     @ExcelIgnore
     @Schema(hidden = true)
     private boolean isAdmin;
     @ExcelIgnore
     @Schema(hidden = true)
-    private String deptId;
+    @JsonSerialize(using = LongJsonSerializer.class)
+    @JsonDeserialize(using = LongJsonDeserializer.class)
+    private Long deptId;
     @ExcelIgnore
     @Schema(hidden = true)
-    private String postId;
+    @JsonSerialize(using = LongJsonSerializer.class)
+    @JsonDeserialize(using = LongJsonDeserializer.class)
+    private Long postId;
     @Schema(description = "状态")
     @ExcelIgnore
     private int status;
@@ -119,11 +127,11 @@ public class SysUser extends BaseModel implements Serializable {
         this.password = password;
     }
 
-    public String[] getRoleIds() {
+    public Long[] getRoleIds() {
         return roleIds;
     }
 
-    public void setRoleIds(String[] roleIds) {
+    public void setRoleIds(Long[] roleIds) {
         this.roleIds = roleIds;
     }
 
@@ -135,23 +143,23 @@ public class SysUser extends BaseModel implements Serializable {
         isAdmin = admin;
     }
 
-    public static boolean isAdmin(String userId) {
-        return userId != null && "1".equals(userId);
+    public static boolean isAdmin(Long userId) {
+        return userId == 1;
     }
 
-    public String getDeptId() {
+    public Long getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(String deptId) {
+    public void setDeptId(Long deptId) {
         this.deptId = deptId;
     }
 
-    public String getPostId() {
+    public Long getPostId() {
         return postId;
     }
 
-    public void setPostId(String postId) {
+    public void setPostId(Long postId) {
         this.postId = postId;
     }
 

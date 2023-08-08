@@ -49,7 +49,7 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
      * @return 流程任务关联单
      */
     @Override
-    public SysTaskForm selectSysTaskFormById(String id) {
+    public SysTaskForm selectSysTaskFormById(Long id) {
         return sysTaskFormDao.getById(id);
     }
 
@@ -87,12 +87,12 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
     }
 
     @Override
-    public void deleteByIds(List<String> ids) {
+    public void deleteByIds(List<Long> ids) {
         sysTaskFormDao.deleteByIds(ids);
     }
 
     @Override
-    public SysTaskForm getById(String id) {
+    public SysTaskForm getById(Long id) {
         return sysTaskFormDao.getById(id);
     }
 

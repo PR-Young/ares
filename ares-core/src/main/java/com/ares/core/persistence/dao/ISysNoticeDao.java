@@ -29,7 +29,7 @@ import java.util.List;
 @Mapper
 public interface ISysNoticeDao extends IBaseDao<SysNotice, SysNoticeQuery> {
 
-    int noticeNum(@Param("userId") String userId);
+    int noticeNum(@Param("userId") Long userId);
 
     List<SysNotice> getNotices();
 

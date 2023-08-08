@@ -29,19 +29,19 @@ import java.util.List;
  **/
 public interface ISysUserService extends IBaseService<SysUser, SysUserQuery> {
 
-    List<SysUser> assignAllUser(String roleId);
+    List<SysUser> assignAllUser(Long roleId);
 
-    List<SysUser> getUserByRole(String roleId);
+    List<SysUser> getUserByRole(Long roleId);
 
     int checkAccount(String account);
 
-    int resetPassword(String id);
+    int resetPassword(Long id);
 
     List<SysUser> selectUserList(SysUserQuery user);
 
-    String insertUser(SysUser sysUser);
+    Long insertUser(SysUser sysUser);
 
-    String selectUserRoleGroup(String userId);
+    String selectUserRoleGroup(Long userId);
 
     int updatePassword(SysUser user, String passWord);
 

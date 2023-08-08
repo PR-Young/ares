@@ -44,7 +44,7 @@ public class AresInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         BaseConfig config = SpringUtil.getBean(BaseConfig.class);
         String tokenValue = StpUtil.getTokenValue();
-        String id = String.valueOf(StpUtil.getLoginIdByToken(tokenValue));
+        Long id = Long.valueOf(String.valueOf(StpUtil.getLoginIdByToken(tokenValue)));
         ISysUserService userService = SpringUtil.getBean(ISysUserService.class);
         SysUser user = userService.getById(id);
         try {

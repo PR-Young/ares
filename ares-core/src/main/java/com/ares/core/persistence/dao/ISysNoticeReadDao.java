@@ -29,5 +29,5 @@ public interface ISysNoticeReadDao extends IBaseDao<SysNoticeRead, SysNoticeRead
 
     int batchInsert(List<SysNoticeRead> noticeReadList);
 
-    List<String> getByUser(String userId);
+    List<Long> getByUser(Long userId);
 }

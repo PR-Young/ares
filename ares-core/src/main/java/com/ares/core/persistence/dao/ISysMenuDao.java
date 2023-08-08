@@ -32,16 +32,16 @@ import java.util.List;
 @Mapper
 public interface ISysMenuDao extends IBaseDao<SysMenu, SysMenuQuery> {
 
-    List<SysMenu> getMenuByUserId(String userId);
+    List<SysMenu> getMenuByUserId(Long userId);
 
-    SysMenu getByPId(String pid);
+    SysMenu getByPId(Long pid);
 
-    List<String> getMenuByRole(String roleId);
+    List<Long> getMenuByRole(Long roleId);
 
     List<SysMenu> selectListByUser(SysMenuQuery menu);
 
-    int deleteById(String menuId);
+    int deleteById(Long menuId);
 
-    int hasChildByMenuId(String menuId);
+    int hasChildByMenuId(Long menuId);
 
 }
