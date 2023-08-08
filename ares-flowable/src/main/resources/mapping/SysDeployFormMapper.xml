@@ -3,7 +3,7 @@
 <mapper namespace="com.ares.flowable.persistence.dao.ISysDeployFormDao">
     <resultMap id="SysDeployForm" type="com.ares.flowable.persistence.model.SysDeployForm">
         <id column="Id" jdbcType="BIGINT" property="id"/>
-        <result column="FormId" jdbcType="VARCHAR" property="formId"/>
+        <result column="FormId" jdbcType="BIGINT" property="formId"/>
         <result column="DeployId" jdbcType="VARCHAR" property="deployId"/>
         <result column="Creator" jdbcType="BIGINT" property="creator"/>
         <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
@@ -35,7 +35,7 @@
         update `sys_deploy_form`
         <set>
             <if test="formId!= null">
-                `FormId`=#{formId,jdbcType=VARCHAR},
+                `FormId`=#{formId,jdbcType=BIGINT},
             </if>
             <if test="deployId!= null">
                 `DeployId`=#{deployId,jdbcType=VARCHAR},

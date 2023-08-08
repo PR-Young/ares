@@ -19,7 +19,11 @@
 package com.ares.core.model.tree;
 
 import com.ares.core.persistence.model.SysMenu;
+import com.ares.core.serializer.LongJsonDeserializer;
+import com.ares.core.serializer.LongJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -36,6 +40,8 @@ public class TreeSelect implements Serializable {
     /**
      * 节点ID
      */
+    @JsonSerialize(using = LongJsonSerializer.class)
+    @JsonDeserialize(using = LongJsonDeserializer.class)
     private Long id;
 
     /**

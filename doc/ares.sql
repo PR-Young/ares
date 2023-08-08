@@ -75,30 +75,31 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept` (
-  `Id` bigint NOT NULL,
-  `Code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `DeptName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `ParentDeptId` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Creator` bigint DEFAULT NULL,
-  `CreateTime` datetime DEFAULT NULL,
-  `Modifier` bigint DEFAULT NULL,
-  `ModifyTime` datetime DEFAULT NULL,
-  PRIMARY KEY (`Id`) USING BTREE
+                          `Id` bigint NOT NULL,
+                          `Code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+                          `DeptName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+                          `ParentDeptId` bigint DEFAULT NULL,
+                          `Creator` bigint DEFAULT NULL,
+                          `CreateTime` datetime DEFAULT NULL,
+                          `Modifier` bigint DEFAULT NULL,
+                          `ModifyTime` datetime DEFAULT NULL,
+                          PRIMARY KEY (`Id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (1, '00000000', '总部', '0', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476951546261803008, '00000011', '财务部', '1', 1, '2020-10-16 05:22:00', NULL, NULL);
-INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476955797205684224, '00000001', '行政部', '1', 1, '2020-10-16 05:38:54', NULL, NULL);
-INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476955894287044608, '00000002', '管理层', '1', 1, '2020-10-16 05:39:17', NULL, NULL);
-INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476960080894496768, '11111', '部门1', '1', 1, '2020-10-16 05:55:55', NULL, NULL);
-INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476960119641477120, '11112', '部门2', '476960080894496768', 1, '2020-10-16 05:56:04', NULL, NULL);
-INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476960168698056704, '11113', '部门3', '476960119641477120', 1, '2020-10-16 05:56:16', NULL, NULL);
-INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476960216085303296, '11114', '部门4', '476960080894496768', 1, '2020-10-16 05:56:27', NULL, NULL);
+INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (1, '00000000', '总部', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476951546261803008, '00000011', '财务部', 1, 1, '2020-10-16 05:22:00', NULL, NULL);
+INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476955797205684224, '00000001', '行政部', 1, 1, '2020-10-16 05:38:54', NULL, NULL);
+INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476955894287044608, '00000002', '管理层', 1, 1, '2020-10-16 05:39:17', NULL, NULL);
+INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476960080894496768, '11111', '部门1', 1, 1, '2020-10-16 05:55:55', NULL, NULL);
+INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476960119641477120, '11112', '部门2', 476960080894496768, 1, '2020-10-16 05:56:04', NULL, NULL);
+INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476960168698056704, '11113', '部门3', 476960119641477120, 1, '2020-10-16 05:56:16', NULL, NULL);
+INSERT INTO `sys_dept` (`Id`, `Code`, `DeptName`, `ParentDeptId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (476960216085303296, '11114', '部门4', 476960080894496768, 1, '2020-10-16 05:56:27', NULL, NULL);
 COMMIT;
+
 
 -- ----------------------------
 -- Table structure for sys_dict_data
