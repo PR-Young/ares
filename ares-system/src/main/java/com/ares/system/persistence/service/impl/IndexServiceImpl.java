@@ -111,7 +111,7 @@ public class IndexServiceImpl implements IIndexService {
         data = new HashMap<>();
         data.put("expectedData", Arrays.asList(130, 140, 141, 142, 145, 150, 160));
         data.put("actualData", Arrays.asList(120, 82, 91, 154, 162, 140, 130));
-        map.put("shoppings", data);
+        map.put("logs", data);
 
         return map;
     }

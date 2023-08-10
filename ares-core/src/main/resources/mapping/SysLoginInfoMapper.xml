@@ -128,6 +128,7 @@
         <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
             AND date_format(`CreateTime`,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
         </if>
+        order by `login_time` desc
     </select>
 
     <update id="remove">

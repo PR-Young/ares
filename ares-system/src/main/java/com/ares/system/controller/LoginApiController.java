@@ -190,7 +190,7 @@ public class LoginApiController {
     @Operation(summary = "退出登录", method = "POST", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object logout() {
         String token = StpUtil.getTokenValue();
-        Long id = (Long) RedisUtil.get(token);
+        Long id = Long.valueOf(String.valueOf(RedisUtil.get(token)));
         SysLoginInfo sysLoginInfo = new SysLoginInfo();
         sysLoginInfo.setId(id);
         sysLoginInfo.setStatus(Constants.OFFLINE);

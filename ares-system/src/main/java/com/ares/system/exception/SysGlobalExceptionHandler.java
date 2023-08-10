@@ -85,7 +85,7 @@ public class SysGlobalExceptionHandler {
                 || e.getType().equals(NotLoginException.TOKEN_TIMEOUT_MESSAGE)
                 || e.getType().equals(NotLoginException.NOT_TOKEN_MESSAGE)) {
             String token = StpUtil.getTokenValue();
-            Long id = (Long) RedisUtil.get(token);
+            Long id = Long.valueOf(String.valueOf(RedisUtil.get(token)));
             SysLoginInfo sysLoginInfo = new SysLoginInfo();
             sysLoginInfo.setId(id);
             sysLoginInfo.setStatus(Constants.OFFLINE);
@@ -96,12 +96,5 @@ public class SysGlobalExceptionHandler {
         }
         return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
     }
-
-    //@ExceptionHandler(value = Exception.class)
-    //public Object handleException(HttpServletRequest request, HttpServletResponse response, Exception e) {
-    //    e.printStackTrace();
-    //    return AjaxResult.error(ResultCode.FAILED.getCode(), e.getMessage());
-    //}
-
 
 }
