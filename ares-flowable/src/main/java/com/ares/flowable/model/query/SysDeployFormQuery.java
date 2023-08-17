@@ -33,4 +33,8 @@ import lombok.Data;
 @Data
 @Schema
 public class SysDeployFormQuery extends BaseQuery {
+    @Schema
+    private String formId;
+    @Schema
+    private String deployId;
 }
