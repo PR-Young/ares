@@ -21,14 +21,9 @@ package com.ares.message.persistence.service.impl;
 import com.ares.message.persistence.dao.AresDocumentRepository;
 import com.ares.message.persistence.model.AresDocument;
 import com.ares.message.persistence.service.IElasticsearchService;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MatchAllQueryBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,12 +39,12 @@ import java.util.List;
 public class ElasticsearchServiceImpl implements IElasticsearchService {
 
     private AresDocumentRepository repository;
-    private ElasticsearchRestTemplate restTemplate;
+    private ElasticsearchTemplate elasticsearchTemplate;
 
     @Autowired
-    public ElasticsearchServiceImpl(AresDocumentRepository repository, ElasticsearchRestTemplate restTemplate) {
+    public ElasticsearchServiceImpl(AresDocumentRepository repository, ElasticsearchTemplate elasticsearchTemplate) {
         this.repository = repository;
-        this.restTemplate = restTemplate;
+        this.elasticsearchTemplate = elasticsearchTemplate;
     }
 
     @Override
@@ -75,19 +70,21 @@ public class ElasticsearchServiceImpl implements IElasticsearchService {
     @Override
     public List<AresDocument> query(String value) {
         List<AresDocument> aresDocuments = new ArrayList<>();
-        MatchQueryBuilder key = new MatchQueryBuilder("key", value);
-        MatchQueryBuilder name = new MatchQueryBuilder("name", value);
-        MatchQueryBuilder body = new MatchQueryBuilder("body", value);
-        MatchQueryBuilder content = new MatchQueryBuilder("content", value);
-
-        BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
-        queryBuilder.should(key).should(name).should(body).should(content);
-        NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
-
-        SearchHits<AresDocument> iterable = restTemplate.search(query, AresDocument.class);
-        iterable.getSearchHits().forEach(document -> {
-            aresDocuments.add(document.getContent());
-        });
+        //MatchQueryBuilder key = new MatchQueryBuilder("key", value);
+        //MatchQueryBuilder name = new MatchQueryBuilder("name", value);
+        //MatchQueryBuilder body = new MatchQueryBuilder("body", value);
+        //MatchQueryBuilder content = new MatchQueryBuilder("content", value);
+        //
+        //Query
+        //
+        //BoolQuery queryBuilder = new BoolQuery.Builder().should().build();
+        //queryBuilder.should(key).should(name).should(body).should(content);
+        //NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
+        //
+        //SearchHits<AresDocument> iterable = restTemplate.search(query, AresDocument.class);
+        //iterable.getSearchHits().forEach(document -> {
+        //    aresDocuments.add(document.getContent());
+        //});
 
         return aresDocuments;
     }
@@ -95,26 +92,26 @@ public class ElasticsearchServiceImpl implements IElasticsearchService {
     @Override
     public Iterable<AresDocument> queryByFiled(String fieldName, Object value, Pageable pageable) {
         List<AresDocument> aresDocuments = new ArrayList<>();
-        MatchQueryBuilder queryBuilder = new MatchQueryBuilder(fieldName, value);
-        NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
-        query.setPageable(pageable);
-        SearchHits<AresDocument> documents = restTemplate.search(query, AresDocument.class);
-        documents.getSearchHits().forEach(document -> {
-            aresDocuments.add(document.getContent());
-        });
+        //MatchQueryBuilder queryBuilder = new MatchQueryBuilder(fieldName, value);
+        //NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
+        //query.setPageable(pageable);
+        //SearchHits<AresDocument> documents = restTemplate.search(query, AresDocument.class);
+        //documents.getSearchHits().forEach(document -> {
+        //    aresDocuments.add(document.getContent());
+        //});
         return aresDocuments;
     }
 
     @Override
     public Iterable<AresDocument> queryAll(Pageable pageable) {
         List<AresDocument> aresDocuments = new ArrayList<>();
-        MatchAllQueryBuilder queryBuilder = new MatchAllQueryBuilder();
-        NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
-        query.setPageable(pageable);
-        SearchHits<AresDocument> documents = restTemplate.search(query, AresDocument.class);
-        documents.getSearchHits().forEach(document -> {
-            aresDocuments.add(document.getContent());
-        });
+        //MatchAllQueryBuilder queryBuilder = new MatchAllQueryBuilder();
+        //NativeSearchQuery query = new NativeSearchQuery(queryBuilder);
+        //query.setPageable(pageable);
+        //SearchHits<AresDocument> documents = restTemplate.search(query, AresDocument.class);
+        //documents.getSearchHits().forEach(document -> {
+        //    aresDocuments.add(document.getContent());
+        //});
         return aresDocuments;
     }
 

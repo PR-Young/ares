@@ -35,7 +35,8 @@ import org.springframework.context.annotation.Import;
  **/
 @Import({MyBatisConfig.class})
 @MapperScan("com.ares.**.dao")
-@SpringBootApplication(scanBasePackages = {"com.ares", "org.jeecg.modules.jmreport"})
+//@SpringBootApplication(scanBasePackages = {"com.ares", "org.jeecg.modules.jmreport"})
+@SpringBootApplication(scanBasePackages = {"com.ares"})
 public class AresSystemApplication extends SpringBootServletInitializer {
 
     /**

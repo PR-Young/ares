@@ -1,2 +1,6 @@
 flowable:
   async-executor-activate: false
+  database-schema-update: false
+spring:
+  liquibase:
+    enabled: false

@@ -1,6 +1,23 @@
 # 更新日志
 
 ## 🚀 ✈️ 🚕 🚲 ⚡ 🐞 🚢 🐅 🐘 🦁 🦒
+### 🚀 v5.0.0.230905
+- spring-boot 2.7.14 -> 3.1.3
+- mybatis-spring-boot-starter 2.3.1 -> 3.0.2
+- commons-lang3 3 3.9 -> 3.13.0
+- commons-io 2.6 -> 2.13.0
+- commons-fileupload 1.4 -> 1.5
+- aspectjweaver 1.9.6 -> 1.9.20.1
+- jython-standalone 2.7.1 -> 2.7.3
+- oshi-core 5.0.0 -> 6.4.5
+- jna 5.5.0 -> 5.13.0
+- jna-platform 5.5.0 -> 5.13.0
+- easyexcel 2.2.8 -> 3.3.2
+- sa-token-spring-boot-starter 1.33.0 -> sa-token-spring-boot3-starter 1.34.0
+- spring-boot-admin 2.7.10 -> 3.1.6
+- flowable 6.7.2 -> 7.0.0.M2
+- junit-platform-launcher 1.6.2 -> 1.10.0
+- jimureport 1.5.8 -> 1.6.1
 ### 🚀 v4.0.1.230801
 - spring-boot 2.7.5 -> 2.7.14
 - mybatis 2.2.2 -> 2.3.1

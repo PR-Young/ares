@@ -5,19 +5,19 @@
     <parent>
         <artifactId>ares</artifactId>
         <groupId>com.ares</groupId>
-        <version>4.0.0</version>
+        <version>5.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ares.neo4j</groupId>
     <artifactId>ares-neo4j</artifactId>
-    <version>1.0</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
         <neo4j.version>4.0.0</neo4j.version>
         <neo4j.ogm.version>3.2.6</neo4j.ogm.version>
-        <ares.version>1.0</ares.version>
+        <ares.version>2.0.0</ares.version>
     </properties>
 
     <dependencies>

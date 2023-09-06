@@ -39,7 +39,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 
-import javax.annotation.Resource;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;

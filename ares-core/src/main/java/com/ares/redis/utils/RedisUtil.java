@@ -20,13 +20,13 @@ package com.ares.redis.utils;
 
 
 import com.ares.core.utils.StringUtils;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
