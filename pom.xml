@@ -45,8 +45,8 @@
         <jwt.version>3.10.3</jwt.version>
         <easyexcel.version>3.3.2</easyexcel.version>
         <sa-token.version>1.34.0</sa-token.version>
-        <durid.version>1.2.18</durid.version>
-        <springdoc.version>1.7.0</springdoc.version>
+        <durid.version>1.2.19</durid.version>
+        <springdoc.version>2.2.0</springdoc.version>
         <guava.version>32.1.1-jre</guava.version>
     </properties>
 
@@ -119,7 +119,7 @@
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
         </dependency>
         <dependency>

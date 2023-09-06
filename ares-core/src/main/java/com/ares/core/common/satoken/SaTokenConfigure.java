@@ -96,10 +96,10 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     /**
      * 默认静态资源处理器
      **/
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable("ares");
-    }
+    //@Override
+    //public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+    //    configurer.enable("ares");
+    //}
 
     @Bean
     public HttpMessageConverter<String> responseBodyStringConverter() {

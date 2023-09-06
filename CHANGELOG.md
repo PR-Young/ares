@@ -18,6 +18,8 @@
 - flowable 6.7.2 -> 7.0.0.M2
 - junit-platform-launcher 1.6.2 -> 1.10.0
 - jimureport 1.5.8 -> 1.6.1
+- druid-spring-boot-starter 1.2.18 -> druid-spring-boot-3-starter 1.2.19
+- springdoc-openapi-ui 1.7.0替换为 springdoc-openapi-starter-webmvc-ui 2.2.0
 ### 🚀 v4.0.1.230801
 - spring-boot 2.7.5 -> 2.7.14
 - mybatis 2.2.2 -> 2.3.1
