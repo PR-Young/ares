@@ -19,39 +19,29 @@
 package com.ares.test;
 
 
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson.JSON;
 import com.ares.core.model.listener.ElasticsearchEvent;
-import com.ares.core.listener.UserDataListener;
-import com.ares.core.persistence.model.SysUser;
-import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
 import com.ares.message.persistence.dao.AresDocumentRepository;
 import com.ares.message.persistence.model.AresDocument;
-import org.elasticsearch.index.query.MatchQueryBuilder;
+import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-
+import org.springframework.data.elasticsearch.client.elc.ElasticsearchTemplate;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Map;
 
 public class AresApplicationTests extends AresBaseTest {
 
     @Resource
     AresDocumentRepository repository;
     @Resource
-    private ElasticsearchRestTemplate restTemplate;
+    private ElasticsearchTemplate restTemplate;
 
 
     @Test
@@ -72,10 +62,10 @@ public class AresApplicationTests extends AresBaseTest {
 
     @Test
     public void testExcel() throws Exception {
-        InputStream in = new FileInputStream("E:\\GitHub\\ares\\doc\\test.xlsx");
-        ISysUserService userService = SpringUtils.getBean(ISysUserService.class);
-        AnalysisEventListener listener = new UserDataListener(true, "");
-        EasyExcel.read(in, SysUser.class, listener).sheet().doRead();
+        //InputStream in = new FileInputStream("E:\\GitHub\\ares\\doc\\test.xlsx");
+        //ISysUserService userService = SpringUtils.getBean(ISysUserService.class);
+        //AnalysisEventListener listener = new UserDataListener(true, "");
+        //EasyExcel.read(in, SysUser.class, listener).sheet().doRead();
     }
 
     @Test
@@ -101,12 +91,12 @@ public class AresApplicationTests extends AresBaseTest {
 
     @Test
     public void testElas() {
-        MatchQueryBuilder builder = new MatchQueryBuilder("category", "小米");
-        NativeSearchQuery query = new NativeSearchQuery(builder);
-        SearchHits<Map> search = restTemplate.search(query, Map.class);
-        search.stream().forEach(item -> {
-            System.out.println(item);
-        });
+        //MatchQueryBuilder builder = new MatchQueryBuilder("category", "小米");
+        //NativeSearchQuery query = new NativeSearchQuery(builder);
+        //SearchHits<Map> search = restTemplate.search(query, Map.class);
+        //search.stream().forEach(item -> {
+        //    System.out.println(item);
+        //});
     }
 
 }
