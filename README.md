@@ -31,8 +31,8 @@ ares
 
 # 使用技术
 
-- 框架：springboot2.7.5, mybatis
-- java版本：jdk11
+- 框架：springboot3.1.3, mybatis
+- java版本：jdk17
 - 数据库：mysql8、redis、neo4j
 - 消息机制：kafka
 - 全文检索：elasticsearch
