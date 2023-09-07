@@ -168,6 +168,7 @@
         <logger name="com.ares" level="DEBUG"/>
         <root level="info">
             <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_FILE"/>
         </root>
     </springProfile>
 
