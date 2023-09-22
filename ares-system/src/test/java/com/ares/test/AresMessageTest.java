@@ -23,6 +23,7 @@ import com.ares.message.handler.AresMessageHandler;
 import com.ares.message.persistence.model.DisruptorQueue;
 import com.ares.message.persistence.service.IDisruptorMessageService;
 import com.ares.message.producer.AresMessageProducer;
+import com.ares.message.utils.AresMessageUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,6 +57,11 @@ public class AresMessageTest extends AresBaseTest {
 
         Thread.sleep(3 * 1000);
         producer.stopThread();
+    }
+
+    @Test
+    public void test(){
+        AresMessageUtil.sendMessage("test","this is a test!");
     }
 
 

@@ -51,25 +51,23 @@ public class AresMessageProducer<T> implements Runnable {
 
     @Override
     public void run() {
-        long sequence = disruptorQueue.getRingBuffer().next();
         try {
             logger.info(now() + this.name + "------>:线程启动");
             if (frequency.get() > 0) {
                 for (int i = 0; i < frequency.get(); i++) {
                     disruptorQueue.add(data);
-                    logger.info(now() + this.name + "---" + (i + 1) + "--->:存入" + data + "到队列中。");
+                    logger.info(now() + this.name + "---" + (i + 1) + "--->:存入[" + data + "]到队列中。");
                 }
             } else {
                 while (flag) {
                     disruptorQueue.add(data);
-                    logger.info(now() + this.name + "------>:存入" + data + "到队列中。");
+                    logger.info(now() + this.name + "------>:存入[" + data + "]到队列中。");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             logger.info(now() + this.name + "------>:退出线程。");
-            disruptorQueue.getRingBuffer().publish(sequence);
         }
     }
 
