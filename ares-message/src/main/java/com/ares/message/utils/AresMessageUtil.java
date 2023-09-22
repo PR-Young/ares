@@ -44,4 +44,15 @@ public class AresMessageUtil {
         executorService.execute(producer);
     }
 
+    public static void sendMessage(AresMessage message) {
+        DisruptorQueue<String> disruptorQueue = DisruptorQueueFactory.getHandleEventsQueue(message.getBufferSize(), message.isMoreProducer(), new AresMessageHandler<>());
+        AresMessageProducer<String> producer = new AresMessageProducer(message.getName(), disruptorQueue, message.getData(), new AtomicInteger(message.getFrequency()));
+        executorService.execute(producer);
+    }
+
+    public static void sendMessage(String name, Object data) {
+        DisruptorQueue<String> disruptorQueue = DisruptorQueueFactory.getHandleEventsQueue(1024, false, new AresMessageHandler<>());
+        AresMessageProducer<String> producer = new AresMessageProducer(name, disruptorQueue, data, new AtomicInteger(1));
+        executorService.execute(producer);
+    }
 }

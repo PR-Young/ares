@@ -37,6 +37,7 @@ import com.ares.core.utils.AresCommonUtils;
 import com.ares.core.utils.IpUtils;
 import com.ares.core.utils.MD5Util;
 import com.ares.core.utils.ServletUtils;
+import com.ares.message.utils.AresMessageUtil;
 import com.ares.redis.utils.RedisUtil;
 import com.wf.captcha.ArithmeticCaptcha;
 import io.swagger.v3.oas.annotations.Operation;
@@ -129,6 +130,8 @@ public class LoginApiController {
         sysLoginInfo.setOs(AresCommonUtils.getUserAgent(request, "os"));
         Long id = loginInfoService.saveInfo(sysLoginInfo);
         RedisUtil.set(token, id, 0);
+
+        AresMessageUtil.sendMessage("login", user.getUserName() + " login system!");
 
         return AjaxResult.success().put("token", token);
     }
