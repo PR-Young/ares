@@ -51,6 +51,7 @@ public class AresMessageProducer<T> implements Runnable {
 
     @Override
     public void run() {
+        long sequence = disruptorQueue.getRingBuffer().next();
         try {
             logger.info(now() + this.name + "------>:线程启动");
             if (frequency.get() > 0) {
@@ -68,6 +69,7 @@ public class AresMessageProducer<T> implements Runnable {
             e.printStackTrace();
         } finally {
             logger.info(now() + this.name + "------>:退出线程。");
+            disruptorQueue.getRingBuffer().publish(sequence);
         }
     }
 
