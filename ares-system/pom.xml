@@ -17,7 +17,6 @@
     <properties>
         <ares.version>2.0.0</ares.version>
         <java.version>17</java.version>
-        <jwt.version>0.9.1</jwt.version>
         <jm.version>1.6.1</jm.version>
         <spring-admin.version>3.1.6</spring-admin.version>
         <junit-platform-launcher.version>1.10.0</junit-platform-launcher.version>
@@ -32,11 +31,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>${jwt.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
