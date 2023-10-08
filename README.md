@@ -7,17 +7,17 @@
 ```
 ares
 │
-├─（※）ares-admin spring-boot-admin监控模块
+├─（※）ares-admin 监控模块
 │
 ├─（※）ares-core 核心模块
 │
-├─（※）ares-flowable 流程模块（待完善）
+├─（※）ares-flowable 流程模块
 │
-├─（※）ares-generator 代码生成模块（待完善）
+├─（※）ares-generator 代码生成模块
 │
-├─（※）ares-message  消息模块（待完善）
+├─（※）ares-message  消息模块
 │
-├─ares-neo4j 图数据库模块（待开发）
+├─ ares-neo4j 图数据库模块（待开发）
 │
 ├─（※）ares-quartz 定时任务模块
 │
@@ -31,8 +31,8 @@ ares
 
 # 使用技术
 
-- 框架：springboot3.1.3, mybatis
-- java版本：jdk17
+- 框架：springboot3, mybatis, sa-token
+- jdk版本：17
 - 数据库：mysql8、redis、neo4j
 - 消息机制：kafka
 - 全文检索：elasticsearch
