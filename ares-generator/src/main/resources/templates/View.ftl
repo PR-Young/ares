@@ -155,40 +155,12 @@
 </template>
 
 <script>
-    import {add$
-
-    {
-        entityName
-    }
-    ,
-    del$
-    {
-        entityName
-    }
-    ,
-    export$
-    {
-        entityName
-    }
-    ,
-    get$
-    {
-        entityName
-    }
-    ,
-    list$
-    {
-        entityName
-    }
-    ,
-    update$
-    {
-        entityName
-    }
-    ,
-    }
-    from
-    "@/api/system/";
+    import {add${entityName},
+    del${entityName},
+    export${entityName},
+    get${entityName},
+    list${entityName},
+    update${entityName}} from "@/api/system/";
 
     export default {
         name: "${entityName}",
@@ -246,9 +218,9 @@
             // 表单重置
             reset() {
                 this.form = {
-                    id: undefined
+                    id: undefined,
                     <#list columns as column>
-                    ${column.name} undefined,
+                    ${column.name}: undefined,
                     </#list>
                 };
                 this.resetForm("form");
