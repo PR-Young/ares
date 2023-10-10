@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ${entityName}Service implements I${entityName}Service {
+public class ${entityName}ServiceImpl implements I${entityName}Service {
 
 private I${entityName}Dao ${entityName1}Dao;
 
 @Autowired
-public ${entityName}Service(I${entityName}Dao ${entityName1}Dao){
+public ${entityName}ServiceImpl(I${entityName}Dao ${entityName1}Dao){
 this.${entityName1}Dao = ${entityName1}Dao;
 }
 
@@ -48,12 +48,12 @@ ${entityName1}Dao.update(obj);
 }
 
 @Override
-public void deleteByIds(${"List<String>"} ids) {
+public void deleteByIds(${"List<Long>"} ids) {
 ${entityName1}Dao.deleteByIds(ids);
 }
 
 @Override
-public ${entityName} getById(String id) {
+public ${entityName} getById(Long id) {
 return ${entityName1}Dao.getById(id);
 }
 
