@@ -45,7 +45,7 @@ return getDataTable(${entityName1}List);
 
 @GetMapping("{${entityName1}Id}")
 @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-public Object getInfo(@PathVariable String ${entityName1}Id) {
+public Object getInfo(@PathVariable Long ${entityName1}Id) {
 return AjaxResult.successData(${entityName1}Service.getById(${entityName1}Id));
 }
 
@@ -66,7 +66,7 @@ return AjaxResult.success();
 @SaCheckPermission("${entityName1}:delete")
 @DeleteMapping("{${entityName1}Ids}")
 @Operation(summary = "删除信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-public Object remove(@PathVariable String[] ${entityName1}Ids) {
+public Object remove(@PathVariable Long[] ${entityName1}Ids) {
 ${entityName1}Service.deleteByIds(Arrays.asList(${entityName1}Ids));
 return AjaxResult.success();
 }
