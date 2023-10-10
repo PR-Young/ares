@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ares.core.persistence.dao.ISysTenantsDao">
+    <resultMap id="SysTenants" type="com.ares.core.persistence.model.SysTenants">
+        <id column="Id" jdbcType="BIGINT" property="id"/>
+        <result column="TenantName" jdbcType="VARCHAR" property="tenantName"/>
+        <result column="TenantAlias" jdbcType="VARCHAR" property="tenantAlias"/>
+        <result column="TenantStatus" jdbcType="VARCHAR" property="tenantStatus"/>
+        <result column="Creator" jdbcType="BIGINT" property="creator"/>
+        <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="Modifier" jdbcType="BIGINT" property="modifier"/>
+        <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        `Id`
+        ,`TenantName`,`TenantAlias`,`TenantStatus`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
+    </sql>
+
+    <insert id="insert" parameterType="com.ares.core.persistence.model.SysTenants">
+        insert into `sys_tenants` (
+        <include refid="Base_Column_List"/>
+        )
+        values (
+        #{id,jdbcType=BIGINT},
+        #{tenantName,jdbcType=VARCHAR},
+        #{tenantAlias,jdbcType=VARCHAR},
+        #{tenantStatus,jdbcType=VARCHAR},
+        #{creator,jdbcType=BIGINT},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{modifier,jdbcType=BIGINT},
+        #{modifyTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.ares.core.persistence.model.SysTenants">
+        update `sys_tenants`
+        <set>
+            <if test="tenantName!= null">
+                `TenantName`=#{tenantName,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantAlias!= null">
+                `TenantAlias`=#{tenantAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="tenantStatus!= null">
+                `TenantStatus`=#{tenantStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="creator != null">
+                `Creator` = #{creator,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                `CreateTime` = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifier != null">
+                `Modifier` = #{modifier,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                `ModifyTime` = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where `Id` = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from `sys_tenants`
+        where `Id` in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getById" parameterType="java.lang.Long" resultMap="SysTenants">
+        select
+        <include refid="Base_Column_List"/>
+        from `sys_tenants`
+        where `Id` = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="list" parameterType="java.util.Map" resultMap="SysTenants">
+        select
+        <include refid="Base_Column_List"/>
+        from `sys_tenants`
+        where 1=1
+        <if test="search != null">
+
+        </if>
+        <if test="sort != null">
+            order by ${sort}
+        </if>
+        <if test="sort == null">
+            order by `CreateTime` desc
+        </if>
+    </select>
+
+    <select id="selectList" parameterType="com.ares.core.model.query.SysTenantsQuery" resultMap="SysTenants">
+        select
+        <include refid="Base_Column_List"/>
+        from `sys_tenants`
+        where 1=1
+        <if test="tenantName != null and tenantName != ''">
+            AND `TenantName` like concat('%', #{tenantName}, '%')
+        </if>
+        <if test="tenantAlias != null and tenantAlias != ''">
+            AND `TenantAlias` like concat('%', #{tenantAlias}, '%')
+        </if>
+        <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
+            AND date_format(`CreateTime`,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+        </if>
+        <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
+            AND date_format(`CreateTime`,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+        </if>
+    </select>
+</mapper>
