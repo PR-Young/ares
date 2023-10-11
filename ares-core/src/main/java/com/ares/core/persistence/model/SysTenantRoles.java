@@ -28,7 +28,7 @@ import lombok.Data;
 @Schema(title = "SysTenantRoles对象", description = "")
 public class SysTenantRoles extends BaseModel {
     @Schema(description = "")
-    private Integer tenantId;
+    private Long tenantId;
     @Schema(description = "")
-    private Integer roleId;
+    private Long roleId;
 }

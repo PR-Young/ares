@@ -24,7 +24,11 @@ package com.ares.core.persistence.service;
 import com.ares.core.model.query.SysTenantRolesQuery;
 import com.ares.core.persistence.model.SysTenantRoles;
 
-public interface ISysTenantRolesService extends IBaseService<SysTenantRoles, SysTenantRolesQuery>{
+import java.util.List;
 
+public interface ISysTenantRolesService extends IBaseService<SysTenantRoles, SysTenantRolesQuery> {
+    List<String> getRoleIdsByTenant(Long tenantId);
+
+    void delByTenantId(Long tenantId);
 
 }

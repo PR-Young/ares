@@ -26,5 +26,4 @@ import com.ares.core.persistence.model.SysTenants;
 
 public interface ISysTenantsService extends IBaseService<SysTenants, SysTenantsQuery> {
 
-
 }

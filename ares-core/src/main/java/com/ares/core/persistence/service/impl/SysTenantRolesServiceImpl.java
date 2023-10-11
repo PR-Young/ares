@@ -81,4 +81,13 @@ public class SysTenantRolesServiceImpl implements ISysTenantRolesService {
         return lists;
     }
 
+    @Override
+    public List<String> getRoleIdsByTenant(Long tenantId) {
+        return sysTenantRolesDao.getRoleIdsByTenant(tenantId);
+    }
+
+    @Override
+    public void delByTenantId(Long tenantId) {
+        sysTenantRolesDao.deleteByTenantId(tenantId);
+    }
 }

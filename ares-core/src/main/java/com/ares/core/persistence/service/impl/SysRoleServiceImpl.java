@@ -123,9 +123,9 @@ public class SysRoleServiceImpl implements ISysRoleService {
     }
 
     @Override
-    public List<Long> getRoleIdsByUser(Long userId) {
+    public List<String> getRoleIdsByUser(Long userId) {
         List<SysRole> roleList = sysRoleDao.getRoleByUserId(userId);
-        List<Long> roles = roleList.stream().map(SysRole::getId).collect(Collectors.toList());
+        List<String> roles = roleList.stream().map(role -> role.getId().toString()).collect(Collectors.toList());
         return roles;
     }
 

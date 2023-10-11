@@ -24,7 +24,11 @@ import com.ares.core.model.query.SysTenantRolesQuery;
 import com.ares.core.persistence.model.SysTenantRoles;
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
-public interface ISysTenantRolesDao extends IBaseDao<SysTenantRoles, SysTenantRolesQuery>{
+import java.util.List;
 
+@Mapper
+public interface ISysTenantRolesDao extends IBaseDao<SysTenantRoles, SysTenantRolesQuery> {
+    List<String> getRoleIdsByTenant(Long tenantId);
+
+    int deleteByTenantId(Long tenantId);
 }

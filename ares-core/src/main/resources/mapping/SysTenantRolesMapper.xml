@@ -99,4 +99,15 @@
             AND date_format(`CreateTime`,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
         </if>
     </select>
+
+    <select id="getRoleIdsByTenant" parameterType="java.lang.Long">
+        select `RoleId`
+        from `sys_tenant_roles`
+        where `TenantId` = #{tenantId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByTenantId" parameterType="java.lang.Long">
+        delete from `sys_tenant_roles`
+        where `TenantId` = #{tenantId}
+    </delete>
 </mapper>

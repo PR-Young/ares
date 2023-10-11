@@ -20,19 +20,21 @@
 
 package com.ares.core.persistence.model;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
 import com.ares.core.model.base.BaseModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-@Schema(title = "SysTenants对象",description = "")
-public class SysTenants extends BaseModel{
+@Schema(title = "SysTenants对象", description = "")
+public class SysTenants extends BaseModel {
     @Schema(description = "")
     private String tenantName;
     @Schema(description = "")
     private String tenantAlias;
     @Schema(description = "")
     private String tenantStatus;
+    @ExcelIgnore
+    @Schema(hidden = true)
+    private Long[] roleIds;
 }

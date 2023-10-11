@@ -24,6 +24,7 @@ import com.ares.core.model.query.SysTenantsQuery;
 import com.ares.core.persistence.model.SysTenants;
 import org.apache.ibatis.annotations.Mapper;
 
+
 @Mapper
 public interface ISysTenantsDao extends IBaseDao<SysTenants, SysTenantsQuery> {
 

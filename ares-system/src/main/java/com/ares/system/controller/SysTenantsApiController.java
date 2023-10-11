@@ -27,6 +27,8 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysTenantsQuery;
 import com.ares.core.persistence.model.SysTenants;
+import com.ares.core.persistence.service.ISysRoleService;
+import com.ares.core.persistence.service.ISysTenantRolesService;
 import com.ares.core.persistence.service.ISysTenantsService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,6 +37,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,10 +51,14 @@ import java.util.List;
 public class SysTenantsApiController extends BaseController {
 
     private ISysTenantsService sysTenantsService;
+    private ISysTenantRolesService sysTenantRolesService;
+    private ISysRoleService roleService;
 
     @Autowired
-    public SysTenantsApiController(ISysTenantsService sysTenantsService) {
+    public SysTenantsApiController(ISysTenantsService sysTenantsService, ISysRoleService roleService, ISysTenantRolesService sysTenantRolesService) {
         this.sysTenantsService = sysTenantsService;
+        this.roleService = roleService;
+        this.sysTenantRolesService = sysTenantRolesService;
     }
 
     @SaCheckPermission("sysTenants:list")
@@ -63,10 +70,17 @@ public class SysTenantsApiController extends BaseController {
         return getDataTable(sysTenantsList);
     }
 
-    @GetMapping("{sysTenantsId}")
+    @GetMapping(value = {"", "{sysTenantsId}"})
     @Operation(summary = "根据Id获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    public Object getInfo(@PathVariable Long sysTenantsId) {
-        return AjaxResult.successData(sysTenantsService.getById(sysTenantsId));
+    public Object getInfo(@PathVariable(required = false) Long sysTenantsId) {
+        AjaxResult result = new AjaxResult();
+        result.put("code", HttpStatus.OK.value());
+        result.put("data", sysTenantsService.getById(sysTenantsId));
+        result.put("roles", roleService.getAll());
+        if (StringUtils.isNotEmpty(sysTenantsId)) {
+            result.put("roleIds", sysTenantRolesService.getRoleIdsByTenant(sysTenantsId));
+        }
+        return result;
     }
 
     @SaCheckPermission("sysTenants:edit")

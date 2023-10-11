@@ -35,7 +35,7 @@ public interface ISysRoleService extends IBaseService<SysRole, SysRoleQuery> {
 
     List<String> getPermsByRoleId(Long roleId);
 
-    List<Long> getRoleIdsByUser(Long userId);
+    List<String> getRoleIdsByUser(Long userId);
 
     List<SysRole> getAll();
 
