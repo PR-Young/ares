@@ -31,4 +31,6 @@ public interface ISysTenantUsersDao extends IBaseDao<SysTenantUsers, SysTenantUs
     List<String> getUserIdsByTenant(Long tenantId);
 
     int deleteByTenantId(Long tenantId);
+
+    Long getTenantIdByUserId(Long userId);
 }

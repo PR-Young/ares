@@ -75,6 +75,11 @@ public class SysUser extends BaseModel implements Serializable {
     @Schema(description = "状态")
     @ExcelIgnore
     private int status;
+    @ExcelIgnore
+    @Schema(hidden = true)
+    @JsonSerialize(using = LongJsonSerializer.class)
+    @JsonDeserialize(using = LongJsonDeserializer.class)
+    private Long tenantId;
 
     public SysUser() {
     }
@@ -169,5 +174,13 @@ public class SysUser extends BaseModel implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Long getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
     }
 }

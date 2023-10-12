@@ -106,6 +106,12 @@
         where `TenantId` = #{tenantId,jdbcType=BIGINT}
     </select>
 
+    <select id="getTenantIdByUserId" resultType="java.lang.Long">
+        select `TenantId`
+        from `sys_tenant_users`
+        where `UserId` = #{userId}
+    </select>
+
     <delete id="deleteByTenantId" parameterType="java.lang.Long">
         delete from `sys_tenant_users`
         where `TenantId` = #{tenantId}

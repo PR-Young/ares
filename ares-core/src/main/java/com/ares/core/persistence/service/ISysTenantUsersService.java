@@ -31,4 +31,5 @@ public interface ISysTenantUsersService extends IBaseService<SysTenantUsers, Sys
 
     void delByTenantId(Long tenantId);
 
+    Long getTenantIdByUserId(Long userId);
 }

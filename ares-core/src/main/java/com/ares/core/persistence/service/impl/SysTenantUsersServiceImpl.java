@@ -90,4 +90,9 @@ public class SysTenantUsersServiceImpl implements ISysTenantUsersService {
     public void delByTenantId(Long tenantId) {
         sysTenantRolesDao.deleteByTenantId(tenantId);
     }
+
+    @Override
+    public Long getTenantIdByUserId(Long userId) {
+        return sysTenantRolesDao.getTenantIdByUserId(userId);
+    }
 }

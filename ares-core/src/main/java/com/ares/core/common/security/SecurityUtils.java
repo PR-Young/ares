@@ -22,6 +22,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.ares.core.common.exception.UserException;
 import com.ares.core.model.exception.ErrorCode;
 import com.ares.core.persistence.model.SysUser;
+import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
 
@@ -43,6 +44,9 @@ public final class SecurityUtils {
         }
         ISysUserService userService = SpringUtils.getBean(ISysUserService.class);
         SysUser user = userService.getById(loginId);
+        ISysTenantUsersService tenantUsersService = SpringUtils.getBean(ISysTenantUsersService.class);
+        Long tenantId = tenantUsersService.getTenantIdByUserId(user.getId());
+        user.setTenantId(tenantId);
         return user;
     }
 
