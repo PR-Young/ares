@@ -18,17 +18,14 @@
  *
  */
 
-package com.ares.core.persistence.dao;
+package com.ares.core.model.query;
 
-import com.ares.core.model.query.SysTenantRolesQuery;
-import com.ares.core.persistence.model.SysTenantRoles;
-import org.apache.ibatis.annotations.Mapper;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 
-import java.util.List;
 
-@Mapper
-public interface ISysTenantRolesDao extends IBaseDao<SysTenantRoles, SysTenantRolesQuery> {
-    List<String> getRoleIdsByTenant(Long tenantId);
+@Data
+@Schema(description = "查询实体")
+public class SysTenantUsersQuery extends BaseQuery {
 
-    int deleteByTenantId(Long tenantId);
 }

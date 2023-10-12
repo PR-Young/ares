@@ -27,8 +27,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysTenantsQuery;
 import com.ares.core.persistence.model.SysTenants;
-import com.ares.core.persistence.service.ISysRoleService;
-import com.ares.core.persistence.service.ISysTenantRolesService;
+import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.persistence.service.ISysTenantsService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,13 +50,11 @@ import java.util.List;
 public class SysTenantsApiController extends BaseController {
 
     private ISysTenantsService sysTenantsService;
-    private ISysTenantRolesService sysTenantRolesService;
-    private ISysRoleService roleService;
+    private ISysTenantUsersService sysTenantRolesService;
 
     @Autowired
-    public SysTenantsApiController(ISysTenantsService sysTenantsService, ISysRoleService roleService, ISysTenantRolesService sysTenantRolesService) {
+    public SysTenantsApiController(ISysTenantsService sysTenantsService, ISysTenantUsersService sysTenantRolesService) {
         this.sysTenantsService = sysTenantsService;
-        this.roleService = roleService;
         this.sysTenantRolesService = sysTenantRolesService;
     }
 
@@ -76,9 +73,9 @@ public class SysTenantsApiController extends BaseController {
         AjaxResult result = new AjaxResult();
         result.put("code", HttpStatus.OK.value());
         result.put("data", sysTenantsService.getById(sysTenantsId));
-        result.put("roles", roleService.getAll());
+        result.put("allUser", sysTenantsService.getAllUsers());
         if (StringUtils.isNotEmpty(sysTenantsId)) {
-            result.put("roleIds", sysTenantRolesService.getRoleIdsByTenant(sysTenantsId));
+            result.put("checkedKeys", sysTenantRolesService.getUserIdsByTenant(sysTenantsId));
         }
         return result;
     }

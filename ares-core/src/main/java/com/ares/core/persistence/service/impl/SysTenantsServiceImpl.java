@@ -22,9 +22,9 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysTenantsQuery;
 import com.ares.core.persistence.dao.ISysTenantsDao;
-import com.ares.core.persistence.model.SysTenantRoles;
+import com.ares.core.persistence.model.SysTenantUsers;
 import com.ares.core.persistence.model.SysTenants;
-import com.ares.core.persistence.service.ISysTenantRolesService;
+import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.persistence.service.ISysTenantsService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
@@ -41,10 +41,10 @@ import java.util.Map;
 public class SysTenantsServiceImpl implements ISysTenantsService {
 
     private ISysTenantsDao sysTenantsDao;
-    private ISysTenantRolesService sysTenantRolesService;
+    private ISysTenantUsersService sysTenantRolesService;
 
     @Autowired
-    public SysTenantsServiceImpl(ISysTenantsDao sysTenantsDao, ISysTenantRolesService sysTenantRolesService) {
+    public SysTenantsServiceImpl(ISysTenantsDao sysTenantsDao, ISysTenantUsersService sysTenantRolesService) {
         this.sysTenantsDao = sysTenantsDao;
         this.sysTenantRolesService = sysTenantRolesService;
     }
@@ -64,10 +64,10 @@ public class SysTenantsServiceImpl implements ISysTenantsService {
         obj.setId(id);
         obj.setCreateTime(new Date());
         sysTenantsDao.insert(obj);
-        for (Long roleId : obj.getRoleIds()) {
-            SysTenantRoles tenantRoles = new SysTenantRoles();
+        for (Long userId : obj.getUserIds()) {
+            SysTenantUsers tenantRoles = new SysTenantUsers();
             tenantRoles.setTenantId(id);
-            tenantRoles.setRoleId(roleId);
+            tenantRoles.setUserId(userId);
             sysTenantRolesService.insert(tenantRoles);
         }
     }
@@ -78,10 +78,10 @@ public class SysTenantsServiceImpl implements ISysTenantsService {
         obj.setModifyTime(new Date());
         sysTenantsDao.update(obj);
         sysTenantRolesService.delByTenantId(obj.getId());
-        for (Long roleId : obj.getRoleIds()) {
-            SysTenantRoles tenantRoles = new SysTenantRoles();
+        for (Long userId : obj.getUserIds()) {
+            SysTenantUsers tenantRoles = new SysTenantUsers();
             tenantRoles.setTenantId(obj.getId());
-            tenantRoles.setRoleId(roleId);
+            tenantRoles.setUserId(userId);
             sysTenantRolesService.insert(tenantRoles);
         }
     }
@@ -104,5 +104,10 @@ public class SysTenantsServiceImpl implements ISysTenantsService {
     public List<SysTenants> list(SysTenantsQuery obj) {
         List<SysTenants> lists = sysTenantsDao.selectList(obj);
         return lists;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllUsers() {
+        return sysTenantsDao.getAllUsers();
     }
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ares.core.persistence.dao.ISysTenantRolesDao">
-    <resultMap id="SysTenantRoles" type="com.ares.core.persistence.model.SysTenantRoles">
+<mapper namespace="com.ares.core.persistence.dao.ISysTenantUsersDao">
+    <resultMap id="SysTenantRoles" type="com.ares.core.persistence.model.SysTenantUsers">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="TenantId" jdbcType="VARCHAR" property="tenantId"/>
-        <result column="RoleId" jdbcType="VARCHAR" property="roleId"/>
+        <result column="UserId" jdbcType="VARCHAR" property="userId"/>
         <result column="Creator" jdbcType="BIGINT" property="creator"/>
         <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="Modifier" jdbcType="BIGINT" property="modifier"/>
@@ -13,17 +13,17 @@
 
     <sql id="Base_Column_List">
         `Id`
-        ,`TenantId`,`RoleId`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
+        ,`TenantId`,`UserId`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.model.SysTenantRoles">
-        insert into `sys_tenant_roles` (
+    <insert id="insert" parameterType="com.ares.core.persistence.model.SysTenantUsers">
+        insert into `sys_tenant_users` (
         <include refid="Base_Column_List"/>
         )
         values (
         #{id,jdbcType=BIGINT},
         #{tenantId,jdbcType=VARCHAR},
-        #{roleId,jdbcType=VARCHAR},
+        #{userId,jdbcType=VARCHAR},
         #{creator,jdbcType=BIGINT},
         #{createTime,jdbcType=TIMESTAMP},
         #{modifier,jdbcType=BIGINT},
@@ -31,14 +31,14 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.model.SysTenantRoles">
-        update `sys_tenant_roles`
+    <update id="update" parameterType="com.ares.core.persistence.model.SysTenantUsers">
+        update `sys_tenant_users`
         <set>
             <if test="tenantId!= null">
                 `TenantId`=#{tenantId,jdbcType=VARCHAR},
             </if>
-            <if test="roleId!= null">
-                `RoleId`=#{roleId,jdbcType=VARCHAR},
+            <if test="userId!= null">
+                `UserId`=#{userId,jdbcType=VARCHAR},
             </if>
             <if test="creator != null">
                 `Creator` = #{creator,jdbcType=TIMESTAMP},
@@ -57,7 +57,7 @@
     </update>
 
     <delete id="deleteByIds" parameterType="java.util.List">
-        delete from `sys_tenant_roles`
+        delete from `sys_tenant_users`
         where `Id` in
         <foreach collection="list" item="id" open="(" separator="," close=")">
             #{id}
@@ -67,14 +67,14 @@
     <select id="getById" parameterType="java.lang.Long" resultMap="SysTenantRoles">
         select
         <include refid="Base_Column_List"/>
-        from `sys_tenant_roles`
+        from `sys_tenant_users`
         where `Id` = #{id,jdbcType=BIGINT}
     </select>
 
     <select id="list" parameterType="java.util.Map" resultMap="SysTenantRoles">
         select
         <include refid="Base_Column_List"/>
-        from `sys_tenant_roles`
+        from `sys_tenant_users`
         where 1=1
         <if test="search != null">
 
@@ -87,10 +87,10 @@
         </if>
     </select>
 
-    <select id="selectList" parameterType="com.ares.core.model.query.SysTenantRolesQuery" resultMap="SysTenantRoles">
+    <select id="selectList" parameterType="com.ares.core.model.query.SysTenantUsersQuery" resultMap="SysTenantRoles">
         select
         <include refid="Base_Column_List"/>
-        from `sys_tenant_roles`
+        from `sys_tenant_users`
         where 1=1
         <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
             AND date_format(`CreateTime`,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
@@ -100,14 +100,14 @@
         </if>
     </select>
 
-    <select id="getRoleIdsByTenant" parameterType="java.lang.Long">
-        select `RoleId`
-        from `sys_tenant_roles`
+    <select id="getUserIdsByTenant" parameterType="java.lang.Long" resultType="java.lang.String">
+        select `UserId`
+        from `sys_tenant_users`
         where `TenantId` = #{tenantId,jdbcType=BIGINT}
     </select>
 
     <delete id="deleteByTenantId" parameterType="java.lang.Long">
-        delete from `sys_tenant_roles`
+        delete from `sys_tenant_users`
         where `TenantId` = #{tenantId}
     </delete>
 </mapper>

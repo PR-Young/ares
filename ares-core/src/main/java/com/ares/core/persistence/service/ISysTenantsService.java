@@ -23,7 +23,10 @@ package com.ares.core.persistence.service;
 import com.ares.core.model.query.SysTenantsQuery;
 import com.ares.core.persistence.model.SysTenants;
 
+import java.util.List;
+import java.util.Map;
+
 
 public interface ISysTenantsService extends IBaseService<SysTenants, SysTenantsQuery> {
-
+    List<Map<String, Object>> getAllUsers();
 }

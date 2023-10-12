@@ -36,5 +36,5 @@ public class SysTenants extends BaseModel {
     private String tenantStatus;
     @ExcelIgnore
     @Schema(hidden = true)
-    private Long[] roleIds;
+    private Long[] userIds;
 }

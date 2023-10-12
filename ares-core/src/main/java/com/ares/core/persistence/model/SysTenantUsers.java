@@ -18,14 +18,17 @@
  *
  */
 
-package com.ares.core.model.query;
+package com.ares.core.persistence.model;
 
+import com.ares.core.model.base.BaseModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-
 @Data
-@Schema(description = "查询实体")
-public class SysTenantRolesQuery extends BaseQuery {
-
+@Schema(title = "SysTenantRoles对象", description = "")
+public class SysTenantUsers extends BaseModel {
+    @Schema(description = "")
+    private Long tenantId;
+    @Schema(description = "")
+    private Long userId;
 }

@@ -15,13 +15,13 @@ CREATE TABLE `sys_tenants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
--- Table structure for sys_tenant_roles
+-- Table structure for sys_tenant_users
 -- ----------------------------
-DROP TABLE IF EXISTS `sys_tenant_roles`;
-CREATE TABLE `sys_tenant_roles` (
+DROP TABLE IF EXISTS `sys_tenant_users`;
+CREATE TABLE `sys_tenant_users` (
                                     `Id` bigint NOT NULL,
                                     `TenantId` bigint DEFAULT NULL,
-                                    `RoleId` bigint DEFAULT NULL,
+                                    `UserId` bigint DEFAULT NULL,
                                     `Creator` bigint DEFAULT NULL,
                                     `CreateTime` datetime DEFAULT NULL,
                                     `Modifier` bigint DEFAULT NULL,
@@ -35,4 +35,4 @@ INSERT INTO `sys_menu` (`Id`, `Name`, `Description`, `Path`, `Url`, `IsBlank`, `
 INSERT INTO `sys_menu` (`Id`, `Name`, `Description`, `Path`, `Url`, `IsBlank`, `PId`, `Icon`, `Order`, `Visible`, `Perms`, `Type`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (871629501501673472, '租户', NULL, '/tenant', '/system/tenant/index', NULL, '1', 'nested', 6, 0, 'sysTenants:list', 1, 1, '2023-10-10 07:51:17', NULL, NULL);
 
 INSERT INTO `sys_tenants` (`Id`, `TenantName`, `TenantAlias`, `TenantStatus`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (1, '系统默认租户', 'sys', '0', 1, '2023-10-11 10:27:18', NULL, NULL);
-INSERT INTO `sys_tenant_roles` (`Id`, `TenantId`, `RoleId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (1, 1, 1, 1, '2023-10-11 10:26:35', NULL, NULL);
+INSERT INTO `sys_tenant_users` (`Id`, `TenantId`, `UserId`, `Creator`, `CreateTime`, `Modifier`, `ModifyTime`) VALUES (1, 1, 1, 1, '2023-10-11 10:26:35', NULL, NULL);

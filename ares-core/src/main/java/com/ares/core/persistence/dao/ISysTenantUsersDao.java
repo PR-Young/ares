@@ -18,17 +18,17 @@
  *
  */
 
-package com.ares.core.persistence.model;
+package com.ares.core.persistence.dao;
 
-import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import com.ares.core.model.query.SysTenantUsersQuery;
+import com.ares.core.persistence.model.SysTenantUsers;
+import org.apache.ibatis.annotations.Mapper;
 
-@Data
-@Schema(title = "SysTenantRoles对象", description = "")
-public class SysTenantRoles extends BaseModel {
-    @Schema(description = "")
-    private Long tenantId;
-    @Schema(description = "")
-    private Long roleId;
+import java.util.List;
+
+@Mapper
+public interface ISysTenantUsersDao extends IBaseDao<SysTenantUsers, SysTenantUsersQuery> {
+    List<String> getUserIdsByTenant(Long tenantId);
+
+    int deleteByTenantId(Long tenantId);
 }

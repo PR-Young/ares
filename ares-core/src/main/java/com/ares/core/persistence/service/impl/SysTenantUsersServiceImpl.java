@@ -20,10 +20,10 @@
 
 package com.ares.core.persistence.service.impl;
 
-import com.ares.core.model.query.SysTenantRolesQuery;
-import com.ares.core.persistence.dao.ISysTenantRolesDao;
-import com.ares.core.persistence.model.SysTenantRoles;
-import com.ares.core.persistence.service.ISysTenantRolesService;
+import com.ares.core.model.query.SysTenantUsersQuery;
+import com.ares.core.persistence.dao.ISysTenantUsersDao;
+import com.ares.core.persistence.model.SysTenantUsers;
+import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -35,32 +35,32 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class SysTenantRolesServiceImpl implements ISysTenantRolesService {
+public class SysTenantUsersServiceImpl implements ISysTenantUsersService {
 
-    private ISysTenantRolesDao sysTenantRolesDao;
+    private ISysTenantUsersDao sysTenantRolesDao;
 
     @Autowired
-    public SysTenantRolesServiceImpl(ISysTenantRolesDao sysTenantRolesDao) {
+    public SysTenantUsersServiceImpl(ISysTenantUsersDao sysTenantRolesDao) {
         this.sysTenantRolesDao = sysTenantRolesDao;
     }
 
     @Override
-    public PageInfo<SysTenantRoles> list(int pageNo, int pageSize, Map<String, Object> map) {
+    public PageInfo<SysTenantUsers> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysTenantRoles> lists = sysTenantRolesDao.list(map);
-        PageInfo<SysTenantRoles> pageInfo = new PageInfo<>(lists);
+        List<SysTenantUsers> lists = sysTenantRolesDao.list(map);
+        PageInfo<SysTenantUsers> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
 
     @Override
-    public void insert(SysTenantRoles obj) {
+    public void insert(SysTenantUsers obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
         sysTenantRolesDao.insert(obj);
     }
 
     @Override
-    public void update(SysTenantRoles obj) {
+    public void update(SysTenantUsers obj) {
         obj.setModifyTime(new Date());
         sysTenantRolesDao.update(obj);
     }
@@ -71,19 +71,19 @@ public class SysTenantRolesServiceImpl implements ISysTenantRolesService {
     }
 
     @Override
-    public SysTenantRoles getById(Long id) {
+    public SysTenantUsers getById(Long id) {
         return sysTenantRolesDao.getById(id);
     }
 
     @Override
-    public List<SysTenantRoles> list(SysTenantRolesQuery obj) {
-        List<SysTenantRoles> lists = sysTenantRolesDao.selectList(obj);
+    public List<SysTenantUsers> list(SysTenantUsersQuery obj) {
+        List<SysTenantUsers> lists = sysTenantRolesDao.selectList(obj);
         return lists;
     }
 
     @Override
-    public List<String> getRoleIdsByTenant(Long tenantId) {
-        return sysTenantRolesDao.getRoleIdsByTenant(tenantId);
+    public List<String> getUserIdsByTenant(Long tenantId) {
+        return sysTenantRolesDao.getUserIdsByTenant(tenantId);
     }
 
     @Override

@@ -110,4 +110,14 @@
             AND date_format(`CreateTime`,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
         </if>
     </select>
+
+    <select id="getAllUsers" resultType="java.util.Map">
+        SELECT
+            CONVERT(u.Id,CHAR) as id,
+            u.UserName as userName,
+            ISNULL(tu.Id) as disabled
+        FROM
+            sys_user u
+                LEFT JOIN sys_tenant_users tu on u.Id = tu.UserId
+    </select>
 </mapper>
