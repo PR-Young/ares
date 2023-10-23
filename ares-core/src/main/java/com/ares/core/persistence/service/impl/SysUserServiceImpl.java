@@ -153,6 +153,6 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public int updateUserByAccount(SysUser sysUser) {
-        return 0;
+        return sysUserDao.updateUserByAccount(sysUser);
     }
 }
