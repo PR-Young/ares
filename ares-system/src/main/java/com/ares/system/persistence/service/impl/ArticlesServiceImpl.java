@@ -21,7 +21,7 @@ package com.ares.system.persistence.service.impl;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.system.model.query.ArticlesQuery;
 import com.ares.system.persistence.dao.IArticlesDao;
-import com.ares.system.persistence.model.Articles;
+import com.ares.system.persistence.entity.Articles;
 import com.ares.system.persistence.service.IArticlesService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

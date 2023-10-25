@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysNoticeReadQuery;
-import com.ares.core.persistence.model.SysNoticeRead;
+import com.ares.core.persistence.entity.SysNoticeRead;
 
 public interface ISysNoticeReadService extends IBaseService<SysNoticeRead, SysNoticeReadQuery> {
 

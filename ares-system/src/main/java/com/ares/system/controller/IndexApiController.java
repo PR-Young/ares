@@ -20,7 +20,7 @@ package com.ares.system.controller;
 
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.utils.ServletUtils;
-import com.ares.message.persistence.model.AresDocument;
+import com.ares.message.persistence.entity.AresDocument;
 import com.ares.message.persistence.service.IElasticsearchService;
 import com.ares.system.persistence.service.IIndexService;
 import io.swagger.v3.oas.annotations.tags.Tag;

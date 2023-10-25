@@ -25,7 +25,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.flowable.model.query.SysDeployFormQuery;
-import com.ares.flowable.persistence.model.SysDeployForm;
+import com.ares.flowable.persistence.entity.SysDeployForm;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

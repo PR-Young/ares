@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysUserQuery;
-import com.ares.core.persistence.model.SysUser;
+import com.ares.core.persistence.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

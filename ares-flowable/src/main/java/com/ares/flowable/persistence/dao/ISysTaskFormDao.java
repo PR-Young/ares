@@ -21,7 +21,7 @@ package com.ares.flowable.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.flowable.model.query.SysTaskFormQuery;
-import com.ares.flowable.persistence.model.SysTaskForm;
+import com.ares.flowable.persistence.entity.SysTaskForm;
 import org.springframework.stereotype.Repository;
 
 @Repository

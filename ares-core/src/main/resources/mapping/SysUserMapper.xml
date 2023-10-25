@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysUserDao">
-    <resultMap id="SysUser" type="com.ares.core.persistence.model.SysUser">
+    <resultMap id="SysUser" type="com.ares.core.persistence.entity.SysUser">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="Account" jdbcType="VARCHAR" property="account"/>
         <result column="UserName" jdbcType="VARCHAR" property="userName"/>
@@ -23,7 +23,7 @@
         `Email`,`DeptId`,`PostId`,`Avatar`,`Status`,
         `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
-    <insert id="insert" parameterType="com.ares.core.persistence.model.SysUser">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysUser">
         insert into `sys_user` (`Id`, `Account`,
                                 `UserName`, `Password`, `PhoneNumber`, `Email`, `Avatar`, `Status`, `DeptId`, `PostId`,
                                 `Creator`,
@@ -35,7 +35,7 @@
                 #{postId,jdbcType=VARCHAR}, #{creator,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
                 #{modifier,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
-    <update id="update" parameterType="com.ares.core.persistence.model.SysUser">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysUser">
         update `sys_user`
         <set>
             <if test="account != null">
@@ -129,7 +129,7 @@
         set `Password` = #{password}
         where `Id` = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateUserByAccount" parameterType="com.ares.core.persistence.model.SysUser">
+    <update id="updateUserByAccount" parameterType="com.ares.core.persistence.entity.SysUser">
         update `sys_user`
         <set>
             <if test="userName != null">

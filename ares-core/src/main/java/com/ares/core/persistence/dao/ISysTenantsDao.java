@@ -21,7 +21,7 @@
 package com.ares.core.persistence.dao;
 
 import com.ares.core.model.query.SysTenantsQuery;
-import com.ares.core.persistence.model.SysTenants;
+import com.ares.core.persistence.entity.SysTenants;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

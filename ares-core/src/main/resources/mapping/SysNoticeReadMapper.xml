@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysNoticeReadDao">
-    <resultMap id="SysNoticeRead" type="com.ares.core.persistence.model.SysNoticeRead">
+    <resultMap id="SysNoticeRead" type="com.ares.core.persistence.entity.SysNoticeRead">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="NoticeId" jdbcType="VARCHAR" property="noticeId"/>
         <result column="UserId" jdbcType="VARCHAR" property="userId"/>
@@ -16,7 +16,7 @@
         ,`NoticeId`,`UserId`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.model.SysNoticeRead">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysNoticeRead">
         insert into `sys_notice_read` (
         <include refid="Base_Column_List"/>
         )
@@ -48,7 +48,7 @@
         </foreach>
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.model.SysNoticeRead">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysNoticeRead">
         update `sys_notice_read`
         <set>
             <if test="noticeId!= null">

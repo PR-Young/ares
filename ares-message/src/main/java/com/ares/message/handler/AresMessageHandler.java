@@ -18,7 +18,7 @@
 
 package com.ares.message.handler;
 
-import com.ares.message.persistence.model.AresMessageEvent;
+import com.ares.message.persistence.entity.AresMessageEvent;
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.WorkHandler;
 import org.slf4j.Logger;

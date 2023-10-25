@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.flowable.persistence.dao.ISysDeployFormDao">
-    <resultMap id="SysDeployForm" type="com.ares.flowable.persistence.model.SysDeployForm">
+    <resultMap id="SysDeployForm" type="com.ares.flowable.persistence.entity.SysDeployForm">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="FormId" jdbcType="BIGINT" property="formId"/>
         <result column="DeployId" jdbcType="VARCHAR" property="deployId"/>
@@ -16,7 +16,7 @@
         ,`FormId`,`DeployId`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.flowable.persistence.model.SysDeployForm">
+    <insert id="insert" parameterType="com.ares.flowable.persistence.entity.SysDeployForm">
         insert into `sys_deploy_form` (
         <include refid="Base_Column_List"/>
         )
@@ -31,7 +31,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.flowable.persistence.model.SysDeployForm">
+    <update id="update" parameterType="com.ares.flowable.persistence.entity.SysDeployForm">
         update `sys_deploy_form`
         <set>
             <if test="formId!= null">
@@ -118,7 +118,7 @@
         where id = #{id}
     </select>
 
-    <select id="selectSysDeployFormByDeployId" resultType="com.ares.flowable.persistence.model.SysForm">
+    <select id="selectSysDeployFormByDeployId" resultType="com.ares.flowable.persistence.entity.SysForm">
         select t1.FormContent as formContent, t1.FormName as formName, t1.Id as id
         from sys_form t1
                  left join sys_deploy_form t2 on t1.Id = t2.FormId

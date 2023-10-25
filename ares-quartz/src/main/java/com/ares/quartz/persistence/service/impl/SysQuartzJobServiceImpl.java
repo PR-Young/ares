@@ -23,7 +23,7 @@ import com.ares.quartz.common.quartz.ScheduleConstants;
 import com.ares.quartz.common.quartz.ScheduleManager;
 import com.ares.quartz.model.query.SysQuartzJobQuery;
 import com.ares.quartz.persistence.dao.ISysQuartzJobDao;
-import com.ares.quartz.persistence.model.SysQuartzJob;
+import com.ares.quartz.persistence.entity.SysQuartzJob;
 import com.ares.quartz.persistence.service.ISysQuartzJobService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysRoleQuery;
-import com.ares.core.persistence.model.SysRole;
+import com.ares.core.persistence.entity.SysRole;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

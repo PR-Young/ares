@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysDictTypeQuery;
-import com.ares.core.persistence.model.SysDictType;
+import com.ares.core.persistence.entity.SysDictType;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

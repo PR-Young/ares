@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysNoticeDao">
-    <resultMap id="SysNotice" type="com.ares.core.persistence.model.SysNotice">
+    <resultMap id="SysNotice" type="com.ares.core.persistence.entity.SysNotice">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="Deadline" jdbcType="TIMESTAMP" property="deadline"/>
         <result column="NoticeContent" jdbcType="VARCHAR" property="noticeContent"/>
@@ -21,7 +21,7 @@
         `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.model.SysNotice">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysNotice">
         insert into `sys_notice` (
         <include refid="Base_Column_List"/>
         )
@@ -40,7 +40,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.model.SysNotice">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysNotice">
         update `sys_notice`
         <set>
             <if test="deadline!= null">

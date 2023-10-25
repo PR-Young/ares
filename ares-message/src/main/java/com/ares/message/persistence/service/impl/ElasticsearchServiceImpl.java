@@ -19,7 +19,7 @@
 package com.ares.message.persistence.service.impl;
 
 import com.ares.message.persistence.dao.AresDocumentRepository;
-import com.ares.message.persistence.model.AresDocument;
+import com.ares.message.persistence.entity.AresDocument;
 import com.ares.message.persistence.service.IElasticsearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

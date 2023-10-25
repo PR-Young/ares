@@ -20,7 +20,7 @@ package com.ares.message.persistence.service.impl;
 
 import com.ares.core.model.base.DefaultMessage;
 import com.ares.core.persistence.dao.ISysTemplateDao;
-import com.ares.core.persistence.model.SysTemplate;
+import com.ares.core.persistence.entity.SysTemplate;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.SpringUtils;
 import com.ares.message.persistence.service.ISendEmailService;

@@ -22,7 +22,7 @@ package com.ares.core.persistence.service;
 
 
 import com.ares.core.model.query.SysLoginInfoQuery;
-import com.ares.core.persistence.model.SysLoginInfo;
+import com.ares.core.persistence.entity.SysLoginInfo;
 
 public interface ISysLoginInfoService extends IBaseService<SysLoginInfo, SysLoginInfoQuery> {
     Long saveInfo(SysLoginInfo sysLoginInfo);

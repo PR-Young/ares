@@ -25,7 +25,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.flowable.model.query.SysTaskFormQuery;
-import com.ares.flowable.persistence.model.SysTaskForm;
+import com.ares.flowable.persistence.entity.SysTaskForm;
 import com.ares.flowable.persistence.service.ISysTaskFormService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

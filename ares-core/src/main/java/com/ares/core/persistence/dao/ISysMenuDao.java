@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysMenuQuery;
-import com.ares.core.persistence.model.SysMenu;
+import com.ares.core.persistence.entity.SysMenu;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

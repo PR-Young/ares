@@ -20,7 +20,7 @@ package com.ares.flowable.persistence.service;
 
 
 import com.ares.core.model.base.AjaxResult;
-import com.ares.flowable.persistence.model.dto.FlowProcDefDto;
+import com.ares.flowable.persistence.entity.dto.FlowProcDefDto;
 import com.github.pagehelper.Page;
 
 import java.io.IOException;

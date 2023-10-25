@@ -19,7 +19,7 @@
 package com.ares.message.producer;
 
 
-import com.ares.message.persistence.model.DisruptorQueue;
+import com.ares.message.persistence.entity.DisruptorQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

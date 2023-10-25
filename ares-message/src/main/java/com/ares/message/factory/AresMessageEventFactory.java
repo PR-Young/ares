@@ -18,7 +18,7 @@
 
 package com.ares.message.factory;
 
-import com.ares.message.persistence.model.AresMessageEvent;
+import com.ares.message.persistence.entity.AresMessageEvent;
 import com.lmax.disruptor.EventFactory;
 
 /**

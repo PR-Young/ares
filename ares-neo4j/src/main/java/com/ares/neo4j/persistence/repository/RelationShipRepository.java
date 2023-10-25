@@ -18,7 +18,7 @@
 
 package com.ares.neo4j.persistence.repository;
 
-import com.ares.neo4j.persistence.model.RelationShip;
+import com.ares.neo4j.persistence.entity.RelationShip;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 

@@ -20,7 +20,7 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysPostQuery;
 import com.ares.core.persistence.dao.ISysPostDao;
-import com.ares.core.persistence.model.SysPost;
+import com.ares.core.persistence.entity.SysPost;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;

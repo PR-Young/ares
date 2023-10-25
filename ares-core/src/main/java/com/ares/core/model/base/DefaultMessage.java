@@ -18,7 +18,7 @@
 
 package com.ares.core.model.base;
 
-import com.ares.core.persistence.model.SysTemplate;
+import com.ares.core.persistence.entity.SysTemplate;
 
 import java.util.List;
 import java.util.Map;

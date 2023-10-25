@@ -19,8 +19,8 @@
 package com.ares.message.factory;
 
 import com.ares.message.handler.AresMessageHandler;
-import com.ares.message.persistence.model.AresMessageEvent;
-import com.ares.message.persistence.model.DisruptorQueue;
+import com.ares.message.persistence.entity.AresMessageEvent;
+import com.ares.message.persistence.entity.DisruptorQueue;
 import com.lmax.disruptor.SleepingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;

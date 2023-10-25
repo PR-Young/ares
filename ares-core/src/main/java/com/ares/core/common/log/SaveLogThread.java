@@ -19,7 +19,7 @@
 package com.ares.core.common.log;
 
 
-import com.ares.core.persistence.model.SysLog;
+import com.ares.core.persistence.entity.SysLog;
 import com.ares.core.persistence.service.ISysLogService;
 
 /**

@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysDictTypeQuery;
-import com.ares.core.persistence.model.SysDictType;
+import com.ares.core.persistence.entity.SysDictType;
 
 /**
  * @author young

@@ -21,7 +21,7 @@ package com.ares.neo4j.persistence.dao;
 
 import com.ares.core.common.datasource.DataSource;
 import com.ares.core.common.datasource.DataSourceType;
-import com.ares.neo4j.persistence.model.Neo4jCommon;
+import com.ares.neo4j.persistence.entity.Neo4jCommon;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

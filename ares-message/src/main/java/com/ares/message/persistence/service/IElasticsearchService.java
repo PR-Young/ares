@@ -18,7 +18,7 @@
 
 package com.ares.message.persistence.service;
 
-import com.ares.message.persistence.model.AresDocument;
+import com.ares.message.persistence.entity.AresDocument;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;

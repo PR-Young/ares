@@ -18,7 +18,7 @@
 
 package com.ares.neo4j.persistence.repository;
 
-import com.ares.neo4j.persistence.model.UserGraph;
+import com.ares.neo4j.persistence.entity.UserGraph;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 

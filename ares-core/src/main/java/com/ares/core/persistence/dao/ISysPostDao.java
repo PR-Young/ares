@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysPostQuery;
-import com.ares.core.persistence.model.SysPost;
+import com.ares.core.persistence.entity.SysPost;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysPropertiesQuery;
-import com.ares.core.persistence.model.SysProperties;
+import com.ares.core.persistence.entity.SysProperties;
 
 import java.util.Map;
 

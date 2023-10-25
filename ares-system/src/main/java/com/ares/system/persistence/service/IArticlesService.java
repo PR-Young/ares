@@ -20,7 +20,7 @@ package com.ares.system.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
 import com.ares.system.model.query.ArticlesQuery;
-import com.ares.system.persistence.model.Articles;
+import com.ares.system.persistence.entity.Articles;
 
 
 public interface IArticlesService extends IBaseService<Articles, ArticlesQuery> {

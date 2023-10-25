@@ -20,7 +20,7 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysRoleQuery;
 import com.ares.core.persistence.dao.ISysRoleDao;
-import com.ares.core.persistence.model.SysRole;
+import com.ares.core.persistence.entity.SysRole;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;

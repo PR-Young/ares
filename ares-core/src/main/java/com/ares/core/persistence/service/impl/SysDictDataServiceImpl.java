@@ -20,7 +20,7 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysDictDataQuery;
 import com.ares.core.persistence.dao.ISysDictDataDao;
-import com.ares.core.persistence.model.SysDictData;
+import com.ares.core.persistence.entity.SysDictData;
 import com.ares.core.persistence.service.ISysDictDataService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;

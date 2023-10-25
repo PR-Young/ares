@@ -23,7 +23,7 @@ import com.alibaba.fastjson.JSON;
 import com.ares.core.model.listener.ElasticsearchEvent;
 import com.ares.core.utils.SpringUtils;
 import com.ares.message.persistence.dao.AresDocumentRepository;
-import com.ares.message.persistence.model.AresDocument;
+import com.ares.message.persistence.entity.AresDocument;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;

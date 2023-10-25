@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysTemplateDao">
-    <resultMap id="SysTemplate" type="com.ares.core.persistence.model.SysTemplate">
+    <resultMap id="SysTemplate" type="com.ares.core.persistence.entity.SysTemplate">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="Name" jdbcType="VARCHAR" property="name"/>
         <result column="Subject" jdbcType="VARCHAR" property="subject"/>
@@ -19,7 +19,7 @@
         ,`Name`,`Subject`,`Text`,`Html`,`Params`,`Creator`,`Modifier`, `CreateTime`, `ModifyTime`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.model.SysTemplate">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysTemplate">
         insert into `sys_template` (<include refid="Base_Column_List"/>)
         values (
         #{id,jdbcType=BIGINT},
@@ -35,7 +35,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.model.SysTemplate">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysTemplate">
         update `sys_template`
         <set>
             <if test="name!= null">

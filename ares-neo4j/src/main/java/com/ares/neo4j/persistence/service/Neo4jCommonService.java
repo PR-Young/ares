@@ -20,10 +20,10 @@ package com.ares.neo4j.persistence.service;
 
 
 import com.ares.neo4j.persistence.dao.INeo4jCommonDao;
-import com.ares.neo4j.persistence.model.DepartmentGraph;
-import com.ares.neo4j.persistence.model.Neo4jCommon;
-import com.ares.neo4j.persistence.model.RelationShip;
-import com.ares.neo4j.persistence.model.UserGraph;
+import com.ares.neo4j.persistence.entity.DepartmentGraph;
+import com.ares.neo4j.persistence.entity.Neo4jCommon;
+import com.ares.neo4j.persistence.entity.RelationShip;
+import com.ares.neo4j.persistence.entity.UserGraph;
 import com.ares.neo4j.persistence.repository.DepartmentGraphRepository;
 import com.ares.neo4j.persistence.repository.RelationShipRepository;
 import com.ares.neo4j.persistence.repository.UserGraphRepository;

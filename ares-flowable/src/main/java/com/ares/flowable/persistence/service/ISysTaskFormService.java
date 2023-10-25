@@ -20,7 +20,7 @@ package com.ares.flowable.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
 import com.ares.flowable.model.query.SysTaskFormQuery;
-import com.ares.flowable.persistence.model.SysTaskForm;
+import com.ares.flowable.persistence.entity.SysTaskForm;
 
 import java.util.List;
 

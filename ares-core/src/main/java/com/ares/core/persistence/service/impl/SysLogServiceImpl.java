@@ -20,7 +20,7 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysLogQuery;
 import com.ares.core.persistence.dao.ISysLogDao;
-import com.ares.core.persistence.model.SysLog;
+import com.ares.core.persistence.entity.SysLog;
 import com.ares.core.persistence.service.ISysLogService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;

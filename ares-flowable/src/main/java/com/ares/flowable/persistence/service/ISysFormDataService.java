@@ -21,7 +21,7 @@ package com.ares.flowable.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
 import com.ares.flowable.model.query.SysFormDataQuery;
-import com.ares.flowable.persistence.model.SysFormData;
+import com.ares.flowable.persistence.entity.SysFormData;
 
 public interface ISysFormDataService extends IBaseService<SysFormData, SysFormDataQuery> {
 

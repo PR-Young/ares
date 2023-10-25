@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysNoticeQuery;
-import com.ares.core.persistence.model.SysNotice;
+import com.ares.core.persistence.entity.SysNotice;
 
 import java.util.List;
 

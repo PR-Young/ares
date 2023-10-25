@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysLogDao">
-    <resultMap id="SysLog" type="com.ares.core.persistence.model.SysLog">
+    <resultMap id="SysLog" type="com.ares.core.persistence.entity.SysLog">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="HostIP" jdbcType="VARCHAR" property="hostIp"/>
         <result column="UserName" jdbcType="VARCHAR" property="userName"/>
@@ -16,7 +16,7 @@
         `Id`
         , `HostIP`, `UserName`, `Url`,`Params`,`RequestMethod`,`Notes`, `CreateTime`, `ModifyTime`
     </sql>
-    <insert id="insert" parameterType="com.ares.core.persistence.model.SysLog">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysLog">
         insert into `sys_log` (`Id`, `HostIP`, `UserName`, `Url`, `Params`, `RequestMethod`, `Notes`, `CreateTime`,
                                `ModifyTime`)
         values (#{id,jdbcType=BIGINT}, #{hostIp,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},

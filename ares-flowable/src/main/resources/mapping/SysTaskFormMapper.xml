@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.flowable.persistence.dao.ISysTaskFormDao">
-    <resultMap id="SysTaskForm" type="com.ares.flowable.persistence.model.SysTaskForm">
+    <resultMap id="SysTaskForm" type="com.ares.flowable.persistence.entity.SysTaskForm">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="FormId" jdbcType="VARCHAR" property="formId"/>
         <result column="TaskId" jdbcType="VARCHAR" property="taskId"/>
@@ -16,7 +16,7 @@
         ,`FormId`,`TaskId`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.flowable.persistence.model.SysTaskForm">
+    <insert id="insert" parameterType="com.ares.flowable.persistence.entity.SysTaskForm">
         insert into `sys_task_form` (
         <include refid="Base_Column_List"/>
         )
@@ -31,7 +31,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.flowable.persistence.model.SysTaskForm">
+    <update id="update" parameterType="com.ares.flowable.persistence.entity.SysTaskForm">
         update `sys_task_form`
         <set>
             <if test="formId!= null">

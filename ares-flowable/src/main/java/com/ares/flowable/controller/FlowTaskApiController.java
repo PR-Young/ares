@@ -20,8 +20,8 @@ package com.ares.flowable.controller;
 
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
-import com.ares.flowable.persistence.model.dto.FlowTaskDto;
-import com.ares.flowable.persistence.model.vo.FlowTaskVo;
+import com.ares.flowable.persistence.entity.dto.FlowTaskDto;
+import com.ares.flowable.persistence.entity.vo.FlowTaskVo;
 import com.ares.flowable.persistence.service.IFlowDefinitionService;
 import com.ares.flowable.persistence.service.IFlowTaskService;
 import io.swagger.v3.oas.annotations.Operation;

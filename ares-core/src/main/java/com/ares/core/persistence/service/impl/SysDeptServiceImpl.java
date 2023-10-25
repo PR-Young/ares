@@ -21,7 +21,7 @@ package com.ares.core.persistence.service.impl;
 import com.ares.core.model.query.SysDeptQuery;
 import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.persistence.dao.ISysDeptDao;
-import com.ares.core.persistence.model.SysDept;
+import com.ares.core.persistence.entity.SysDept;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;

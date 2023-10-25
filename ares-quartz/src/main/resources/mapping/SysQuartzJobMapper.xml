@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.quartz.persistence.dao.ISysQuartzJobDao">
-    <resultMap id="SysQuartzJob" type="com.ares.quartz.persistence.model.SysQuartzJob">
+    <resultMap id="SysQuartzJob" type="com.ares.quartz.persistence.entity.SysQuartzJob">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="JobName" jdbcType="VARCHAR" property="jobName"/>
         <result column="JobGroup" jdbcType="VARCHAR" property="jobGroup"/>
@@ -48,7 +48,7 @@
             #{id}
         </foreach>
     </delete>
-    <insert id="insert" parameterType="com.ares.quartz.persistence.model.SysQuartzJob">
+    <insert id="insert" parameterType="com.ares.quartz.persistence.entity.SysQuartzJob">
         insert into sys_quartz_job (Id, JobName, JobGroup, Description,
                                     InvokeTarget, CronExpression,
                                     ConCurrent, Status, Creator, CreateTime, Modifier,
@@ -58,7 +58,7 @@
                 #{conCurrent,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{creator,jdbcType=BIGINT},
                 #{createTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
-    <update id="update" parameterType="com.ares.quartz.persistence.model.SysQuartzJob">
+    <update id="update" parameterType="com.ares.quartz.persistence.entity.SysQuartzJob">
         update sys_quartz_job
         <set>
             <if test="jobName != null">

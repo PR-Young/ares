@@ -25,7 +25,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysNoticeQuery;
-import com.ares.core.persistence.model.SysNotice;
+import com.ares.core.persistence.entity.SysNotice;
 import com.ares.core.persistence.service.ISysNoticeService;
 import com.ares.core.utils.StringUtils;
 import com.ares.system.websocket.WebSocketServer;

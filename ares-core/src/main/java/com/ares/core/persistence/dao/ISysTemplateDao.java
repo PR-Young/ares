@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysTemplateQuery;
-import com.ares.core.persistence.model.SysTemplate;
+import com.ares.core.persistence.entity.SysTemplate;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

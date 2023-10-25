@@ -20,7 +20,7 @@ package com.ares.system.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.system.model.query.ArticlesQuery;
-import com.ares.system.persistence.model.Articles;
+import com.ares.system.persistence.entity.Articles;
 import org.springframework.stereotype.Repository;
 
 @Repository

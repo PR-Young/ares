@@ -20,7 +20,7 @@ package com.ares.test;
 
 import com.ares.message.factory.DisruptorQueueFactory;
 import com.ares.message.handler.AresMessageHandler;
-import com.ares.message.persistence.model.DisruptorQueue;
+import com.ares.message.persistence.entity.DisruptorQueue;
 import com.ares.message.persistence.service.IDisruptorMessageService;
 import com.ares.message.producer.AresMessageProducer;
 import com.ares.message.utils.AresMessageUtil;

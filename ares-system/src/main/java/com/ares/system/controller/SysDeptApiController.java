@@ -24,7 +24,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysDeptQuery;
-import com.ares.core.persistence.model.SysDept;
+import com.ares.core.persistence.entity.SysDept;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;

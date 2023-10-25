@@ -19,7 +19,7 @@
 package com.ares.quartz.common.quartz;
 
 
-import com.ares.quartz.persistence.model.SysQuartzJob;
+import com.ares.quartz.persistence.entity.SysQuartzJob;
 import com.ares.quartz.utils.JobInvokeUtil;
 import org.quartz.JobExecutionContext;
 

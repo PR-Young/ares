@@ -20,7 +20,7 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysTemplateQuery;
 import com.ares.core.persistence.dao.ISysTemplateDao;
-import com.ares.core.persistence.model.SysTemplate;
+import com.ares.core.persistence.entity.SysTemplate;
 import com.ares.core.persistence.service.ISysTemplateService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;

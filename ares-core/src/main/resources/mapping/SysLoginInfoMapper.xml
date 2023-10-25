@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysLoginInfoDao">
-    <resultMap id="SysLoginInfo" type="com.ares.core.persistence.model.SysLoginInfo">
+    <resultMap id="SysLoginInfo" type="com.ares.core.persistence.entity.SysLoginInfo">
         <id column="Id" jdbcType="BIGINT" property="id"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr"/>
@@ -22,7 +22,7 @@
         ,`user_name`,`ip_addr`,`login_location`,`browser`,`os`,`status`,`msg`,`login_time`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.model.SysLoginInfo">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysLoginInfo">
         insert into `sys_login_info` (
         <include refid="Base_Column_List"/>
         )
@@ -43,7 +43,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.model.SysLoginInfo">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysLoginInfo">
         update `sys_login_info`
         <set>
             <if test="userName!= null">

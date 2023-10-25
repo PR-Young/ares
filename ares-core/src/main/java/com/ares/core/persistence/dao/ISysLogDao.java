@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysLogQuery;
-import com.ares.core.persistence.model.SysLog;
+import com.ares.core.persistence.entity.SysLog;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

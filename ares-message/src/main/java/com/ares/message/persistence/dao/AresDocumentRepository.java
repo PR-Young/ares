@@ -18,7 +18,7 @@
 
 package com.ares.message.persistence.dao;
 
-import com.ares.message.persistence.model.AresDocument;
+import com.ares.message.persistence.entity.AresDocument;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;

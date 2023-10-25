@@ -21,7 +21,7 @@ package com.ares.flowable.persistence.service.impl;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.flowable.model.query.SysFormQuery;
 import com.ares.flowable.persistence.dao.ISysFormDao;
-import com.ares.flowable.persistence.model.SysForm;
+import com.ares.flowable.persistence.entity.SysForm;
 import com.ares.flowable.persistence.service.ISysFormService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

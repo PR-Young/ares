@@ -18,7 +18,7 @@
 
 package com.ares.message.persistence.service.impl;
 
-import com.ares.message.persistence.model.AresMessageEvent;
+import com.ares.message.persistence.entity.AresMessageEvent;
 import com.ares.message.persistence.service.IDisruptorMessageService;
 import com.lmax.disruptor.RingBuffer;
 import org.slf4j.Logger;

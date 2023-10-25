@@ -19,7 +19,7 @@
 package com.ares.core.persistence.dao;
 
 import com.ares.core.model.query.SysNoticeReadQuery;
-import com.ares.core.persistence.model.SysNoticeRead;
+import com.ares.core.persistence.entity.SysNoticeRead;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

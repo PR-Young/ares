@@ -22,8 +22,8 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysTenantsQuery;
 import com.ares.core.persistence.dao.ISysTenantsDao;
-import com.ares.core.persistence.model.SysTenantUsers;
-import com.ares.core.persistence.model.SysTenants;
+import com.ares.core.persistence.entity.SysTenantUsers;
+import com.ares.core.persistence.entity.SysTenants;
 import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.persistence.service.ISysTenantsService;
 import com.ares.core.utils.SnowflakeIdWorker;

@@ -22,7 +22,7 @@ package com.ares.core.persistence.service;
 
 
 import com.ares.core.model.query.SysTenantUsersQuery;
-import com.ares.core.persistence.model.SysTenantUsers;
+import com.ares.core.persistence.entity.SysTenantUsers;
 
 import java.util.List;
 

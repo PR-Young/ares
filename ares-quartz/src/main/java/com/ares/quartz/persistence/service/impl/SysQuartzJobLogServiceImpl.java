@@ -21,7 +21,7 @@ package com.ares.quartz.persistence.service.impl;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.quartz.model.query.SysQuartzJobLogQuery;
 import com.ares.quartz.persistence.dao.ISysQuartzJobLogDao;
-import com.ares.quartz.persistence.model.SysQuartzJobLog;
+import com.ares.quartz.persistence.entity.SysQuartzJobLog;
 import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

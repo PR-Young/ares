@@ -21,7 +21,7 @@ package com.ares.quartz.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.quartz.model.query.SysQuartzJobQuery;
-import com.ares.quartz.persistence.model.SysQuartzJob;
+import com.ares.quartz.persistence.entity.SysQuartzJob;
 import org.springframework.stereotype.Repository;
 
 @Repository
