@@ -502,28 +502,11 @@ public class Convert {
                 result = defaultValue;
             } else {
                 valueStr = valueStr.trim().toLowerCase();
-                switch (valueStr) {
-                    case "true":
-                        break;
-                    case "false":
-                        result = false;
-                        break;
-                    case "yes":
-                        break;
-                    case "ok":
-                        break;
-                    case "no":
-                        result = false;
-                        break;
-                    case "1":
-                        break;
-                    case "0":
-                        result = false;
-                        break;
-                    default:
-                        result = defaultValue;
-                        break;
-                }
+                result = switch (valueStr) {
+                    case "true", "yes", "ok", "1" -> true;
+                    case "false", "no", "0" -> false;
+                    default -> defaultValue;
+                };
             }
         }
         return result;

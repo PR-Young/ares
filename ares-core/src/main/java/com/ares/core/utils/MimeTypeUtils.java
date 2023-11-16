@@ -40,27 +40,14 @@ public class MimeTypeUtils {
             "asf", "rm", "rmvb"};
 
     public static String getExtension(String prefix) {
-        String result;
-        switch (prefix) {
-            case IMAGE_PNG:
-                result = "png";
-                break;
-            case IMAGE_JPG:
-                result = "jpg";
-                break;
-            case IMAGE_JPEG:
-                result = "jpeg";
-                break;
-            case IMAGE_BMP:
-                result = "bmp";
-                break;
-            case IMAGE_GIF:
-                result = "gif";
-                break;
-            default:
-                result = "";
-                break;
-        }
+        String result = switch (prefix) {
+            case IMAGE_PNG -> "png";
+            case IMAGE_JPG -> "jpg";
+            case IMAGE_JPEG -> "jpeg";
+            case IMAGE_BMP -> "bmp";
+            case IMAGE_GIF -> "gif";
+            default -> "";
+        };
         return result;
     }
 }

@@ -156,18 +156,11 @@ public final class AresCommonUtils {
 
     public static String getUserAgent(HttpServletRequest request, String type) {
         UserAgent userAgent = UserAgentUtil.parse(request.getHeader("user-agent"));
-        String result = "";
-        switch (type) {
-            case "browser":
-                result = userAgent.getBrowser().getName();
-                break;
-            case "os":
-                result = userAgent.getOs().getName();
-                break;
-            default:
-                result = "";
-                break;
-        }
+        String result = switch (type) {
+            case "browser" -> userAgent.getBrowser().getName();
+            case "os" -> userAgent.getOs().getName();
+            default -> "";
+        };
         return result;
     }
 
