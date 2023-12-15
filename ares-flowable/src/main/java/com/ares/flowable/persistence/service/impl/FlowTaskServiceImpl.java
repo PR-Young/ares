@@ -788,11 +788,14 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
         JSONObject data = JSONObject.parseObject(formData);
         JSONObject jsonObject = JSONObject.parseObject(formContent);
         JSONArray fields = jsonObject.getJSONArray("fields");
+        jsonObject.put("formData", data);
         for (int i = 0; i < fields.size(); i++) {
             JSONObject field = fields.getJSONObject(i);
             JSONObject config = field.getJSONObject("__config__");
-            String vModel = field.getString("__vModel__");
-            config.put("defaultValue", data.get(vModel));
+            if (null != config) {
+                String vModel = field.getString("__vModel__");
+                config.put("defaultValue", data.get(vModel));
+            }
         }
         return jsonObject;
     }
