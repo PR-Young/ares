@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysTenantsDao">
     <resultMap id="SysTenants" type="com.ares.core.persistence.entity.SysTenants">
-        <id column="Id" jdbcType="BIGINT" property="id"/>
-        <result column="TenantName" jdbcType="VARCHAR" property="tenantName"/>
-        <result column="TenantAlias" jdbcType="VARCHAR" property="tenantAlias"/>
-        <result column="TenantStatus" jdbcType="VARCHAR" property="tenantStatus"/>
-        <result column="Creator" jdbcType="BIGINT" property="creator"/>
-        <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="Modifier" jdbcType="BIGINT" property="modifier"/>
-        <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <id column="ID_" jdbcType="BIGINT" property="id"/>
+        <result column="TENANT_NAME_" jdbcType="VARCHAR" property="tenantName"/>
+        <result column="TENANT_ALIAS_" jdbcType="VARCHAR" property="tenantAlias"/>
+        <result column="TENANT_STATUS_" jdbcType="VARCHAR" property="tenantStatus"/>
+        <result column="CREATOR_" jdbcType="BIGINT" property="creator"/>
+        <result column="CREATE_TIME_" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="MODIFIER_" jdbcType="BIGINT" property="modifier"/>
+        <result column="MODIFY_TIME_" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        `Id`
-        ,`TenantName`,`TenantAlias`,`TenantStatus`, `Creator`,`CreateTime`,`Modifier`, `ModifyTime`
+        `ID_`
+        ,`TENANT_NAME_`,`TENANT_ALIAS_`,`TENANT_STATUS_`, `CREATOR_`,`CREATE_TIME_`,`MODIFIER_`, `MODIFY_TIME_`
     </sql>
 
     <insert id="insert" parameterType="com.ares.core.persistence.entity.SysTenants">
@@ -37,33 +37,33 @@
         update `sys_tenants`
         <set>
             <if test="tenantName!= null">
-                `TenantName`=#{tenantName,jdbcType=VARCHAR},
+                `TENANT_NAME_`=#{tenantName,jdbcType=VARCHAR},
             </if>
             <if test="tenantAlias!= null">
-                `TenantAlias`=#{tenantAlias,jdbcType=VARCHAR},
+                `TENANT_ALIAS_`=#{tenantAlias,jdbcType=VARCHAR},
             </if>
             <if test="tenantStatus!= null">
-                `TenantStatus`=#{tenantStatus,jdbcType=VARCHAR},
+                `TENANT_STATUS_`=#{tenantStatus,jdbcType=VARCHAR},
             </if>
             <if test="creator != null">
-                `Creator` = #{creator,jdbcType=TIMESTAMP},
+                `CREATOR_` = #{creator,jdbcType=TIMESTAMP},
             </if>
             <if test="createTime != null">
-                `CreateTime` = #{createTime,jdbcType=TIMESTAMP},
+                `CREATE_TIME_` = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="modifier != null">
-                `Modifier` = #{modifier,jdbcType=TIMESTAMP},
+                `MODIFIER_` = #{modifier,jdbcType=TIMESTAMP},
             </if>
             <if test="modifyTime != null">
-                `ModifyTime` = #{modifyTime,jdbcType=TIMESTAMP},
+                `MODIFY_TIME_` = #{modifyTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where `Id` = #{id,jdbcType=BIGINT}
+        where `ID_` = #{id,jdbcType=BIGINT}
     </update>
 
     <delete id="deleteByIds" parameterType="java.util.List">
         delete from `sys_tenants`
-        where `Id` in
+        where `ID_` in
         <foreach collection="list" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
@@ -73,7 +73,7 @@
         select
         <include refid="Base_Column_List"/>
         from `sys_tenants`
-        where `Id` = #{id,jdbcType=BIGINT}
+        where `ID_` = #{id,jdbcType=BIGINT}
     </select>
 
     <select id="list" parameterType="java.util.Map" resultMap="SysTenants">
@@ -88,7 +88,7 @@
             order by ${sort}
         </if>
         <if test="sort == null">
-            order by `CreateTime` desc
+            order by `CREATE_TIME_` desc
         </if>
     </select>
 
@@ -98,26 +98,26 @@
         from `sys_tenants`
         where 1=1
         <if test="tenantName != null and tenantName != ''">
-            AND `TenantName` like concat('%', #{tenantName}, '%')
+            AND `TENANT_NAME_` like concat('%', #{tenantName}, '%')
         </if>
         <if test="tenantAlias != null and tenantAlias != ''">
-            AND `TenantAlias` like concat('%', #{tenantAlias}, '%')
+            AND `TENANT_ALIAS_` like concat('%', #{tenantAlias}, '%')
         </if>
         <if test="beginTime != null and beginTime != ''"><!-- 开始时间检索 -->
-            AND date_format(`CreateTime`,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
+            AND date_format(`CREATE_TIME_`,'%y%m%d') &gt;= date_format(#{beginTime},'%y%m%d')
         </if>
         <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
-            AND date_format(`CreateTime`,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
+            AND date_format(`CREATE_TIME_`,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
         </if>
     </select>
 
     <select id="getAllUsers" resultType="java.util.Map">
         SELECT
-            CONVERT(u.Id,CHAR) as id,
-            u.UserName as userName,
-            ISNULL(tu.Id) as disabled
+            CONVERT(u.ID_,CHAR) as id,
+            u.USERNAME_ as userName,
+            ISNULL(tu.ID_) as disabled
         FROM
             sys_user u
-                LEFT JOIN sys_tenant_users tu on u.Id = tu.UserId
+                LEFT JOIN sys_tenant_users tu on u.ID_ = tu.USER_ID_
     </select>
 </mapper>
