@@ -129,7 +129,7 @@ public class LoginApiController {
         sysLoginInfo.setBrowser(AresCommonUtils.getUserAgent(request, "browser"));
         sysLoginInfo.setOs(AresCommonUtils.getUserAgent(request, "os"));
         Long id = loginInfoService.saveInfo(sysLoginInfo);
-        RedisUtil.set(token, id, 0);
+        RedisUtil.set(token, id, config.getTimeout());
 
         AresMessageUtil.sendMessage("login", user.getUserName() + " login system!");
 
