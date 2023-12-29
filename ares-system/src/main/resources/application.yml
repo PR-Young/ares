@@ -88,10 +88,10 @@ info:
   project-sourceEncoding: '@project.build.sourceEncoding@'
   project-version: '@project.version@'
 
-jeecg :
+jeecg:
   jmreport:
     #多租户模式，默认值为空(created:按照创建人隔离、tenant:按照租户隔离) (v1.6.2+ 新增)
-#    saasMode: created
+    #saasMode: created
     # 平台上线安全配置(v1.6.2+ 新增)
     firewall:
       # 数据源安全 (开启后，不允许使用平台数据源、SQL解析加签并且不允许查询数据库)
