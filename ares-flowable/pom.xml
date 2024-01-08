@@ -5,19 +5,18 @@
     <parent>
         <artifactId>ares</artifactId>
         <groupId>com.ares</groupId>
-        <version>5.0.0</version>
+        <version>5.1.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ares.flowable</groupId>
     <artifactId>ares-flowable</artifactId>
-    <version>2.0.0</version>
+    <version>${ares.version}</version>
     <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <ares.version>2.0.0</ares.version>
         <flowable.version>7.0.0</flowable.version>
         <fel.version>0.8</fel.version>
         <xercesImpl.version>2.12.2</xercesImpl.version>

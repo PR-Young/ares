@@ -12,7 +12,7 @@
     <groupId>com.ares</groupId>
     <artifactId>ares</artifactId>
     <packaging>pom</packaging>
-    <version>5.0.0</version>
+    <version>5.1.1</version>
     <description>my first springboot project</description>
 
     <modules>
@@ -27,6 +27,7 @@
     </modules>
 
     <properties>
+        <ares.version>2.0.0</ares.version>
         <java.version>17</java.version>
         <mysql.version>8.0.33</mysql.version>
         <mybatis.version>3.0.2</mybatis.version>
