@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ares</artifactId>
         <groupId>com.ares</groupId>
-        <version>5.1.1</version>
+        <version>5.1.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -87,11 +87,11 @@
             <artifactId>easy-captcha</artifactId>
             <version>${easy-captcha.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jeecgframework.jimureport</groupId>
-            <artifactId>jimureport-spring-boot3-starter</artifactId>
-            <version>${jm.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.jeecgframework.jimureport</groupId>-->
+<!--            <artifactId>jimureport-spring-boot3-starter</artifactId>-->
+<!--            <version>${jm.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
