@@ -18,7 +18,7 @@
 
 package com.ares.test;
 
-import com.ares.core.model.server.Server;
+import com.alibaba.druid.filter.config.ConfigTools;
 
 /*
  * @description:
@@ -29,10 +29,12 @@ import com.ares.core.model.server.Server;
 public class test {
     public static void main(String[] args) throws Exception {
         String password = "root1234";
-        //String[] arr = ConfigTools.genKeyPair(512);
-        ////System.out.println("privateKey:" + arr[0]);
-        //System.out.println("publicKey:" + arr[1]);
-        //System.out.println("password:" + ConfigTools.decrypt(arr[0],password));
+        String[] arr = ConfigTools.genKeyPair(512);
+        //System.out.println("privateKey:" + arr[0]);
+        System.out.println("publicKey:" + arr[1]);
+        String pwd = ConfigTools.encrypt(arr[0], password);
+        System.out.println("password:" + pwd);
+        System.out.println(ConfigTools.decrypt(arr[1],pwd));
 
         //Integer keySize = 512;
         //String[] keyArr = CryptoUtils.genKeyPair(keySize);
@@ -53,8 +55,8 @@ public class test {
 
         //AresMessageUtil.sendMessage("ares", "success", 1024 * 1024, false, 2, new AresMessageHandler<String>());
 
-        Server server = new Server();
-        server.copyTo();
-        System.out.println(server);
+        //Server server = new Server();
+        //server.copyTo();
+        //System.out.println(server);
     }
 }

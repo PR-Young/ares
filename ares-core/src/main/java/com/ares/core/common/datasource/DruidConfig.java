@@ -30,10 +30,11 @@ import java.util.Map;
 public class DruidConfig {
 
     private boolean slaveEnabled = false;
+    private boolean neo4jEnabled = false;
 
     @Bean
     @ConfigurationProperties("spring.datasource.druid.master")
-    public DataSource mysqlDataSource(DruidProperties druidProperties) {
+    public DataSource masterDataSource(DruidProperties druidProperties) {
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         return druidProperties.dataSource(dataSource);
     }
@@ -47,18 +48,34 @@ public class DruidConfig {
         return druidProperties.dataSource(dataSource);
     }
 
+    @Bean
+    @ConfigurationProperties("spring.datasource.druid.neo4j")
+    @ConditionalOnProperty(prefix = "spring.datasource.neo4j.slave", name = "enabled", havingValue = "true")
+    public DataSource neo4jDataSource(DruidProperties druidProperties) {
+        DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
+        neo4jEnabled = true;
+        return druidProperties.dataSource(dataSource);
+    }
+
     @Bean(name = "dynamicDataSource")
     @Primary
-    public DynamicDataSource dataSource(DataSource mysqlDataSource) throws Exception {
+    public DynamicDataSource dataSource(DataSource masterDataSource,
+                                        DataSource slaveDataSource) throws Exception {
         Map<Object, Object> targetDataSources = new HashMap<>();
-        String password = ((DruidDataSource) mysqlDataSource).getPassword();
-        String key = ((DruidDataSource) mysqlDataSource).getConnectProperties().getProperty("config.decrypt.key");
-        ((DruidDataSource) mysqlDataSource).setPassword(ConfigTools.decrypt(key, password));
-        targetDataSources.put(DataSourceType.MASTER.name(), mysqlDataSource);
+        String password = ((DruidDataSource) masterDataSource).getPassword();
+        String key = ((DruidDataSource) masterDataSource).getConnectProperties().getProperty("config.decrypt.key");
+        ((DruidDataSource) masterDataSource).setPassword(ConfigTools.decrypt(key, password));
+        targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
         if (slaveEnabled) {
-            setDataSource(targetDataSources, DataSourceType.SALVE.name(), "slaveDataSource");
+            String slavePassword = ((DruidDataSource) slaveDataSource).getPassword();
+            String slaveKey = ((DruidDataSource) slaveDataSource).getConnectProperties().getProperty("config.decrypt.key");
+            ((DruidDataSource) slaveDataSource).setPassword(ConfigTools.decrypt(slaveKey, slavePassword));
+            targetDataSources.put(DataSourceType.SALVE.name(), slaveDataSource);
         }
-        return new DynamicDataSource(mysqlDataSource, targetDataSources);
+        if (neo4jEnabled) {
+            setDataSource(targetDataSources, DataSourceType.SALVE.name(), "neo4jDataSource");
+        }
+        return new DynamicDataSource(masterDataSource, targetDataSources);
     }
 
     @Bean

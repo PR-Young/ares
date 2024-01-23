@@ -223,6 +223,10 @@
             <version>9.5</version>
         </dependency>
         <!-- 解决验证码问题 -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
