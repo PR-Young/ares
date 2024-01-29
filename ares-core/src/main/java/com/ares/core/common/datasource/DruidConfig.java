@@ -73,7 +73,7 @@ public class DruidConfig {
             targetDataSources.put(DataSourceType.SALVE.name(), slaveDataSource);
         }
         if (neo4jEnabled) {
-            setDataSource(targetDataSources, DataSourceType.SALVE.name(), "neo4jDataSource");
+            setDataSource(targetDataSources, DataSourceType.NEO4J.name(), "neo4jDataSource");
         }
         return new DynamicDataSource(masterDataSource, targetDataSources);
     }
