@@ -1,12 +1,21 @@
 ares:
   generator:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ares?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
-    username: root
-    password: root1234
-    databaseName: ares
-    tableName: test_v
-    tablePrefix: t_
+    master:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/ares?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      username: root
+      password: root1234
+      databaseName: ares
+      tableName: test_v
+      tablePrefix: t_
+    slave:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/ares?SSL=false
+      username: postgres
+      password: root1234
+      databaseName: public
+      tableName: test_v
+      tablePrefix: t_
     generatorLevel: 3
     basePackage: com.ares.system
     entityPackage: com.ares.system.persistence.model

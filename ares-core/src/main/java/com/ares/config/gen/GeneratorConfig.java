@@ -37,42 +37,83 @@ public class GeneratorConfig {
      * 数据库驱动
      * 未提供注入时请自行提供驱动
      */
-    @Value("${ares.generator.driverClassName}")
+    @Value("${ares.generator.master.driverClassName}")
     private String driverClassName;
     /**
      * 数据库URL
      */
-    @Value("${ares.generator.url}")
+    @Value("${ares.generator.master.url}")
     private String url;
     /**
      * 用户名
      */
-    @Value("${ares.generator.username}")
+    @Value("${ares.generator.master.username}")
     private String username;
 
     /**
      * 密码
      */
-    @Value("${ares.generator.password}")
+    @Value("${ares.generator.master.password}")
     private String password;
 
     /**
      * 数据库名
      */
-    @Value("${ares.generator.databaseName}")
+    @Value("${ares.generator.master.databaseName}")
     private String databaseName;
 
     /**
      * 只生成单表，非必须
      */
-    @Value("${ares.generator.tableName}")
+    @Value("${ares.generator.master.tableName}")
     private String tableName;
 
     /**
      * 表前缀，非必须
      */
-    @Value("${ares.generator.tablePrefix}")
+    @Value("${ares.generator.master.tablePrefix}")
     private String tablePrefix;
+
+    /**
+     * 数据库驱动
+     * 未提供注入时请自行提供驱动
+     */
+    @Value("${ares.generator.slave.driverClassName}")
+    private String slaveDriverClassName;
+    /**
+     * 数据库URL
+     */
+    @Value("${ares.generator.slave.url}")
+    private String slaveUrl;
+    /**
+     * 用户名
+     */
+    @Value("${ares.generator.slave.username}")
+    private String slaveUsername;
+
+    /**
+     * 密码
+     */
+    @Value("${ares.generator.slave.password}")
+    private String slavePassword;
+
+    /**
+     * 数据库名
+     */
+    @Value("${ares.generator.slave.databaseName}")
+    private String slaveDatabaseName;
+
+    /**
+     * 只生成单表，非必须
+     */
+    @Value("${ares.generator.slave.tableName}")
+    private String slaveTableName;
+
+    /**
+     * 表前缀，非必须
+     */
+    @Value("${ares.generator.slave.tablePrefix}")
+    private String slaveTablePrefix;
 
     /**
      * 生成级别 必须

@@ -87,10 +87,10 @@ public class GeneratorApiController extends BaseController {
         return dataInfo;
     }
 
-    @GetMapping("genCode/{tableName}")
+    @GetMapping("genCode/{flag}/{tableName}")
     @Operation(summary = "生成代码", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
-        byte[] data = autoGeneratorService.generator(tableName);
+    public void genCode(HttpServletResponse response, @PathVariable("flag") String flag, @PathVariable("tableName") String tableName) throws IOException {
+        byte[] data = autoGeneratorService.generator(flag, tableName);
         genCode(response, data);
     }
 

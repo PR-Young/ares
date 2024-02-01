@@ -26,6 +26,6 @@ package com.ares.generator.persistence.service;
  **/
 public interface IAutoGeneratorService {
 
-    byte[] generator(String tableName);
+    byte[] generator(String flag, String tableName);
 
 }

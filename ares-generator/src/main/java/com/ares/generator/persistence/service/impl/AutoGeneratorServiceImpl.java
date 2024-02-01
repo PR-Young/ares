@@ -63,11 +63,23 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
     }
 
     @Override
-    public byte[] generator(String tableName) {
-        return gen(tableName);
+    public byte[] generator(String flag, String tableName) {
+        return gen(flag, tableName);
     }
 
-    private Connection getConn(String driver, String url, String user, String pwd) {
+    private Connection getConn(String flag) {
+        String driver, url, user, pwd;
+        if ("master".equalsIgnoreCase(flag)) {
+            driver = config.getDriverClassName();
+            url = config.getUrl();
+            user = config.getUsername();
+            pwd = config.getPassword();
+        } else {
+            driver = config.getSlaveDriverClassName();
+            url = config.getSlaveUrl();
+            user = config.getSlaveUsername();
+            pwd = config.getSlavePassword();
+        }
         Connection con = null;
         //注册驱动
         try {
@@ -79,15 +91,15 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
         return con;
     }
 
-    private byte[] gen(String tableName) {
+    private byte[] gen(String flag, String tableName) {
         Assert.notNull(tableName);
-        String driver = config.getDriverClassName();
-        String url = config.getUrl();
-        String user = config.getUsername();
-        String pwd = config.getPassword();
-        String tablePrefix = config.getTablePrefix();
-        Connection con = getConn(driver, url, user, pwd);
-
+        String tablePrefix;
+        if ("master".equalsIgnoreCase(flag)) {
+            tablePrefix = config.getTablePrefix();
+        } else {
+            tablePrefix = config.getSlaveTablePrefix();
+        }
+        Connection con = getConn(flag);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
         String entityDir = autoCodePath();
@@ -98,7 +110,7 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
                 log.info("创建目录：{} 成功！ ", entityDir);
             }
 
-            EntityDataModel entityModel = getEntityModel(con, tableName, tablePrefix);
+            EntityDataModel entityModel = getEntityModel(flag, con, tableName, tablePrefix);
             switch (config.getGeneratorLevel()) {
                 case 1:
                     generateCode(entityModel, "Entity.ftl", "", ".java", zip);
@@ -231,7 +243,7 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
         return sb.toString();
     }
 
-    private EntityDataModel getEntityModel(Connection con, String tableName, String tablePrefix)
+    private EntityDataModel getEntityModel(String flag, Connection con, String tableName, String tablePrefix)
             throws Exception {
         String basePackage = config.getBasePackage();
         String daoPackage = config.getDaoPackage();
@@ -240,9 +252,14 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
 
 
         //查询表属性,格式化生成实体所需属性
-        String sql = "SELECT table_name, column_name, column_comment, column_type, column_key, column_default "
-                + " FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" + tableName + "' " + "AND table_schema = '" + config.getDatabaseName() + "'";
-
+        String sql;
+        if ("master".equalsIgnoreCase(flag)) {
+            sql = "SELECT table_name, column_name, column_comment, column_type, column_key, column_default "
+                    + " FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" + tableName + "' " + "AND table_schema = '" + config.getDatabaseName() + "'";
+        } else {
+            sql = "select \"column_name\",udt_name as column_type , '' as column_comment "
+                    + "from information_schema.columns where table_schema='" + config.getDatabaseName() + "' and table_name='" + tableName + "' ";
+        }
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
