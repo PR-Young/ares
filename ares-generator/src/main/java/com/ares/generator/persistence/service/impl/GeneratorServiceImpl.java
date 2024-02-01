@@ -26,6 +26,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +45,14 @@ public class GeneratorServiceImpl implements IGeneratorService {
     }
 
     @Override
-    public List<Map<String, Object>> tables(Map<String, Object> map) {
-        List<Map<String, Object>> tables = generatorDao.getTables(map);
+    public List<Map<String, Object>> tables(String flag, Map<String, Object> map) {
+        List<Map<String, Object>> tables = new ArrayList<>();
+        if ("master".equalsIgnoreCase(flag)) {
+            tables = generatorDao.getTables(map);
+        } else {
+            tables = generatorDao.getSlaveTables();
+        }
+
         return tables;
     }
 
@@ -58,8 +65,12 @@ public class GeneratorServiceImpl implements IGeneratorService {
     }
 
     @Override
-    public List<Map<String, Object>> selectTableColumnListByTableName(String tableName) {
-        return generatorDao.selectTableColumnListByTableName(tableName);
+    public List<Map<String, Object>> selectTableColumnListByTableName(String flag, String tableName) {
+        if ("master".equalsIgnoreCase(flag)) {
+            return generatorDao.selectTableColumnListByTableName(tableName);
+        } else {
+            return generatorDao.selectTableColumnListByTableName(tableName);
+        }
     }
 
 }

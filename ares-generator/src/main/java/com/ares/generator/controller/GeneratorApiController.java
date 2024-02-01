@@ -70,16 +70,18 @@ public class GeneratorApiController extends BaseController {
         map.put("tableComment", ServletUtils.getParameter("tableComment"));
         map.put("beginTime", ServletUtils.getParameter("beginTime"));
         map.put("endTime", ServletUtils.getParameter("endTime"));
+        String flag = ServletUtils.getParameter("flag");
         startPage();
-        List<Map<String, Object>> list = generatorService.tables(map);
+        List<Map<String, Object>> list = generatorService.tables(flag, map);
         return getDataTable(list);
     }
 
-    @GetMapping(value = "column/{tableName}")
+    @GetMapping(value = "column/{flag}/{tableName}")
     @Operation(summary = "根据表获取字段", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
-    public TableDataInfo columnList(@PathVariable("tableName") String tableName) {
+    public TableDataInfo columnList(@PathVariable("flag") String flag,
+                                    @PathVariable("tableName") String tableName) {
         TableDataInfo dataInfo = new TableDataInfo();
-        List<Map<String, Object>> list = generatorService.selectTableColumnListByTableName(tableName);
+        List<Map<String, Object>> list = generatorService.selectTableColumnListByTableName(flag, tableName);
         dataInfo.setRows(list);
         dataInfo.setTotal(list.size());
         return dataInfo;

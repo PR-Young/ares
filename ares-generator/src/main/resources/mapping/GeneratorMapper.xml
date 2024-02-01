@@ -50,4 +50,13 @@
         from information_schema.`COLUMNS`
         where `TABLE_NAME` = #{tableName}
     </select>
+
+    <select id="getSlaveTables" resultType="java.util.Map">
+        select tablename as "TABLE_NAME" from pg_tables where schemaname='public'
+    </select>
+
+    <select id="getSlaveColumnsByTable" resultType="java.util.Map">
+        select "column_name" as "COLUMN_NAME",data_type as "COLUMN_TYPE",table_catalog as "TABLE_CATALOG",table_schema as "TABLE_SCHEMA" from information_schema.columns
+        where table_schema='public' and table_name=#{tableName}
+    </select>
 </mapper>

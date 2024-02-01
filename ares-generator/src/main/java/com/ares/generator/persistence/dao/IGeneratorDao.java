@@ -18,6 +18,8 @@
 
 package com.ares.generator.persistence.dao;
 
+import com.ares.core.common.datasource.DataSource;
+import com.ares.core.common.datasource.DataSourceType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,4 +37,10 @@ public interface IGeneratorDao {
     List<Map<String, Object>> getColumnsByTable(Map<String, Object> map);
 
     List<Map<String, Object>> selectTableColumnListByTableName(String tableName);
+
+    @DataSource(DataSourceType.SALVE)
+    List<Map<String, Object>> getSlaveTables();
+
+    @DataSource(DataSourceType.SALVE)
+    List<Map<String, Object>> getSlaveColumnsByTable(Map<String, Object> map);
 }
