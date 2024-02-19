@@ -24,6 +24,7 @@
         <module>ares-system</module>
         <module>ares-generator</module>
         <module>ares-flowable</module>
+        <module>ares-bootstrap</module>
     </modules>
 
     <properties>

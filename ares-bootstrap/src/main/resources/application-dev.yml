@@ -12,7 +12,7 @@ spring:
         password: TlLoBEB3zNIXq/oItvk9ce4jv4b42oBg2aVJ4L4wOW3/y79+oj+6ctb0RhY95oxgp3HKgCaJu5SQg7166iHJOQ==
         connection-properties: config.decrypt=false;config.decrypt.key=${public-key};druid.stat.mergeSql=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=3000
       slave:
-        enabled: true
+        enabled: false
         db-type: postgresql
         driver-class-name: org.postgresql.Driver
         url: jdbc:postgresql://localhost:5432/ares?SSL=false
