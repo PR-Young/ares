@@ -33,7 +33,7 @@
         <mysql.version>8.0.33</mysql.version>
         <mybatis.version>3.0.2</mybatis.version>
         <mybatis-generator.version>1.4.2</mybatis-generator.version>
-        <pagehelper.version>2.1.0</pagehelper.version>
+        <pagehelper.version>2.0.0</pagehelper.version>
         <fastjson.version>2.0.38</fastjson.version>
         <gson.version>2.10.1</gson.version>
         <commons-lang3.version>3.13.0</commons-lang3.version>
@@ -109,8 +109,8 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
         <dependency>
