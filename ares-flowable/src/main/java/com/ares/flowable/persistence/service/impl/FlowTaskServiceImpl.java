@@ -18,8 +18,8 @@
 
 package com.ares.flowable.persistence.service.impl;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.base.BaseModel;

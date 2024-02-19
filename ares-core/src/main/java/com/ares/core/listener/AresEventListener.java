@@ -18,8 +18,8 @@
 
 package com.ares.core.listener;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
 import com.ares.core.model.listener.AresEvent;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,6 +34,6 @@ public class AresEventListener extends DefaultEventListener<AresEvent> {
 
     @Override
     public void onApplicationEvent(AresEvent aresEvent) {
-        log.info(JSON.toJSONString(aresEvent.getSource(), SerializerFeature.WriteMapNullValue));
+        log.info(JSON.toJSONString(aresEvent.getSource(), JSONWriter.Feature.WriteMapNullValue));
     }
 }

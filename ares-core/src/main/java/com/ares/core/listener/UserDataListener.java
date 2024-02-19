@@ -23,7 +23,7 @@ package com.ares.core.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.ares.core.persistence.dao.ISysPostDao;
 import com.ares.core.persistence.dao.ISysRoleDao;
 import com.ares.core.persistence.entity.SysPost;

@@ -20,7 +20,7 @@ package com.ares.core.utils;
 
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.ares.core.model.base.Constants;
 import com.ares.redis.utils.RedisUtil;
 import jakarta.servlet.http.HttpServletRequest;

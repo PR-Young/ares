@@ -18,9 +18,9 @@
 
 package com.ares.core.utils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONWriter;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +64,7 @@ public class JsonUtils {
     }
 
     public static String toJson(Object obj) {
-        return JSON.toJSONString(obj, SerializerFeature.WriteMapNullValue);
+        return JSON.toJSONString(obj, JSONWriter.Feature.WriteMapNullValue);
     }
 
     public static Map<String, Object> parseJsonToMap(Object json) {
