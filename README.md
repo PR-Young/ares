@@ -9,6 +9,8 @@ ares
 │
 ├─（※）ares-admin 监控模块
 │
+├─（※）ares-bootstrap 启动模块
+│
 ├─（※）ares-core 核心模块
 │
 ├─（※）ares-flowable 流程模块
