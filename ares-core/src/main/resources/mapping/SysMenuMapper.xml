@@ -146,9 +146,9 @@
         where `PID_` = #{pid,jdbcType=BIGINT}
     </select>
     <select id="getMenuByRole" parameterType="java.lang.Long" resultType="java.lang.Long">
-        select `MenuId`
+        select `MENU_ID_`
         from `sys_permission`
-        where `RoleId` = #{roleId,jdbcType=BIGINT}
+        where `ROLE_ID_` = #{roleId,jdbcType=BIGINT}
     </select>
 
     <select id="selectList" parameterType="com.ares.core.persistence.entity.SysMenu" resultMap="SysMenu">
