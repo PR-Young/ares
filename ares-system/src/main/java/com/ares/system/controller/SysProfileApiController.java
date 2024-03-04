@@ -148,7 +148,7 @@ public class SysProfileApiController extends BaseController {
             response.setContentType("image/*");
             toClient.write(data);
         } else {
-            toClient.write(null);
+            toClient.write(new byte[0]);
         }
         toClient.close();
     }
