@@ -11,7 +11,7 @@
 
     <groupId>com.ares.neo4j</groupId>
     <artifactId>ares-neo4j</artifactId>
-    <version>${ares.version}</version>
+    <version>${ares-neo.version}</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.ares.core</groupId>
             <artifactId>ares-core</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

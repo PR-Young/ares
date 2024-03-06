@@ -11,7 +11,7 @@
 
     <groupId>com.ares.system</groupId>
     <artifactId>ares-system</artifactId>
-    <version>${ares.version}</version>
+    <version>${ares-system.version}</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -48,12 +48,12 @@
         <dependency>
             <groupId>com.ares.core</groupId>
             <artifactId>ares-core</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ares.message</groupId>
             <artifactId>ares-message</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-message.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>

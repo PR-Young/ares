@@ -25,37 +25,37 @@
         <dependency>
             <groupId>com.ares.core</groupId>
             <artifactId>ares-core</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ares.quartz</groupId>
             <artifactId>ares-quartz</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-job.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ares.message</groupId>
             <artifactId>ares-message</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-message.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ares.generator</groupId>
             <artifactId>ares-generator</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-generator.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ares.flowable</groupId>
             <artifactId>ares-flowable</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-flowable.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ares.system</groupId>
             <artifactId>ares-system</artifactId>
-            <version>${ares.version}</version>
+            <version>${ares-system.version}</version>
         </dependency>
         <!--        <dependency>-->
         <!--            <groupId>com.ares.neo4j</groupId>-->
         <!--            <artifactId>ares-neo4j</artifactId>-->
-        <!--            <version>${ares.version}</version>-->
+        <!--            <version>${ares-neo.version}</version>-->
         <!--        </dependency>-->
         <dependency>
             <groupId>org.jeecgframework.jimureport</groupId>

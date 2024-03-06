@@ -11,7 +11,7 @@
 
     <groupId>com.ares.core</groupId>
     <artifactId>ares-core</artifactId>
-    <version>${ares.version}</version>
+    <version>${ares-core.version}</version>
     <packaging>jar</packaging>
 
     <properties>

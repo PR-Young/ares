@@ -50,17 +50,17 @@ public class AresInterceptor implements HandlerInterceptor {
         ISysUserService userService = SpringUtil.getBean(ISysUserService.class);
         SysUser user = userService.getById(id);
         try {
-            StpUtil.checkActivityTimeout();
+            StpUtil.checkActiveTimeout();
         } catch (Exception e) {
             StpUtil.renewTimeout(config.getTimeout());
-            StpUtil.updateLastActivityToNow();
+            StpUtil.updateLastActiveToNow();
             RedisUtil.expire(Constants.LOGIN_INFO + user.getAccount(), config.getTimeout());
         }
         long tokenTimeout = StpUtil.getTokenTimeout(); // 获取过期时间
         //token没过期，过期时间不是-1的时候，每次请求都刷新过期时间
         if (tokenTimeout != -1) {
             StpUtil.renewTimeout(config.getTimeout()); // 用于token续期
-            StpUtil.updateLastActivityToNow();
+            StpUtil.updateLastActiveToNow();
             RedisUtil.expire(Constants.LOGIN_INFO + user.getAccount(), config.getTimeout());
         }
         return true;
