@@ -377,6 +377,36 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return sb.toString();
     }
 
+    public static String toUpperScoreCase(String s) {
+        if (s == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        boolean upperCase = false;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            boolean nextUpperCase = true;
+
+            if (i < (s.length() - 1)) {
+                nextUpperCase = Character.isUpperCase(s.charAt(i + 1));
+            }
+
+            if ((i > 0) && Character.isUpperCase(c)) {
+                if (!upperCase || !nextUpperCase) {
+                    sb.append(SEPARATOR);
+                }
+                upperCase = true;
+            } else {
+                upperCase = false;
+            }
+
+            sb.append(Character.toUpperCase(c));
+        }
+        sb.append(SEPARATOR);
+        return sb.toString();
+    }
+
     /**
      * 是否包含字符串
      *
