@@ -19,6 +19,7 @@
 package com.ares;
 
 import com.ares.config.mybatis.MyBatisConfig;
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,6 +34,7 @@ import org.springframework.context.annotation.Import;
  * @date: 2020/10/19
  * @see: com.ares.system AresSystemApplication.java
  **/
+@EnableEncryptableProperties
 @Import({MyBatisConfig.class})
 @MapperScan("com.ares.**.dao")
 @SpringBootApplication(scanBasePackages = {"org.jeecg.modules.jmreport", "com.ares"})

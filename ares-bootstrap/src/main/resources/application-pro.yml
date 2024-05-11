@@ -1,5 +1,3 @@
-public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAL7RfKDu37MWmf6AsKSuqyIa9yjWfNn69Dq2YW9JnHC4Qx1v6rMruo+SR6R00WfrjtblLYUV2W8qsCGiTD0pYnUCAwEAAQ==
-slave-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAINvc0EYQvD0FmCpcSOAa5UdspDSiZEvzf+BbDG+hBtU+Q9jWtG4PzRw3uHLRUd0YMFsQ45L1VgVt5i/dVw1S/MCAwEAAQ==
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -9,16 +7,16 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/ares?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
         username: root
-        password: TlLoBEB3zNIXq/oItvk9ce4jv4b42oBg2aVJ4L4wOW3/y79+oj+6ctb0RhY95oxgp3HKgCaJu5SQg7166iHJOQ==
-        connection-properties: config.decrypt=false;config.decrypt.key=${public-key};druid.stat.mergeSql=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=3000
+        password: ENC(Fz0XUNPl2l1EOxXXqSO5gS3zkkkrF//+)
+        connection-properties: druid.stat.mergeSql=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=3000
       slave:
         enabled: false
         db-type: postgresql
         driver-class-name: org.postgresql.Driver
         url: jdbc:postgresql://localhost:5432/ares?SSL=false
         username: postgres
-        password: TgpM8V84xREsZT+tvuHMUIdZXbr3YTOAegYhCYsG5oTxbCT5jJit1yArEw0xZ5bKm96rbhSy3rvoJvoaO0y5Qg==
-        connection-properties: config.decrypt=false;config.decrypt.key=${slave-key};druid.stat.mergeSql=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=3000
+        password: ENC(3IZ4GKKpWv3j8rW5EY1jrgGYGBAAX1mR)
+        connection-properties: druid.stat.mergeSql=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=3000
       neo4j:
         enabled: false
         db-type: neo4j
@@ -73,3 +71,9 @@ spring:
           min-idle: 0
       lettuce:
         shutdown-timeout: 0
+
+jasypt:
+  encryptor:
+    password: ares-2024
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

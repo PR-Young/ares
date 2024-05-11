@@ -1,6 +1,5 @@
 package com.ares.core.common.datasource;
 
-import com.alibaba.druid.filter.config.ConfigTools;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot3.autoconfigure.properties.DruidStatProperties;
@@ -62,14 +61,8 @@ public class DruidConfig {
     public DynamicDataSource dataSource(DataSource masterDataSource,
                                         DataSource slaveDataSource) throws Exception {
         Map<Object, Object> targetDataSources = new HashMap<>();
-        String password = ((DruidDataSource) masterDataSource).getPassword();
-        String key = ((DruidDataSource) masterDataSource).getConnectProperties().getProperty("config.decrypt.key");
-        ((DruidDataSource) masterDataSource).setPassword(ConfigTools.decrypt(key, password));
         targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
         if (slaveEnabled) {
-            String slavePassword = ((DruidDataSource) slaveDataSource).getPassword();
-            String slaveKey = ((DruidDataSource) slaveDataSource).getConnectProperties().getProperty("config.decrypt.key");
-            ((DruidDataSource) slaveDataSource).setPassword(ConfigTools.decrypt(slaveKey, slavePassword));
             targetDataSources.put(DataSourceType.SALVE.name(), slaveDataSource);
         }
         if (neo4jEnabled) {

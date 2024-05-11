@@ -21,6 +21,7 @@
 package com.ares.test;
 
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 
@@ -34,7 +35,7 @@ import java.io.InputStreamReader;
  * @date: 2021/04/22
  * @see: com.ares.test.AresTest.java
  **/
-public class AresTest {
+public class AresTest extends AresBaseTest{
 
     @Test
     public void test() {
@@ -56,5 +57,17 @@ public class AresTest {
             e.printStackTrace();
         }
         System.out.println(sb);
+    }
+
+    @Test
+    public void testJasypt() {
+        StandardPBEStringEncryptor stringEncryptor = new StandardPBEStringEncryptor();
+        stringEncryptor.setAlgorithm("PBEWithMD5AndDES");
+        stringEncryptor.setPassword("ares-2024");
+        String pwd = stringEncryptor.encrypt("root1234");
+        String dpwd = stringEncryptor.decrypt(pwd);
+
+        System.out.println("加密后：" + pwd);
+        System.out.println("解密后：" + dpwd);
     }
 }

@@ -12,7 +12,7 @@
     <groupId>com.ares</groupId>
     <artifactId>ares</artifactId>
     <packaging>pom</packaging>
-    <version>5.1.2</version>
+    <version>5.1.3</version>
     <description>my first springboot project</description>
 
     <modules>
@@ -28,7 +28,7 @@
     </modules>
 
     <properties>
-        <ares-core.version>2.0.1</ares-core.version>
+        <ares-core.version>2.0.2</ares-core.version>
         <ares-flowable.version>2.0.0</ares-flowable.version>
         <ares-generator.version>2.0.0</ares-generator.version>
         <ares-message.version>2.0.0</ares-message.version>
@@ -55,6 +55,7 @@
         <durid.version>1.2.19</durid.version>
         <springdoc.version>2.2.0</springdoc.version>
         <guava.version>32.1.1-jre</guava.version>
+        <jasypt.version>3.0.5</jasypt.version>
     </properties>
 
     <dependencies>
@@ -233,6 +234,12 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>${jasypt.version}</version>
         </dependency>
     </dependencies>
 
