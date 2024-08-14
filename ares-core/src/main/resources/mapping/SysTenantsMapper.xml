@@ -80,10 +80,11 @@
         select
         <include refid="Base_Column_List"/>
         from `sys_tenants`
-        where 1=1
+        <where>
         <if test="search != null">
 
         </if>
+        </where>
         <if test="sort != null">
             order by ${sort}
         </if>
@@ -96,7 +97,7 @@
         select
         <include refid="Base_Column_List"/>
         from `sys_tenants`
-        where 1=1
+        <where>
         <if test="tenantName != null and tenantName != ''">
             AND `TENANT_NAME_` like concat('%', #{tenantName}, '%')
         </if>
@@ -109,6 +110,7 @@
         <if test="endTime != null and endTime != ''"><!-- 结束时间检索 -->
             AND date_format(`CREATE_TIME_`,'%y%m%d') &lt;= date_format(#{endTime},'%y%m%d')
         </if>
+        </where>
     </select>
 
     <select id="getAllUsers" resultType="java.util.Map">
