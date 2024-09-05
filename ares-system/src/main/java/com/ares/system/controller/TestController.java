@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @see: com.ares.system.controller.TestController.java
  **/
 @Slf4j
-@RestController
+@RestController("aresTestController")
 @RequestMapping("/test/*")
 public class TestController {
 

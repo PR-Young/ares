@@ -72,3 +72,14 @@ CREATE TABLE `gen_template` (
                                 `MODIFY_TIME_` datetime DEFAULT NULL COMMENT '修改时间',
                                 PRIMARY KEY (`ID_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='模版';
+
+
+ALTER TABLE `jimu_report_share`
+    ADD UNIQUE INDEX `uniq_report_id`(`report_id`);
+
+ALTER TABLE jimu_report_share
+    ADD COLUMN share_token varchar(50) NULL COMMENT '分享token' AFTER preview_lock_status,
+ADD UNIQUE INDEX uniq_jrs_share_token(share_token);
+
+ALTER TABLE `jimu_report`
+    ADD COLUMN `py_str` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL COMMENT 'py增强' AFTER `js_str`;
