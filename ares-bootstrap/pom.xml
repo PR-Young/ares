@@ -18,7 +18,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jm.version>1.8.0</jm.version>
+        <jm.version>1.8.1</jm.version>
     </properties>
 
     <dependencies>
