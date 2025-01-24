@@ -25,3 +25,4 @@ ares:
     controllerPackage: com.ares.system.controller
     templatePath: /Users/young/IdeaProjects/ares/ares-generator/src/main/resources/templates
     projectPtah: /Users/young/IdeaProjects/ares
+    author: ares

@@ -6,6 +6,11 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+* @description:
+* @author: ${author}
+* @date: ${createTime}
+**/
 @Data
 @Schema(title = "${entityName}对象",description = "")
 public class ${entityName} extends BaseModel{

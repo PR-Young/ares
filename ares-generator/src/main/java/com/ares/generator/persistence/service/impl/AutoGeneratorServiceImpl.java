@@ -22,11 +22,9 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.ares.config.gen.GeneratorConfig;
-import com.ares.generator.persistence.entity.Column;
-import com.ares.generator.persistence.entity.ColumnType;
-import com.ares.generator.persistence.entity.DataType;
-import com.ares.generator.persistence.entity.EntityDataModel;
+import com.ares.generator.persistence.entity.*;
 import com.ares.generator.persistence.service.IAutoGeneratorService;
+import com.ares.generator.persistence.service.IGenPropertiesService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -56,18 +54,37 @@ import java.util.zip.ZipOutputStream;
 public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
 
     private GeneratorConfig config;
+    private IGenPropertiesService genPropertiesService;
 
     @Autowired
-    public AutoGeneratorServiceImpl(GeneratorConfig config) {
+    public AutoGeneratorServiceImpl(GeneratorConfig config,
+                                    IGenPropertiesService genPropertiesService) {
         this.config = config;
+        this.genPropertiesService = genPropertiesService;
+    }
+
+    private void init() {
+        GenProperties properties = genPropertiesService.getByUser();
+        if (null != properties) {
+            config.setBasePackage(properties.getBasePackage());
+            config.setEntityPackage(properties.getEntityPackage());
+            config.setDaoPackage(properties.getDaoPackage());
+            config.setServicePackage(properties.getServicePackage());
+            config.setControllerPackage(properties.getControllerPackage());
+            config.setAuthor(properties.getAuthor());
+            config.setGeneratorLevel(properties.getGenLevel());
+            config.setTablePrefix(properties.getTablePrefix());
+        }
     }
 
     @Override
     public byte[] generator(String flag, String tableName) {
+        init();
         return gen(flag, tableName);
     }
 
-    private Connection getConn(String flag) {
+    @Override
+    public Connection getConn(String flag) {
         String driver, url, user, pwd;
         if ("master".equalsIgnoreCase(flag)) {
             driver = config.getDriverClassName();
@@ -199,7 +216,8 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
         inputStream.close();
     }
 
-    private String handleSQL(List<Column> columns, String flag) {
+    @Override
+    public String handleSQL(List<Column> columns, String flag) {
         StringBuffer sb = new StringBuffer();
         switch (flag) {
             case "columnList":
@@ -243,7 +261,8 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
         return sb.toString();
     }
 
-    private EntityDataModel getEntityModel(String flag, Connection con, String tableName, String tablePrefix)
+    @Override
+    public EntityDataModel getEntityModel(String flag, Connection con, String tableName, String tablePrefix)
             throws Exception {
         String basePackage = config.getBasePackage();
         String daoPackage = config.getDaoPackage();
@@ -292,6 +311,7 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
         dataModel.setServicePackage(servicePackage);
         dataModel.setControllerPackage(controllerPackage);
         dataModel.setCreateTime(new Date().toString());
+        dataModel.setAuthor(config.getAuthor());
         if (StrUtil.isNotBlank(tablePrefix)) {
             dataModel.setEntityName(StrUtil.upperFirst(StrUtil.toCamelCase(StrUtil.removePrefix(tableName, tablePrefix))));
             dataModel.setEntityName1(StrUtil.lowerFirst(StrUtil.toCamelCase(StrUtil.removePrefix(tableName, tablePrefix))));

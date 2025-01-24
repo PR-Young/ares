@@ -20,6 +20,7 @@ package com.ares.generator.controller;
 
 
 import com.ares.core.controller.BaseController;
+import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.DateUtils;
 import com.ares.core.utils.ServletUtils;
@@ -91,18 +92,24 @@ public class GeneratorApiController extends BaseController {
     @Operation(summary = "生成代码", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public void genCode(HttpServletResponse response, @PathVariable("flag") String flag, @PathVariable("tableName") String tableName) throws IOException {
         byte[] data = autoGeneratorService.generator(flag, tableName);
-        genCode(response, data);
+        genCode(response, data, tableName);
     }
 
     /**
      * 生成zip文件
      */
-    private void genCode(HttpServletResponse response, byte[] data) throws IOException {
+    private void genCode(HttpServletResponse response, byte[] data, String tableName) throws IOException {
         String date = DateUtils.dateTimeNow();
         response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"code_" + date + ".zip\"");
+        response.setHeader("Content-Disposition", "attachment; filename=" + tableName + "_" + date + ".zip\"");
         response.addHeader("Content-Length", "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
         IOUtils.write(data, response.getOutputStream());
+    }
+
+    @GetMapping("preview/{flag}/{tableName}")
+    @Operation(summary = "预览代码", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
+    public Object preview(HttpServletResponse response, @PathVariable("flag") String flag, @PathVariable("tableName") String tableName) throws IOException {
+        return AjaxResult.successData(generatorService.preview(flag, tableName));
     }
 }

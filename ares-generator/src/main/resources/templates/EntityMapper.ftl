@@ -21,7 +21,7 @@
         <include refid="Base_Column_List"/>
         )
         values (
-        ${insertValue}
+            ${insertValue}
         )
     </insert>
 
@@ -30,7 +30,7 @@
         <set>
             ${updateValue}
         </set>
-        ${whereIdSql}
+            ${whereIdSql}
     </update>
 
     <delete id="deleteByIds" parameterType="java.util.List">

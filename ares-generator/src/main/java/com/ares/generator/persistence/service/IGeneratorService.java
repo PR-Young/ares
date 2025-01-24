@@ -21,6 +21,7 @@ package com.ares.generator.persistence.service;
 
 import com.github.pagehelper.PageInfo;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,4 +38,5 @@ public interface IGeneratorService {
 
     List<Map<String, Object>> selectTableColumnListByTableName(String flag, String tableName);
 
+    LinkedHashMap<String, Object> preview(String flag, String tableName);
 }

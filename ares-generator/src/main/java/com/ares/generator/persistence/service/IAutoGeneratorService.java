@@ -18,6 +18,12 @@
 
 package com.ares.generator.persistence.service;
 
+import com.ares.generator.persistence.entity.Column;
+import com.ares.generator.persistence.entity.EntityDataModel;
+
+import java.sql.Connection;
+import java.util.List;
+
 /**
  * @description:
  * @author: Young
@@ -27,5 +33,12 @@ package com.ares.generator.persistence.service;
 public interface IAutoGeneratorService {
 
     byte[] generator(String flag, String tableName);
+
+    EntityDataModel getEntityModel(String flag, Connection con, String tableName, String tablePrefix)
+            throws Exception;
+
+    Connection getConn(String flag);
+
+    String handleSQL(List<Column> columns, String flag);
 
 }
