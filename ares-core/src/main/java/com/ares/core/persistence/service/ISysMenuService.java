@@ -22,7 +22,7 @@ package com.ares.core.persistence.service;
 import com.ares.core.model.query.SysMenuQuery;
 import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.model.vo.RouterVo;
-import com.ares.core.persistence.entity.SysMenu;
+import com.ares.core.model.vo.SysMenu;
 
 import java.util.List;
 import java.util.Map;

@@ -19,8 +19,8 @@
 package com.ares.flowable.persistence.entity.dto;
 
 
-import com.ares.core.persistence.entity.SysRole;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.model.vo.SysRole;
+import com.ares.core.model.vo.SysUser;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -20,8 +20,8 @@ package com.ares.flowable.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
 import com.ares.flowable.model.query.SysDeployFormQuery;
-import com.ares.flowable.persistence.entity.SysDeployForm;
-import com.ares.flowable.persistence.entity.SysForm;
+import com.ares.flowable.model.vo.SysDeployForm;
+import com.ares.flowable.model.vo.SysForm;
 
 
 public interface ISysDeployFormService extends IBaseService<SysDeployForm, SysDeployFormQuery> {

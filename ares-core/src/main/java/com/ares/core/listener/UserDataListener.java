@@ -24,11 +24,11 @@ package com.ares.core.listener;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson2.JSON;
+import com.ares.core.model.vo.SysUser;
 import com.ares.core.persistence.dao.ISysPostDao;
 import com.ares.core.persistence.dao.ISysRoleDao;
-import com.ares.core.persistence.entity.SysPost;
-import com.ares.core.persistence.entity.SysRole;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.persistence.entity.SysPostDto;
+import com.ares.core.persistence.entity.SysRoleDto;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.SpringUtils;
@@ -80,9 +80,9 @@ public class UserDataListener extends AnalysisEventListener<SysUser> {
         ISysUserService userService = SpringUtils.getBean(ISysUserService.class);
         logger.info("{}条数据，开始存储数据库！", userList.size());
         ISysPostDao postDao = SpringUtils.getBean(ISysPostDao.class);
-        SysPost post = postDao.getByName(POST_NAME);
+        SysPostDto post = postDao.getByName(POST_NAME);
         ISysRoleDao roleDao = SpringUtils.getBean(ISysRoleDao.class);
-        SysRole role = roleDao.getRoleByName(ROLE_NAME);
+        SysRoleDto role = roleDao.getRoleByName(ROLE_NAME);
         for (SysUser user : userList) {
             if (userService.checkAccount(user.getAccount()) > 0) {
                 if (needUpdate) {

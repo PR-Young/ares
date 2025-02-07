@@ -18,7 +18,7 @@
 
 package com.ares.core.model.base;
 
-import com.ares.core.persistence.entity.SysTemplate;
+import com.ares.core.persistence.entity.SysTemplateDto;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class DefaultMessage {
     private String sender;
     private List receiver;
     private Map vars;
-    private SysTemplate template;
+    private SysTemplateDto template;
 
     public static MessageBuilder newInstance() {
         return new MessageBuilder();
@@ -48,7 +48,7 @@ public class DefaultMessage {
         private String sender;
         private List receiver;
         private Map vars;
-        private SysTemplate template;
+        private SysTemplateDto template;
 
         public MessageBuilder() {
         }
@@ -68,7 +68,7 @@ public class DefaultMessage {
             return this;
         }
 
-        public MessageBuilder template(SysTemplate value) {
+        public MessageBuilder template(SysTemplateDto value) {
             this.template = value;
             return this;
         }
@@ -90,7 +90,7 @@ public class DefaultMessage {
         return vars;
     }
 
-    public SysTemplate getTemplate() {
+    public SysTemplateDto getTemplate() {
         return template;
     }
 }

@@ -20,10 +20,10 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysDictTypeQuery;
-import com.ares.core.persistence.entity.SysDictType;
+import com.ares.core.persistence.entity.SysDictTypeDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ISysDictTypeDao extends IBaseDao<SysDictType, SysDictTypeQuery> {
+public interface ISysDictTypeDao extends IBaseDao<SysDictTypeDto, SysDictTypeQuery> {
 
 }

@@ -19,16 +19,18 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysUserQuery;
+import com.ares.core.model.vo.SysUser;
 import com.ares.core.persistence.dao.ISysRoleDao;
 import com.ares.core.persistence.dao.ISysUserDao;
-import com.ares.core.persistence.entity.SysRole;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.persistence.entity.SysRoleDto;
+import com.ares.core.persistence.entity.SysUserDto;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.MD5Util;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,11 +47,13 @@ public class SysUserServiceImpl implements ISysUserService {
 
     private ISysUserDao sysUserDao;
     private ISysRoleDao roleDao;
+    private Converter converter;
 
     @Autowired
-    public SysUserServiceImpl(ISysUserDao sysUserDao, ISysRoleDao roleDao) {
+    public SysUserServiceImpl(ISysUserDao sysUserDao, ISysRoleDao roleDao, Converter converter) {
         this.sysUserDao = sysUserDao;
         this.roleDao = roleDao;
+        this.converter = converter;
     }
 
     @Override
@@ -57,13 +61,14 @@ public class SysUserServiceImpl implements ISysUserService {
         sysUser.setId(SnowflakeIdWorker.getUUID());
         sysUser.setPassword(MD5Util.encode("123456"));
         sysUser.setCreateTime(new Date());
-        sysUserDao.insert(sysUser);
+        SysUserDto sysUserDto = converter.convert(sysUser, SysUserDto.class);
+        sysUserDao.insert(sysUserDto);
     }
 
     @Override
     public PageInfo<SysUser> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysUser> userList = sysUserDao.list(map);
+        List<SysUser> userList = converter.convert(sysUserDao.list(map), SysUser.class);
         PageInfo<SysUser> userPageInfo = new PageInfo<>(userList);
         return userPageInfo;
     }
@@ -75,20 +80,21 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public List<SysUser> assignAllUser(Long roleId) {
-        List<SysUser> userList = sysUserDao.allUser(roleId);
+        List<SysUser> userList = converter.convert(sysUserDao.allUser(roleId), SysUser.class);
         return userList;
     }
 
     @Override
     public List<SysUser> getUserByRole(Long roleId) {
-        List<SysUser> userList = sysUserDao.getUserByRole(roleId);
+        List<SysUser> userList = converter.convert(sysUserDao.getUserByRole(roleId), SysUser.class);
         return userList;
     }
 
     @Override
     public void update(SysUser obj) {
         obj.setModifyTime(new Date());
-        sysUserDao.update(obj);
+        SysUserDto sysUserDto = converter.convert(obj, SysUserDto.class);
+        sysUserDao.update(sysUserDto);
     }
 
     @Override
@@ -98,7 +104,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public SysUser getById(Long id) {
-        return sysUserDao.getById(id);
+        return converter.convert(sysUserDao.getById(id), SysUser.class);
     }
 
     @Override
@@ -114,7 +120,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public List<SysUser> selectUserList(SysUserQuery user) {
-        return sysUserDao.selectList(user);
+        return converter.convert(sysUserDao.selectList(user), SysUser.class);
     }
 
     @Override
@@ -123,15 +129,16 @@ public class SysUserServiceImpl implements ISysUserService {
         sysUser.setId(id);
         sysUser.setPassword(MD5Util.encode("123456"));
         sysUser.setCreateTime(new Date());
-        sysUserDao.insert(sysUser);
+        SysUserDto sysUserDto = converter.convert(sysUser, SysUserDto.class);
+        sysUserDao.insert(sysUserDto);
         return id;
     }
 
     @Override
     public String selectUserRoleGroup(Long userId) {
-        List<SysRole> roleList = roleDao.getRoleByUserId(userId);
+        List<SysRoleDto> roleList = roleDao.getRoleByUserId(userId);
         StringBuffer idsStr = new StringBuffer();
-        for (SysRole role : roleList) {
+        for (SysRoleDto role : roleList) {
             idsStr.append(role.getDescription()).append(",");
         }
         if (StringUtils.isNotEmpty(idsStr.toString())) {
@@ -143,16 +150,18 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     public int updatePassword(SysUser user, String passWord) {
         user.setPassword(MD5Util.encode(passWord));
-        return sysUserDao.update(user);
+        SysUserDto sysUserDto = converter.convert(user, SysUserDto.class);
+        return sysUserDao.update(sysUserDto);
     }
 
     @Override
     public SysUser getUserByName(String userName) {
-        return sysUserDao.getUserByName(userName);
+        return converter.convert(sysUserDao.getUserByName(userName), SysUser.class);
     }
 
     @Override
     public int updateUserByAccount(SysUser sysUser) {
-        return sysUserDao.updateUserByAccount(sysUser);
+        SysUserDto sysUserDto = converter.convert(sysUser, SysUserDto.class);
+        return sysUserDao.updateUserByAccount(sysUserDto);
     }
 }

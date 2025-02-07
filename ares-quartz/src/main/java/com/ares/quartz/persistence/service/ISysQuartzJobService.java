@@ -19,8 +19,8 @@
 package com.ares.quartz.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
+import com.ares.quartz.model.vo.SysQuartzJob;
 import com.ares.quartz.model.query.SysQuartzJobQuery;
-import com.ares.quartz.persistence.entity.SysQuartzJob;
 import org.quartz.SchedulerException;
 
 import java.util.List;

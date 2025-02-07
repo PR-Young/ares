@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysPropertiesDao">
-    <resultMap id="SysProperties" type="com.ares.core.persistence.entity.SysProperties">
+    <resultMap id="SysProperties" type="com.ares.core.persistence.entity.SysPropertiesDto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <result column="ALIAS_" jdbcType="VARCHAR" property="alias"/>
         <result column="CREATOR_" jdbcType="BIGINT" property="creator"/>
@@ -19,7 +19,7 @@
         ,`ALIAS_`,`CREATOR_`,`DESCRIPTION_`,`GROUP_`,`MODIFIER_`,`NAME_`,`VALUE_`, `CREATE_TIME_`, `MODIFY_TIME_`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysProperties">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysPropertiesDto">
         insert into `sys_properties` (<include refid="Base_Column_List"/>)
         values (
         #{id,jdbcType=BIGINT},
@@ -35,7 +35,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.entity.SysProperties">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysPropertiesDto">
         update `sys_properties`
         <set>
             <if test="alias!= null">

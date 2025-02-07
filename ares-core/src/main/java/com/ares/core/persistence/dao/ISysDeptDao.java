@@ -20,16 +20,16 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysDeptQuery;
-import com.ares.core.persistence.entity.SysDept;
+import com.ares.core.persistence.entity.SysDeptDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
-public interface ISysDeptDao extends IBaseDao<SysDept, SysDeptQuery> {
+public interface ISysDeptDao extends IBaseDao<SysDeptDto, SysDeptQuery> {
 
-    List<SysDept> getAllDept();
+    List<SysDeptDto> getAllDept();
 
-    SysDept getByDeptId(@Param("id") Long id);
+    SysDeptDto getByDeptId(@Param("id") Long id);
 }

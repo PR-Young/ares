@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysDictTypeDao">
-    <resultMap id="SysDictType" type="com.ares.core.persistence.entity.SysDictType">
+    <resultMap id="SysDictType" type="com.ares.core.persistence.entity.SysDictTypeDto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <result column="DICT_NAME_" jdbcType="VARCHAR" property="dictName"/>
         <result column="DICT_TYPE_" jdbcType="VARCHAR" property="dictType"/>
@@ -18,7 +18,7 @@
         ,`DICT_NAME_`,`DICT_TYPE_`,`STATUS_`,`REMARK_`, `CREATOR_`,`CREATE_TIME_`,`MODIFIER_`, `MODIFY_TIME_`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysDictType">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysDictTypeDto">
         insert into `sys_dict_type` (
         <include refid="Base_Column_List"/>
         )
@@ -35,7 +35,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.entity.SysDictType">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysDictTypeDto">
         update `sys_dict_type`
         <set>
             <if test="dictName!= null">

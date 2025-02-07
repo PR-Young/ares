@@ -21,12 +21,14 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysTenantUsersQuery;
+import com.ares.core.model.vo.SysTenantUsers;
 import com.ares.core.persistence.dao.ISysTenantUsersDao;
-import com.ares.core.persistence.entity.SysTenantUsers;
+import com.ares.core.persistence.entity.SysTenantUsersDto;
 import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,16 +40,18 @@ import java.util.Map;
 public class SysTenantUsersServiceImpl implements ISysTenantUsersService {
 
     private ISysTenantUsersDao sysTenantRolesDao;
+    private Converter converter;
 
     @Autowired
-    public SysTenantUsersServiceImpl(ISysTenantUsersDao sysTenantRolesDao) {
+    public SysTenantUsersServiceImpl(ISysTenantUsersDao sysTenantRolesDao, Converter converter) {
         this.sysTenantRolesDao = sysTenantRolesDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysTenantUsers> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysTenantUsers> lists = sysTenantRolesDao.list(map);
+        List<SysTenantUsers> lists = converter.convert(sysTenantRolesDao.list(map), SysTenantUsers.class);
         PageInfo<SysTenantUsers> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -56,13 +60,15 @@ public class SysTenantUsersServiceImpl implements ISysTenantUsersService {
     public void insert(SysTenantUsers obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysTenantRolesDao.insert(obj);
+        SysTenantUsersDto sysTenantUsersDto = converter.convert(obj, SysTenantUsersDto.class);
+        sysTenantRolesDao.insert(sysTenantUsersDto);
     }
 
     @Override
     public void update(SysTenantUsers obj) {
         obj.setModifyTime(new Date());
-        sysTenantRolesDao.update(obj);
+        SysTenantUsersDto sysTenantUsersDto = converter.convert(obj, SysTenantUsersDto.class);
+        sysTenantRolesDao.update(sysTenantUsersDto);
     }
 
     @Override
@@ -72,12 +78,12 @@ public class SysTenantUsersServiceImpl implements ISysTenantUsersService {
 
     @Override
     public SysTenantUsers getById(Long id) {
-        return sysTenantRolesDao.getById(id);
+        return converter.convert(sysTenantRolesDao.getById(id), SysTenantUsers.class);
     }
 
     @Override
     public List<SysTenantUsers> list(SysTenantUsersQuery obj) {
-        List<SysTenantUsers> lists = sysTenantRolesDao.selectList(obj);
+        List<SysTenantUsers> lists = converter.convert(sysTenantRolesDao.selectList(obj), SysTenantUsers.class);
         return lists;
     }
 

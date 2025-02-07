@@ -21,21 +21,21 @@ package com.ares.flowable.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.flowable.model.query.SysDeployFormQuery;
-import com.ares.flowable.persistence.entity.SysDeployForm;
-import com.ares.flowable.persistence.entity.SysForm;
+import com.ares.flowable.persistence.entity.dto.SysDeployFormDto;
+import com.ares.flowable.persistence.entity.dto.SysFormDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ISysDeployFormDao extends IBaseDao<SysDeployForm, SysDeployFormQuery> {
+public interface ISysDeployFormDao extends IBaseDao<SysDeployFormDto, SysDeployFormQuery> {
     /**
      * 查询流程实例关联表单
      *
      * @param id 流程实例关联表单ID
      * @return 流程实例关联表单
      */
-    SysDeployForm selectSysDeployFormById(Long id);
+    SysDeployFormDto selectSysDeployFormById(Long id);
 
     /**
      * 查询流程实例关联表单列表
@@ -43,7 +43,7 @@ public interface ISysDeployFormDao extends IBaseDao<SysDeployForm, SysDeployForm
      * @param sysDeployForm 流程实例关联表单
      * @return 流程实例关联表单集合
      */
-    List<SysDeployForm> selectSysDeployFormList(SysDeployFormQuery sysDeployForm);
+    List<SysDeployFormDto> selectSysDeployFormList(SysDeployFormQuery sysDeployForm);
 
 
     /**
@@ -52,5 +52,5 @@ public interface ISysDeployFormDao extends IBaseDao<SysDeployForm, SysDeployForm
      * @param deployId
      * @return
      */
-    SysForm selectSysDeployFormByDeployId(String deployId);
+    SysFormDto selectSysDeployFormByDeployId(String deployId);
 }

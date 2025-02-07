@@ -22,14 +22,14 @@ package com.ares.flowable.persistence.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.model.base.AjaxResult;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.model.vo.SysUser;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.flowable.common.constant.ProcessConstants;
 import com.ares.flowable.factory.FlowServiceFactory;
-import com.ares.flowable.persistence.entity.SysForm;
-import com.ares.flowable.persistence.entity.SysFormData;
+import com.ares.flowable.model.vo.SysForm;
+import com.ares.flowable.model.vo.SysFormData;
 import com.ares.flowable.persistence.entity.dto.FlowProcDefDto;
 import com.ares.flowable.persistence.service.IFlowDefinitionService;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
@@ -63,6 +63,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
     private ISysDeptService sysDeptService;
     private ISysPostService postService;
     private ISysFormDataService formDataService;
+
 
     @Autowired
     public FlowDefinitionServiceImpl(ISysDeployFormService deployFormService,

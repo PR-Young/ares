@@ -20,13 +20,13 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysDictDataQuery;
-import com.ares.core.persistence.entity.SysDictData;
+import com.ares.core.persistence.entity.SysDictDataDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
-public interface ISysDictDataDao extends IBaseDao<SysDictData, SysDictDataQuery> {
-    List<SysDictData> getDicts(@Param("dictType") String dictType);
+public interface ISysDictDataDao extends IBaseDao<SysDictDataDto, SysDictDataQuery> {
+    List<SysDictDataDto> getDicts(@Param("dictType") String dictType);
 }

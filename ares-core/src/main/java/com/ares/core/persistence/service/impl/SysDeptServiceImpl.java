@@ -20,12 +20,14 @@ package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysDeptQuery;
 import com.ares.core.model.tree.TreeSelect;
+import com.ares.core.model.vo.SysDept;
 import com.ares.core.persistence.dao.ISysDeptDao;
-import com.ares.core.persistence.entity.SysDept;
+import com.ares.core.persistence.entity.SysDeptDto;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,17 +43,19 @@ import java.util.Map;
 public class SysDeptServiceImpl implements ISysDeptService {
 
     private ISysDeptDao sysDeptDao;
+    private Converter converter;
 
     @Autowired
-    public SysDeptServiceImpl(ISysDeptDao sysDeptDao) {
+    public SysDeptServiceImpl(ISysDeptDao sysDeptDao, Converter converter) {
         this.sysDeptDao = sysDeptDao;
+        this.converter = converter;
     }
 
 
     @Override
     public PageInfo<SysDept> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysDept> lists = sysDeptDao.list(map);
+        List<SysDept> lists = converter.convert(sysDeptDao.list(map), SysDept.class);
         PageInfo<SysDept> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -60,13 +64,15 @@ public class SysDeptServiceImpl implements ISysDeptService {
     public void insert(SysDept obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysDeptDao.insert(obj);
+        SysDeptDto sysDeptDto = converter.convert(obj, SysDeptDto.class);
+        sysDeptDao.insert(sysDeptDto);
     }
 
     @Override
     public void update(SysDept obj) {
         obj.setModifyTime(new Date());
-        sysDeptDao.update(obj);
+        SysDeptDto sysDeptDto = converter.convert(obj, SysDeptDto.class);
+        sysDeptDao.update(sysDeptDto);
     }
 
     @Override
@@ -76,23 +82,23 @@ public class SysDeptServiceImpl implements ISysDeptService {
 
     @Override
     public SysDept getById(Long id) {
-        return sysDeptDao.getById(id);
+        return converter.convert(sysDeptDao.getById(id), SysDept.class);
     }
 
     @Override
     public List<SysDept> list(SysDeptQuery obj) {
-        List<SysDept> lists = sysDeptDao.selectList(obj);
+        List<SysDept> lists = converter.convert(sysDeptDao.selectList(obj), SysDept.class);
         return lists;
     }
 
     @Override
     public SysDept getByDeptId(Long id) {
-        return sysDeptDao.getByDeptId(id);
+        return converter.convert(sysDeptDao.getByDeptId(id), SysDept.class);
     }
 
     @Override
     public List<TreeSelect> buildDeptTree() {
-        List<SysDept> deptList = sysDeptDao.getAllDept();
+        List<SysDept> deptList = converter.convert(sysDeptDao.getAllDept(), SysDept.class);
         return buildTree(0L, deptList);
     }
 

@@ -26,7 +26,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysTenantsQuery;
-import com.ares.core.persistence.entity.SysTenants;
+import com.ares.core.model.vo.SysTenants;
 import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.persistence.service.ISysTenantsService;
 import com.ares.core.utils.StringUtils;

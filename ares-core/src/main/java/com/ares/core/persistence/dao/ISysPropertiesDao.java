@@ -20,16 +20,16 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysPropertiesQuery;
-import com.ares.core.persistence.entity.SysProperties;
+import com.ares.core.persistence.entity.SysPropertiesDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
-public interface ISysPropertiesDao extends IBaseDao<SysProperties, SysPropertiesQuery> {
+public interface ISysPropertiesDao extends IBaseDao<SysPropertiesDto, SysPropertiesQuery> {
 
-    List<SysProperties> getByGroup(@Param("group") String group);
+    List<SysPropertiesDto> getByGroup(@Param("group") String group);
 
     String getValueByAlias(@Param("alias") String alias);
 }

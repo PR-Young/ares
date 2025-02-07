@@ -21,12 +21,14 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysLoginInfoQuery;
+import com.ares.core.model.vo.SysLoginInfo;
 import com.ares.core.persistence.dao.ISysLoginInfoDao;
-import com.ares.core.persistence.entity.SysLoginInfo;
+import com.ares.core.persistence.entity.SysLoginInfoDto;
 import com.ares.core.persistence.service.ISysLoginInfoService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,17 +40,20 @@ import java.util.Map;
 public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
 
     private ISysLoginInfoDao sysLoginInfoDao;
+    private Converter converter;
 
     @Autowired
-    public SysLoginInfoServiceImpl(ISysLoginInfoDao sysLoginInfoDao) {
+    public SysLoginInfoServiceImpl(ISysLoginInfoDao sysLoginInfoDao, Converter converter) {
         this.sysLoginInfoDao = sysLoginInfoDao;
+        this.converter = converter;
     }
 
     @Override
     public Long saveInfo(SysLoginInfo sysLoginInfo) {
         Long id = SnowflakeIdWorker.getUUID();
         sysLoginInfo.setId(id);
-        sysLoginInfoDao.insert(sysLoginInfo);
+        SysLoginInfoDto sysLoginInfoDto = converter.convert(sysLoginInfo, SysLoginInfoDto.class);
+        sysLoginInfoDao.insert(sysLoginInfoDto);
         return id;
     }
 
@@ -60,7 +65,7 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
     @Override
     public PageInfo<SysLoginInfo> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysLoginInfo> lists = sysLoginInfoDao.list(map);
+        List<SysLoginInfo> lists = converter.convert(sysLoginInfoDao.list(map), SysLoginInfo.class);
         PageInfo<SysLoginInfo> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -69,13 +74,15 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
     public void insert(SysLoginInfo obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysLoginInfoDao.insert(obj);
+        SysLoginInfoDto sysLoginInfoDto = converter.convert(obj, SysLoginInfoDto.class);
+        sysLoginInfoDao.insert(sysLoginInfoDto);
     }
 
     @Override
     public void update(SysLoginInfo obj) {
         obj.setModifyTime(new Date());
-        sysLoginInfoDao.update(obj);
+        SysLoginInfoDto sysLoginInfoDto = converter.convert(obj, SysLoginInfoDto.class);
+        sysLoginInfoDao.update(sysLoginInfoDto);
     }
 
     @Override
@@ -85,12 +92,12 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
 
     @Override
     public SysLoginInfo getById(Long id) {
-        return sysLoginInfoDao.getById(id);
+        return converter.convert(sysLoginInfoDao.getById(id), SysLoginInfo.class);
     }
 
     @Override
     public List<SysLoginInfo> list(SysLoginInfoQuery obj) {
-        List<SysLoginInfo> lists = sysLoginInfoDao.selectList(obj);
+        List<SysLoginInfo> lists = converter.convert(sysLoginInfoDao.selectList(obj), SysLoginInfo.class);
         return lists;
     }
 }

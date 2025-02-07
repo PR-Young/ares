@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysMenuQuery;
-import com.ares.core.persistence.entity.SysMenu;
+import com.ares.core.persistence.entity.SysMenuDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -30,15 +30,15 @@ import java.util.List;
  * @author: Young 2020/01/23
  **/
 @Mapper
-public interface ISysMenuDao extends IBaseDao<SysMenu, SysMenuQuery> {
+public interface ISysMenuDao extends IBaseDao<SysMenuDto, SysMenuQuery> {
 
-    List<SysMenu> getMenuByUserId(Long userId);
+    List<SysMenuDto> getMenuByUserId(Long userId);
 
-    SysMenu getByPId(Long pid);
+    SysMenuDto getByPId(Long pid);
 
     List<Long> getMenuByRole(Long roleId);
 
-    List<SysMenu> selectListByUser(SysMenuQuery menu);
+    List<SysMenuDto> selectListByUser(SysMenuQuery menu);
 
     int deleteById(Long menuId);
 

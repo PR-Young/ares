@@ -21,9 +21,9 @@ package com.ares.generator.persistence.service.impl;
 
 import cn.hutool.core.lang.Assert;
 import com.ares.config.gen.GeneratorConfig;
+import com.ares.generator.model.query.EntityDataModel;
+import com.ares.generator.model.vo.GenProperties;
 import com.ares.generator.persistence.dao.IGeneratorDao;
-import com.ares.generator.persistence.entity.EntityDataModel;
-import com.ares.generator.persistence.entity.GenProperties;
 import com.ares.generator.persistence.service.IAutoGeneratorService;
 import com.ares.generator.persistence.service.IGenPropertiesService;
 import com.ares.generator.persistence.service.IGeneratorService;
@@ -125,17 +125,19 @@ public class GeneratorServiceImpl implements IGeneratorService {
         Connection con = autoGeneratorService.getConn(flag);
 
         try {
-            ByteArrayOutputStream entity = null, entityQuery = null, entityMapper = null, entityDao = null, iEntityService = null, entityServiceImpl = null, entityApiController = null, view = null, viewjs = null;
+            ByteArrayOutputStream entity = null, entityDto = null, entityQuery = null, entityMapper = null, entityDao = null, iEntityService = null, entityServiceImpl = null, entityApiController = null, view = null, viewjs = null;
             EntityDataModel entityModel = autoGeneratorService.getEntityModel(flag, con, tableName, tablePrefix);
             switch (config.getGeneratorLevel()) {
                 case 1:
                     entity = generateCode(entityModel, "Entity.ftl", "", ".java");
+                    entityDto = generateCode(entityModel, "EntityDto.ftl", "", ".java");
                     entityQuery = generateCode(entityModel, "EntityQuery.ftl", "", "Query.java");
                     entityMapper = generateCode(entityModel, "EntityMapper.ftl", "", "Mapper.xml");
                     entityDao = generateCode(entityModel, "EntityDao.ftl", "I", "Dao.java");
                     break;
                 case 2:
                     entity = generateCode(entityModel, "Entity.ftl", "", ".java");
+                    entityDto = generateCode(entityModel, "EntityDto.ftl", "", ".java");
                     entityQuery = generateCode(entityModel, "EntityQuery.ftl", "", "Query.java");
                     entityMapper = generateCode(entityModel, "EntityMapper.ftl", "", "Mapper.xml");
                     entityDao = generateCode(entityModel, "EntityDao.ftl", "I", "Dao.java");
@@ -144,6 +146,7 @@ public class GeneratorServiceImpl implements IGeneratorService {
                     break;
                 case 3:
                     entity = generateCode(entityModel, "Entity.ftl", "", ".java");
+                    entityDto = generateCode(entityModel, "EntityDto.ftl", "", ".java");
                     entityQuery = generateCode(entityModel, "EntityQuery.ftl", "", "Query.java");
                     entityDao = generateCode(entityModel, "EntityDao.ftl", "I", "Dao.java");
                     iEntityService = generateCode(entityModel, "IEntityService.ftl", "I", "Service.java");
@@ -157,6 +160,7 @@ public class GeneratorServiceImpl implements IGeneratorService {
                     break;
             }
             result.put("Entity.ftl", entity.toString("utf-8"));
+            result.put("EntityDto.ftl", entityDto.toString("utf-8"));
             result.put("EntityQuery.ftl", entityQuery.toString("utf-8"));
             result.put("EntityDao.ftl", entityDao.toString("utf-8"));
             result.put("IEntityService.ftl", iEntityService.toString("utf-8"));

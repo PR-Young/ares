@@ -19,12 +19,14 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysDictTypeQuery;
+import com.ares.core.model.vo.SysDictType;
 import com.ares.core.persistence.dao.ISysDictTypeDao;
-import com.ares.core.persistence.entity.SysDictType;
+import com.ares.core.persistence.entity.SysDictTypeDto;
 import com.ares.core.persistence.service.ISysDictTypeService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,16 +38,18 @@ import java.util.Map;
 public class SysDictTypeServiceImpl implements ISysDictTypeService {
 
     private ISysDictTypeDao sysDictTypeDao;
+    private Converter converter;
 
     @Autowired
-    public SysDictTypeServiceImpl(ISysDictTypeDao sysDictTypeDao) {
+    public SysDictTypeServiceImpl(ISysDictTypeDao sysDictTypeDao, Converter converter) {
         this.sysDictTypeDao = sysDictTypeDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysDictType> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysDictType> lists = sysDictTypeDao.list(map);
+        List<SysDictType> lists = converter.convert(sysDictTypeDao.list(map), SysDictType.class);
         PageInfo<SysDictType> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -54,13 +58,15 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
     public void insert(SysDictType obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysDictTypeDao.insert(obj);
+        SysDictTypeDto sysDictTypeDto = converter.convert(obj, SysDictTypeDto.class);
+        sysDictTypeDao.insert(sysDictTypeDto);
     }
 
     @Override
     public void update(SysDictType obj) {
         obj.setModifyTime(new Date());
-        sysDictTypeDao.update(obj);
+        SysDictTypeDto sysDictTypeDto = converter.convert(obj, SysDictTypeDto.class);
+        sysDictTypeDao.update(sysDictTypeDto);
     }
 
     @Override
@@ -70,12 +76,12 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService {
 
     @Override
     public SysDictType getById(Long id) {
-        return sysDictTypeDao.getById(id);
+        return converter.convert(sysDictTypeDao.getById(id), SysDictType.class);
     }
 
     @Override
     public List<SysDictType> list(SysDictTypeQuery obj) {
-        List<SysDictType> lists = sysDictTypeDao.selectList(obj);
+        List<SysDictType> lists = converter.convert(sysDictTypeDao.selectList(obj), SysDictType.class);
         return lists;
     }
 }

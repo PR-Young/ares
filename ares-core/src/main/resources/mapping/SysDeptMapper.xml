@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysDeptDao">
-    <resultMap id="SysDept" type="com.ares.core.persistence.entity.SysDept">
+    <resultMap id="SysDept" type="com.ares.core.persistence.entity.SysDeptDto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <result column="CODE_" jdbcType="VARCHAR" property="code"/>
         <result column="DEPT_NAME_" jdbcType="VARCHAR" property="deptName"/>
@@ -19,7 +19,7 @@
         ,`CODE_`,`DEPT_NAME_`,`PARENT_DEPT_ID_`, `CREATOR_`,`CREATE_TIME_`,`MODIFIER_`, `MODIFY_TIME_`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysDept">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysDeptDto">
         insert into `sys_dept` (
         <include refid="Base_Column_List"/>
         )
@@ -35,7 +35,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.entity.SysDept">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysDeptDto">
         update `sys_dept`
         <set>
             <if test="code!= null">

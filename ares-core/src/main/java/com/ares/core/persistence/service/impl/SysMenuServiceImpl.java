@@ -23,12 +23,14 @@ import com.ares.core.model.query.SysMenuQuery;
 import com.ares.core.model.tree.TreeSelect;
 import com.ares.core.model.vo.MetaVo;
 import com.ares.core.model.vo.RouterVo;
+import com.ares.core.model.vo.SysMenu;
 import com.ares.core.persistence.dao.ISysMenuDao;
-import com.ares.core.persistence.entity.SysMenu;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.persistence.entity.SysMenuDto;
+import com.ares.core.persistence.entity.SysUserDto;
 import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,10 +45,12 @@ import java.util.stream.Collectors;
 public class SysMenuServiceImpl implements ISysMenuService {
 
     private ISysMenuDao sysMenuDao;
+    private Converter converter;
 
     @Autowired
-    public SysMenuServiceImpl(ISysMenuDao sysMenuDao) {
+    public SysMenuServiceImpl(ISysMenuDao sysMenuDao, Converter converter) {
         this.sysMenuDao = sysMenuDao;
+        this.converter = converter;
     }
 
     /**
@@ -56,25 +60,27 @@ public class SysMenuServiceImpl implements ISysMenuService {
      */
     @Override
     public List<SysMenu> getAll(Long userId) {
-        return sysMenuDao.getMenuByUserId(userId);
+        return converter.convert(sysMenuDao.getMenuByUserId(userId), SysMenu.class);
     }
 
     @Override
     public List<SysMenu> list(Map<String, Object> map) {
-        return sysMenuDao.list(map);
+        return converter.convert(sysMenuDao.list(map), SysMenu.class);
     }
 
     @Override
     public void insert(SysMenu obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysMenuDao.insert(obj);
+        SysMenuDto sysMenuDto = converter.convert(obj, SysMenuDto.class);
+        sysMenuDao.insert(sysMenuDto);
     }
 
     @Override
     public void update(SysMenu obj) {
         obj.setModifyTime(new Date());
-        sysMenuDao.update(obj);
+        SysMenuDto sysMenuDto = converter.convert(obj, SysMenuDto.class);
+        sysMenuDao.update(sysMenuDto);
     }
 
     @Override
@@ -84,7 +90,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     @Override
     public SysMenu getById(Long id) {
-        return sysMenuDao.getById(id);
+        return converter.convert(sysMenuDao.getById(id), SysMenu.class);
     }
 
     @Override
@@ -99,7 +105,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
 
     @Override
     public SysMenu getByPId(Long pid) {
-        return sysMenuDao.getByPId(pid);
+        return converter.convert(sysMenuDao.getByPId(pid), SysMenu.class);
     }
 
 
@@ -138,11 +144,11 @@ public class SysMenuServiceImpl implements ISysMenuService {
     @Override
     public List<SysMenu> selectMenuList(SysMenuQuery menu, Long userId) {
         List<SysMenu> menuList = null;
-        if (SysUser.isAdmin(userId)) {
-            menuList = sysMenuDao.selectList(menu);
+        if (SysUserDto.isAdmin(userId)) {
+            menuList = converter.convert(sysMenuDao.selectList(menu), SysMenu.class);
         } else {
             menu.getParams().put("userId", userId);
-            menuList = sysMenuDao.selectListByUser(menu);
+            menuList = converter.convert(sysMenuDao.selectListByUser(menu), SysMenu.class);
         }
         return menuList;
     }

@@ -19,13 +19,15 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysRoleQuery;
+import com.ares.core.model.vo.SysRole;
 import com.ares.core.persistence.dao.ISysRoleDao;
-import com.ares.core.persistence.entity.SysRole;
+import com.ares.core.persistence.entity.SysRoleDto;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,16 +46,18 @@ import java.util.stream.Collectors;
 public class SysRoleServiceImpl implements ISysRoleService {
 
     private ISysRoleDao sysRoleDao;
+    private Converter converter;
 
     @Autowired
-    public SysRoleServiceImpl(ISysRoleDao sysRoleDao) {
+    public SysRoleServiceImpl(ISysRoleDao sysRoleDao, Converter converter) {
         this.sysRoleDao = sysRoleDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysRole> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysRole> userList = sysRoleDao.list(map);
+        List<SysRole> userList = converter.convert(sysRoleDao.list(map), SysRole.class);
         PageInfo<SysRole> userPageInfo = new PageInfo<>(userList);
         return userPageInfo;
     }
@@ -67,13 +71,15 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public void insert(SysRole obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysRoleDao.insert(obj);
+        SysRoleDto sysRoleDto = converter.convert(obj, SysRoleDto.class);
+        sysRoleDao.insert(sysRoleDto);
     }
 
     @Override
     public void update(SysRole obj) {
         obj.setModifyTime(new Date());
-        sysRoleDao.update(obj);
+        SysRoleDto sysRoleDto = converter.convert(obj, SysRoleDto.class);
+        sysRoleDao.update(sysRoleDto);
     }
 
     @Override
@@ -83,7 +89,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
     @Override
     public SysRole getById(Long id) {
-        return sysRoleDao.getById(id);
+        return converter.convert(sysRoleDao.getById(id), SysRole.class);
     }
 
     @Override
@@ -114,7 +120,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
     @Override
     public List<SysRole> getRoleByUserId(Long userId) {
-        return sysRoleDao.getRoleByUserId(userId);
+        return converter.convert(sysRoleDao.getRoleByUserId(userId), SysRole.class);
     }
 
     @Override
@@ -124,14 +130,14 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
     @Override
     public List<String> getRoleIdsByUser(Long userId) {
-        List<SysRole> roleList = sysRoleDao.getRoleByUserId(userId);
+        List<SysRole> roleList = converter.convert(sysRoleDao.getRoleByUserId(userId), SysRole.class);
         List<String> roles = roleList.stream().map(role -> role.getId().toString()).collect(Collectors.toList());
         return roles;
     }
 
     @Override
     public List<SysRole> getAll() {
-        return sysRoleDao.list(new HashMap<>());
+        return converter.convert(sysRoleDao.list(new HashMap<>()), SysRole.class);
     }
 
     @Override
@@ -149,7 +155,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
     @Override
     public List<SysRole> selectRoleList(SysRoleQuery role) {
-        return sysRoleDao.selectList(role);
+        return converter.convert(sysRoleDao.selectList(role), SysRole.class);
     }
 
     @Override
@@ -164,7 +170,8 @@ public class SysRoleServiceImpl implements ISysRoleService {
         Long roleId = SnowflakeIdWorker.getUUID();
         obj.setId(roleId);
         obj.setCreateTime(new Date());
-        sysRoleDao.insert(obj);
+        SysRoleDto sysRoleDto = converter.convert(obj, SysRoleDto.class);
+        sysRoleDao.insert(sysRoleDto);
         if (StringUtils.isNotEmpty(obj.getMenuIds())) {
             sysRoleDao.deletePermission(roleId);
             for (String id : obj.getMenuIds()) {
@@ -182,7 +189,8 @@ public class SysRoleServiceImpl implements ISysRoleService {
     @Transactional
     public void updateRole(SysRole obj) {
         obj.setModifyTime(new Date());
-        sysRoleDao.update(obj);
+        SysRoleDto sysRoleDto = converter.convert(obj, SysRoleDto.class);
+        sysRoleDao.update(sysRoleDto);
         if (StringUtils.isNotEmpty(obj.getMenuIds())) {
             sysRoleDao.deletePermission(obj.getId());
             for (String id : obj.getMenuIds()) {
@@ -200,7 +208,8 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public void authDataScope(SysRole role) {
         role.setModifyTime(new Date());
         // 修改角色信息
-        sysRoleDao.update(role);
+        SysRoleDto sysRoleDto = converter.convert(role, SysRoleDto.class);
+        sysRoleDao.update(sysRoleDto);
         if (StringUtils.isNotEmpty(role.getUserIds())) {
             sysRoleDao.deleteRoleUser(role.getId());
             for (String id : role.getUserIds()) {

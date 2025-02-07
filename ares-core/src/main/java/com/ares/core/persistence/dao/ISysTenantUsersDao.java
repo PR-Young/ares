@@ -21,13 +21,13 @@
 package com.ares.core.persistence.dao;
 
 import com.ares.core.model.query.SysTenantUsersQuery;
-import com.ares.core.persistence.entity.SysTenantUsers;
+import com.ares.core.persistence.entity.SysTenantUsersDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
-public interface ISysTenantUsersDao extends IBaseDao<SysTenantUsers, SysTenantUsersQuery> {
+public interface ISysTenantUsersDao extends IBaseDao<SysTenantUsersDto, SysTenantUsersQuery> {
     List<String> getUserIdsByTenant(Long tenantId);
 
     int deleteByTenantId(Long tenantId);

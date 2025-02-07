@@ -20,8 +20,8 @@ package com.ares.core.common.satoken;
 
 import cn.dev33.satoken.stp.StpInterface;
 import com.ares.core.common.exception.UserException;
-import com.ares.core.persistence.entity.SysRole;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.model.vo.SysRole;
+import com.ares.core.model.vo.SysUser;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;

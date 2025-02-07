@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${daoPackage}.I${entityName}Dao">
-    <resultMap id="${entityName}" type="${entityPackage}.${entityName}">
+    <resultMap id="${entityName}" type="${entityPackage}.${entityName}Dto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <#list columns as column>
             <result column="${column.columnName}" jdbcType="${column.jdbcType}" property="${column.name}"/>
@@ -16,7 +16,7 @@
         `ID_`,${strColumn} `CREATOR_`,`CREATE_TIME_`,`MODIFIER_`, `MODIFY_TIME_`
     </sql>
 
-    <insert id="insert" parameterType="${entityPackage}.${entityName}">
+    <insert id="insert" parameterType="${entityPackage}.${entityName}Dto">
         insert into `${tableName}` (
         <include refid="Base_Column_List"/>
         )
@@ -25,7 +25,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="${entityPackage}.${entityName}">
+    <update id="update" parameterType="${entityPackage}.${entityName}Dto">
         update `${tableName}`
         <set>
             ${updateValue}

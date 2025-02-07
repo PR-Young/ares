@@ -24,7 +24,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysDictDataQuery;
-import com.ares.core.persistence.entity.SysDictData;
+import com.ares.core.model.vo.SysDictData;
 import com.ares.core.persistence.service.ISysDictDataService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;

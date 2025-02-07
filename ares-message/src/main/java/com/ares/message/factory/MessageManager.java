@@ -19,8 +19,8 @@
 package com.ares.message.factory;
 
 import com.ares.message.handler.AresMessageHandler;
-import com.ares.message.persistence.entity.AresMessageEvent;
-import com.ares.message.persistence.entity.DisruptorQueue;
+import com.ares.message.model.AresMessageEvent;
+import com.ares.message.model.DisruptorQueue;
 import com.lmax.disruptor.RingBuffer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

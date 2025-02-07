@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysRoleQuery;
-import com.ares.core.persistence.entity.SysRole;
+import com.ares.core.model.vo.SysRole;
 
 import java.util.List;
 

@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysRoleQuery;
-import com.ares.core.persistence.entity.SysRole;
+import com.ares.core.persistence.entity.SysRoleDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -31,8 +31,8 @@ import java.util.Map;
  * @author: Young 2020/01/25
  **/
 @Mapper
-public interface ISysRoleDao extends IBaseDao<SysRole, SysRoleQuery> {
-    List<SysRole> getRoleByUserId(Long userId);
+public interface ISysRoleDao extends IBaseDao<SysRoleDto, SysRoleQuery> {
+    List<SysRoleDto> getRoleByUserId(Long userId);
 
     List<String> getPermsByRoleId(Long roleId);
 
@@ -48,5 +48,5 @@ public interface ISysRoleDao extends IBaseDao<SysRole, SysRoleQuery> {
 
     int checkRoleName(String roleName);
 
-    SysRole getRoleByName(String roleName);
+    SysRoleDto getRoleByName(String roleName);
 }

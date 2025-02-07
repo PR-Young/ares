@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.flowable.persistence.dao.ISysFormDao">
-    <resultMap id="SysForm" type="com.ares.flowable.persistence.entity.SysForm">
+    <resultMap id="SysForm" type="com.ares.flowable.persistence.entity.dto.SysFormDto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <result column="FORM_NAME_" jdbcType="VARCHAR" property="formName"/>
         <result column="FORM_CONTENT_" jdbcType="VARCHAR" property="formContent"/>
@@ -17,7 +17,7 @@
         ,`FORM_NAME_`,`FORM_CONTENT_`,`REMARK_`, `CREATOR_`,`CREATE_TIME_`,`MODIFIER_`, `MODIFY_TIME_`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.flowable.persistence.entity.SysForm">
+    <insert id="insert" parameterType="com.ares.flowable.persistence.entity.dto.SysFormDto">
         insert into `sys_form` (
         <include refid="Base_Column_List"/>
         )
@@ -33,7 +33,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.flowable.persistence.entity.SysForm">
+    <update id="update" parameterType="com.ares.flowable.persistence.entity.dto.SysFormDto">
         update `sys_form`
         <set>
             <if test="formName!= null">

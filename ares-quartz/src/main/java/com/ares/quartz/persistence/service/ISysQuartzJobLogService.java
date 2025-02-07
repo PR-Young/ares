@@ -19,8 +19,8 @@
 package com.ares.quartz.persistence.service;
 
 import com.ares.core.persistence.service.IBaseService;
+import com.ares.quartz.model.vo.SysQuartzJobLog;
 import com.ares.quartz.model.query.SysQuartzJobLogQuery;
-import com.ares.quartz.persistence.entity.SysQuartzJobLog;
 
 import java.util.List;
 

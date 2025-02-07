@@ -18,7 +18,7 @@
 
 package com.ares.core.model.tree;
 
-import com.ares.core.persistence.entity.SysMenu;
+import com.ares.core.model.vo.SysMenu;
 import com.ares.core.serializer.LongJsonDeserializer;
 import com.ares.core.serializer.LongJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;

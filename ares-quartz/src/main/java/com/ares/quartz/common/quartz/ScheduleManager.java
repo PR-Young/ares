@@ -19,7 +19,7 @@
 package com.ares.quartz.common.quartz;
 
 
-import com.ares.quartz.persistence.entity.SysQuartzJob;
+import com.ares.quartz.model.vo.SysQuartzJob;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

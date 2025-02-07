@@ -22,7 +22,11 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.ares.config.gen.GeneratorConfig;
-import com.ares.generator.persistence.entity.*;
+import com.ares.generator.model.vo.GenProperties;
+import com.ares.generator.model.query.Column;
+import com.ares.generator.model.query.ColumnType;
+import com.ares.generator.model.query.DataType;
+import com.ares.generator.model.query.EntityDataModel;
 import com.ares.generator.persistence.service.IAutoGeneratorService;
 import com.ares.generator.persistence.service.IGenPropertiesService;
 import freemarker.template.Configuration;
@@ -131,12 +135,14 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
             switch (config.getGeneratorLevel()) {
                 case 1:
                     generateCode(entityModel, "Entity.ftl", "", ".java", zip);
+                    generateCode(entityModel, "EntityDto.ftl", "", ".java", zip);
                     generateCode(entityModel, "EntityQuery.ftl", "", "Query.java", zip);
                     generateCode(entityModel, "EntityMapper.ftl", "", "Mapper.xml", zip);
                     generateCode(entityModel, "EntityDao.ftl", "I", "Dao.java", zip);
                     break;
                 case 2:
                     generateCode(entityModel, "Entity.ftl", "", ".java", zip);
+                    generateCode(entityModel, "EntityDto.ftl", "", ".java", zip);
                     generateCode(entityModel, "EntityQuery.ftl", "", "Query.java", zip);
                     generateCode(entityModel, "EntityMapper.ftl", "", "Mapper.xml", zip);
                     generateCode(entityModel, "EntityDao.ftl", "I", "Dao.java", zip);
@@ -145,6 +151,7 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
                     break;
                 case 3:
                     generateCode(entityModel, "Entity.ftl", "", ".java", zip);
+                    generateCode(entityModel, "EntityDto.ftl", "", ".java", zip);
                     generateCode(entityModel, "EntityQuery.ftl", "", "Query.java", zip);
                     generateCode(entityModel, "EntityDao.ftl", "I", "Dao.java", zip);
                     generateCode(entityModel, "IEntityService.ftl", "I", "Service.java", zip);

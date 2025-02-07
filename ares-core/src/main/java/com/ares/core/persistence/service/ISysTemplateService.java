@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysTemplateQuery;
-import com.ares.core.persistence.entity.SysTemplate;
+import com.ares.core.model.vo.SysTemplate;
 
 
 /**

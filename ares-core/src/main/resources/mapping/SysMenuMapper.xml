@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysMenuDao">
-    <resultMap id="SysMenu" type="com.ares.core.persistence.entity.SysMenu">
+    <resultMap id="SysMenu" type="com.ares.core.persistence.entity.SysMenuDto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <result column="NAME_" jdbcType="VARCHAR" property="name"/>
         <result column="DESCRIPTION_" jdbcType="VARCHAR" property="description"/>
@@ -30,7 +30,7 @@
         , menu.`NAME_`, menu.`DESCRIPTION_`, menu.`URL_`,menu.`PATH_`,menu.`IS_BLANK_`,menu.`PID_`,menu.`PERMS_`,menu.`TYPE_`,
             menu.`ICON_`,menu.`ORDER_`,menu.`VISIBLE_`,menu.`CREATOR_`,menu.`CREATE_TIME_`,menu.`MODIFIER_`, menu.`MODIFY_TIME_`
     </sql>
-    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysMenu">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysMenuDto">
         insert into sys_menu (<include refid="Base_Column_List"/>)
         values (
         #{id,jdbcType=BIGINT},
@@ -50,7 +50,7 @@
         #{modifier,jdbcType=BIGINT},
         #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
-    <update id="update" parameterType="com.ares.core.persistence.entity.SysMenu">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysMenuDto">
         update sys_menu
         <set>
             <if test="name != null">
@@ -151,7 +151,7 @@
         where `ROLE_ID_` = #{roleId,jdbcType=BIGINT}
     </select>
 
-    <select id="selectList" parameterType="com.ares.core.persistence.entity.SysMenu" resultMap="SysMenu">
+    <select id="selectList" parameterType="com.ares.core.persistence.entity.SysMenuDto" resultMap="SysMenu">
         select
         <include refid="Base_Column_List"/>
         from `sys_menu`

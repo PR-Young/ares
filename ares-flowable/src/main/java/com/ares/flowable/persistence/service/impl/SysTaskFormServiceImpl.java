@@ -19,12 +19,14 @@
 package com.ares.flowable.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.flowable.model.vo.SysTaskForm;
 import com.ares.flowable.model.query.SysTaskFormQuery;
 import com.ares.flowable.persistence.dao.ISysTaskFormDao;
-import com.ares.flowable.persistence.entity.SysTaskForm;
+import com.ares.flowable.persistence.entity.dto.SysTaskFormDto;
 import com.ares.flowable.persistence.service.ISysTaskFormService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +38,12 @@ import java.util.Map;
 public class SysTaskFormServiceImpl implements ISysTaskFormService {
 
     private ISysTaskFormDao sysTaskFormDao;
+    private Converter converter;
 
     @Autowired
-    public SysTaskFormServiceImpl(ISysTaskFormDao sysTaskFormDao) {
+    public SysTaskFormServiceImpl(ISysTaskFormDao sysTaskFormDao, Converter converter) {
         this.sysTaskFormDao = sysTaskFormDao;
+        this.converter = converter;
     }
 
     /**
@@ -50,7 +54,7 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
      */
     @Override
     public SysTaskForm selectSysTaskFormById(Long id) {
-        return sysTaskFormDao.getById(id);
+        return converter.convert(sysTaskFormDao.getById(id), SysTaskForm.class);
     }
 
     /**
@@ -62,13 +66,13 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
 
     @Override
     public List<SysTaskForm> selectSysTaskFormList(SysTaskFormQuery sysTaskForm) {
-        return sysTaskFormDao.selectList(sysTaskForm);
+        return converter.convert(sysTaskFormDao.selectList(sysTaskForm), SysTaskForm.class);
     }
 
     @Override
     public PageInfo<SysTaskForm> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysTaskForm> lists = sysTaskFormDao.list(map);
+        List<SysTaskForm> lists = converter.convert(sysTaskFormDao.list(map), SysTaskForm.class);
         PageInfo<SysTaskForm> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -77,13 +81,15 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
     public void insert(SysTaskForm obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysTaskFormDao.insert(obj);
+        SysTaskFormDto sysTaskFormDto = converter.convert(obj, SysTaskFormDto.class);
+        sysTaskFormDao.insert(sysTaskFormDto);
     }
 
     @Override
     public void update(SysTaskForm obj) {
         obj.setModifyTime(new Date());
-        sysTaskFormDao.update(obj);
+        SysTaskFormDto sysTaskFormDto = converter.convert(obj, SysTaskFormDto.class);
+        sysTaskFormDao.update(sysTaskFormDto);
     }
 
     @Override
@@ -93,12 +99,12 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
 
     @Override
     public SysTaskForm getById(Long id) {
-        return sysTaskFormDao.getById(id);
+        return converter.convert(sysTaskFormDao.getById(id), SysTaskForm.class);
     }
 
     @Override
     public List<SysTaskForm> list(SysTaskFormQuery obj) {
-        List<SysTaskForm> lists = sysTaskFormDao.selectList(obj);
+        List<SysTaskForm> lists = converter.convert(sysTaskFormDao.selectList(obj), SysTaskForm.class);
         return lists;
     }
 

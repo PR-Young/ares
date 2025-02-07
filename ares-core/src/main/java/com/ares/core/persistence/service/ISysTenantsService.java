@@ -21,7 +21,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysTenantsQuery;
-import com.ares.core.persistence.entity.SysTenants;
+import com.ares.core.model.vo.SysTenants;
 
 import java.util.List;
 import java.util.Map;

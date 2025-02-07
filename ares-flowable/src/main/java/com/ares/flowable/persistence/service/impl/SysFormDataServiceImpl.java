@@ -20,12 +20,14 @@ package com.ares.flowable.persistence.service.impl;
 
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.flowable.model.vo.SysFormData;
 import com.ares.flowable.model.query.SysFormDataQuery;
 import com.ares.flowable.persistence.dao.ISysFormDataDao;
-import com.ares.flowable.persistence.entity.SysFormData;
+import com.ares.flowable.persistence.entity.dto.SysFormDataDto;
 import com.ares.flowable.persistence.service.ISysFormDataService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,16 +39,18 @@ import java.util.Map;
 public class SysFormDataServiceImpl implements ISysFormDataService {
 
     private ISysFormDataDao sysFormDataDao;
+    private Converter converter;
 
     @Autowired
-    public SysFormDataServiceImpl(ISysFormDataDao sysFormDataDao) {
+    public SysFormDataServiceImpl(ISysFormDataDao sysFormDataDao, Converter converter) {
         this.sysFormDataDao = sysFormDataDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysFormData> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysFormData> lists = sysFormDataDao.list(map);
+        List<SysFormData> lists = converter.convert(sysFormDataDao.list(map), SysFormData.class);
         PageInfo<SysFormData> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -55,13 +59,15 @@ public class SysFormDataServiceImpl implements ISysFormDataService {
     public void insert(SysFormData obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysFormDataDao.insert(obj);
+        SysFormDataDto sysFormDataDto = converter.convert(obj, SysFormDataDto.class);
+        sysFormDataDao.insert(sysFormDataDto);
     }
 
     @Override
     public void update(SysFormData obj) {
         obj.setModifyTime(new Date());
-        sysFormDataDao.update(obj);
+        SysFormDataDto sysFormDataDto = converter.convert(obj, SysFormDataDto.class);
+        sysFormDataDao.update(sysFormDataDto);
     }
 
     @Override
@@ -71,18 +77,18 @@ public class SysFormDataServiceImpl implements ISysFormDataService {
 
     @Override
     public SysFormData getById(Long id) {
-        return sysFormDataDao.getById(id);
+        return converter.convert(sysFormDataDao.getById(id), SysFormData.class);
     }
 
     @Override
     public List<SysFormData> list(SysFormDataQuery obj) {
-        List<SysFormData> lists = sysFormDataDao.selectList(obj);
+        List<SysFormData> lists = converter.convert(sysFormDataDao.selectList(obj), SysFormData.class);
         return lists;
     }
 
     @Override
     public SysFormData getFormDataByProInstId(String proInstId) {
-        return sysFormDataDao.getFormDataByProInstId(proInstId);
+        return converter.convert(sysFormDataDao.getFormDataByProInstId(proInstId), SysFormData.class);
     }
 
 }

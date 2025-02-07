@@ -12,6 +12,7 @@ import java.util.Date;
 * @date: ${createTime}
 **/
 @Data
+@AutoMapper(target = ${entityName}Dto.class)
 @Schema(title = "${entityName}对象",description = "")
 public class ${entityName} extends BaseModel{
 <#list columns as column>

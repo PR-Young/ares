@@ -21,8 +21,8 @@ package com.ares.message.utils;
 import com.ares.core.utils.ThreadPoolUtils;
 import com.ares.message.factory.DisruptorQueueFactory;
 import com.ares.message.handler.AresMessageHandler;
-import com.ares.message.persistence.entity.AresMessage;
-import com.ares.message.persistence.entity.DisruptorQueue;
+import com.ares.message.model.AresMessage;
+import com.ares.message.model.DisruptorQueue;
 import com.ares.message.producer.AresMessageProducer;
 
 import java.util.concurrent.atomic.AtomicInteger;

@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysDictDataQuery;
-import com.ares.core.persistence.entity.SysDictData;
+import com.ares.core.model.vo.SysDictData;
 
 import java.util.List;
 

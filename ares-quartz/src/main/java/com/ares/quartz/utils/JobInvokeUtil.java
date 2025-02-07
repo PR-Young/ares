@@ -21,7 +21,7 @@ package com.ares.quartz.utils;
 
 import com.ares.core.utils.SpringUtils;
 import com.ares.core.utils.StringUtils;
-import com.ares.quartz.persistence.entity.SysQuartzJob;
+import com.ares.quartz.model.vo.SysQuartzJob;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

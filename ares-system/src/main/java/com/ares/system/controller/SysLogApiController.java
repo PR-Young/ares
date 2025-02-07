@@ -22,7 +22,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysLogQuery;
-import com.ares.core.persistence.entity.SysLog;
+import com.ares.core.model.vo.SysLog;
 import com.ares.core.persistence.service.ISysLogService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

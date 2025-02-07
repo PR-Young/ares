@@ -20,7 +20,7 @@ package com.ares.message.persistence.service.impl;
 
 import com.ares.core.model.base.DefaultMessage;
 import com.ares.core.persistence.dao.ISysTemplateDao;
-import com.ares.core.persistence.entity.SysTemplate;
+import com.ares.core.persistence.entity.SysTemplateDto;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.SpringUtils;
 import com.ares.message.persistence.service.ISendEmailService;
@@ -50,7 +50,7 @@ public class SendEmailServiceImpl implements ISendEmailService {
     @Override
     public void sendEmail() {
         try {
-            SysTemplate template = sysTemplateDao.getByName("test");
+            SysTemplateDto template = sysTemplateDao.getByName("test");
             List<String> receivers = Arrays.asList(new String[]{"2862322640@qq.com"});
             Map<String, Object> var = new HashMap<>(10);
             var.put("name", "这是测试");
@@ -70,7 +70,7 @@ public class SendEmailServiceImpl implements ISendEmailService {
     @Override
     public void send(String template, List<String> receivers, Map<String, Object> vars) {
         try {
-            SysTemplate sysTemplate = sysTemplateDao.getByName(template);
+            SysTemplateDto sysTemplate = sysTemplateDao.getByName(template);
             ISysPropertiesService propertiesService = SpringUtils.getBean(ISysPropertiesService.class);
             String sender = propertiesService.getValueByAlias("mail.username");
             DefaultMessage message = DefaultMessage.newInstance()

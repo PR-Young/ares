@@ -20,7 +20,7 @@ package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysDeptQuery;
 import com.ares.core.model.tree.TreeSelect;
-import com.ares.core.persistence.entity.SysDept;
+import com.ares.core.model.vo.SysDept;
 
 import java.util.List;
 

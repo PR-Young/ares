@@ -21,7 +21,7 @@
 package com.ares.core.persistence.dao;
 
 import com.ares.core.model.query.SysTenantsQuery;
-import com.ares.core.persistence.entity.SysTenants;
+import com.ares.core.persistence.entity.SysTenantsDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -29,6 +29,6 @@ import java.util.Map;
 
 
 @Mapper
-public interface ISysTenantsDao extends IBaseDao<SysTenants, SysTenantsQuery> {
+public interface ISysTenantsDao extends IBaseDao<SysTenantsDto, SysTenantsQuery> {
     List<Map<String, Object>> getAllUsers();
 }

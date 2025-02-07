@@ -19,12 +19,14 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysPostQuery;
+import com.ares.core.model.vo.SysPost;
 import com.ares.core.persistence.dao.ISysPostDao;
-import com.ares.core.persistence.entity.SysPost;
+import com.ares.core.persistence.entity.SysPostDto;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,16 +39,18 @@ import java.util.Map;
 public class SysPostServiceImpl implements ISysPostService {
 
     private ISysPostDao sysPostDao;
+    private Converter converter;
 
     @Autowired
-    public SysPostServiceImpl(ISysPostDao sysPostDao) {
+    public SysPostServiceImpl(ISysPostDao sysPostDao, Converter converter) {
         this.sysPostDao = sysPostDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysPost> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysPost> lists = sysPostDao.list(map);
+        List<SysPost> lists = converter.convert(sysPostDao.list(map), SysPost.class);
         PageInfo<SysPost> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -55,13 +59,15 @@ public class SysPostServiceImpl implements ISysPostService {
     public void insert(SysPost obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysPostDao.insert(obj);
+        SysPostDto sysPostDto = converter.convert(obj, SysPostDto.class);
+        sysPostDao.insert(sysPostDto);
     }
 
     @Override
     public void update(SysPost obj) {
         obj.setModifyTime(new Date());
-        sysPostDao.update(obj);
+        SysPostDto sysPostDto = converter.convert(obj, SysPostDto.class);
+        sysPostDao.update(sysPostDto);
     }
 
     @Override
@@ -71,18 +77,18 @@ public class SysPostServiceImpl implements ISysPostService {
 
     @Override
     public SysPost getById(Long id) {
-        return sysPostDao.getById(id);
+        return converter.convert(sysPostDao.getById(id), SysPost.class);
     }
 
     @Override
     public List<SysPost> list(SysPostQuery obj) {
-        List<SysPost> lists = sysPostDao.selectList(obj);
+        List<SysPost> lists = converter.convert(sysPostDao.selectList(obj), SysPost.class);
         return lists;
     }
 
     @Override
     public List<SysPost> getAll() {
-        return sysPostDao.list(new HashMap<>());
+        return converter.convert(sysPostDao.list(new HashMap<>()), SysPost.class);
     }
 
 }

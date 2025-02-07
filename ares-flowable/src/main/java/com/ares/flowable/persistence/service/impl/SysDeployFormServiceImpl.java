@@ -19,13 +19,15 @@
 package com.ares.flowable.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.flowable.model.vo.SysDeployForm;
+import com.ares.flowable.model.vo.SysForm;
 import com.ares.flowable.model.query.SysDeployFormQuery;
 import com.ares.flowable.persistence.dao.ISysDeployFormDao;
-import com.ares.flowable.persistence.entity.SysDeployForm;
-import com.ares.flowable.persistence.entity.SysForm;
+import com.ares.flowable.persistence.entity.dto.SysDeployFormDto;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,16 +39,18 @@ import java.util.Map;
 public class SysDeployFormServiceImpl implements ISysDeployFormService {
 
     private ISysDeployFormDao sysDeployFormDao;
+    private Converter converter;
 
     @Autowired
-    public SysDeployFormServiceImpl(ISysDeployFormDao sysDeployFormDao) {
+    public SysDeployFormServiceImpl(ISysDeployFormDao sysDeployFormDao, Converter converter) {
         this.sysDeployFormDao = sysDeployFormDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysDeployForm> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysDeployForm> lists = sysDeployFormDao.list(map);
+        List<SysDeployForm> lists = converter.convert(sysDeployFormDao.list(map), SysDeployForm.class);
         PageInfo<SysDeployForm> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -55,13 +59,15 @@ public class SysDeployFormServiceImpl implements ISysDeployFormService {
     public void insert(SysDeployForm obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysDeployFormDao.insert(obj);
+        SysDeployFormDto sysDeployFormDto = converter.convert(obj, SysDeployFormDto.class);
+        sysDeployFormDao.insert(sysDeployFormDto);
     }
 
     @Override
     public void update(SysDeployForm obj) {
         obj.setModifyTime(new Date());
-        sysDeployFormDao.update(obj);
+        SysDeployFormDto sysDeployFormDto = converter.convert(obj, SysDeployFormDto.class);
+        sysDeployFormDao.update(sysDeployFormDto);
     }
 
     @Override
@@ -71,23 +77,23 @@ public class SysDeployFormServiceImpl implements ISysDeployFormService {
 
     @Override
     public SysDeployForm getById(Long id) {
-        return sysDeployFormDao.getById(id);
+        return converter.convert(sysDeployFormDao.getById(id), SysDeployForm.class);
     }
 
     @Override
     public List<SysDeployForm> list(SysDeployFormQuery obj) {
-        List<SysDeployForm> lists = sysDeployFormDao.selectList(obj);
+        List<SysDeployForm> lists = converter.convert(sysDeployFormDao.selectList(obj), SysDeployForm.class);
         return lists;
     }
 
     @Override
     public SysDeployForm selectSysDeployFormById(Long id) {
-        return sysDeployFormDao.selectSysDeployFormById(id);
+        return converter.convert(sysDeployFormDao.selectSysDeployFormById(id), SysDeployForm.class);
     }
 
     @Override
     public SysForm selectSysDeployFormByDeployId(String id) {
-        return sysDeployFormDao.selectSysDeployFormByDeployId(id);
+        return converter.convert(sysDeployFormDao.selectSysDeployFormByDeployId(id), SysForm.class);
     }
 
 }

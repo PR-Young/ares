@@ -19,14 +19,17 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysNoticeQuery;
+import com.ares.core.model.vo.SysNotice;
+import com.ares.core.model.vo.SysNoticeRead;
 import com.ares.core.persistence.dao.ISysNoticeDao;
 import com.ares.core.persistence.dao.ISysNoticeReadDao;
-import com.ares.core.persistence.entity.SysNotice;
-import com.ares.core.persistence.entity.SysNoticeRead;
+import com.ares.core.persistence.entity.SysNoticeDto;
+import com.ares.core.persistence.entity.SysNoticeReadDto;
 import com.ares.core.persistence.service.ISysNoticeService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,17 +43,19 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
 
     private ISysNoticeDao sysNoticeDao;
     private ISysNoticeReadDao noticeReadDao;
+    private Converter converter;
 
     @Autowired
-    public SysNoticeServiceImpl(ISysNoticeDao sysNoticeDao, ISysNoticeReadDao noticeReadDao) {
+    public SysNoticeServiceImpl(ISysNoticeDao sysNoticeDao, ISysNoticeReadDao noticeReadDao, Converter converter) {
         this.sysNoticeDao = sysNoticeDao;
         this.noticeReadDao = noticeReadDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysNotice> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysNotice> lists = sysNoticeDao.list(map);
+        List<SysNotice> lists = converter.convert(sysNoticeDao.list(map), SysNotice.class);
         PageInfo<SysNotice> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -59,13 +64,15 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
     public void insert(SysNotice obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysNoticeDao.insert(obj);
+        SysNoticeDto sysNoticeDto = converter.convert(obj, SysNoticeDto.class);
+        sysNoticeDao.insert(sysNoticeDto);
     }
 
     @Override
     public void update(SysNotice obj) {
         obj.setModifyTime(new Date());
-        sysNoticeDao.update(obj);
+        SysNoticeDto sysNoticeDto = converter.convert(obj, SysNoticeDto.class);
+        sysNoticeDao.update(sysNoticeDto);
     }
 
     @Override
@@ -75,12 +82,12 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
 
     @Override
     public SysNotice getById(Long id) {
-        return sysNoticeDao.getById(id);
+        return converter.convert(sysNoticeDao.getById(id), SysNotice.class);
     }
 
     @Override
     public List<SysNotice> list(SysNoticeQuery obj) {
-        List<SysNotice> lists = sysNoticeDao.selectList(obj);
+        List<SysNotice> lists = converter.convert(sysNoticeDao.selectList(obj), SysNotice.class);
         return lists;
     }
 
@@ -91,7 +98,7 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
 
     @Override
     public List<SysNotice> getNotices(Long userId) {
-        List<SysNotice> noticeList = sysNoticeDao.getNotices();
+        List<SysNotice> noticeList = converter.convert(sysNoticeDao.getNotices(), SysNotice.class);
         List<SysNoticeRead> noticeReads = new ArrayList<>();
         if (null != noticeList && noticeList.size() > 0) {
             List<Long> noticeReadList = noticeReadDao.getByUser(userId);
@@ -109,7 +116,8 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
             }
         }
         if (null != noticeReads && noticeReads.size() > 0) {
-            noticeReadDao.batchInsert(noticeReads);
+            List<SysNoticeReadDto> noticeReadDtos = converter.convert(noticeReads, SysNoticeReadDto.class);
+            noticeReadDao.batchInsert(noticeReadDtos);
         }
         return noticeList;
     }

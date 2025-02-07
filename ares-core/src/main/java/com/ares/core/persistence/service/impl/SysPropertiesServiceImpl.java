@@ -19,12 +19,14 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysPropertiesQuery;
+import com.ares.core.model.vo.SysProperties;
 import com.ares.core.persistence.dao.ISysPropertiesDao;
-import com.ares.core.persistence.entity.SysProperties;
+import com.ares.core.persistence.entity.SysPropertiesDto;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,16 +39,18 @@ import java.util.stream.Collectors;
 public class SysPropertiesServiceImpl implements ISysPropertiesService {
 
     private ISysPropertiesDao sysPropertiesDao;
+    private Converter converter;
 
     @Autowired
-    public SysPropertiesServiceImpl(ISysPropertiesDao sysPropertiesDao) {
+    public SysPropertiesServiceImpl(ISysPropertiesDao sysPropertiesDao, Converter converter) {
         this.sysPropertiesDao = sysPropertiesDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysProperties> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysProperties> lists = sysPropertiesDao.list(map);
+        List<SysProperties> lists = converter.convert(sysPropertiesDao.list(map), SysProperties.class);
         PageInfo<SysProperties> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -55,13 +59,15 @@ public class SysPropertiesServiceImpl implements ISysPropertiesService {
     public void insert(SysProperties obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysPropertiesDao.insert(obj);
+        SysPropertiesDto sysPropertiesDto = converter.convert(obj, SysPropertiesDto.class);
+        sysPropertiesDao.insert(sysPropertiesDto);
     }
 
     @Override
     public void update(SysProperties obj) {
         obj.setModifyTime(new Date());
-        sysPropertiesDao.update(obj);
+        SysPropertiesDto sysPropertiesDto = converter.convert(obj, SysPropertiesDto.class);
+        sysPropertiesDao.update(sysPropertiesDto);
     }
 
     @Override
@@ -71,18 +77,18 @@ public class SysPropertiesServiceImpl implements ISysPropertiesService {
 
     @Override
     public SysProperties getById(Long id) {
-        return sysPropertiesDao.getById(id);
+        return converter.convert(sysPropertiesDao.getById(id), SysProperties.class);
     }
 
     @Override
     public List<SysProperties> list(SysPropertiesQuery obj) {
-        List<SysProperties> lists = sysPropertiesDao.selectList(obj);
+        List<SysProperties> lists = converter.convert(sysPropertiesDao.selectList(obj), SysProperties.class);
         return lists;
     }
 
     @Override
     public Map<String, Object> getByGroup(String group) {
-        List<SysProperties> properties = sysPropertiesDao.getByGroup(group);
+        List<SysProperties> properties = converter.convert(sysPropertiesDao.getByGroup(group), SysProperties.class);
         Map<String, Object> map = properties.stream().collect(Collectors.toMap(SysProperties::getAlias, SysProperties::getValue));
         return map;
     }

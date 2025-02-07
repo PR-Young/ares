@@ -20,17 +20,17 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysNoticeQuery;
-import com.ares.core.persistence.entity.SysNotice;
+import com.ares.core.persistence.entity.SysNoticeDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
-public interface ISysNoticeDao extends IBaseDao<SysNotice, SysNoticeQuery> {
+public interface ISysNoticeDao extends IBaseDao<SysNoticeDto, SysNoticeQuery> {
 
     int noticeNum(@Param("userId") Long userId);
 
-    List<SysNotice> getNotices();
+    List<SysNoticeDto> getNotices();
 
 }

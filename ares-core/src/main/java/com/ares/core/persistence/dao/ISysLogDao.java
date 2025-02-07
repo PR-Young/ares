@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysLogQuery;
-import com.ares.core.persistence.entity.SysLog;
+import com.ares.core.persistence.entity.SysLogDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -31,7 +31,7 @@ import java.util.List;
  **/
 @Mapper
 public interface ISysLogDao {
-    int insert(SysLog sysLog);
+    int insert(SysLogDto sysLog);
 
-    List<SysLog> list(SysLogQuery sysLog);
+    List<SysLogDto> list(SysLogQuery sysLog);
 }

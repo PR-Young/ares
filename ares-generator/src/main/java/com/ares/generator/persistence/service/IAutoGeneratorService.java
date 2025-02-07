@@ -18,8 +18,8 @@
 
 package com.ares.generator.persistence.service;
 
-import com.ares.generator.persistence.entity.Column;
-import com.ares.generator.persistence.entity.EntityDataModel;
+import com.ares.generator.model.query.Column;
+import com.ares.generator.model.query.EntityDataModel;
 
 import java.sql.Connection;
 import java.util.List;

@@ -20,7 +20,7 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysUserQuery;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.persistence.entity.SysUserDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,18 +31,18 @@ import java.util.List;
  * @author: Young 2020/01/22
  **/
 @Mapper
-public interface ISysUserDao extends IBaseDao<SysUser, SysUserQuery> {
+public interface ISysUserDao extends IBaseDao<SysUserDto, SysUserQuery> {
 
-    SysUser getUserByName(String userName);
+    SysUserDto getUserByName(String userName);
 
     Integer checkAccount(String account);
 
     int resetPassword(@Param("password") String password, @Param("id") Long id);
 
-    List<SysUser> getUserByRole(Long roleId);
+    List<SysUserDto> getUserByRole(Long roleId);
 
-    List<SysUser> allUser(Long roleId);
+    List<SysUserDto> allUser(Long roleId);
 
-    int updateUserByAccount(SysUser sysUser);
+    int updateUserByAccount(SysUserDto sysUser);
 
 }

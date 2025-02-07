@@ -19,10 +19,12 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysLogQuery;
+import com.ares.core.model.vo.SysLog;
 import com.ares.core.persistence.dao.ISysLogDao;
-import com.ares.core.persistence.entity.SysLog;
+import com.ares.core.persistence.entity.SysLogDto;
 import com.ares.core.persistence.service.ISysLogService;
 import com.ares.core.utils.SnowflakeIdWorker;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,22 +39,25 @@ import java.util.List;
 public class SysLogServiceImpl implements ISysLogService {
 
     private ISysLogDao sysLogDao;
+    private Converter converter;
 
     @Autowired
-    public SysLogServiceImpl(ISysLogDao sysLogDao) {
+    public SysLogServiceImpl(ISysLogDao sysLogDao, Converter converter) {
         this.sysLogDao = sysLogDao;
+        this.converter = converter;
     }
 
     @Override
     public void insert(SysLog sysLog) {
         sysLog.setId(SnowflakeIdWorker.getUUID());
         sysLog.setCreateTime(new Date());
-        sysLogDao.insert(sysLog);
+        SysLogDto sysLogDto = converter.convert(sysLog, SysLogDto.class);
+        sysLogDao.insert(sysLogDto);
     }
 
     @Override
     public List<SysLog> list(SysLogQuery sysLog) {
-        List<SysLog> logList = sysLogDao.list(sysLog);
+        List<SysLog> logList = converter.convert(sysLogDao.list(sysLog), SysLog.class);
         return logList;
     }
 }

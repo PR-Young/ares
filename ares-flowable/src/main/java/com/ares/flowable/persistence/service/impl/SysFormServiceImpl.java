@@ -19,12 +19,14 @@
 package com.ares.flowable.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.flowable.model.vo.SysForm;
 import com.ares.flowable.model.query.SysFormQuery;
 import com.ares.flowable.persistence.dao.ISysFormDao;
-import com.ares.flowable.persistence.entity.SysForm;
+import com.ares.flowable.persistence.entity.dto.SysFormDto;
 import com.ares.flowable.persistence.service.ISysFormService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,16 +38,18 @@ import java.util.Map;
 public class SysFormServiceImpl implements ISysFormService {
 
     private ISysFormDao sysFormDao;
+    private Converter converter;
 
     @Autowired
-    public SysFormServiceImpl(ISysFormDao sysFormDao) {
+    public SysFormServiceImpl(ISysFormDao sysFormDao, Converter converter) {
         this.sysFormDao = sysFormDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysForm> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysForm> lists = sysFormDao.list(map);
+        List<SysForm> lists = converter.convert(sysFormDao.list(map), SysForm.class);
         PageInfo<SysForm> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -54,13 +58,15 @@ public class SysFormServiceImpl implements ISysFormService {
     public void insert(SysForm obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysFormDao.insert(obj);
+        SysFormDto sysFormDto = converter.convert(obj, SysFormDto.class);
+        sysFormDao.insert(sysFormDto);
     }
 
     @Override
     public void update(SysForm obj) {
         obj.setModifyTime(new Date());
-        sysFormDao.update(obj);
+        SysFormDto sysFormDto = converter.convert(obj, SysFormDto.class);
+        sysFormDao.update(sysFormDto);
     }
 
     @Override
@@ -70,12 +76,12 @@ public class SysFormServiceImpl implements ISysFormService {
 
     @Override
     public SysForm getById(Long id) {
-        return sysFormDao.getById(id);
+        return converter.convert(sysFormDao.getById(id), SysForm.class);
     }
 
     @Override
     public List<SysForm> list(SysFormQuery obj) {
-        List<SysForm> lists = sysFormDao.selectList(obj);
+        List<SysForm> lists = converter.convert(sysFormDao.selectList(obj), SysForm.class);
         return lists;
     }
 }

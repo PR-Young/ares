@@ -21,14 +21,16 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysTenantsQuery;
+import com.ares.core.model.vo.SysTenantUsers;
+import com.ares.core.model.vo.SysTenants;
 import com.ares.core.persistence.dao.ISysTenantsDao;
-import com.ares.core.persistence.entity.SysTenantUsers;
-import com.ares.core.persistence.entity.SysTenants;
+import com.ares.core.persistence.entity.SysTenantsDto;
 import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.persistence.service.ISysTenantsService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,17 +44,19 @@ public class SysTenantsServiceImpl implements ISysTenantsService {
 
     private ISysTenantsDao sysTenantsDao;
     private ISysTenantUsersService sysTenantRolesService;
+    private Converter converter;
 
     @Autowired
-    public SysTenantsServiceImpl(ISysTenantsDao sysTenantsDao, ISysTenantUsersService sysTenantRolesService) {
+    public SysTenantsServiceImpl(ISysTenantsDao sysTenantsDao, ISysTenantUsersService sysTenantRolesService, Converter converter) {
         this.sysTenantsDao = sysTenantsDao;
         this.sysTenantRolesService = sysTenantRolesService;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysTenants> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysTenants> lists = sysTenantsDao.list(map);
+        List<SysTenants> lists = converter.convert(sysTenantsDao.list(map), SysTenants.class);
         PageInfo<SysTenants> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -63,7 +67,8 @@ public class SysTenantsServiceImpl implements ISysTenantsService {
         Long id = SnowflakeIdWorker.getUUID();
         obj.setId(id);
         obj.setCreateTime(new Date());
-        sysTenantsDao.insert(obj);
+        SysTenantsDto sysTenantsDto = converter.convert(obj, SysTenantsDto.class);
+        sysTenantsDao.insert(sysTenantsDto);
         for (Long userId : obj.getUserIds()) {
             SysTenantUsers tenantRoles = new SysTenantUsers();
             tenantRoles.setTenantId(id);
@@ -76,7 +81,8 @@ public class SysTenantsServiceImpl implements ISysTenantsService {
     @Override
     public void update(SysTenants obj) {
         obj.setModifyTime(new Date());
-        sysTenantsDao.update(obj);
+        SysTenantsDto sysTenantsDto = converter.convert(obj, SysTenantsDto.class);
+        sysTenantsDao.update(sysTenantsDto);
         sysTenantRolesService.delByTenantId(obj.getId());
         for (Long userId : obj.getUserIds()) {
             SysTenantUsers tenantRoles = new SysTenantUsers();
@@ -97,12 +103,12 @@ public class SysTenantsServiceImpl implements ISysTenantsService {
 
     @Override
     public SysTenants getById(Long id) {
-        return sysTenantsDao.getById(id);
+        return converter.convert(sysTenantsDao.getById(id), SysTenants.class);
     }
 
     @Override
     public List<SysTenants> list(SysTenantsQuery obj) {
-        List<SysTenants> lists = sysTenantsDao.selectList(obj);
+        List<SysTenants> lists = converter.convert(sysTenantsDao.selectList(obj), SysTenants.class);
         return lists;
     }
 

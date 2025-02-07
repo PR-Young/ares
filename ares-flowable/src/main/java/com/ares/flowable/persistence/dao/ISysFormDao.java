@@ -21,10 +21,10 @@ package com.ares.flowable.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.flowable.model.query.SysFormQuery;
-import com.ares.flowable.persistence.entity.SysForm;
+import com.ares.flowable.persistence.entity.dto.SysFormDto;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ISysFormDao extends IBaseDao<SysForm, SysFormQuery> {
+public interface ISysFormDao extends IBaseDao<SysFormDto, SysFormQuery> {
 
 }

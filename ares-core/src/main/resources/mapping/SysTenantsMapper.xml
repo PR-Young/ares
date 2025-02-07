@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysTenantsDao">
-    <resultMap id="SysTenants" type="com.ares.core.persistence.entity.SysTenants">
+    <resultMap id="SysTenants" type="com.ares.core.persistence.entity.SysTenantsDto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <result column="TENANT_NAME_" jdbcType="VARCHAR" property="tenantName"/>
         <result column="TENANT_ALIAS_" jdbcType="VARCHAR" property="tenantAlias"/>
@@ -17,7 +17,7 @@
         ,`TENANT_NAME_`,`TENANT_ALIAS_`,`TENANT_STATUS_`, `CREATOR_`,`CREATE_TIME_`,`MODIFIER_`, `MODIFY_TIME_`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysTenants">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysTenantsDto">
         insert into `sys_tenants` (
         <include refid="Base_Column_List"/>
         )
@@ -33,7 +33,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.entity.SysTenants">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysTenantsDto">
         update `sys_tenants`
         <set>
             <if test="tenantName!= null">

@@ -30,7 +30,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.base.Constants;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysUserQuery;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.model.vo.SysUser;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;

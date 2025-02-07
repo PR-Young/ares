@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 * @date: ${createTime}
 **/
 @Mapper
-public interface I${entityName}Dao extends IBaseDao<${entityName},${entityName}Query>{
+public interface I${entityName}Dao extends IBaseDao<${entityName}Dto, ${entityName}Query>{
 
 }

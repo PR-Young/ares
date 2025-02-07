@@ -9,6 +9,7 @@ import ${daoPackage}.I${entityName}Dao;
 import ${servicePackage}.I${entityName}Service;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.StringUtils;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -25,16 +26,18 @@ import java.util.Map;
 public class ${entityName}ServiceImpl implements I${entityName}Service {
 
     private I${entityName}Dao ${entityName1}Dao;
+    private Converter converter;
 
     @Autowired
-    public ${entityName}ServiceImpl(I${entityName}Dao ${entityName1}Dao){
+    public ${entityName}ServiceImpl(I${entityName}Dao ${entityName1}Dao, Converter converter){
         this.${entityName1}Dao = ${entityName1}Dao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<${entityName}> list(int pageNo, int pageSize, ${"Map<String, Object>"} map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<${entityName}> lists = ${entityName1}Dao.list(map);
+        List<${entityName}> lists = converter.convert(${entityName1}Dao.list(map), ${entityName}.class);
         PageInfo<${entityName}> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -43,13 +46,15 @@ public class ${entityName}ServiceImpl implements I${entityName}Service {
     public void insert(${entityName} obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
+        ${entityName}Dto dto = converter.convert(obj, ${entityName}Dto.class);
         ${entityName1}Dao.insert(obj);
     }
 
     @Override
     public void update(${entityName} obj) {
         obj.setModifyTime(new Date());
-        ${entityName1}Dao.update(obj);
+        ${entityName}Dto dto = converter.convert(obj, ${entityName}Dto.class);
+        ${entityName1}Dao.update(dto);
     }
 
     @Override
@@ -59,12 +64,12 @@ public class ${entityName}ServiceImpl implements I${entityName}Service {
 
     @Override
     public ${entityName} getById(Long id) {
-        return ${entityName1}Dao.getById(id);
+        return converter.convert(${entityName1}Dao.getById(id), ${entityName}.class);
     }
 
     @Override
     public List<${entityName}> list(${entityName}Query obj) {
-        List<${entityName}> lists = ${entityName1}Dao.selectList(obj);
+        List<${entityName}> lists = converter.convert(${entityName1}Dao.selectList(obj), ${entityName}.class);
         return lists;
     }
 

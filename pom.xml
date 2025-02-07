@@ -12,7 +12,7 @@
     <groupId>com.ares</groupId>
     <artifactId>ares</artifactId>
     <packaging>pom</packaging>
-    <version>5.1.3</version>
+    <version>6.0.0</version>
     <description>my first springboot project</description>
 
     <modules>
@@ -28,13 +28,13 @@
     </modules>
 
     <properties>
-        <ares-core.version>2.0.2</ares-core.version>
-        <ares-flowable.version>2.0.0</ares-flowable.version>
-        <ares-generator.version>2.0.0</ares-generator.version>
-        <ares-message.version>2.0.0</ares-message.version>
+        <ares-core.version>3.0.0</ares-core.version>
+        <ares-flowable.version>3.0.0</ares-flowable.version>
+        <ares-generator.version>3.0.0</ares-generator.version>
+        <ares-message.version>3.0.0</ares-message.version>
         <ares-neo.version>2.0.0</ares-neo.version>
-        <ares-job.version>2.0.0</ares-job.version>
-        <ares-system.version>2.0.0</ares-system.version>
+        <ares-job.version>3.0.0</ares-job.version>
+        <ares-system.version>3.0.0</ares-system.version>
         <java.version>17</java.version>
         <mysql.version>8.0.33</mysql.version>
         <mybatis.version>3.0.2</mybatis.version>
@@ -56,6 +56,7 @@
         <springdoc.version>2.2.0</springdoc.version>
         <guava.version>32.1.1-jre</guava.version>
         <jasypt.version>3.0.5</jasypt.version>
+        <mapstruct-plus.version>1.4.6</mapstruct-plus.version>
     </properties>
 
     <dependencies>
@@ -241,6 +242,12 @@
             <artifactId>jasypt-spring-boot-starter</artifactId>
             <version>${jasypt.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.linpeilie</groupId>
+            <artifactId>mapstruct-plus-spring-boot-starter</artifactId>
+            <version>${mapstruct-plus.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -252,6 +259,32 @@
         </resources>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>17</source>    <!-- 这里根据自己的需要进行切换 -->
+                    <target>17</target>    <!-- 这里根据自己的需要进行切换 -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>io.github.linpeilie</groupId>
+                            <artifactId>mapstruct-plus-processor</artifactId>
+                            <version>${mapstruct-plus.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>0.2.0</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.3.0</version>

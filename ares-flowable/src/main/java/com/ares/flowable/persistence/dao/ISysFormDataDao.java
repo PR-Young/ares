@@ -21,11 +21,11 @@ package com.ares.flowable.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.flowable.model.query.SysFormDataQuery;
-import com.ares.flowable.persistence.entity.SysFormData;
+import com.ares.flowable.persistence.entity.dto.SysFormDataDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ISysFormDataDao extends IBaseDao<SysFormData, SysFormDataQuery> {
-    SysFormData getFormDataByProInstId(@Param("proInstId") String proInstId);
+public interface ISysFormDataDao extends IBaseDao<SysFormDataDto, SysFormDataQuery> {
+    SysFormDataDto getFormDataByProInstId(@Param("proInstId") String proInstId);
 }

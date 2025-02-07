@@ -21,18 +21,20 @@ package com.ares.quartz.persistence.service.impl;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.quartz.common.quartz.ScheduleConstants;
 import com.ares.quartz.common.quartz.ScheduleManager;
+import com.ares.quartz.model.vo.SysQuartzJob;
 import com.ares.quartz.model.query.SysQuartzJobQuery;
 import com.ares.quartz.persistence.dao.ISysQuartzJobDao;
-import com.ares.quartz.persistence.entity.SysQuartzJob;
+import com.ares.quartz.persistence.entity.SysQuartzJobDto;
 import com.ares.quartz.persistence.service.ISysQuartzJobService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
+import jakarta.annotation.PostConstruct;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.annotation.PostConstruct;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -47,11 +49,13 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
 
     private ISysQuartzJobDao sysQuartzJobDao;
     private ScheduleManager scheduler;
+    private Converter converter;
 
     @Autowired
-    public SysQuartzJobServiceImpl(ISysQuartzJobDao sysQuartzJobDao, ScheduleManager scheduler) {
+    public SysQuartzJobServiceImpl(ISysQuartzJobDao sysQuartzJobDao, ScheduleManager scheduler, Converter converter) {
         this.sysQuartzJobDao = sysQuartzJobDao;
         this.scheduler = scheduler;
+        this.converter = converter;
     }
 
     @PostConstruct
@@ -75,14 +79,14 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
     }
 
     public List<SysQuartzJob> list() {
-        List<SysQuartzJob> sysQuartzJobList = sysQuartzJobDao.list(new HashMap<>());
+        List<SysQuartzJob> sysQuartzJobList = converter.convert(sysQuartzJobDao.list(new HashMap<>()), SysQuartzJob.class);
         return sysQuartzJobList;
     }
 
     @Override
     public PageInfo<SysQuartzJob> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysQuartzJob> sysQuartzJobList = sysQuartzJobDao.list(map);
+        List<SysQuartzJob> sysQuartzJobList = converter.convert(sysQuartzJobDao.list(map), SysQuartzJob.class);
         PageInfo<SysQuartzJob> jobPageInfo = new PageInfo<>(sysQuartzJobList);
         return jobPageInfo;
     }
@@ -97,14 +101,16 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
     public void insert(SysQuartzJob obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysQuartzJobDao.insert(obj);
+        SysQuartzJobDto sysQuartzJobDto = converter.convert(obj, SysQuartzJobDto.class);
+        sysQuartzJobDao.insert(sysQuartzJobDto);
         scheduler.addJob(obj);
     }
 
     @Override
     public void update(SysQuartzJob obj) {
         obj.setModifyTime(new Date());
-        sysQuartzJobDao.update(obj);
+        SysQuartzJobDto sysQuartzJobDto = converter.convert(obj, SysQuartzJobDto.class);
+        sysQuartzJobDao.update(sysQuartzJobDto);
         scheduler.edit(obj);
     }
 
@@ -119,7 +125,7 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
 
     @Override
     public SysQuartzJob getById(Long id) {
-        return sysQuartzJobDao.getById(id);
+        return converter.convert(sysQuartzJobDao.getById(id), SysQuartzJob.class);
     }
 
     @Override
@@ -135,7 +141,8 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
     @Transactional
     public int resumeJob(SysQuartzJob job) {
         job.setStatus(ScheduleConstants.Status.NORMAL.getValue());
-        int rows = sysQuartzJobDao.update(job);
+        SysQuartzJobDto sysQuartzJobDto = converter.convert(job, SysQuartzJobDto.class);
+        int rows = sysQuartzJobDao.update(sysQuartzJobDto);
         if (rows > 0) {
             scheduler.start(scheduler.createTaskName(job.getJobName()), job.getJobGroup());
         }
@@ -146,7 +153,8 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
     @Transactional
     public int pauseJob(SysQuartzJob job) {
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
-        int rows = sysQuartzJobDao.update(job);
+        SysQuartzJobDto sysQuartzJobDto = converter.convert(job, SysQuartzJobDto.class);
+        int rows = sysQuartzJobDao.update(sysQuartzJobDto);
         if (rows > 0) {
             scheduler.pause(scheduler.createTaskName(job.getJobName()), job.getJobGroup());
         }
@@ -175,7 +183,7 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
 
     @Override
     public List<SysQuartzJob> selectJobList(SysQuartzJobQuery job) {
-        List<SysQuartzJob> sysQuartzJobList = sysQuartzJobDao.selectList(job);
+        List<SysQuartzJob> sysQuartzJobList = converter.convert(sysQuartzJobDao.selectList(job), SysQuartzJob.class);
         return sysQuartzJobList;
     }
 

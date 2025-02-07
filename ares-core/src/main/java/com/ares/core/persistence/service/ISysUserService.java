@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysUserQuery;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.model.vo.SysUser;
 
 import java.util.List;
 

@@ -19,12 +19,14 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysTemplateQuery;
+import com.ares.core.model.vo.SysTemplate;
 import com.ares.core.persistence.dao.ISysTemplateDao;
-import com.ares.core.persistence.entity.SysTemplate;
+import com.ares.core.persistence.entity.SysTemplateDto;
 import com.ares.core.persistence.service.ISysTemplateService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,16 +38,18 @@ import java.util.Map;
 public class SysTemplateServiceImpl implements ISysTemplateService {
 
     private ISysTemplateDao sysTemplateDao;
+    private Converter converter;
 
     @Autowired
-    public SysTemplateServiceImpl(ISysTemplateDao sysTemplateDao) {
+    public SysTemplateServiceImpl(ISysTemplateDao sysTemplateDao, Converter converter) {
         this.sysTemplateDao = sysTemplateDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysTemplate> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysTemplate> lists = sysTemplateDao.list(map);
+        List<SysTemplate> lists = converter.convert(sysTemplateDao.list(map), SysTemplate.class);
         PageInfo<SysTemplate> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -54,13 +58,15 @@ public class SysTemplateServiceImpl implements ISysTemplateService {
     public void insert(SysTemplate obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysTemplateDao.insert(obj);
+        SysTemplateDto sysTemplateDto = converter.convert(obj, SysTemplateDto.class);
+        sysTemplateDao.insert(sysTemplateDto);
     }
 
     @Override
     public void update(SysTemplate obj) {
         obj.setModifyTime(new Date());
-        sysTemplateDao.update(obj);
+        SysTemplateDto sysTemplateDto = converter.convert(obj, SysTemplateDto.class);
+        sysTemplateDao.update(sysTemplateDto);
     }
 
     @Override
@@ -70,12 +76,12 @@ public class SysTemplateServiceImpl implements ISysTemplateService {
 
     @Override
     public SysTemplate getById(Long id) {
-        return sysTemplateDao.getById(id);
+        return converter.convert(sysTemplateDao.getById(id), SysTemplate.class);
     }
 
     @Override
     public List<SysTemplate> list(SysTemplateQuery obj) {
-        List<SysTemplate> lists = sysTemplateDao.selectList(obj);
+        List<SysTemplate> lists = converter.convert(sysTemplateDao.selectList(obj), SysTemplate.class);
         return lists;
     }
 }

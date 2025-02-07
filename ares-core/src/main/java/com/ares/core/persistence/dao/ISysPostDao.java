@@ -20,10 +20,10 @@ package com.ares.core.persistence.dao;
 
 
 import com.ares.core.model.query.SysPostQuery;
-import com.ares.core.persistence.entity.SysPost;
+import com.ares.core.persistence.entity.SysPostDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ISysPostDao extends IBaseDao<SysPost, SysPostQuery> {
-    SysPost getByName(String postName);
+public interface ISysPostDao extends IBaseDao<SysPostDto, SysPostQuery> {
+    SysPostDto getByName(String postName);
 }

@@ -23,7 +23,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.query.SysMenuQuery;
-import com.ares.core.persistence.entity.SysMenu;
+import com.ares.core.model.vo.SysMenu;
 import com.ares.core.persistence.service.ISysMenuService;
 import com.ares.core.utils.StringUtils;
 import io.swagger.v3.oas.annotations.Operation;

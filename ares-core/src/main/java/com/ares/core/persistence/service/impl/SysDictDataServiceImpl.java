@@ -19,12 +19,14 @@
 package com.ares.core.persistence.service.impl;
 
 import com.ares.core.model.query.SysDictDataQuery;
+import com.ares.core.model.vo.SysDictData;
 import com.ares.core.persistence.dao.ISysDictDataDao;
-import com.ares.core.persistence.entity.SysDictData;
+import com.ares.core.persistence.entity.SysDictDataDto;
 import com.ares.core.persistence.service.ISysDictDataService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,16 +38,18 @@ import java.util.Map;
 public class SysDictDataServiceImpl implements ISysDictDataService {
 
     private ISysDictDataDao sysDictDataDao;
+    private Converter converter;
 
     @Autowired
-    public SysDictDataServiceImpl(ISysDictDataDao sysDictDataDao) {
+    public SysDictDataServiceImpl(ISysDictDataDao sysDictDataDao, Converter converter) {
         this.sysDictDataDao = sysDictDataDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<SysDictData> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysDictData> lists = sysDictDataDao.list(map);
+        List<SysDictData> lists = converter.convert(sysDictDataDao.list(map), SysDictData.class);
         PageInfo<SysDictData> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -54,13 +58,15 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
     public void insert(SysDictData obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        sysDictDataDao.insert(obj);
+        SysDictDataDto sysDictDataDto = converter.convert(obj, SysDictDataDto.class);
+        sysDictDataDao.insert(sysDictDataDto);
     }
 
     @Override
     public void update(SysDictData obj) {
         obj.setModifyTime(new Date());
-        sysDictDataDao.update(obj);
+        SysDictDataDto sysDictDataDto = converter.convert(obj, SysDictDataDto.class);
+        sysDictDataDao.update(sysDictDataDto);
     }
 
     @Override
@@ -70,18 +76,18 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
 
     @Override
     public SysDictData getById(Long id) {
-        return sysDictDataDao.getById(id);
+        return converter.convert(sysDictDataDao.getById(id), SysDictData.class);
     }
 
     @Override
     public List<SysDictData> list(SysDictDataQuery obj) {
-        List<SysDictData> lists = sysDictDataDao.selectList(obj);
+        List<SysDictData> lists = converter.convert(sysDictDataDao.selectList(obj), SysDictData.class);
         return lists;
     }
 
     @Override
     public List<SysDictData> getDicts(String dictType) {
-        return sysDictDataDao.getDicts(dictType);
+        return converter.convert(sysDictDataDao.getDicts(dictType), SysDictData.class);
     }
 
 }

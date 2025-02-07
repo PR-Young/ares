@@ -164,4 +164,7 @@ public class GeneratorConfig {
 
     @Value("${ares.generator.projectPtah}")
     private String projectPtah;
+
+    @Value("${ares.generator.author}")
+    private String author;
 }

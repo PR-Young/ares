@@ -21,11 +21,11 @@ package com.ares.quartz.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.quartz.model.query.SysQuartzJobLogQuery;
-import com.ares.quartz.persistence.entity.SysQuartzJobLog;
+import com.ares.quartz.persistence.entity.SysQuartzJobLogDto;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ISysQuartzJobLogDao extends IBaseDao<SysQuartzJobLog, SysQuartzJobLogQuery> {
+public interface ISysQuartzJobLogDao extends IBaseDao<SysQuartzJobLogDto, SysQuartzJobLogQuery> {
 
     int cleanJobLog();
 

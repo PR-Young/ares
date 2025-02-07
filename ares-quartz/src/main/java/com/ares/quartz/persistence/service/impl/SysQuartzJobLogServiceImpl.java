@@ -19,12 +19,14 @@
 package com.ares.quartz.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.quartz.model.vo.SysQuartzJobLog;
 import com.ares.quartz.model.query.SysQuartzJobLogQuery;
 import com.ares.quartz.persistence.dao.ISysQuartzJobLogDao;
-import com.ares.quartz.persistence.entity.SysQuartzJobLog;
+import com.ares.quartz.persistence.entity.SysQuartzJobLogDto;
 import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,16 +41,19 @@ import java.util.Map;
 public class SysQuartzJobLogServiceImpl implements ISysQuartzJobLogService {
 
     private ISysQuartzJobLogDao sysQuartzJobLogDao;
+    private Converter converter;
 
     @Autowired
-    public SysQuartzJobLogServiceImpl(ISysQuartzJobLogDao sysQuartzJobLogDao) {
+    public SysQuartzJobLogServiceImpl(ISysQuartzJobLogDao sysQuartzJobLogDao, Converter converter) {
         this.sysQuartzJobLogDao = sysQuartzJobLogDao;
+        this.converter = converter;
     }
 
     @Override
     public void insert(SysQuartzJobLog obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
-        sysQuartzJobLogDao.insert(obj);
+        SysQuartzJobLogDto sysQuartzJobLogDto = converter.convert(obj, SysQuartzJobLogDto.class);
+        sysQuartzJobLogDao.insert(sysQuartzJobLogDto);
     }
 
     @Override
@@ -63,13 +68,13 @@ public class SysQuartzJobLogServiceImpl implements ISysQuartzJobLogService {
 
     @Override
     public SysQuartzJobLog getById(Long id) {
-        return sysQuartzJobLogDao.getById(id);
+        return converter.convert(sysQuartzJobLogDao.getById(id), SysQuartzJobLog.class);
     }
 
     @Override
     public PageInfo<SysQuartzJobLog> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<SysQuartzJobLog> sysQuartzJobLogList = sysQuartzJobLogDao.list(map);
+        List<SysQuartzJobLog> sysQuartzJobLogList = converter.convert(sysQuartzJobLogDao.list(map), SysQuartzJobLog.class);
         PageInfo<SysQuartzJobLog> jobPageInfo = new PageInfo<>(sysQuartzJobLogList);
         return jobPageInfo;
     }
@@ -81,7 +86,7 @@ public class SysQuartzJobLogServiceImpl implements ISysQuartzJobLogService {
 
     @Override
     public List<SysQuartzJobLog> selectJobLogList(SysQuartzJobLogQuery jobLog) {
-        return sysQuartzJobLogDao.selectList(jobLog);
+        return converter.convert(sysQuartzJobLogDao.selectList(jobLog), SysQuartzJobLog.class);
     }
 
     @Override

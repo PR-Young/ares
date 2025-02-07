@@ -19,7 +19,7 @@
 package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysPostQuery;
-import com.ares.core.persistence.entity.SysPost;
+import com.ares.core.model.vo.SysPost;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysRoleDao">
-    <resultMap id="SysRole" type="com.ares.core.persistence.entity.SysRole">
+    <resultMap id="SysRole" type="com.ares.core.persistence.entity.SysRoleDto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <result column="ROLE_NAME_" jdbcType="VARCHAR" property="roleName"/>
         <result column="DESCRIPTION_" jdbcType="VARCHAR" property="description"/>
@@ -14,13 +14,13 @@
         `ID_`
         , `ROLE_NAME_`, `DESCRIPTION_`,`CREATOR_`, `CREATE_TIME_`, `MODIFIER_`,`MODIFY_TIME_`
     </sql>
-    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysRole">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysRoleDto">
         insert into `sys_role` (`ID_`, `ROLE_NAME_`, `DESCRIPTION_`, `CREATOR_`, `CREATE_TIME_`, `MODIFIER_`, `MODIFY_TIME_`)
         values (#{id,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
                 #{creator,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
                 #{modifier,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
-    <update id="update" parameterType="com.ares.core.persistence.entity.SysRole">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysRoleDto">
         update `sys_role`
         <set>
             <if test="roleName != null">
@@ -139,7 +139,7 @@
         where `ROLE_NAME_` = #{roleName}
     </select>
 
-    <select id="getRoleByName" resultType="com.ares.core.persistence.entity.SysRole">
+    <select id="getRoleByName" resultType="com.ares.core.persistence.entity.SysRoleDto">
         select
         <include refid="Base_Column_List"/>
         from `sys_role` where `ROLE_NAME_` = #{roleName} limit 1

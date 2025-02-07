@@ -24,7 +24,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.ares.config.base.BaseConfig;
 import com.ares.core.model.base.Constants;
-import com.ares.core.persistence.entity.SysUser;
+import com.ares.core.model.vo.SysUser;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.redis.utils.RedisUtil;
 import jakarta.servlet.http.HttpServletRequest;

@@ -21,8 +21,8 @@ package com.ares.quartz.common.quartz;
 
 import com.ares.core.utils.SpringUtils;
 import com.ares.core.utils.StringUtils;
-import com.ares.quartz.persistence.entity.SysQuartzJob;
-import com.ares.quartz.persistence.entity.SysQuartzJobLog;
+import com.ares.quartz.model.vo.SysQuartzJob;
+import com.ares.quartz.model.vo.SysQuartzJobLog;
 import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

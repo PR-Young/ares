@@ -26,7 +26,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysRoleQuery;
 import com.ares.core.model.query.SysUserQuery;
-import com.ares.core.persistence.entity.SysRole;
+import com.ares.core.model.vo.SysRole;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.StringUtils;

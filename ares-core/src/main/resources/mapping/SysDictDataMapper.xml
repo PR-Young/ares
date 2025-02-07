@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ares.core.persistence.dao.ISysDictDataDao">
-    <resultMap id="SysDictData" type="com.ares.core.persistence.entity.SysDictData">
+    <resultMap id="SysDictData" type="com.ares.core.persistence.entity.SysDictDataDto">
         <id column="ID_" jdbcType="BIGINT" property="id"/>
         <result column="DICT_SORT_" jdbcType="VARCHAR" property="dictSort"/>
         <result column="DICT_LABEL_" jdbcType="VARCHAR" property="dictLabel"/>
@@ -21,7 +21,7 @@
         `MODIFY_TIME_`
     </sql>
 
-    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysDictData">
+    <insert id="insert" parameterType="com.ares.core.persistence.entity.SysDictDataDto">
         insert into `sys_dict_data` (
         <include refid="Base_Column_List"/>
         )
@@ -40,7 +40,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="com.ares.core.persistence.entity.SysDictData">
+    <update id="update" parameterType="com.ares.core.persistence.entity.SysDictDataDto">
         update `sys_dict_data`
         <set>
             <if test="dictSort!= null">
