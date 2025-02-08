@@ -26,7 +26,7 @@ import com.ares.core.model.vo.SysRole;
 import com.ares.core.model.vo.SysUser;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;
-import com.ares.flowable.persistence.entity.dto.FlowSaveXmlVo;
+import com.ares.flowable.model.vo.FlowSaveXml;
 import com.ares.flowable.persistence.service.IFlowDefinitionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -136,7 +136,7 @@ public class FlowDefinitionApiController extends BaseController {
 
     @Operation(summary = "保存流程设计器内的xml文件")
     @PostMapping("/save")
-    public AjaxResult save(@RequestBody FlowSaveXmlVo vo) {
+    public AjaxResult save(@RequestBody FlowSaveXml vo) {
         InputStream in = null;
         try {
             in = new ByteArrayInputStream(vo.getXml().getBytes(StandardCharsets.UTF_8));

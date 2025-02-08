@@ -21,8 +21,8 @@ package com.ares.flowable.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.flowable.model.query.SysDeployFormQuery;
-import com.ares.flowable.persistence.entity.dto.SysDeployFormDto;
-import com.ares.flowable.persistence.entity.dto.SysFormDto;
+import com.ares.flowable.persistence.entity.SysDeployFormDto;
+import com.ares.flowable.persistence.entity.SysFormDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -30,7 +30,7 @@ import com.ares.flowable.common.constant.ProcessConstants;
 import com.ares.flowable.factory.FlowServiceFactory;
 import com.ares.flowable.model.vo.SysForm;
 import com.ares.flowable.model.vo.SysFormData;
-import com.ares.flowable.persistence.entity.dto.FlowProcDefDto;
+import com.ares.flowable.model.vo.FlowProcDef;
 import com.ares.flowable.persistence.service.IFlowDefinitionService;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
 import com.ares.flowable.persistence.service.ISysFormDataService;
@@ -98,8 +98,8 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
      * @return 流程定义分页列表数据
      */
     @Override
-    public Page<FlowProcDefDto> list(Integer pageNum, Integer pageSize) {
-        Page<FlowProcDefDto> page = new Page<>();
+    public Page<FlowProcDef> list(Integer pageNum, Integer pageSize) {
+        Page<FlowProcDef> page = new Page<>();
         // 流程定义列表数据查询
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery()
                 //.latestVersion()
@@ -107,11 +107,11 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
                 .orderByProcessDefinitionKey().asc();
         page.setTotal(processDefinitionQuery.count());
         List<ProcessDefinition> processDefinitionList = processDefinitionQuery.listPage(pageNum - 1, pageSize);
-        List<FlowProcDefDto> dataList = new ArrayList<>();
+        List<FlowProcDef> dataList = new ArrayList<>();
         for (ProcessDefinition processDefinition : processDefinitionList) {
             String deploymentId = processDefinition.getDeploymentId();
             Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(deploymentId).singleResult();
-            FlowProcDefDto reProcDef = new FlowProcDefDto();
+            FlowProcDef reProcDef = new FlowProcDef();
             BeanUtils.copyProperties(processDefinition, reProcDef);
             SysForm sysForm = sysDeployFormService.selectSysDeployFormByDeployId(deploymentId);
             if (Objects.nonNull(sysForm)) {
@@ -269,8 +269,8 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
      * @return
      */
     @Override
-    public Page<FlowProcDefDto> applyFlowList(Integer pageNum, Integer pageSize) {
-        Page<FlowProcDefDto> page = new Page<>();
+    public Page<FlowProcDef> applyFlowList(Integer pageNum, Integer pageSize) {
+        Page<FlowProcDef> page = new Page<>();
         // 流程定义列表数据查询
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery()
                 .latestVersion()
@@ -278,11 +278,11 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
                 .orderByProcessDefinitionKey().asc();
         page.setTotal(processDefinitionQuery.count());
         List<ProcessDefinition> processDefinitionList = processDefinitionQuery.listPage(pageNum - 1, pageSize);
-        List<FlowProcDefDto> dataList = new ArrayList<>();
+        List<FlowProcDef> dataList = new ArrayList<>();
         for (ProcessDefinition processDefinition : processDefinitionList) {
             String deploymentId = processDefinition.getDeploymentId();
             Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(deploymentId).singleResult();
-            FlowProcDefDto reProcDef = new FlowProcDefDto();
+            FlowProcDef reProcDef = new FlowProcDef();
             BeanUtils.copyProperties(processDefinition, reProcDef);
             SysForm sysForm = sysDeployFormService.selectSysDeployFormByDeployId(deploymentId);
             if (Objects.nonNull(sysForm)) {
@@ -304,8 +304,8 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
      * @return
      */
     @Override
-    public List<FlowProcDefDto> applyFlowList() {
-        List<FlowProcDefDto> dataList = new ArrayList<>();
+    public List<FlowProcDef> applyFlowList() {
+        List<FlowProcDef> dataList = new ArrayList<>();
         // 流程定义列表数据查询
         ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery()
                 .latestVersion()
@@ -315,7 +315,7 @@ public class FlowDefinitionServiceImpl extends FlowServiceFactory implements IFl
         for (ProcessDefinition processDefinition : processDefinitionList) {
             String deploymentId = processDefinition.getDeploymentId();
             Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(deploymentId).singleResult();
-            FlowProcDefDto reProcDef = new FlowProcDefDto();
+            FlowProcDef reProcDef = new FlowProcDef();
             BeanUtils.copyProperties(processDefinition, reProcDef);
             SysForm sysForm = sysDeployFormService.selectSysDeployFormByDeployId(deploymentId);
             if (Objects.nonNull(sysForm)) {

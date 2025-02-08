@@ -21,7 +21,7 @@
 package com.ares.flowable.model.vo;
 
 import com.ares.core.model.base.BaseModel;
-import com.ares.flowable.persistence.entity.dto.SysFormDto;
+import com.ares.flowable.persistence.entity.SysFormDto;
 import io.github.linpeilie.annotations.AutoMapper;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

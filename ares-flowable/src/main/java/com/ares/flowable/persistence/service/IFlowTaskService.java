@@ -19,7 +19,7 @@
 package com.ares.flowable.persistence.service;
 
 import com.ares.core.model.base.AjaxResult;
-import com.ares.flowable.persistence.entity.dto.FlowTaskDto;
+import com.ares.flowable.model.vo.FlowTask;
 import com.ares.flowable.model.vo.FlowTaskVo;
 import com.github.pagehelper.Page;
 import org.flowable.task.api.Task;
@@ -114,7 +114,7 @@ public interface IFlowTaskService {
      * @param pageSize
      * @return
      */
-    Page<FlowTaskDto> myProcess(Integer pageNum, Integer pageSize);
+    Page<FlowTask> myProcess(Integer pageNum, Integer pageSize);
 
     /**
      * 取消申请
@@ -139,7 +139,7 @@ public interface IFlowTaskService {
      * @param pageSize 每页条数
      * @return
      */
-    Page<FlowTaskDto> todoList(Integer pageNum, Integer pageSize);
+    Page<FlowTask> todoList(Integer pageNum, Integer pageSize);
 
 
     /**
@@ -149,7 +149,7 @@ public interface IFlowTaskService {
      * @param pageSize 每页条数
      * @return
      */
-    Page<FlowTaskDto> finishedList(Integer pageNum, Integer pageSize);
+    Page<FlowTask> finishedList(Integer pageNum, Integer pageSize);
 
 
     /**

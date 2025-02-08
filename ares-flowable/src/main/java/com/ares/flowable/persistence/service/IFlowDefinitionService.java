@@ -20,7 +20,7 @@ package com.ares.flowable.persistence.service;
 
 
 import com.ares.core.model.base.AjaxResult;
-import com.ares.flowable.persistence.entity.dto.FlowProcDefDto;
+import com.ares.flowable.model.vo.FlowProcDef;
 import com.github.pagehelper.Page;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public interface IFlowDefinitionService {
      * @param pageSize 每页条数
      * @return 流程定义分页列表数据
      */
-    Page<FlowProcDefDto> list(Integer pageNum, Integer pageSize);
+    Page<FlowProcDef> list(Integer pageNum, Integer pageSize);
 
 
     /**
@@ -100,13 +100,13 @@ public interface IFlowDefinitionService {
      * @param pageSize
      * @return
      */
-    Page<FlowProcDefDto> applyFlowList(Integer pageNum, Integer pageSize);
+    Page<FlowProcDef> applyFlowList(Integer pageNum, Integer pageSize);
 
     /**
      * 发起流程列表
      *
      * @return
      */
-    List<FlowProcDefDto> applyFlowList();
+    List<FlowProcDef> applyFlowList();
 
 }

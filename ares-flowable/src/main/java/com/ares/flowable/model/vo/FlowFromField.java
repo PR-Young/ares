@@ -20,24 +20,16 @@
 
 package com.ares.flowable.model.vo;
 
-import com.ares.core.model.base.BaseModel;
-import com.ares.core.serializer.LongJsonDeserializer;
-import com.ares.core.serializer.LongJsonSerializer;
-import com.ares.flowable.persistence.entity.SysDeployFormDto;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.github.linpeilie.annotations.AutoMapper;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serializable;
+
+/**
+ * @author XuanXuan
+ * @date 2021/3/31 23:20
+ */
 @Data
-@AutoMapper(target = SysDeployFormDto.class)
-@Schema(title = "SysDeployForm对象", description = "")
-public class SysDeployForm extends BaseModel {
-    @Schema(description = "")
-    @JsonSerialize(using = LongJsonSerializer.class)
-    @JsonDeserialize(using = LongJsonDeserializer.class)
-    private Long formId;
-    @Schema(description = "")
-    private String deployId;
+public class FlowFromField implements Serializable {
+
+    private Object fields;
 }

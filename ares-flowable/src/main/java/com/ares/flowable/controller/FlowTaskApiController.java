@@ -20,7 +20,7 @@ package com.ares.flowable.controller;
 
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
-import com.ares.flowable.persistence.entity.dto.FlowTaskDto;
+import com.ares.flowable.model.vo.FlowTask;
 import com.ares.flowable.model.vo.FlowTaskVo;
 import com.ares.flowable.persistence.service.IFlowDefinitionService;
 import com.ares.flowable.persistence.service.IFlowTaskService;
@@ -57,33 +57,33 @@ public class FlowTaskApiController extends BaseController {
         this.flowDefinitionService = flowDefinitionService;
     }
 
-    @Operation(summary = "我发起的流程", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTaskDto.class)))})
+    @Operation(summary = "我发起的流程", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTask.class)))})
     @GetMapping(value = "/myProcess")
     public Object myProcess(@Parameter(description = "当前页码", required = true) @RequestParam Integer pageNum,
                             @Parameter(description = "每页条数", required = true) @RequestParam Integer pageSize) {
         return getDataTable(flowTaskService.myProcess(pageNum, pageSize));
     }
 
-    @Operation(summary = "取消申请", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTaskDto.class)))})
+    @Operation(summary = "取消申请", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTask.class)))})
     @PostMapping(value = "/stopProcess")
     public AjaxResult stopProcess(@RequestBody FlowTaskVo flowTaskVo) {
         return flowTaskService.stopProcess(flowTaskVo);
     }
 
-    @Operation(summary = "撤回流程", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTaskDto.class)))})
+    @Operation(summary = "撤回流程", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTask.class)))})
     @PostMapping(value = "/revokeProcess")
     public AjaxResult revokeProcess(@RequestBody FlowTaskVo flowTaskVo) {
         return flowTaskService.revokeProcess(flowTaskVo);
     }
 
-    @Operation(summary = "获取待办列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTaskDto.class)))})
+    @Operation(summary = "获取待办列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTask.class)))})
     @GetMapping(value = "/todoList")
     public Object todoList(@Parameter(description = "当前页码", required = true) @RequestParam Integer pageNum,
                            @Parameter(description = "每页条数", required = true) @RequestParam Integer pageSize) {
         return getDataTable(flowTaskService.todoList(pageNum, pageSize));
     }
 
-    @Operation(summary = "获取已办任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTaskDto.class)))})
+    @Operation(summary = "获取已办任务", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTask.class)))})
     @GetMapping(value = "/finishedList")
     public Object finishedList(@Parameter(description = "当前页码", required = true) @RequestParam Integer pageNum,
                                @Parameter(description = "每页条数", required = true) @RequestParam Integer pageSize) {
@@ -91,13 +91,13 @@ public class FlowTaskApiController extends BaseController {
     }
 
 
-    @Operation(summary = "流程历史流转记录", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTaskDto.class)))})
+    @Operation(summary = "流程历史流转记录", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTask.class)))})
     @GetMapping(value = "/flowRecord")
     public AjaxResult flowRecord(String procInsId, String deployId) {
         return flowTaskService.flowRecord(procInsId, deployId);
     }
 
-    @Operation(summary = "获取流程变量", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTaskDto.class)))})
+    @Operation(summary = "获取流程变量", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = FlowTask.class)))})
     @GetMapping(value = "/processVariables/{taskId}")
     public AjaxResult processVariables(@Parameter(description = "流程任务Id") @PathVariable(value = "taskId") String taskId) {
         return flowTaskService.processVariables(taskId);

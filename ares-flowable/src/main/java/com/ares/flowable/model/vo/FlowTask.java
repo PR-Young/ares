@@ -1,22 +1,24 @@
 /*
- * !******************************************************************************
- *  * Copyright (c) 2021 - 9999, ARES
- *  *
- *  * Licensed under the Apache License, Version 2.0 (the "License");
- *  * you may not use this file except in compliance with the License.
- *  * You may obtain a copy of the License at
- *  *
- *  *        http://www.apache.org/licenses/LICENSE-2.0
- *  *
- *  * Unless required by applicable law or agreed to in writing, software
- *  * distributed under the License is distributed on an "AS IS" BASIS,
- *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  * See the License for the specific language governing permissions and
- *  * limitations under the License.
- *  *****************************************************************************
+ *
+ *  * ****************************************************************************
+ *  * * Copyright (c) 2021 - 9999, ARES
+ *  * *
+ *  * * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * * you may not use this file except in compliance with the License.
+ *  * * You may obtain a copy of the License at
+ *  * *
+ *  * *        http://www.apache.org/licenses/LICENSE-2.0
+ *  * *
+ *  * * Unless required by applicable law or agreed to in writing, software
+ *  * * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * * See the License for the specific language governing permissions and
+ *  * * limitations under the License.
+ *  * ***************************************************************************
+ *
  */
 
-package com.ares.flowable.persistence.entity.dto;
+package com.ares.flowable.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +31,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Schema(description = "工作流任务相关-返回参数")
-public class FlowTaskDto implements Serializable {
+public class FlowTask implements Serializable {
 
     @Schema(description = "任务编号")
     private String taskId;
@@ -92,7 +94,7 @@ public class FlowTaskDto implements Serializable {
     private String duration;
 
     @Schema(description = "任务意见")
-    private FlowCommentDto comment;
+    private FlowComment comment;
 
     @Schema(description = "候选执行人")
     private String candidate;

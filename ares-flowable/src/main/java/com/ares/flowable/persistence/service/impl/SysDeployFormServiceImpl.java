@@ -23,7 +23,7 @@ import com.ares.flowable.model.vo.SysDeployForm;
 import com.ares.flowable.model.vo.SysForm;
 import com.ares.flowable.model.query.SysDeployFormQuery;
 import com.ares.flowable.persistence.dao.ISysDeployFormDao;
-import com.ares.flowable.persistence.entity.dto.SysDeployFormDto;
+import com.ares.flowable.persistence.entity.SysDeployFormDto;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

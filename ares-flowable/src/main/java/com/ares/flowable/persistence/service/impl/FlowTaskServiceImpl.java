@@ -30,7 +30,6 @@ import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.flowable.common.constant.ProcessConstants;
-import com.ares.flowable.common.enums.FlowComment;
 import com.ares.flowable.common.exception.CustomException;
 import com.ares.flowable.factory.FlowServiceFactory;
 import com.ares.flowable.flow.CustomProcessDiagramGenerator;
@@ -38,10 +37,10 @@ import com.ares.flowable.flow.FindNextNodeUtil;
 import com.ares.flowable.flow.FlowableUtils;
 import com.ares.flowable.model.vo.SysForm;
 import com.ares.flowable.model.vo.SysFormData;
-import com.ares.flowable.persistence.entity.dto.FlowCommentDto;
-import com.ares.flowable.persistence.entity.dto.FlowNextDto;
-import com.ares.flowable.persistence.entity.dto.FlowTaskDto;
-import com.ares.flowable.persistence.entity.dto.FlowViewerDto;
+import com.ares.flowable.model.vo.FlowComment;
+import com.ares.flowable.model.vo.FlowNext;
+import com.ares.flowable.model.vo.FlowTask;
+import com.ares.flowable.model.vo.FlowViewer;
 import com.ares.flowable.model.vo.FlowTaskVo;
 import com.ares.flowable.persistence.service.IFlowTaskService;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
@@ -121,10 +120,10 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
             return AjaxResult.error("任务不存在");
         }
         if (DelegationState.PENDING.equals(task.getDelegationState())) {
-            taskService.addComment(taskVo.getTaskId(), taskVo.getInstanceId(), FlowComment.DELEGATE.getType(), taskVo.getComment());
+            taskService.addComment(taskVo.getTaskId(), taskVo.getInstanceId(), com.ares.flowable.common.enums.FlowComment.DELEGATE.getType(), taskVo.getComment());
             taskService.resolveTask(taskVo.getTaskId(), taskVo.getValues());
         } else {
-            taskService.addComment(taskVo.getTaskId(), taskVo.getInstanceId(), FlowComment.NORMAL.getType(), taskVo.getComment());
+            taskService.addComment(taskVo.getTaskId(), taskVo.getInstanceId(), com.ares.flowable.common.enums.FlowComment.NORMAL.getType(), taskVo.getComment());
             Long userId = SecurityUtils.getUser().getId();
             taskService.setAssignee(taskVo.getTaskId(), String.valueOf(userId));
             taskService.complete(taskVo.getTaskId(), taskVo.getValues());
@@ -145,7 +144,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
             throw new CustomException("任务处于挂起状态");
         }
 
-        taskService.addComment(taskVo.getTaskId(), taskVo.getInstanceId(), FlowComment.NORMAL.getType(), taskVo.getComment());
+        taskService.addComment(taskVo.getTaskId(), taskVo.getInstanceId(), com.ares.flowable.common.enums.FlowComment.NORMAL.getType(), taskVo.getComment());
         taskService.complete(taskVo.getTaskId(), taskVo.getValues());
 
     }
@@ -183,7 +182,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
             }
         }));
         // 设置驳回意见
-        currentTaskIds.forEach(item -> taskService.addComment(item, task.getProcessInstanceId(), FlowComment.REJECT.getType(), flowTaskVo.getComment()));
+        currentTaskIds.forEach(item -> taskService.addComment(item, task.getProcessInstanceId(), com.ares.flowable.common.enums.FlowComment.REJECT.getType(), flowTaskVo.getComment()));
 
         return currentIds;
     }
@@ -425,8 +424,8 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
      */
 
     @Override
-    public Page<FlowTaskDto> myProcess(Integer pageNum, Integer pageSize) {
-        Page<FlowTaskDto> page = new Page<>();
+    public Page<FlowTask> myProcess(Integer pageNum, Integer pageSize) {
+        Page<FlowTask> page = new Page<>();
         Long userId = SecurityUtils.getUser().getId();
         HistoricProcessInstanceQuery historicProcessInstanceQuery = historyService.createHistoricProcessInstanceQuery()
                 .startedBy(String.valueOf(userId))
@@ -434,9 +433,9 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                 .desc();
         List<HistoricProcessInstance> historicProcessInstances = historicProcessInstanceQuery.listPage(pageNum - 1, pageSize);
         page.setTotal(historicProcessInstanceQuery.count());
-        List<FlowTaskDto> flowList = new ArrayList<>();
+        List<FlowTask> flowList = new ArrayList<>();
         for (HistoricProcessInstance hisIns : historicProcessInstances) {
-            FlowTaskDto flowTask = new FlowTaskDto();
+            FlowTask flowTask = new FlowTask();
             flowTask.setCreateTime(hisIns.getStartTime());
             flowTask.setFinishTime(hisIns.getEndTime());
             flowTask.setProcInsId(hisIns.getId());
@@ -576,8 +575,8 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
      * @return
      */
     @Override
-    public Page<FlowTaskDto> todoList(Integer pageNum, Integer pageSize) {
-        Page<FlowTaskDto> page = new Page<>();
+    public Page<FlowTask> todoList(Integer pageNum, Integer pageSize) {
+        Page<FlowTask> page = new Page<>();
         Long userId = SecurityUtils.getUser().getId();
         List<SysRole> roles = roleService.getRoleByUserId(userId);
         List<Long> roleIds = roles.stream().map(BaseModel::getId).collect(Collectors.toList());
@@ -606,9 +605,9 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
         } else {
             taskList = taskList.subList((pageNum - 1) * pageSize, (pageNum - 1) * pageSize + pageSize);
         }
-        List<FlowTaskDto> flowList = new ArrayList<>();
+        List<FlowTask> flowList = new ArrayList<>();
         for (Task task : taskList) {
-            FlowTaskDto flowTask = new FlowTaskDto();
+            FlowTask flowTask = new FlowTask();
             // 当前流程信息
             flowTask.setTaskId(task.getId());
             flowTask.setTaskDefKey(task.getTaskDefinitionKey());
@@ -649,8 +648,8 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
      * @return
      */
     @Override
-    public Page<FlowTaskDto> finishedList(Integer pageNum, Integer pageSize) {
-        Page<FlowTaskDto> page = new Page<>();
+    public Page<FlowTask> finishedList(Integer pageNum, Integer pageSize) {
+        Page<FlowTask> page = new Page<>();
         long userId = SecurityUtils.getUser().getId();
         List<String> ids = new ArrayList<>();
         ids.add(String.valueOf(userId));
@@ -661,9 +660,9 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                 .orderByHistoricTaskInstanceEndTime()
                 .desc();
         List<HistoricTaskInstance> historicTaskInstanceList = taskInstanceQuery.listPage(pageNum - 1, pageSize);
-        List<FlowTaskDto> hisTaskList = Lists.newArrayList();
+        List<FlowTask> hisTaskList = Lists.newArrayList();
         for (HistoricTaskInstance histTask : historicTaskInstanceList) {
-            FlowTaskDto flowTask = new FlowTaskDto();
+            FlowTask flowTask = new FlowTask();
             // 当前流程信息
             flowTask.setTaskId(histTask.getId());
             // 审批人员信息
@@ -720,10 +719,10 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                     .processInstanceId(procInsId)
                     .orderByHistoricActivityInstanceStartTime()
                     .desc().list();
-            List<FlowTaskDto> hisFlowList = new ArrayList<>();
+            List<FlowTask> hisFlowList = new ArrayList<>();
             for (HistoricActivityInstance histIns : list) {
                 if (StringUtils.isNotBlank(histIns.getTaskId())) {
-                    FlowTaskDto flowTask = new FlowTaskDto();
+                    FlowTask flowTask = new FlowTask();
                     flowTask.setTaskId(histIns.getTaskId());
                     flowTask.setTaskName(histIns.getActivityName());
                     flowTask.setCreateTime(histIns.getStartTime());
@@ -758,7 +757,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                     List<Comment> commentList = taskService.getProcessInstanceComments(histIns.getProcessInstanceId());
                     commentList.forEach(comment -> {
                         if (histIns.getTaskId().equals(comment.getTaskId())) {
-                            flowTask.setComment(FlowCommentDto.builder().type(comment.getType()).comment(comment.getFullMessage()).build());
+                            flowTask.setComment(FlowComment.builder().type(comment.getType()).comment(comment.getFullMessage()).build());
                         }
                     });
                     hisFlowList.add(flowTask);
@@ -870,8 +869,8 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
      */
     @Override
     public AjaxResult getFlowViewer(String procInsId) {
-        List<FlowViewerDto> flowViewerList = new ArrayList<>();
-        FlowViewerDto flowViewerDto;
+        List<FlowViewer> flowViewerList = new ArrayList<>();
+        FlowViewer flowViewerDto;
         // 获得活动的节点
         List<HistoricActivityInstance> hisActIns = historyService.createHistoricActivityInstanceQuery()
                 .processInstanceId(procInsId)
@@ -879,7 +878,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
                 .asc().list();
         for (HistoricActivityInstance activityInstance : hisActIns) {
             if (!"sequenceFlow".equals(activityInstance.getActivityType())) {
-                flowViewerDto = new FlowViewerDto();
+                flowViewerDto = new FlowViewer();
                 flowViewerDto.setKey(activityInstance.getActivityId());
                 flowViewerDto.setCompleted(!Objects.isNull(activityInstance.getEndTime()));
                 flowViewerList.add(flowViewerDto);
@@ -915,7 +914,7 @@ public class FlowTaskServiceImpl extends FlowServiceFactory implements IFlowTask
     @Override
     public AjaxResult getNextFlowNode(FlowTaskVo flowTaskVo) {
         Task task = taskService.createTaskQuery().taskId(flowTaskVo.getTaskId()).singleResult();
-        FlowNextDto flowNextDto = new FlowNextDto();
+        FlowNext flowNextDto = new FlowNext();
         if (Objects.nonNull(task)) {
             List<UserTask> nextUserTask = FindNextNodeUtil.getNextUserTasks(repositoryService, task, new HashMap<>());
             if (CollectionUtils.isEmpty(nextUserTask)) {

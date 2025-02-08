@@ -23,7 +23,7 @@ import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.flowable.model.vo.SysFormData;
 import com.ares.flowable.model.query.SysFormDataQuery;
 import com.ares.flowable.persistence.dao.ISysFormDataDao;
-import com.ares.flowable.persistence.entity.dto.SysFormDataDto;
+import com.ares.flowable.persistence.entity.SysFormDataDto;
 import com.ares.flowable.persistence.service.ISysFormDataService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
