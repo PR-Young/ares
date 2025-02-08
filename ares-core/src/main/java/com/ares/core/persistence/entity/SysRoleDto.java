@@ -20,7 +20,6 @@ package com.ares.core.persistence.entity;
 
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -30,13 +29,10 @@ import java.io.Serializable;
  * @author: Young 2020/01/25
  **/
 @Data
-@Schema(title = "SysRole对象", description = "系统角色")
 public class SysRoleDto extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 3066031349080678671L;
-    @Schema(description = "角色名称")
     private String roleName;
-    @Schema(description = "角色描述")
     private String description;
 
     /**

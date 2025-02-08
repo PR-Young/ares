@@ -20,7 +20,6 @@ package com.ares.core.persistence.entity;
 
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -32,20 +31,14 @@ import java.io.Serializable;
  **/
 @Data
 @Accessors(chain = true)
-@Schema(title = "SysLog对象", description = "系统日志")
 public class SysLogDto extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = -2925066346168762533L;
-    @Schema(description = "主机IP")
+
     private String hostIp;
-    @Schema(description = "用户名")
     private String userName;
-    @Schema(description = "url地址")
     private String url;
-    @Schema(description = "操作参数")
     private String operParams;
-    @Schema(description = "备注")
     private String notes;
-    @Schema(description = "请求方式")
     private String requestMethod;
 }

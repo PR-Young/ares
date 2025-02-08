@@ -90,6 +90,7 @@ public class GenPropertiesServiceImpl implements IGenPropertiesService {
 
     @Override
     public GenProperties getByUser() {
-        return converter.convert(genPropertiesDao.getByUser(SecurityUtils.getUser().getId()), GenProperties.class);
+        GenPropertiesDto genPropertiesDto = genPropertiesDao.getByUser(SecurityUtils.getUser().getId());
+        return converter.convert(genPropertiesDto, GenProperties.class);
     }
 }

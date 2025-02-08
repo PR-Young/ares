@@ -21,28 +21,42 @@
 package com.ares.core.persistence.entity;
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-@Schema(title = "SysLoginInfo对象", description = "")
 public class SysLoginInfoDto extends BaseModel {
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String browser;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String ipAddr;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String loginLocation;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private Date loginTime;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String msg;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String os;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String status;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String userName;
 }

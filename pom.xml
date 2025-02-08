@@ -30,7 +30,7 @@
     <properties>
         <ares-core.version>3.0.0</ares-core.version>
         <ares-flowable.version>3.0.0</ares-flowable.version>
-        <ares-generator.version>3.0.0</ares-generator.version>
+        <ares-generator.version>3.1.0</ares-generator.version>
         <ares-message.version>3.0.0</ares-message.version>
         <ares-neo.version>2.0.0</ares-neo.version>
         <ares-job.version>3.0.0</ares-job.version>

@@ -93,7 +93,7 @@
                 `MODIFY_TIME_` = #{modifyTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where `Id` = #{id,jdbcType=BIGINT}
+        where `ID_` = #{id,jdbcType=BIGINT}
     </update>
 
     <delete id="deleteByIds" parameterType="java.util.List">
@@ -142,12 +142,13 @@
         </where>
     </select>
 
-    <select id="getByUser" resultType="com.ares.generator.persistence.entity.GenPropertiesDto">
+    <select id="getByUser" parameterType="java.lang.Long" resultMap="GenProperties">
         select
         <include refid="Base_Column_List"/>
         from `gen_properties`
         <where>
             `CREATOR_` = #{userId,jdbcType=BIGINT}
         </where>
+        limit 1
     </select>
 </mapper>

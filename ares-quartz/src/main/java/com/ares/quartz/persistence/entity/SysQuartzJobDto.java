@@ -21,37 +21,22 @@ package com.ares.quartz.persistence.entity;
 
 import com.ares.core.model.base.BaseModel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Schema(title = "SysQuartzJob对象", description = "定时任务")
 public class SysQuartzJobDto extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "任务名称", required = true)
-    @NotEmpty(message = "任务名称不能为空")
     private String jobName;
-    @Schema(description = "任务组别", required = true)
-    @NotEmpty(message = "任务组别不能为空")
     private String jobGroup;
-    @Schema(description = "目标类", required = true)
-    @NotEmpty(message = "目标类不能为空")
     private String invokeTarget;
-    @Schema(description = "corn表达式", required = true)
-    @NotEmpty(message = "corn表达式不能为空")
     private String cronExpression;
-    @Schema(description = "执行状态", required = true)
-    @NotEmpty(message = "执行状态不能为空")
     private String conCurrent;
-    @Schema(description = "任务状态", required = true)
     private Integer status;
-    @Schema(description = "描述")
     private String description;
 
 }

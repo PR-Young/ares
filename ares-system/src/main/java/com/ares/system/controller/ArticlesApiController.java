@@ -25,7 +25,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.system.model.query.ArticlesQuery;
-import com.ares.system.persistence.entity.Articles;
+import com.ares.system.model.vo.Articles;
 import com.ares.system.persistence.service.IArticlesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

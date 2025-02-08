@@ -12,10 +12,11 @@ import java.util.Date;
 * @date: ${createTime}
 **/
 @Data
-@Schema(title = "${entityName}Dto对象",description = "")
 public class ${entityName}Dto extends BaseModel{
 <#list columns as column>
-    @Schema(description = "")
+    /**
+    *
+    */
     private ${column.type} ${column.name};
 </#list>
 }

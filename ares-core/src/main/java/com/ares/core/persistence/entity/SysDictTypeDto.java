@@ -19,19 +19,14 @@
 package com.ares.core.persistence.entity;
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "SysDictType对象", description = "字典类别")
 public class SysDictTypeDto extends BaseModel {
     private static final long serialVersionUID = -8641334815971550904L;
-    @Schema(description = "字典名称")
+
     private String dictName;
-    @Schema(description = "字典类别")
     private String dictType;
-    @Schema(description = "状态")
     private String status;
-    @Schema(description = "备注")
     private String remark;
 }

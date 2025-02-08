@@ -19,15 +19,12 @@
 package com.ares.core.persistence.entity;
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "SysPost对象", description = "岗位对象")
 public class SysPostDto extends BaseModel {
     private static final long serialVersionUID = -5311455714157532240L;
-    @Schema(description = "岗位编号")
+
     private String postCode;
-    @Schema(description = "岗位名称")
     private String postName;
 }

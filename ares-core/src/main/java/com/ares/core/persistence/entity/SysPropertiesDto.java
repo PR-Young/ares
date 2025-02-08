@@ -20,21 +20,15 @@ package com.ares.core.persistence.entity;
 
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "SysProperties对象", description = "系统参数")
 public class SysPropertiesDto extends BaseModel {
     private static final long serialVersionUID = -8344592553043367264L;
-    @Schema(description = "参数别名")
+
     private String alias;
-    @Schema(description = "参数描述")
     private String description;
-    @Schema(description = "参数分组")
     private String group;
-    @Schema(description = "参数名称")
     private String name;
-    @Schema(description = "参数值")
     private String value;
 }

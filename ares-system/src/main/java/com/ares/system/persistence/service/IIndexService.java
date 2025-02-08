@@ -18,8 +18,8 @@
 
 package com.ares.system.persistence.service;
 
-import com.ares.system.persistence.entity.PanelGroup;
-import com.ares.system.persistence.entity.line.LineChart;
+import com.ares.system.model.PanelGroup;
+import com.ares.system.model.line.LineChart;
 
 import java.util.List;
 import java.util.Map;

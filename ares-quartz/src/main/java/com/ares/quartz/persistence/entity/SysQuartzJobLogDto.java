@@ -19,38 +19,25 @@
 package com.ares.quartz.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@Schema(title = "SysQuartzJobLog对象", description = "任务日志")
 public class SysQuartzJobLogDto implements Serializable {
-    @Schema(description = "主键")
     private Long id;
-    @Schema(description = "任务名称")
     private String jobName;
-    @Schema(description = "任务分组")
     private String jobGroup;
-    @Schema(description = "目标类")
     private String invokeTarget;
-    @Schema(description = "任务消息")
     private String jobMessage;
-    @Schema(description = "任务状态")
     private Integer status;
-    @Schema(description = "异常信息")
     private String exceptionInfo;
-    @Schema(description = "开始时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date startTime;
-    @Schema(description = "完成时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date finishTime;
-    @Schema(description = "开始时间")
     private String beginTime;
-    @Schema(description = "结束时间")
     private String endTime;
 
 }

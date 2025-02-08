@@ -16,17 +16,34 @@
  *  *****************************************************************************
  */
 
-package com.ares.system.persistence.entity.line;
+package com.ares.system.model.vo;
 
+import com.ares.core.model.base.BaseModel;
+import com.ares.system.persistence.entity.ArticlesDto;
+import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 
-/**
- * @description:
- * @author: Young
- * @date: 2020/09/14
- * @see: com.ares.system.persistence.model.line Legend.java
- **/
 @Data
-public class Legend {
-    private String[] data;
+@AutoMapper(target = ArticlesDto.class)
+public class Articles extends BaseModel {
+    /**
+     * 
+     */
+    private String content;
+    /**
+     * 
+     */
+    private String name;
+    /**
+     * 
+     */
+    private String status;
+    /**
+     * 
+     */
+    private String type;
+    /**
+     * 
+     */
+    private String title;
 }

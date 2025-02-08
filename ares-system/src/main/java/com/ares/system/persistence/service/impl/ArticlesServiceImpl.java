@@ -20,11 +20,13 @@ package com.ares.system.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.system.model.query.ArticlesQuery;
+import com.ares.system.model.vo.Articles;
 import com.ares.system.persistence.dao.IArticlesDao;
-import com.ares.system.persistence.entity.Articles;
+import com.ares.system.persistence.entity.ArticlesDto;
 import com.ares.system.persistence.service.IArticlesService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,16 +39,18 @@ import java.util.Map;
 public class ArticlesServiceImpl implements IArticlesService {
 
     private IArticlesDao articlesDao;
+    private Converter converter;
 
     @Autowired
-    public ArticlesServiceImpl(IArticlesDao articlesDao) {
+    public ArticlesServiceImpl(IArticlesDao articlesDao, Converter converter) {
         this.articlesDao = articlesDao;
+        this.converter = converter;
     }
 
     @Override
     public PageInfo<Articles> list(int pageNo, int pageSize, Map<String, Object> map) {
         PageHelper.startPage(pageNo, pageSize);
-        List<Articles> lists = articlesDao.list(map);
+        List<Articles> lists = converter.convert(articlesDao.list(map), Articles.class);
         PageInfo<Articles> pageInfo = new PageInfo<>(lists);
         return pageInfo;
     }
@@ -55,13 +59,15 @@ public class ArticlesServiceImpl implements IArticlesService {
     public void insert(Articles obj) {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
-        articlesDao.insert(obj);
+        ArticlesDto articlesDto = converter.convert(obj, ArticlesDto.class);
+        articlesDao.insert(articlesDto);
     }
 
     @Override
     public void update(Articles obj) {
         obj.setModifyTime(new Date());
-        articlesDao.update(obj);
+        ArticlesDto articlesDto = converter.convert(obj, ArticlesDto.class);
+        articlesDao.update(articlesDto);
     }
 
     @Override
@@ -71,12 +77,12 @@ public class ArticlesServiceImpl implements IArticlesService {
 
     @Override
     public Articles getById(Long id) {
-        return articlesDao.getById(id);
+        return converter.convert(articlesDao.getById(id), Articles.class);
     }
 
     @Override
     public List<Articles> list(ArticlesQuery obj) {
-        List<Articles> lists = articlesDao.selectList(obj);
+        List<Articles> lists = converter.convert(articlesDao.selectList(obj), Articles.class);
         return lists;
     }
 

@@ -21,14 +21,16 @@
 package com.ares.core.persistence.entity;
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "SysTenantRoles对象", description = "")
 public class SysTenantUsersDto extends BaseModel {
-    @Schema(description = "")
+    /**
+     * 
+     */
     private Long tenantId;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private Long userId;
 }

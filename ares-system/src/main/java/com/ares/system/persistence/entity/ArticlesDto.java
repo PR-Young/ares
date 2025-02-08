@@ -19,20 +19,28 @@
 package com.ares.system.persistence.entity;
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "Articles对象", description = "")
-public class Articles extends BaseModel {
-    @Schema(description = "")
+public class ArticlesDto extends BaseModel {
+    /**
+     * 
+     */
     private String content;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String name;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String status;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String type;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String title;
 }

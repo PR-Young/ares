@@ -42,7 +42,7 @@ import com.ares.flowable.persistence.entity.dto.FlowCommentDto;
 import com.ares.flowable.persistence.entity.dto.FlowNextDto;
 import com.ares.flowable.persistence.entity.dto.FlowTaskDto;
 import com.ares.flowable.persistence.entity.dto.FlowViewerDto;
-import com.ares.flowable.persistence.entity.vo.FlowTaskVo;
+import com.ares.flowable.model.vo.FlowTaskVo;
 import com.ares.flowable.persistence.service.IFlowTaskService;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
 import com.ares.flowable.persistence.service.ISysFormDataService;

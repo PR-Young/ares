@@ -22,7 +22,7 @@ import com.ares.blog.persistence.service.IMyBlogService;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.JsonUtils;
 import com.ares.system.model.query.ArticlesQuery;
-import com.ares.system.persistence.entity.Articles;
+import com.ares.system.model.vo.Articles;
 import com.ares.system.persistence.service.IArticlesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

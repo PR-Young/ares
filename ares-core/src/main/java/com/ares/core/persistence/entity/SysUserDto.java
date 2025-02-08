@@ -34,26 +34,19 @@ import java.io.Serializable;
  * @description:
  * @author: Young 2020/01/22
  **/
-@Schema(name = "SysUser", title = "SysUser对象", description = "系统用户")
 public class SysUserDto extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1335150848291052716L;
-    @Schema(description = "帐号")
     @ExcelProperty(value = "帐号", index = 1)
     private String account;
-    @Schema(description = "用户名")
     @ExcelProperty(value = "用户名", index = 2)
     private String userName;
-    @Schema(description = "密码")
     @ExcelIgnore
     private String password;
-    @Schema(description = "电话")
     @ExcelProperty(value = "电话", index = 3)
     private String phoneNumber;
-    @Schema(description = "邮箱")
     @ExcelProperty(value = "邮箱", index = 4)
     private String email;
-    @Schema(description = "头像")
     @ExcelIgnore
     private String avatar;
     @ExcelIgnore
@@ -72,7 +65,6 @@ public class SysUserDto extends BaseModel implements Serializable {
     @JsonSerialize(using = LongJsonSerializer.class)
     @JsonDeserialize(using = LongJsonDeserializer.class)
     private Long postId;
-    @Schema(description = "状态")
     @ExcelIgnore
     private int status;
     @ExcelIgnore

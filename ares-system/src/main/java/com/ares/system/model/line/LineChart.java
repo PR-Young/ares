@@ -18,28 +18,21 @@
  *
  */
 
-package com.ares.core.persistence.entity;
+package com.ares.system.model.line;
 
-import com.alibaba.excel.annotation.ExcelIgnore;
-import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.util.List;
+
+/**
+ * @description:
+ * @author: Young
+ * @date: 2020/09/14
+ * @see: com.ares.system.persistence.model LineChart.java
+ **/
 @Data
-public class SysTenantsDto extends BaseModel {
-    /**
-     * 
-     */
-    private String tenantName;
-    /**
-     * 
-     */
-    private String tenantAlias;
-    /**
-     * 
-     */
-    private String tenantStatus;
-    @ExcelIgnore
-    @Schema(hidden = true)
-    private Long[] userIds;
+public class LineChart {
+    private XAxis xAxis;
+    private Legend legend;
+    private List<Series> series;
 }

@@ -26,8 +26,8 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
-import com.ares.generator.model.vo.GenProperties;
 import com.ares.generator.model.query.GenPropertiesQuery;
+import com.ares.generator.model.vo.GenProperties;
 import com.ares.generator.persistence.service.IGenPropertiesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -69,7 +69,6 @@ public class GenPropertiesApiController extends BaseController {
         return AjaxResult.successData(genPropertiesService.getById(genPropertiesId));
     }
 
-    @SaCheckPermission("genProperties:edit")
     @PostMapping("edit")
     @Operation(summary = "编辑信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object edit(@Validated @RequestBody GenProperties genProperties) throws Exception {
@@ -89,5 +88,15 @@ public class GenPropertiesApiController extends BaseController {
     public Object remove(@PathVariable Long[] genPropertiesIds) {
         genPropertiesService.deleteByIds(Arrays.asList(genPropertiesIds));
         return AjaxResult.success();
+    }
+
+    @GetMapping("basicInfo")
+    @Operation(summary = "获取信息", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
+    public Object getBasicInfo() {
+        GenProperties properties = genPropertiesService.getByUser();
+        if (null == properties) {
+            properties = new GenProperties();
+        }
+        return AjaxResult.successData(properties);
     }
 }

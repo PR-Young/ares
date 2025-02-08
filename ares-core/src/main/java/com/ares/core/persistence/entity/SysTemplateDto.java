@@ -20,21 +20,14 @@ package com.ares.core.persistence.entity;
 
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "SysTemplate对象", description = "系统模版")
 public class SysTemplateDto extends BaseModel {
     private static final long serialVersionUID = 1595294527563638343L;
-    @Schema(description = "模版名称")
     private String name;
-    @Schema(description = "模版类别")
     private String subject;
-    @Schema(description = "模版内容")
     private String text;
-    @Schema(description = "html内容")
     private String html;
-    @Schema(description = "模版参数")
     private String param;
 }

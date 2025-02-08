@@ -19,14 +19,16 @@
 package com.ares.flowable.persistence.entity.dto;
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "SysFormData对象", description = "")
 public class SysFormDataDto extends BaseModel {
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String proInstId;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String formData;
 }

@@ -23,18 +23,13 @@ import com.ares.core.serializer.LongJsonDeserializer;
 import com.ares.core.serializer.LongJsonSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "SysDept对象", description = "部门对象")
 public class SysDeptDto extends BaseModel {
     private static final long serialVersionUID = -2238247302831731612L;
-    @Schema(description = "部门编号")
     private String code;
-    @Schema(description = "部门名称")
     private String deptName;
-    @Schema(description = "父部门Id")
     @JsonSerialize(using = LongJsonSerializer.class)
     @JsonDeserialize(using = LongJsonDeserializer.class)
     private Long parentDeptId;

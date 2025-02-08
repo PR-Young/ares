@@ -21,30 +21,48 @@
 package com.ares.generator.persistence.entity;
 
 import com.ares.core.model.base.BaseModel;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-@Schema(title = "GenProperties对象", description = "")
 public class GenPropertiesDto extends BaseModel {
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String author;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String basePackage;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String controllerPackage;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String daoPackage;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String entityPackage;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String filePrefix;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String fileSuffix;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private Integer genLevel;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String servicePackage;
-    @Schema(description = "")
+    /**
+     * 
+     */
     private String tablePrefix;
 }

@@ -20,10 +20,10 @@ package com.ares.system.persistence.dao;
 
 import com.ares.core.persistence.dao.IBaseDao;
 import com.ares.system.model.query.ArticlesQuery;
-import com.ares.system.persistence.entity.Articles;
+import com.ares.system.persistence.entity.ArticlesDto;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IArticlesDao extends IBaseDao<Articles, ArticlesQuery> {
+public interface IArticlesDao extends IBaseDao<ArticlesDto, ArticlesQuery> {
 
 }
