@@ -22,12 +22,30 @@ package com.ares.core.persistence.entity;
 import com.ares.core.model.base.BaseModel;
 import lombok.Data;
 
+/**
+ * 系统模版
+ */
 @Data
 public class SysTemplateDto extends BaseModel {
     private static final long serialVersionUID = 1595294527563638343L;
+    /**
+     * 模版名称
+     */
     private String name;
+    /**
+     * 模版类别
+     */
     private String subject;
+    /**
+     * 模版内容
+     */
     private String text;
+    /**
+     * html内容
+     */
     private String html;
+    /**
+     * 模版参数
+     */
     private String param;
 }

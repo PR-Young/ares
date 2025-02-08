@@ -23,6 +23,9 @@ package com.ares.core.persistence.entity;
 import com.ares.core.model.base.BaseModel;
 import lombok.Data;
 
+/**
+ *
+ */
 @Data
 public class SysTenantUsersDto extends BaseModel {
     /**

@@ -21,13 +21,34 @@ package com.ares.core.persistence.entity;
 import com.ares.core.model.base.BaseModel;
 import lombok.Data;
 
+/**
+ * 字典数据
+ */
 @Data
 public class SysDictDataDto extends BaseModel {
     private static final long serialVersionUID = 8860820274340442461L;
+    /**
+     * 排序
+     */
     private Integer dictSort;
+    /**
+     * 字典名称
+     */
     private String dictLabel;
+    /**
+     * 字典值
+     */
     private String dictValue;
+    /**
+     * 字典类别
+     */
     private String dictType;
+    /**
+     * 状态
+     */
     private String status;
+    /**
+     * 备注
+     */
     private String remark;
 }

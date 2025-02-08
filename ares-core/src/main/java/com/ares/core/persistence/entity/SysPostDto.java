@@ -21,10 +21,18 @@ package com.ares.core.persistence.entity;
 import com.ares.core.model.base.BaseModel;
 import lombok.Data;
 
+/**
+ * 岗位对象
+ */
 @Data
 public class SysPostDto extends BaseModel {
     private static final long serialVersionUID = -5311455714157532240L;
-
+    /**
+     * 岗位编号
+     */
     private String postCode;
+    /**
+     * 岗位名称
+     */
     private String postName;
 }

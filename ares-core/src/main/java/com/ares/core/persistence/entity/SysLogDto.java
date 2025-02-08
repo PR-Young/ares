@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * @description:
+ * @description: 系统日志
  * @author: Young 2020/01/27
  **/
 @Data
@@ -34,11 +34,28 @@ import java.io.Serializable;
 public class SysLogDto extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = -2925066346168762533L;
-
+    /**
+     * 主机IP
+     */
     private String hostIp;
+    /**
+     * 用户名
+     */
     private String userName;
+    /**
+     * url地址
+     */
     private String url;
+    /**
+     * 操作参数
+     */
     private String operParams;
+    /**
+     * 备注
+     */
     private String notes;
+    /**
+     * 请求方式
+     */
     private String requestMethod;
 }

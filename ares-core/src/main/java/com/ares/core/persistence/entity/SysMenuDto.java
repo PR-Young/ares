@@ -31,29 +31,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 系统菜单
  * @author: Young 2020/01/23
  **/
 @Data
 public class SysMenuDto extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = -7528858814504220374L;
+    /**
+     * 菜单名称
+     */
     private String name;
+    /**
+     * 菜单描述
+     */
     private String description;
+    /**
+     * 菜单地址
+     */
     private String url;
+    /**
+     * 菜单路由
+     */
     private String path;
     /**
      * 
      */
     private Integer isBlank;
-
+    /**
+     * 父菜单
+     */
     @JsonSerialize(using = LongJsonSerializer.class)
     @JsonDeserialize(using = LongJsonDeserializer.class)
     private Long pId;
+    /**
+     * 菜单图标
+     */
     private String icon;
+    /**
+     * 菜单权限
+     */
     private String perms;
+    /**
+     * 菜单分类，0：目录1：菜单2：按钮
+     */
     private Integer type;
+    /**
+     * 菜单排序
+     */
     private Integer order;
+    /**
+     * 是否可见
+     */
     private Integer visible;
 
     private Integer childCount;

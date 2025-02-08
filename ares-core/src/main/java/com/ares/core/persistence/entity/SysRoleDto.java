@@ -25,14 +25,20 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @description:
+ * @description: 系统角色
  * @author: Young 2020/01/25
  **/
 @Data
 public class SysRoleDto extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 3066031349080678671L;
+    /**
+     * 角色名称
+     */
     private String roleName;
+    /**
+     * 角色描述
+     */
     private String description;
 
     /**

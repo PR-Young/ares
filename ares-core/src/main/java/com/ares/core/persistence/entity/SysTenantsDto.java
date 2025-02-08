@@ -25,6 +25,9 @@ import com.ares.core.model.base.BaseModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+/**
+ *
+ */
 @Data
 public class SysTenantsDto extends BaseModel {
     /**

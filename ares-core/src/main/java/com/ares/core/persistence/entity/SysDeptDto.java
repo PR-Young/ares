@@ -25,11 +25,23 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
+/**
+ * 部门对象
+ */
 @Data
 public class SysDeptDto extends BaseModel {
     private static final long serialVersionUID = -2238247302831731612L;
+    /**
+     * 部门编号
+     */
     private String code;
+    /**
+     * 部门名称
+     */
     private String deptName;
+    /**
+     * 父部门Id
+     */
     @JsonSerialize(using = LongJsonSerializer.class)
     @JsonDeserialize(using = LongJsonDeserializer.class)
     private Long parentDeptId;

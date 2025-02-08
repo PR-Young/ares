@@ -31,22 +31,40 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 
 /**
- * @description:
+ * @description: 系统用户
  * @author: Young 2020/01/22
  **/
 public class SysUserDto extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1335150848291052716L;
+    /**
+     * 帐号
+     */
     @ExcelProperty(value = "帐号", index = 1)
     private String account;
+    /**
+     * 用户名
+     */
     @ExcelProperty(value = "用户名", index = 2)
     private String userName;
+    /**
+     * 密码
+     */
     @ExcelIgnore
     private String password;
+    /**
+     * 电话
+     */
     @ExcelProperty(value = "电话", index = 3)
     private String phoneNumber;
+    /**
+     * 邮箱
+     */
     @ExcelProperty(value = "邮箱", index = 4)
     private String email;
+    /**
+     * 头像
+     */
     @ExcelIgnore
     private String avatar;
     @ExcelIgnore
@@ -65,6 +83,9 @@ public class SysUserDto extends BaseModel implements Serializable {
     @JsonSerialize(using = LongJsonSerializer.class)
     @JsonDeserialize(using = LongJsonDeserializer.class)
     private Long postId;
+    /**
+     * 状态
+     */
     @ExcelIgnore
     private int status;
     @ExcelIgnore

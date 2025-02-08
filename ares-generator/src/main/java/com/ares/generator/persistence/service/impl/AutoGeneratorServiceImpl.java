@@ -22,11 +22,11 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
 import com.ares.config.gen.GeneratorConfig;
-import com.ares.generator.model.vo.GenProperties;
 import com.ares.generator.model.query.Column;
 import com.ares.generator.model.query.ColumnType;
 import com.ares.generator.model.query.DataType;
 import com.ares.generator.model.query.EntityDataModel;
+import com.ares.generator.model.vo.GenProperties;
 import com.ares.generator.persistence.service.IAutoGeneratorService;
 import com.ares.generator.persistence.service.IGenPropertiesService;
 import freemarker.template.Configuration;
@@ -42,7 +42,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -317,7 +316,6 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
         dataModel.setDaoPackage(daoPackage);
         dataModel.setServicePackage(servicePackage);
         dataModel.setControllerPackage(controllerPackage);
-        dataModel.setCreateTime(new Date().toString());
         dataModel.setAuthor(config.getAuthor());
         if (StrUtil.isNotBlank(tablePrefix)) {
             dataModel.setEntityName(StrUtil.upperFirst(StrUtil.toCamelCase(StrUtil.removePrefix(tableName, tablePrefix))));
