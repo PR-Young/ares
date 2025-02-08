@@ -20,9 +20,9 @@
 
 package com.ares.generator.model.query;
 
+import com.ares.core.utils.DateUtils;
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,7 +61,7 @@ public class EntityDataModel {
     /**
      * 创建时间
      */
-    private String createTime = new Date().toString();
+    private String createTime = DateUtils.getTime();
 
     /**
      * 表名
