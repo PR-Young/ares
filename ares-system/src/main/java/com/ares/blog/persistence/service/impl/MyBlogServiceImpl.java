@@ -24,6 +24,7 @@ import com.ares.core.utils.JsonUtils;
 import com.ares.system.model.query.ArticlesQuery;
 import com.ares.system.model.vo.Articles;
 import com.ares.system.persistence.service.IArticlesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,7 @@ import java.util.List;
  * @date: 2021/04/19
  * @see: com.ares.blog.persistence.service.MyBlogService.java
  **/
+@Slf4j
 @Service
 public class MyBlogServiceImpl implements IMyBlogService {
     private IArticlesService articlesService;
@@ -50,38 +52,30 @@ public class MyBlogServiceImpl implements IMyBlogService {
     @Override
     public String getUpdateInfo() {
         StringBuffer sb = new StringBuffer();
-        try {
-            String versionInfo = sysPropertiesService.getValueByAlias("version.info");
-            String path = versionInfo.replace("/", File.separator);
-            FileInputStream fileInputStream = new FileInputStream(path);
-            InputStreamReader reader = new InputStreamReader(fileInputStream, "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(reader);
+        String versionInfo = sysPropertiesService.getValueByAlias("version.info");
+        String path = versionInfo.replace("/", File.separator);
+        try (FileInputStream fileInputStream = new FileInputStream(path);
+             InputStreamReader reader = new InputStreamReader(fileInputStream, "UTF-8");
+             BufferedReader bufferedReader = new BufferedReader(reader)) {
             String result = null;
             while ((result = bufferedReader.readLine()) != null) {
                 sb.append(result).append(" \n");
             }
-
-            bufferedReader.close();
-            reader.close();
-            fileInputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("getUpdateInfo error: ", e);
         }
         return sb.toString();
     }
 
     @Override
     public boolean saveUpdateInfo(String content) {
-        try {
-            String versionInfo = sysPropertiesService.getValueByAlias("version.info");
-            String path = versionInfo.replace("/", File.separator);
-            FileOutputStream fileOutputStream = new FileOutputStream(path);
-            OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream, "UTF-8");
+        String versionInfo = sysPropertiesService.getValueByAlias("version.info");
+        String path = versionInfo.replace("/", File.separator);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(path);
+             OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream, "UTF-8");) {
             writer.write(content);
-            writer.close();
-            fileOutputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("saveUpdateInfo error: ", e);
             return false;
         }
         return true;

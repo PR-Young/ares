@@ -19,9 +19,8 @@ import org.springframework.util.ClassUtils;
 
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @description:
@@ -34,45 +33,39 @@ public class MyBatisConfig {
     @Autowired
     private Environment env;
 
-    static final String DEFAULT_RESOURCE_PATTERN = "**/*.class";
+    private static final String DEFAULT_RESOURCE_PATTERN = "**/*.class";
+    private static final String CLASSPATH_ALL_URL_PREFIX = "classpath*:";
+
 
     public static String setTypeAliasesPackage(String typeAliasesPackage) {
+        if (typeAliasesPackage == null || typeAliasesPackage.trim().isEmpty()) {
+            throw new IllegalArgumentException("typeAliasesPackage 不能为空");
+        }
         ResourcePatternResolver resolver = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
         MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory(resolver);
-        List<String> allResult = new ArrayList<String>();
+        Set<String> allResult = new HashSet<>();
         try {
             for (String aliasesPackage : typeAliasesPackage.split(",")) {
-                List<String> result = new ArrayList<String>();
-                aliasesPackage = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX
+                aliasesPackage = CLASSPATH_ALL_URL_PREFIX
                         + ClassUtils.convertClassNameToResourcePath(aliasesPackage.trim()) + "/" + DEFAULT_RESOURCE_PATTERN;
                 Resource[] resources = resolver.getResources(aliasesPackage);
                 if (resources != null && resources.length > 0) {
-                    MetadataReader metadataReader = null;
                     for (Resource resource : resources) {
                         if (resource.isReadable()) {
-                            metadataReader = metadataReaderFactory.getMetadataReader(resource);
-                            try {
-                                result.add(Class.forName(metadataReader.getClassMetadata().getClassName()).getPackage().getName());
-                            } catch (ClassNotFoundException e) {
-                                e.printStackTrace();
-                            }
+                            MetadataReader metadataReader = metadataReaderFactory.getMetadataReader(resource);
+                            allResult.add(metadataReader.getClassMetadata().getClassName().substring(0, metadataReader.getClassMetadata().getClassName().lastIndexOf(".")));
+
                         }
                     }
                 }
-                if (result.size() > 0) {
-                    HashSet<String> hashResult = new HashSet<String>(result);
-                    allResult.addAll(hashResult);
-                }
             }
-            if (allResult.size() > 0) {
-                typeAliasesPackage = String.join(",", (String[]) allResult.toArray(new String[0]));
-            } else {
-                throw new RuntimeException("mybatis typeAliasesPackage 路径扫描错误,参数typeAliasesPackage:" + typeAliasesPackage + "未找到任何包");
+            if (allResult.isEmpty()) {
+                throw new RuntimeException("mybatis typeAliasesPackage 路径扫描错误, 参数 typeAliasesPackage: " + typeAliasesPackage + " 未找到任何包");
             }
+            return String.join(",", allResult);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("扫描 mybatis typeAliasesPackage 时发生错误", e);
         }
-        return typeAliasesPackage;
     }
 
     @Bean

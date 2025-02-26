@@ -23,17 +23,19 @@ package com.ares.message.model;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Iterator;
 import java.util.List;
 
 /**
+ * @param <T>
  * @description:
  * @author: Young
  * @date: 2023/1/30
  * @see: com.ares.message.utils.DisruptorQueueUtil.java
- * @param <T>
  **/
+@Slf4j
 @Data
 public class DisruptorQueue<T> {
 
@@ -53,7 +55,7 @@ public class DisruptorQueue<T> {
                 AresMessageEvent<T> event = this.ringBuffer.get(next);
                 event.setObj(obj);
             } catch (Exception e) {
-                e.printStackTrace();
+                log.error("add error:", e);
             } finally {
                 this.ringBuffer.publish(next);
             }

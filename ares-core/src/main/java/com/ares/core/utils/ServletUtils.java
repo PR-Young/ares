@@ -24,6 +24,7 @@ import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -37,6 +38,7 @@ import java.util.Map;
 /**
  * 客户端工具类
  */
+@Slf4j
 public class ServletUtils {
     /**
      * 获取String参数
@@ -105,7 +107,7 @@ public class ServletUtils {
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(string);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("renderString error:", e);
         }
         return null;
     }
@@ -162,7 +164,7 @@ public class ServletUtils {
             }
             map = JSON.parseObject(sb.toString(), Map.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("getParameter error: ", e);
         }
         return map;
     }

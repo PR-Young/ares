@@ -52,7 +52,7 @@ public class DisruptorMessageServiceImpl implements IDisruptorMessageService {
                 event.setObj(message);
                 logger.info("存入" + message + "到队列中。");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("send error: ", e);
             } finally {
                 aresStringMessageModel.publish(next);
             }

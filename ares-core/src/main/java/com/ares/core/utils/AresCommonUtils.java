@@ -25,6 +25,7 @@ import com.ares.core.model.base.Constants;
 import com.ares.redis.utils.RedisUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -39,6 +40,7 @@ import java.util.Map;
  * @description: 公共方法
  * @author: Young 2020/05/15
  **/
+@Slf4j
 public final class AresCommonUtils {
     private AresCommonUtils() {
     }
@@ -73,7 +75,7 @@ public final class AresCommonUtils {
             }
             return code;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("getCode error: ", e);
             return null;
         }
     }

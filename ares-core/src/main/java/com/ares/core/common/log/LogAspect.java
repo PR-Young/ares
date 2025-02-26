@@ -111,17 +111,16 @@ public class LogAspect {
                 String ip = IpUtils.getIpAddr(ServletUtils.getRequest());
 
                 SysUser currentUser = SecurityUtils.getUser();
-                if (null != currentUser) {
-                    sysLog.setHostIp(ip)
-                            .setUrl(url)
-                            .setUserName(currentUser.getUserName())
-                            .setRequestMethod(ServletUtils.getRequest().getMethod());
-                    if (null != e) {
-                        sysLog.setNotes(StringUtils.substring(e.getMessage(), 0, 2000));
-                    } else {
-                        setRequestValue(joinPoint, sysLog);
-                    }
+                sysLog.setHostIp(ip)
+                        .setUrl(url)
+                        .setUserName(currentUser.getUserName())
+                        .setRequestMethod(ServletUtils.getRequest().getMethod());
+                if (null != e) {
+                    sysLog.setNotes(StringUtils.substring(e.getMessage(), 0, 2000));
+                } else {
+                    setRequestValue(joinPoint, sysLog);
                 }
+
             }
             long beginTime = DATE_THREAD_LOCAL.get().getTime();
             long endTime = System.currentTimeMillis();

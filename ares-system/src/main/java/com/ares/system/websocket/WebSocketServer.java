@@ -21,13 +21,13 @@ package com.ares.system.websocket;
 import com.ares.core.persistence.service.ISysNoticeService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
+import jakarta.websocket.*;
+import jakarta.websocket.server.PathParam;
+import jakarta.websocket.server.ServerEndpoint;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import jakarta.websocket.*;
-import jakarta.websocket.server.PathParam;
-import jakarta.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -57,8 +57,7 @@ public class WebSocketServer {
             try {
                 sendMessage("连接成功");
             } catch (IOException e) {
-                e.printStackTrace();
-                log.error("websocket IO异常");
+                log.error("websocket IO异常", e);
             }
         }
     }
@@ -88,8 +87,7 @@ public class WebSocketServer {
                 try {
                     server.sendMessage(message);
                 } catch (IOException e) {
-                    e.printStackTrace();
-                    continue;
+                    log.error("IO异常", e);
                 }
             }
         }
@@ -103,7 +101,7 @@ public class WebSocketServer {
      */
     @OnError
     public void onError(Session session, Throwable error) {
-        log.error("发生错误");
+        log.error("发生错误", error);
         error.printStackTrace();
     }
 
@@ -129,8 +127,7 @@ public class WebSocketServer {
                         server.sendMessage(message);
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
-                    continue;
+                    log.error("IO异常", e);
                 }
             }
         }
@@ -152,8 +149,7 @@ public class WebSocketServer {
                         server.sendMessage(String.valueOf(noticeNum));
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
-                    continue;
+                    log.error("IO异常", e);
                 }
             }
         }

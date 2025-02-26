@@ -1,6 +1,7 @@
 package com.ares.core.common.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2020/07/10
  * @see: com.ares.core.common.datasource.DruidProperties.java
  **/
+@Slf4j
 @Configuration
 public class DruidProperties {
 
@@ -73,7 +75,7 @@ public class DruidProperties {
             dataSource.setTestOnReturn(testOnReturn);
             dataSource.setFilters(filters);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("dataSource error:", e);
         }
         return dataSource;
     }

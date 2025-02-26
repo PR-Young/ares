@@ -337,7 +337,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      */
     public static String uncapitalize(String str) {
         int strLen = str.length();
-        if (str == null || strLen == 0) {
+        if (strLen == 0) {
             return str;
         }
         return new StrBuilder(strLen).append(Character.toLowerCase(str.charAt(0))).append(str.substring(1)).toString();

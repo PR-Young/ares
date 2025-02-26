@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.function.Supplier;
 
 /**
@@ -67,10 +66,8 @@ public class SendMessageServiceImpl implements ISendMessageService {
 
         try {
             logger.info(String.valueOf(future.get()));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            logger.error("sendAsync error: ", e);
         }
 
     }

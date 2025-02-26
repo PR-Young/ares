@@ -27,11 +27,11 @@ import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * @param <T>
  * @description:
  * @author: Young
  * @date: 2023/1/30
  * @see: com.ares.message.producer.AresMessageProducer.java
- * @param <T> 
  **/
 public class AresMessageProducer<T> implements Runnable {
     private static Logger logger = LoggerFactory.getLogger(AresMessageProducer.class);
@@ -65,7 +65,7 @@ public class AresMessageProducer<T> implements Runnable {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("run error: ", e);
         } finally {
             logger.info(now() + this.name + "------>:退出线程。");
         }

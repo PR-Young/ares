@@ -170,7 +170,7 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
                 zip.close();
                 deleteFiles(entityDir);
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("error: ", e);
             }
         }
         return outputStream.toByteArray();

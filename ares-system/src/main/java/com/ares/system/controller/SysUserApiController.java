@@ -45,6 +45,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -60,6 +61,7 @@ import java.util.List;
  * @description: 用户
  * @author: Young 2020/05/05
  **/
+@Slf4j
 @RestController
 @RequestMapping("/system/user/*")
 @Tag(name = "SysUserApiController", description = "系统用户API")
@@ -150,7 +152,7 @@ public class SysUserApiController extends BaseController {
         try {
             ExcelUtils.writeExcel(response, userList, fileName, sheetName, SysUser.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("export error: ",e);
         }
     }
 
@@ -163,7 +165,7 @@ public class SysUserApiController extends BaseController {
         try {
             ExcelUtils.writeExcel(response, userList, fileName, sheetName, SysUser.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("importTemplate error: ", e);
         }
     }
 

@@ -73,7 +73,6 @@ public class RedisUtil {
             return true;
         } catch (Exception e) {
             logger.error("redis set {} error ,message {}", key, StringUtils.substring(e.toString(), 0, 2000));
-            e.printStackTrace();
             return false;
         }
     }

@@ -121,7 +121,7 @@ public class FlowDefinitionApiController extends BaseController {
                 ImageIO.write(image, "png", os);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("读取图片文件失败", e);
         } finally {
             try {
                 if (os != null) {
@@ -129,7 +129,7 @@ public class FlowDefinitionApiController extends BaseController {
                     os.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("关闭输出流出错", e);
             }
         }
     }

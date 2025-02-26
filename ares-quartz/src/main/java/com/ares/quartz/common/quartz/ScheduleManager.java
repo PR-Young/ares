@@ -62,9 +62,9 @@ public class ScheduleManager {
     /**
      * 使用SimpleScheduleBuilder创建一个定时任务
      *
-     * @param durability   是否持久化
-     * @param interval     间隔时间，单位秒
-     * @param delay        延迟启动时间，单位秒
+     * @param durability 是否持久化
+     * @param interval   间隔时间，单位秒
+     * @param delay      延迟启动时间，单位秒
      * @return
      */
     public Boolean addJob(boolean durability, int interval, int delay, SysQuartzJob job) {
@@ -82,7 +82,7 @@ public class ScheduleManager {
             scheduler.scheduleJob(trigger);
             return true;
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            log.error("addJob error: ", e);
         }
         return false;
     }
@@ -123,7 +123,7 @@ public class ScheduleManager {
             scheduler.scheduleJob(jobDetail, trigger);
             return true;
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            log.error("addJob error: ", e);
         }
         return false;
     }
@@ -141,7 +141,7 @@ public class ScheduleManager {
             scheduler.pauseJob(key);
             return true;
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            log.error("pause error: ", e);
         }
         return false;
     }
@@ -159,7 +159,7 @@ public class ScheduleManager {
             scheduler.resumeJob(key);
             return true;
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            log.error("start error: ", e);
         }
         return false;
     }
@@ -191,7 +191,7 @@ public class ScheduleManager {
             scheduler.deleteJob(jobKey);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("delete error: ", e);
         }
         return false;
     }
@@ -259,7 +259,7 @@ public class ScheduleManager {
                 return true;
             }
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            log.error("modify error: ", e);
         }
         return false;
     }
@@ -285,7 +285,7 @@ public class ScheduleManager {
             TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroupName);
             return scheduler.getTriggerState(triggerKey).ordinal();
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            log.error("getJobStatus error: ", e);
         }
         return null;
     }
@@ -298,7 +298,7 @@ public class ScheduleManager {
             scheduler.start();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("startAll error: ", e);
         }
         return false;
     }
@@ -313,7 +313,7 @@ public class ScheduleManager {
             }
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("shutdownAll error: ", e);
         }
         return false;
     }

@@ -216,16 +216,28 @@ public class Server {
         long kb = 1024;
         long mb = kb * 1024;
         long gb = mb * 1024;
+        double value = size;
+        String unit = "";
         if (size >= gb) {
-            return String.format("%.1f GB", (float) size / gb);
+            value = (double) size / gb;
+            unit = "GB";
         } else if (size >= mb) {
-            float f = (float) size / mb;
-            return String.format(f > 100 ? "%.0f MB" : "%.1f MB", f);
+            value = (double) size / mb;
+            unit = "MB";
         } else if (size >= kb) {
-            float f = (float) size / kb;
-            return String.format(f > 100 ? "%.0f KB" : "%.1f KB", f);
+            value = (float) size / kb;
+            unit = "KB";
         } else {
             return String.format("%d B", size);
+        }
+        return formatSize(value, unit);
+    }
+
+    private String formatSize(double value, String unit) {
+        if (value > 100) {
+            return String.format("%.0f %s", value, unit);
+        } else {
+            return String.format("%.1f %s", value, unit);
         }
     }
 }

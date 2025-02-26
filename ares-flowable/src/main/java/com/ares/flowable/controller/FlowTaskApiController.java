@@ -196,7 +196,7 @@ public class FlowTaskApiController extends BaseController {
                 ImageIO.write(image, "png", os);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("生成流程图失败", e);
         } finally {
             try {
                 if (os != null) {
@@ -204,7 +204,7 @@ public class FlowTaskApiController extends BaseController {
                     os.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("关闭输出流出错", e);
             }
         }
     }

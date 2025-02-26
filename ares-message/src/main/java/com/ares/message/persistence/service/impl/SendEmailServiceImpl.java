@@ -30,6 +30,7 @@ import jakarta.annotation.Resource;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.StringReader;
@@ -41,6 +42,7 @@ import java.util.stream.Collectors;
  * @description:
  * @author: Young 2020/06/08
  **/
+@Slf4j
 @Service
 public class SendEmailServiceImpl implements ISendEmailService {
 
@@ -63,7 +65,7 @@ public class SendEmailServiceImpl implements ISendEmailService {
                     .build();
             send(message);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("sendEmail error: ", e);
         }
     }
 
@@ -81,7 +83,7 @@ public class SendEmailServiceImpl implements ISendEmailService {
                     .build();
             send(message);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("send error: ", e);
         }
     }
 

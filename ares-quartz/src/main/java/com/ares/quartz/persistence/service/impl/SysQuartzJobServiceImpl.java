@@ -21,8 +21,8 @@ package com.ares.quartz.persistence.service.impl;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.quartz.common.quartz.ScheduleConstants;
 import com.ares.quartz.common.quartz.ScheduleManager;
-import com.ares.quartz.model.vo.SysQuartzJob;
 import com.ares.quartz.model.query.SysQuartzJobQuery;
+import com.ares.quartz.model.vo.SysQuartzJob;
 import com.ares.quartz.persistence.dao.ISysQuartzJobDao;
 import com.ares.quartz.persistence.entity.SysQuartzJobDto;
 import com.ares.quartz.persistence.service.ISysQuartzJobService;
@@ -30,20 +30,20 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.github.linpeilie.Converter;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @description:
  * @author: Young 2020/01/29
  **/
+@Slf4j
 @Service
 public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
 
@@ -61,17 +61,24 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
     @PostConstruct
     public void init() {
         List<SysQuartzJob> jobList = list();
-        if (null != jobList && jobList.size() > 0) {
+        if (CollectionUtils.isNotEmpty(jobList)) {
             for (SysQuartzJob job : jobList) {
                 try {
-                    if (ScheduleConstants.Status.NORMAL.getValue().equals(job.getStatus())) {
-                        if (scheduler.checkJobExist(job)) {
-                            scheduler.delete(scheduler.createTaskName(job.getJobName()), job.getJobGroup());
-                        }
-                        scheduler.addJob(job);
-                    }
+                    Optional.ofNullable(job.getStatus())
+                            .filter(status -> ScheduleConstants.Status.NORMAL.getValue().equals(status))
+                            .ifPresent(status -> {
+                                try {
+                                    if (scheduler.checkJobExist(job)) {
+                                        scheduler.delete(scheduler.createTaskName(job.getJobName()), job.getJobGroup());
+                                    }
+                                    scheduler.addJob(job);
+                                } catch (SchedulerException e) {
+                                    log.error("Failed to init job {}: ", job, e);
+                                }
+
+                            });
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.error("init error: ", e);
                 }
             }
         }
