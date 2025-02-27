@@ -43,7 +43,7 @@ public class TestController {
         log.info("begin " + userId);
         try {
             Thread.sleep(1000);
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             log.info("has some error:", e);
         }
         log.info("end " + userId);

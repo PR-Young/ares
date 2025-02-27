@@ -210,16 +210,16 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
         writer.close();
         log.info("代码生成成功，文件位置：{}", file);
 
-        FileInputStream inputStream = new FileInputStream(new File(file));
-        zip.putNextEntry(new ZipEntry(new File(file).getName()));
-        byte[] buffer = new byte[inputStream.available()];
-        int len;
-        while ((len = inputStream.read(buffer)) > 0) {
-            zip.write(buffer, 0, len);
+        try (FileInputStream inputStream = new FileInputStream(new File(file))) {
+            zip.putNextEntry(new ZipEntry(new File(file).getName()));
+            byte[] buffer = new byte[inputStream.available()];
+            int len;
+            while ((len = inputStream.read(buffer)) > 0) {
+                zip.write(buffer, 0, len);
+            }
+            zip.flush();
+            zip.closeEntry();
         }
-        zip.flush();
-        zip.closeEntry();
-        inputStream.close();
     }
 
     @Override
@@ -285,31 +285,31 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
             sql = "select \"column_name\",udt_name as column_type , '' as column_comment "
                     + "from information_schema.columns where table_schema='" + config.getDatabaseName() + "' and table_name='" + tableName + "' ";
         }
-        PreparedStatement ps = con.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-
         List<Column> columns = new ArrayList<>();
-        while (rs.next()) {
-            Column col = new Column();
-            String name = rs.getString("column_name");
-            String type = rs.getString("column_type");
-            String comment = rs.getString("column_comment");
-            String annotation = null;
-            if ("ID_".equalsIgnoreCase(name)
-                    || "CREATE_TIME_".equalsIgnoreCase(name)
-                    || "MODIFY_TIME_".equalsIgnoreCase(name)
-                    || "CREATOR_".equalsIgnoreCase(name)
-                    || "MODIFIER_".equalsIgnoreCase(name)) {
-                continue;
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Column col = new Column();
+                String name = rs.getString("column_name");
+                String type = rs.getString("column_type");
+                String comment = rs.getString("column_comment");
+                String annotation = null;
+                if ("ID_".equalsIgnoreCase(name)
+                        || "CREATE_TIME_".equalsIgnoreCase(name)
+                        || "MODIFY_TIME_".equalsIgnoreCase(name)
+                        || "CREATOR_".equalsIgnoreCase(name)
+                        || "MODIFIER_".equalsIgnoreCase(name)) {
+                    continue;
+                }
+                type = ColumnType.getJavaType(type);
+                col.setName(StrUtil.lowerFirst(StrUtil.toCamelCase(name)));
+                col.setColumnName(name);
+                col.setType(type);
+                col.setAnnotation(annotation);
+                col.setComment(comment);
+                col.setJdbcType(DataType.getJdbcType(type));
+                columns.add(col);
             }
-            type = ColumnType.getJavaType(type);
-            col.setName(StrUtil.lowerFirst(StrUtil.toCamelCase(name)));
-            col.setColumnName(name);
-            col.setType(type);
-            col.setAnnotation(annotation);
-            col.setComment(comment);
-            col.setJdbcType(DataType.getJdbcType(type));
-            columns.add(col);
         }
         EntityDataModel dataModel = new EntityDataModel();
         dataModel.setEntityPackage(basePackage);

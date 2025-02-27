@@ -33,6 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @description:
@@ -186,7 +187,7 @@ public class IndexServiceImpl implements IIndexService {
     private Integer[] buildData() {
         Integer[] data = new Integer[7];
         for (int i = 0; i < 7; i++) {
-            data[i] = (int) Math.ceil(Math.random() * 100000);
+            data[i] = ThreadLocalRandom.current().nextInt();
         }
         return data;
     }

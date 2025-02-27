@@ -102,7 +102,6 @@ public class WebSocketServer {
     @OnError
     public void onError(Session session, Throwable error) {
         log.error("发生错误", error);
-        error.printStackTrace();
     }
 
     /**
@@ -118,14 +117,18 @@ public class WebSocketServer {
     public static void sendInfo(String message, @PathParam("id") String id) throws IOException {
         log.info("推送消息到窗口" + id + "，推送内容:" + message);
         if (StringUtils.isNotBlank(message)) {
-            for (WebSocketServer server : websocketMap.values()) {
-                try {
-                    // sid为null时群发，不为null则只发一个
-                    if (id == null) {
+            if (id == null) {
+                for (WebSocketServer server : websocketMap.values()) {
+                    try {
                         server.sendMessage(message);
-                    } else if (server.id.equals(id)) {
-                        server.sendMessage(message);
+                    } catch (IOException e) {
+                        log.error("IO异常", e);
                     }
+                }
+            } else {
+                WebSocketServer server = websocketMap.get(id);
+                try {
+                    server.sendMessage(message);
                 } catch (IOException e) {
                     log.error("IO异常", e);
                 }
@@ -140,14 +143,18 @@ public class WebSocketServer {
             Long userId = userService.getUserByName(id).getId();
             ISysNoticeService sysNoticeService = SpringUtils.getBean(ISysNoticeService.class);
             int noticeNum = sysNoticeService.noticeNum(userId);
-            for (WebSocketServer server : websocketMap.values()) {
-                try {
-                    // sid为null时群发，不为null则只发一个
-                    if (id == null) {
+            if (id == null) {
+                for (WebSocketServer server : websocketMap.values()) {
+                    try {
                         server.sendMessage(String.valueOf(noticeNum));
-                    } else if (server.id.equals(id)) {
-                        server.sendMessage(String.valueOf(noticeNum));
+                    } catch (IOException e) {
+                        log.error("IO异常", e);
                     }
+                }
+            } else {
+                WebSocketServer server = websocketMap.get(id);
+                try {
+                    server.sendMessage(String.valueOf(noticeNum));
                 } catch (IOException e) {
                     log.error("IO异常", e);
                 }

@@ -103,17 +103,18 @@ public class SysProfileApiController extends BaseController {
     @Operation(summary = "重置密码", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
     public Object updatePwd(String oldPassword, String newPassword) throws Exception {
         SysUser user = SecurityUtils.getUser();
+        String error = "修改密码异常，请联系管理员";
         if (!user.getPassword().equals(MD5Util.encode(oldPassword))) {
-            return AjaxResult.error("修改密码失败，旧密码错误");
+            error = "修改密码失败，旧密码错误";
         }
         if (user.getPassword().equals(MD5Util.encode(newPassword))) {
-            return AjaxResult.error("新密码不能与旧密码相同");
+            error = "新密码不能与旧密码相同";
         }
         if (userService.updatePassword(user, newPassword) > 0) {
             user.setPassword(MD5Util.encode(newPassword));
             return AjaxResult.success();
         }
-        return AjaxResult.error("修改密码异常，请联系管理员");
+        return AjaxResult.error(error);
     }
 
     /**
@@ -139,14 +140,14 @@ public class SysProfileApiController extends BaseController {
         File file = new File(EncryptUtils.decode(path));
         OutputStream toClient = response.getOutputStream();
         if (file.exists()) {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            int i = fileInputStream.available();
-            byte[] data;
-            data = new byte[i];
-            fileInputStream.read(data);
-            fileInputStream.close();
-            response.setContentType("image/*");
-            toClient.write(data);
+            try (FileInputStream fileInputStream = new FileInputStream(file)) {
+                int i = fileInputStream.available();
+                byte[] data;
+                data = new byte[i];
+                fileInputStream.read(data);
+                response.setContentType("image/*");
+                toClient.write(data);
+            }
         } else {
             toClient.write(new byte[0]);
         }

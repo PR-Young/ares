@@ -69,7 +69,7 @@ public class LoginApiController {
 
     private String prefix = "";
     // token 过期时间一个月
-    private static final long EXPIRE = 7 * 24 * 60 * 60;
+    private static final long EXPIRE = (long) 7 * 24 * 60 * 60;
 
     private ISysUserService userService;
     private ISysRoleService roleService;

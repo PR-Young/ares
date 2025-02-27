@@ -40,7 +40,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -50,6 +52,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
 public class SysGlobalExceptionHandler {
+    private static final Set<String> NOT_LOGIN_EXCEPTION_TYPES = new HashSet<>(Arrays.asList(
+            NotLoginException.INVALID_TOKEN_MESSAGE,
+            NotLoginException.BE_REPLACED_MESSAGE,
+            NotLoginException.DEFAULT_MESSAGE,
+            NotLoginException.KICK_OUT_MESSAGE,
+            NotLoginException.TOKEN_TIMEOUT_MESSAGE,
+            NotLoginException.NOT_TOKEN_MESSAGE));
+
 
     @ExceptionHandler(value = BindException.class)
     public Object handleNotValidException(HttpServletRequest request, HttpServletResponse response, BindException e) {
@@ -80,12 +90,7 @@ public class SysGlobalExceptionHandler {
 
     @ExceptionHandler(value = NotLoginException.class)
     public Object handleException(HttpServletRequest request, HttpServletResponse response, NotLoginException e) {
-        if (e.getType().equals(NotLoginException.INVALID_TOKEN_MESSAGE)
-                || e.getType().equals(NotLoginException.BE_REPLACED_MESSAGE)
-                || e.getType().equals(NotLoginException.DEFAULT_MESSAGE)
-                || e.getType().equals(NotLoginException.KICK_OUT_MESSAGE)
-                || e.getType().equals(NotLoginException.TOKEN_TIMEOUT_MESSAGE)
-                || e.getType().equals(NotLoginException.NOT_TOKEN_MESSAGE)) {
+        if (null != e.getType() && NOT_LOGIN_EXCEPTION_TYPES.contains(e.getType())) {
             String token = StpUtil.getTokenValue();
             Long id = Long.valueOf(String.valueOf(RedisUtil.get(token)));
             SysLoginInfo sysLoginInfo = new SysLoginInfo();
