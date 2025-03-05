@@ -51,7 +51,7 @@
         <oshi-core.version>6.4.5</oshi-core.version>
         <jna.version>5.13.0</jna.version>
         <easyexcel.version>3.3.2</easyexcel.version>
-        <sa-token.version>1.37.0</sa-token.version>
+        <sa-token.version>1.40.0</sa-token.version>
         <durid.version>1.2.19</durid.version>
         <springdoc.version>2.2.0</springdoc.version>
         <guava.version>32.1.1-jre</guava.version>
