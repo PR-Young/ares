@@ -27,6 +27,6 @@ import lombok.Data;
 
 @Data
 @Schema(description = "查询实体")
-public class GenPropertiesQuery extends BaseQuery{
+public class GenPropertiesQuery extends BaseQuery {
 
 }

@@ -152,7 +152,7 @@ public class SysUserApiController extends BaseController {
         try {
             ExcelUtils.writeExcel(response, userList, fileName, sheetName, SysUser.class);
         } catch (Exception e) {
-            log.error("export error: ",e);
+            log.error("export error: ", e);
         }
     }
 
