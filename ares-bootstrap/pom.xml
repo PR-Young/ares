@@ -143,5 +143,11 @@
                 <profileActive>test</profileActive>
             </properties>
         </profile>
+        <profile>
+            <id>docker</id>
+            <properties>
+                <profileActive>docker</profileActive>
+            </properties>
+        </profile>
     </profiles>
 </project>
