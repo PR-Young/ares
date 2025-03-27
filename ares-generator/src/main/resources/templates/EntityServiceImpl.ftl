@@ -47,7 +47,7 @@ public class ${entityName}ServiceImpl implements I${entityName}Service {
         obj.setId(SnowflakeIdWorker.getUUID());
         obj.setCreateTime(new Date());
         ${entityName}Dto dto = converter.convert(obj, ${entityName}Dto.class);
-        ${entityName1}Dao.insert(obj);
+        ${entityName1}Dao.insert(dto);
     }
 
     @Override
