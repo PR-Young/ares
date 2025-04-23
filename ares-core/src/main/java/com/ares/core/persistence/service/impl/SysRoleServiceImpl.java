@@ -63,8 +63,14 @@ public class SysRoleServiceImpl implements ISysRoleService {
     }
 
     @Override
-    public List<SysRole> list(SysRoleQuery obj) {
-        return null;
+    public PageInfo<SysRole> list(SysRoleQuery obj) {
+        List<SysRoleDto> lists = sysRoleDao.selectList(obj);
+        PageInfo<SysRoleDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysRole> page = pageInfo.convert(dto -> {
+            SysRole v = converter.convert(dto, SysRole.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

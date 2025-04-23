@@ -29,6 +29,7 @@ import com.ares.core.model.vo.SysNotice;
 import com.ares.core.persistence.service.ISysNoticeService;
 import com.ares.core.utils.StringUtils;
 import com.ares.system.websocket.WebSocketServer;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,7 +40,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 通知
@@ -62,7 +62,7 @@ public class SysNoticeApiController extends BaseController {
     @Operation(summary = "通知公告列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysNoticeQuery sysNotice) {
         startPage();
-        List<SysNotice> sysNoticeList = sysNoticeService.list(sysNotice);
+        PageInfo<SysNotice> sysNoticeList = sysNoticeService.list(sysNotice);
         return getDataTable(sysNoticeList);
     }
 

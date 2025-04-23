@@ -81,9 +81,14 @@ public class ArticlesServiceImpl implements IArticlesService {
     }
 
     @Override
-    public List<Articles> list(ArticlesQuery obj) {
-        List<Articles> lists = converter.convert(articlesDao.selectList(obj), Articles.class);
-        return lists;
+    public PageInfo<Articles> list(ArticlesQuery obj) {
+        List<ArticlesDto> lists = articlesDao.selectList(obj);
+        PageInfo<ArticlesDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<Articles> page = pageInfo.convert(dto -> {
+            Articles v = converter.convert(dto, Articles.class);
+            return v;
+        });
+        return page;
     }
 
 }

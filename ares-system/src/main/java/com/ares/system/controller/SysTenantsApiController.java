@@ -30,6 +30,7 @@ import com.ares.core.model.vo.SysTenants;
 import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.persistence.service.ISysTenantsService;
 import com.ares.core.utils.StringUtils;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -41,7 +42,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 
 @RestController
@@ -63,7 +63,7 @@ public class SysTenantsApiController extends BaseController {
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysTenantsQuery sysTenants) {
         startPage();
-        List<SysTenants> sysTenantsList = sysTenantsService.list(sysTenants);
+        PageInfo<SysTenants> sysTenantsList = sysTenantsService.list(sysTenants);
         return getDataTable(sysTenantsList);
     }
 

@@ -5,6 +5,7 @@ import com.ares.core.model.base.AjaxResult;
 import ${entityPackage}.${entityName};
 import com.ares.core.model.page.TableDataInfo;
 import ${servicePackage}.I${entityName}Service;
+import com.github.pagehelper.PageInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.core.common.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class ${entityName}ApiController extends BaseController {
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(${entityName}Query ${entityName1}) {
         startPage();
-        List<${entityName}> ${entityName1}List = ${entityName1}Service.list(${entityName1});
+        PageInfo<${entityName}> ${entityName1}List = ${entityName1}Service.list(${entityName1});
         return getDataTable(${entityName1}List);
     }
 

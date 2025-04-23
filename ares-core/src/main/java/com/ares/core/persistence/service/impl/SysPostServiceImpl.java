@@ -81,9 +81,14 @@ public class SysPostServiceImpl implements ISysPostService {
     }
 
     @Override
-    public List<SysPost> list(SysPostQuery obj) {
-        List<SysPost> lists = converter.convert(sysPostDao.selectList(obj), SysPost.class);
-        return lists;
+    public PageInfo<SysPost> list(SysPostQuery obj) {
+        List<SysPostDto> lists = sysPostDao.selectList(obj);
+        PageInfo<SysPostDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysPost> page = pageInfo.convert(dto -> {
+            SysPost v = converter.convert(dto, SysPost.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

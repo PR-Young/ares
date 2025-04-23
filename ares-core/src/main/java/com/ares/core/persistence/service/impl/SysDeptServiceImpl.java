@@ -86,9 +86,14 @@ public class SysDeptServiceImpl implements ISysDeptService {
     }
 
     @Override
-    public List<SysDept> list(SysDeptQuery obj) {
-        List<SysDept> lists = converter.convert(sysDeptDao.selectList(obj), SysDept.class);
-        return lists;
+    public PageInfo<SysDept> list(SysDeptQuery obj) {
+        List<SysDeptDto> lists = sysDeptDao.selectList(obj);
+        PageInfo<SysDeptDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysDept> page = pageInfo.convert(dto -> {
+            SysDept v = converter.convert(dto, SysDept.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

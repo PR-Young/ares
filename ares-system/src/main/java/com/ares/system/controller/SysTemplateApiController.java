@@ -28,6 +28,7 @@ import com.ares.core.model.query.SysTemplateQuery;
 import com.ares.core.model.vo.SysTemplate;
 import com.ares.core.persistence.service.ISysTemplateService;
 import com.ares.core.utils.StringUtils;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,7 +39,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 模版
@@ -61,7 +61,7 @@ public class SysTemplateApiController extends BaseController {
     @Operation(summary = "模版列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysTemplateQuery sysTemplate) {
         startPage();
-        List<SysTemplate> sysTemplateList = sysTemplateService.list(sysTemplate);
+        PageInfo<SysTemplate> sysTemplateList = sysTemplateService.list(sysTemplate);
         return getDataTable(sysTemplateList);
     }
 

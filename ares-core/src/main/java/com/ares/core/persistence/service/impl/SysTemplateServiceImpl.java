@@ -80,8 +80,13 @@ public class SysTemplateServiceImpl implements ISysTemplateService {
     }
 
     @Override
-    public List<SysTemplate> list(SysTemplateQuery obj) {
-        List<SysTemplate> lists = converter.convert(sysTemplateDao.selectList(obj), SysTemplate.class);
-        return lists;
+    public PageInfo<SysTemplate> list(SysTemplateQuery obj) {
+        List<SysTemplateDto> lists = sysTemplateDao.selectList(obj);
+        PageInfo<SysTemplateDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysTemplate> page = pageInfo.convert(dto -> {
+            SysTemplate v = converter.convert(dto, SysTemplate.class);
+            return v;
+        });
+        return page;
     }
 }

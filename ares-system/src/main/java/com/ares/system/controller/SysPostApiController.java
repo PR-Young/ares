@@ -27,6 +27,7 @@ import com.ares.core.model.query.SysPostQuery;
 import com.ares.core.model.vo.SysPost;
 import com.ares.core.persistence.service.ISysPostService;
 import com.ares.core.utils.StringUtils;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +38,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 职务
@@ -60,7 +60,7 @@ public class SysPostApiController extends BaseController {
     @Operation(summary = "岗位列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysPostQuery sysPost) {
         startPage();
-        List<SysPost> sysPostList = sysPostService.list(sysPost);
+        PageInfo<SysPost> sysPostList = sysPostService.list(sysPost);
         return getDataTable(sysPostList);
     }
 

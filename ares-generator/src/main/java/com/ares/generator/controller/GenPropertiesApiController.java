@@ -29,6 +29,7 @@ import com.ares.core.utils.StringUtils;
 import com.ares.generator.model.query.GenPropertiesQuery;
 import com.ares.generator.model.vo.GenProperties;
 import com.ares.generator.persistence.service.IGenPropertiesService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,7 +40,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 
 @RestController
@@ -59,7 +59,7 @@ public class GenPropertiesApiController extends BaseController {
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(GenPropertiesQuery genProperties) {
         startPage();
-        List<GenProperties> genPropertiesList = genPropertiesService.list(genProperties);
+        PageInfo<GenProperties> genPropertiesList = genPropertiesService.list(genProperties);
         return getDataTable(genPropertiesList);
     }
 

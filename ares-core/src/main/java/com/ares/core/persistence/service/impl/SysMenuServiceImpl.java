@@ -99,7 +99,7 @@ public class SysMenuServiceImpl implements ISysMenuService {
     }
 
     @Override
-    public List<SysMenu> list(SysMenuQuery obj) {
+    public PageInfo<SysMenu> list(SysMenuQuery obj) {
         return null;
     }
 

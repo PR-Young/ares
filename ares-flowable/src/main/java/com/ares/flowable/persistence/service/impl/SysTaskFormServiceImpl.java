@@ -103,9 +103,14 @@ public class SysTaskFormServiceImpl implements ISysTaskFormService {
     }
 
     @Override
-    public List<SysTaskForm> list(SysTaskFormQuery obj) {
-        List<SysTaskForm> lists = converter.convert(sysTaskFormDao.selectList(obj), SysTaskForm.class);
-        return lists;
+    public PageInfo<SysTaskForm> list(SysTaskFormQuery obj) {
+        List<SysTaskFormDto> lists = sysTaskFormDao.selectList(obj);
+        PageInfo<SysTaskFormDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysTaskForm> page = pageInfo.convert(dto -> {
+            SysTaskForm v = converter.convert(dto, SysTaskForm.class);
+            return v;
+        });
+        return page;
     }
 
 }

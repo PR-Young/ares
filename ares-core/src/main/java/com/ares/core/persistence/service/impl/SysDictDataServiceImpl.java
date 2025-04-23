@@ -80,9 +80,14 @@ public class SysDictDataServiceImpl implements ISysDictDataService {
     }
 
     @Override
-    public List<SysDictData> list(SysDictDataQuery obj) {
-        List<SysDictData> lists = converter.convert(sysDictDataDao.selectList(obj), SysDictData.class);
-        return lists;
+    public PageInfo<SysDictData> list(SysDictDataQuery obj) {
+        List<SysDictDataDto> lists = sysDictDataDao.selectList(obj);
+        PageInfo<SysDictDataDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysDictData> page = pageInfo.convert(dto -> {
+            SysDictData v = converter.convert(dto, SysDictData.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

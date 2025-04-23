@@ -80,8 +80,13 @@ public class SysNoticeReadServiceImpl implements ISysNoticeReadService {
     }
 
     @Override
-    public List<SysNoticeRead> list(SysNoticeReadQuery obj) {
-        List<SysNoticeRead> lists = converter.convert(sysNoticeReadDao.selectList(obj), SysNoticeRead.class);
-        return lists;
+    public PageInfo<SysNoticeRead> list(SysNoticeReadQuery obj) {
+        List<SysNoticeReadDto> lists = sysNoticeReadDao.selectList(obj);
+        PageInfo<SysNoticeReadDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysNoticeRead> page = pageInfo.convert(dto -> {
+            SysNoticeRead v = converter.convert(dto, SysNoticeRead.class);
+            return v;
+        });
+        return page;
     }
 }

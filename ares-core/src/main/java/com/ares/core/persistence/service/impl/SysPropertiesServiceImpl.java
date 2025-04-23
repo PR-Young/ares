@@ -81,9 +81,14 @@ public class SysPropertiesServiceImpl implements ISysPropertiesService {
     }
 
     @Override
-    public List<SysProperties> list(SysPropertiesQuery obj) {
-        List<SysProperties> lists = converter.convert(sysPropertiesDao.selectList(obj), SysProperties.class);
-        return lists;
+    public PageInfo<SysProperties> list(SysPropertiesQuery obj) {
+        List<SysPropertiesDto> lists = sysPropertiesDao.selectList(obj);
+        PageInfo<SysPropertiesDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysProperties> page = pageInfo.convert(dto -> {
+            SysProperties v = converter.convert(dto, SysProperties.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

@@ -30,6 +30,7 @@ import com.ares.core.model.vo.SysRole;
 import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.StringUtils;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -40,7 +41,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 角色
@@ -64,7 +64,7 @@ public class SysRoleApiController extends BaseController {
     @Operation(summary = "角色列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysRoleQuery role) {
         startPage();
-        List<SysRole> roleList = roleService.selectRoleList(role);
+        PageInfo<SysRole> roleList = roleService.list(role);
         return getDataTable(roleList);
     }
 

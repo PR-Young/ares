@@ -27,6 +27,7 @@ import com.ares.core.model.query.SysDeptQuery;
 import com.ares.core.model.vo.SysDept;
 import com.ares.core.persistence.service.ISysDeptService;
 import com.ares.core.utils.StringUtils;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,7 +40,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 部门
@@ -62,7 +62,7 @@ public class SysDeptApiController extends BaseController {
     @Operation(summary = "部门列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysDeptQuery sysDept) {
         startPage();
-        List<SysDept> sysDeptList = sysDeptService.list(sysDept);
+        PageInfo<SysDept> sysDeptList = sysDeptService.list(sysDept);
         return getDataTable(sysDeptList);
     }
 

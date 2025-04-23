@@ -19,9 +19,9 @@
 package com.ares.flowable.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.ares.flowable.model.query.SysDeployFormQuery;
 import com.ares.flowable.model.vo.SysDeployForm;
 import com.ares.flowable.model.vo.SysForm;
-import com.ares.flowable.model.query.SysDeployFormQuery;
 import com.ares.flowable.persistence.dao.ISysDeployFormDao;
 import com.ares.flowable.persistence.entity.SysDeployFormDto;
 import com.ares.flowable.persistence.service.ISysDeployFormService;
@@ -81,9 +81,14 @@ public class SysDeployFormServiceImpl implements ISysDeployFormService {
     }
 
     @Override
-    public List<SysDeployForm> list(SysDeployFormQuery obj) {
-        List<SysDeployForm> lists = converter.convert(sysDeployFormDao.selectList(obj), SysDeployForm.class);
-        return lists;
+    public PageInfo<SysDeployForm> list(SysDeployFormQuery obj) {
+        List<SysDeployFormDto> lists = sysDeployFormDao.selectList(obj);
+        PageInfo<SysDeployFormDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysDeployForm> page = pageInfo.convert(dto -> {
+            SysDeployForm v = converter.convert(dto, SysDeployForm.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

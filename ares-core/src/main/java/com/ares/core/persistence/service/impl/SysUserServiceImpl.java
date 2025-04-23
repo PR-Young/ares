@@ -74,8 +74,14 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public List<SysUser> list(SysUserQuery obj) {
-        return null;
+    public PageInfo<SysUser> list(SysUserQuery obj) {
+        List<SysUserDto> lists = sysUserDao.selectList(obj);
+        PageInfo<SysUserDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysUser> page = pageInfo.convert(dto -> {
+            SysUser v = converter.convert(dto, SysUser.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

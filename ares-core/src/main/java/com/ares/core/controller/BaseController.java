@@ -75,6 +75,14 @@ public class BaseController {
         return rspData;
     }
 
+    protected TableDataInfo getDataTable(PageInfo<?> list) {
+        TableDataInfo rspData = new TableDataInfo();
+        rspData.setCode(HttpStatus.OK.value());
+        rspData.setRows(list.getList());
+        rspData.setTotal(list.getTotal());
+        return rspData;
+    }
+
     protected MapBuilder buildMapBuilder() {
         return new MapBuilder();
     }

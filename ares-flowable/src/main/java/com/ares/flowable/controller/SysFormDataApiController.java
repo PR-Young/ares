@@ -24,9 +24,10 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
-import com.ares.flowable.model.vo.SysFormData;
 import com.ares.flowable.model.query.SysFormDataQuery;
+import com.ares.flowable.model.vo.SysFormData;
 import com.ares.flowable.persistence.service.ISysFormDataService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +38,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 
 @RestController
@@ -57,7 +57,7 @@ public class SysFormDataApiController extends BaseController {
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysFormDataQuery sysFormData) {
         startPage();
-        List<SysFormData> sysFormDataList = sysFormDataService.list(sysFormData);
+        PageInfo<SysFormData> sysFormDataList = sysFormDataService.list(sysFormData);
         return getDataTable(sysFormDataList);
     }
 

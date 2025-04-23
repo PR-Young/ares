@@ -24,12 +24,12 @@ import com.ares.core.utils.JsonUtils;
 import com.ares.system.model.query.ArticlesQuery;
 import com.ares.system.model.vo.Articles;
 import com.ares.system.persistence.service.IArticlesService;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.util.List;
 
 /**
  * @description:
@@ -86,7 +86,7 @@ public class MyBlogServiceImpl implements IMyBlogService {
         ArticlesQuery articles = new ArticlesQuery();
         articles.setType("1");
         articles.setStatus("1");
-        List<Articles> list = articlesService.list(articles);
-        return JsonUtils.toJson(list);
+        PageInfo<Articles> list = articlesService.list(articles);
+        return JsonUtils.toJson(list.getList());
     }
 }

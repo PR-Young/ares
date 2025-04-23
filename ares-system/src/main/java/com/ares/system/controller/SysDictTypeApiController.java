@@ -27,6 +27,7 @@ import com.ares.core.model.query.SysDictTypeQuery;
 import com.ares.core.model.vo.SysDictType;
 import com.ares.core.persistence.service.ISysDictTypeService;
 import com.ares.core.utils.StringUtils;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +38,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 字典
@@ -60,7 +60,7 @@ public class SysDictTypeApiController extends BaseController {
     @Operation(summary = "字典类别列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysDictTypeQuery sysDictType) {
         startPage();
-        List<SysDictType> sysDictTypeList = sysDictTypeService.list(sysDictType);
+        PageInfo<SysDictType> sysDictTypeList = sysDictTypeService.list(sysDictType);
         return getDataTable(sysDictTypeList);
     }
 

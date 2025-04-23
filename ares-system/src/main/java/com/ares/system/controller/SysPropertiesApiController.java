@@ -28,6 +28,7 @@ import com.ares.core.model.query.SysPropertiesQuery;
 import com.ares.core.model.vo.SysProperties;
 import com.ares.core.persistence.service.ISysPropertiesService;
 import com.ares.core.utils.StringUtils;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,7 +39,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 系统参数
@@ -61,7 +61,7 @@ public class SysPropertiesApiController extends BaseController {
     @Operation(summary = "系统参数列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysPropertiesQuery sysProperties) {
         startPage();
-        List<SysProperties> sysPropertiesList = sysPropertiesService.list(sysProperties);
+        PageInfo<SysProperties> sysPropertiesList = sysPropertiesService.list(sysProperties);
         return getDataTable(sysPropertiesList);
     }
 

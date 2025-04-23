@@ -41,6 +41,6 @@ public interface IBaseService<T, Q> {
 
     PageInfo<T> list(int pageNo, int pageSize, Map<String, Object> map);
 
-    List<T> list(Q obj);
+    PageInfo<T> list(Q obj);
 
 }

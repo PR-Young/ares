@@ -99,8 +99,14 @@ public class SysQuartzJobServiceImpl implements ISysQuartzJobService {
     }
 
     @Override
-    public List<SysQuartzJob> list(SysQuartzJobQuery obj) {
-        return null;
+    public PageInfo<SysQuartzJob> list(SysQuartzJobQuery obj) {
+        List<SysQuartzJobDto> sysQuartzJobList = sysQuartzJobDao.selectList(obj);
+        PageInfo<SysQuartzJobDto> pageInfo = new PageInfo<>(sysQuartzJobList);
+        PageInfo<SysQuartzJob> page = pageInfo.convert(dto -> {
+            SysQuartzJob v = converter.convert(dto, SysQuartzJob.class);
+            return v;
+        });
+        return page;
     }
 
 

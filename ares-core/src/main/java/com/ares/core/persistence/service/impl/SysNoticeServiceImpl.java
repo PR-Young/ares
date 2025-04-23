@@ -86,9 +86,14 @@ public class SysNoticeServiceImpl implements ISysNoticeService {
     }
 
     @Override
-    public List<SysNotice> list(SysNoticeQuery obj) {
-        List<SysNotice> lists = converter.convert(sysNoticeDao.selectList(obj), SysNotice.class);
-        return lists;
+    public PageInfo<SysNotice> list(SysNoticeQuery obj) {
+        List<SysNoticeDto> lists = sysNoticeDao.selectList(obj);
+        PageInfo<SysNoticeDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysNotice> page = pageInfo.convert(dto -> {
+            SysNotice v = converter.convert(dto, SysNotice.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

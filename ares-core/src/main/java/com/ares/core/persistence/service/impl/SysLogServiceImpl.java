@@ -24,6 +24,7 @@ import com.ares.core.persistence.dao.ISysLogDao;
 import com.ares.core.persistence.entity.SysLogDto;
 import com.ares.core.persistence.service.ISysLogService;
 import com.ares.core.utils.SnowflakeIdWorker;
+import com.github.pagehelper.PageInfo;
 import io.github.linpeilie.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,8 +57,13 @@ public class SysLogServiceImpl implements ISysLogService {
     }
 
     @Override
-    public List<SysLog> list(SysLogQuery sysLog) {
-        List<SysLog> logList = converter.convert(sysLogDao.list(sysLog), SysLog.class);
-        return logList;
+    public PageInfo<SysLog> list(SysLogQuery sysLog) {
+        List<SysLogDto> list = sysLogDao.list(sysLog);
+        PageInfo<SysLogDto> pageInfo = new PageInfo<>(list);
+        PageInfo<SysLog> page = pageInfo.convert(dto -> {
+            SysLog v = converter.convert(dto, SysLog.class);
+            return v;
+        });
+        return page;
     }
 }

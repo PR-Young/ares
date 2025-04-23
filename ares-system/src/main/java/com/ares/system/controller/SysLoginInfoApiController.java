@@ -29,6 +29,7 @@ import com.ares.core.model.query.SysLoginInfoQuery;
 import com.ares.core.model.vo.SysLoginInfo;
 import com.ares.core.persistence.service.ISysLoginInfoService;
 import com.ares.core.utils.StringUtils;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,7 +40,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 
 @RestController
@@ -59,7 +59,7 @@ public class SysLoginInfoApiController extends BaseController {
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysLoginInfoQuery sysLoginInfo) {
         startPage();
-        List<SysLoginInfo> sysLoginInfoList = sysLoginInfoService.list(sysLoginInfo);
+        PageInfo<SysLoginInfo> sysLoginInfoList = sysLoginInfoService.list(sysLoginInfo);
         return getDataTable(sysLoginInfoList);
     }
 

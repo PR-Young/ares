@@ -37,6 +37,7 @@ import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.ExcelUtils;
 import com.ares.core.utils.StringUtils;
 import com.ares.redis.utils.RedisUtil;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -85,7 +86,7 @@ public class SysUserApiController extends BaseController {
     @Operation(summary = "用户列表", parameters = {@Parameter(schema = @Schema(name = "SysUserQuery"))}, responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysUserQuery user) {
         startPage();
-        List<SysUser> userList = userService.selectUserList(user);
+        PageInfo<SysUser> userList = userService.list(user);
         return getDataTable(userList);
     }
 

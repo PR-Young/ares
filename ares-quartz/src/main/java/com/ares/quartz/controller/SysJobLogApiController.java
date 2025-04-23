@@ -23,9 +23,10 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
-import com.ares.quartz.model.vo.SysQuartzJobLog;
 import com.ares.quartz.model.query.SysQuartzJobLogQuery;
+import com.ares.quartz.model.vo.SysQuartzJobLog;
 import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -35,7 +36,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 任务日志
@@ -58,7 +58,7 @@ public class SysJobLogApiController extends BaseController {
     @Operation(summary = "任务日志列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysQuartzJobLogQuery jobLog) {
         startPage();
-        List<SysQuartzJobLog> list = jobLogService.selectJobLogList(jobLog);
+        PageInfo<SysQuartzJobLog> list = jobLogService.list(jobLog);
         return getDataTable(list);
     }
 

@@ -96,8 +96,13 @@ public class SysLoginInfoServiceImpl implements ISysLoginInfoService {
     }
 
     @Override
-    public List<SysLoginInfo> list(SysLoginInfoQuery obj) {
-        List<SysLoginInfo> lists = converter.convert(sysLoginInfoDao.selectList(obj), SysLoginInfo.class);
-        return lists;
+    public PageInfo<SysLoginInfo> list(SysLoginInfoQuery obj) {
+        List<SysLoginInfoDto> lists = sysLoginInfoDao.selectList(obj);
+        PageInfo<SysLoginInfoDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysLoginInfo> page = pageInfo.convert(dto -> {
+            SysLoginInfo v = converter.convert(dto, SysLoginInfo.class);
+            return v;
+        });
+        return page;
     }
 }

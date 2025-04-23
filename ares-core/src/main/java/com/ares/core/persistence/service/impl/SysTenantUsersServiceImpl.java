@@ -82,9 +82,14 @@ public class SysTenantUsersServiceImpl implements ISysTenantUsersService {
     }
 
     @Override
-    public List<SysTenantUsers> list(SysTenantUsersQuery obj) {
-        List<SysTenantUsers> lists = converter.convert(sysTenantRolesDao.selectList(obj), SysTenantUsers.class);
-        return lists;
+    public PageInfo<SysTenantUsers> list(SysTenantUsersQuery obj) {
+        List<SysTenantUsersDto> lists = sysTenantRolesDao.selectList(obj);
+        PageInfo<SysTenantUsersDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysTenantUsers> page = pageInfo.convert(dto -> {
+            SysTenantUsers v = converter.convert(dto, SysTenantUsers.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

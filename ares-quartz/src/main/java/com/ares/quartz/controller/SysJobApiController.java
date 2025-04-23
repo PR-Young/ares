@@ -25,9 +25,10 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
-import com.ares.quartz.model.vo.SysQuartzJob;
 import com.ares.quartz.model.query.SysQuartzJobQuery;
+import com.ares.quartz.model.vo.SysQuartzJob;
 import com.ares.quartz.persistence.service.ISysQuartzJobService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,7 +40,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 定时任务
@@ -62,7 +62,7 @@ public class SysJobApiController extends BaseController {
     @Operation(summary = "任务列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(SysQuartzJobQuery job) {
         startPage();
-        List<SysQuartzJob> jobList = jobService.selectJobList(job);
+        PageInfo<SysQuartzJob> jobList = jobService.list(job);
         return getDataTable(jobList);
     }
 

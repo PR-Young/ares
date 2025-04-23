@@ -27,6 +27,7 @@ import com.ares.core.utils.StringUtils;
 import com.ares.system.model.query.ArticlesQuery;
 import com.ares.system.model.vo.Articles;
 import com.ares.system.persistence.service.IArticlesService;
+import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +38,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 
 @RestController
@@ -57,7 +57,7 @@ public class ArticlesApiController extends BaseController {
     @Operation(summary = "列表", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = TableDataInfo.class)))})
     public TableDataInfo list(ArticlesQuery articles) {
         startPage();
-        List<Articles> articlesList = articlesService.list(articles);
+        PageInfo<Articles> articlesList = articlesService.list(articles);
         return getDataTable(articlesList);
     }
 

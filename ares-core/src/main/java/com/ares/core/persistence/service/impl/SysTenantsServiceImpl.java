@@ -107,9 +107,14 @@ public class SysTenantsServiceImpl implements ISysTenantsService {
     }
 
     @Override
-    public List<SysTenants> list(SysTenantsQuery obj) {
-        List<SysTenants> lists = converter.convert(sysTenantsDao.selectList(obj), SysTenants.class);
-        return lists;
+    public PageInfo<SysTenants> list(SysTenantsQuery obj) {
+        List<SysTenantsDto> lists = sysTenantsDao.selectList(obj);
+        PageInfo<SysTenantsDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysTenants> page = pageInfo.convert(dto -> {
+            SysTenants v = converter.convert(dto, SysTenants.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

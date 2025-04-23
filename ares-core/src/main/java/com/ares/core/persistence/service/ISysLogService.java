@@ -20,8 +20,7 @@ package com.ares.core.persistence.service;
 
 import com.ares.core.model.query.SysLogQuery;
 import com.ares.core.model.vo.SysLog;
-
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @description:
@@ -31,6 +30,6 @@ public interface ISysLogService {
 
     void insert(SysLog sysLog);
 
-    List<SysLog> list(SysLogQuery sysLog);
+    PageInfo<SysLog> list(SysLogQuery sysLog);
 
 }

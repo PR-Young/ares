@@ -83,9 +83,14 @@ public class GenPropertiesServiceImpl implements IGenPropertiesService {
     }
 
     @Override
-    public List<GenProperties> list(GenPropertiesQuery obj) {
-        List<GenProperties> lists = converter.convert(genPropertiesDao.selectList(obj), GenProperties.class);
-        return lists;
+    public PageInfo<GenProperties> list(GenPropertiesQuery obj) {
+        List<GenPropertiesDto> lists = genPropertiesDao.selectList(obj);
+        PageInfo<GenPropertiesDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<GenProperties> page = pageInfo.convert(dto -> {
+            GenProperties v = converter.convert(dto, GenProperties.class);
+            return v;
+        });
+        return page;
     }
 
     @Override

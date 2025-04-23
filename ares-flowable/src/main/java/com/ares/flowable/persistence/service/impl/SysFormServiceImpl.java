@@ -19,8 +19,8 @@
 package com.ares.flowable.persistence.service.impl;
 
 import com.ares.core.utils.SnowflakeIdWorker;
-import com.ares.flowable.model.vo.SysForm;
 import com.ares.flowable.model.query.SysFormQuery;
+import com.ares.flowable.model.vo.SysForm;
 import com.ares.flowable.persistence.dao.ISysFormDao;
 import com.ares.flowable.persistence.entity.SysFormDto;
 import com.ares.flowable.persistence.service.ISysFormService;
@@ -80,8 +80,13 @@ public class SysFormServiceImpl implements ISysFormService {
     }
 
     @Override
-    public List<SysForm> list(SysFormQuery obj) {
-        List<SysForm> lists = converter.convert(sysFormDao.selectList(obj), SysForm.class);
-        return lists;
+    public PageInfo<SysForm> list(SysFormQuery obj) {
+        List<SysFormDto> lists = sysFormDao.selectList(obj);
+        PageInfo<SysFormDto> pageInfo = new PageInfo<>(lists);
+        PageInfo<SysForm> page = pageInfo.convert(dto -> {
+            SysForm v = converter.convert(dto, SysForm.class);
+            return v;
+        });
+        return page;
     }
 }
