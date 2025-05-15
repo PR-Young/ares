@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 // 查询列表
-export function list${entityName}(query) {
+export function list${entityName}(query : any) {
     return request({
         url: '/ares//list',
         method: 'get',
@@ -10,7 +10,7 @@ export function list${entityName}(query) {
 }
 
 // 查询
-export function get${entityName}(id) {
+export function get${entityName}(id : string) {
     return request({
         url: '/ares//' + id,
         method: 'get'
@@ -18,7 +18,7 @@ export function get${entityName}(id) {
 }
 
 // 新增
-export function add${entityName}(data) {
+export function add${entityName}(data : any) {
     return request({
         url: '/ares//edit',
         method: 'post',
@@ -27,7 +27,7 @@ export function add${entityName}(data) {
 }
 
 // 修改
-export function update${entityName}(data) {
+export function update${entityName}(data : any) {
     return request({
         url: '/ares//edit',
         method: 'post',
@@ -36,7 +36,7 @@ export function update${entityName}(data) {
 }
 
 // 删除
-export function del${entityName}(postId) {
+export function del${entityName}(postId : string) {
     return request({
         url: '/ares//' + postId,
         method: 'delete'
@@ -44,7 +44,7 @@ export function del${entityName}(postId) {
 }
 
 // 导出
-export function export${entityName}(query) {
+export function export${entityName}(query : any) {
     return request({
         url: '/ares//export',
         method: 'get',

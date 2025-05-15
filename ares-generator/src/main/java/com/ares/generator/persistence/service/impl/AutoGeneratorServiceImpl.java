@@ -158,7 +158,7 @@ public class AutoGeneratorServiceImpl implements IAutoGeneratorService {
                     generateCode(entityModel, "EntityMapper.ftl", "", "Mapper.xml", zip);
                     generateCode(entityModel, "EntityApiController.ftl", "", "ApiController.java", zip);
                     generateCode(entityModel, "View.ftl", "", ".vue", zip);
-                    generateCode(entityModel, "View-js.ftl", "", ".js", zip);
+                    generateCode(entityModel, "View-js.ftl", "", ".ts", zip);
                     break;
                 default:
                     break;

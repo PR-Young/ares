@@ -154,7 +154,7 @@ public class GeneratorServiceImpl implements IGeneratorService {
                     entityMapper = generateCode(entityModel, "EntityMapper.ftl", "", "Mapper.xml");
                     entityApiController = generateCode(entityModel, "EntityApiController.ftl", "", "ApiController.java");
                     view = generateCode(entityModel, "View.ftl", "", ".vue");
-                    viewjs = generateCode(entityModel, "View-js.ftl", "", ".js");
+                    viewjs = generateCode(entityModel, "View-js.ftl", "", ".ts");
                     break;
                 default:
                     break;
