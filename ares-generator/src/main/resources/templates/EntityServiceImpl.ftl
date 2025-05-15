@@ -69,7 +69,7 @@ public class ${entityName}ServiceImpl implements I${entityName}Service {
 
     @Override
     public PageInfo<${entityName}> list(${entityName}Query obj) {
-        List<${entityName}> lists = ${entityName1}Dao.selectList(obj);
+        List<${entityName}Dto> lists = ${entityName1}Dao.selectList(obj);
         PageInfo<${entityName}Dto> pageInfo = new PageInfo<>(lists);
         PageInfo<${entityName}> page = pageInfo.convert(dto -> {
             ${entityName} v = converter.convert(dto, ${entityName}.class);
