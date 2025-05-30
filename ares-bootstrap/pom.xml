@@ -52,6 +52,11 @@
             <artifactId>ares-system</artifactId>
             <version>${ares-system.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.ares.ai</groupId>
+            <artifactId>ares-ai</artifactId>
+            <version>${ares-ai.version}</version>
+        </dependency>
         <!--        <dependency>-->
         <!--            <groupId>com.ares.neo4j</groupId>-->
         <!--            <artifactId>ares-neo4j</artifactId>-->

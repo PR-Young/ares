@@ -25,6 +25,7 @@
         <module>ares-generator</module>
         <module>ares-flowable</module>
         <module>ares-bootstrap</module>
+        <module>ares-ai</module>
     </modules>
 
     <properties>
@@ -35,6 +36,7 @@
         <ares-neo.version>2.0.0</ares-neo.version>
         <ares-job.version>3.0.0</ares-job.version>
         <ares-system.version>3.0.0</ares-system.version>
+        <ares-ai.version>1.0.0</ares-ai.version>
         <java.version>17</java.version>
         <mysql.version>8.0.33</mysql.version>
         <mybatis.version>3.0.2</mybatis.version>

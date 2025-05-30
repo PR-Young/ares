@@ -9,6 +9,8 @@ ares
 │
 ├─（※）ares-admin 监控模块
 │
+├─（※）ares-ai ai模块（待完善）
+│
 ├─（※）ares-bootstrap 启动模块
 │
 ├─（※）ares-core 核心模块
