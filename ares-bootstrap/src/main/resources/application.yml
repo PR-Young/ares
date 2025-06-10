@@ -10,7 +10,7 @@ server:
 spring:
   profiles:
     active: @profileActive@
-    include: ares,quartz,message,neo4j,generator,flowable
+    include: ares,quartz,message,neo4j,generator,flowable,flow
   application:
     name: Ares
   devtools:

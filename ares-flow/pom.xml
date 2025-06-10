@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ares</groupId>
+        <artifactId>ares</artifactId>
+        <version>6.0.0</version>
+    </parent>
+
+    <groupId>com.ares.flow</groupId>
+    <artifactId>ares-flow</artifactId>
+    <version>${ares-flow.version}</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <warm-flow.version>1.7.3</warm-flow.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.dromara.warm</groupId>
+            <artifactId>warm-flow-mybatis-sb3-starter</artifactId>
+            <version>${warm-flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dromara.warm</groupId>
+            <artifactId>warm-flow-plugin-ui-sb-web</artifactId>
+            <version>${warm-flow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ares.core</groupId>
+            <artifactId>ares-core</artifactId>
+            <version>${ares-core.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

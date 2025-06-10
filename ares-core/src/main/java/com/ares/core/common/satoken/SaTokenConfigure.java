@@ -23,13 +23,18 @@ import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.filter.FormContentFilter;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -68,7 +73,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                                     "/v2/**", "/error", "/favicon.ico",
                                     "/druid/**", "/actuator/**",
                                     "/model/**", "/editor/**", "/blog/**",
-                                    "/test/**", "/ws/**", "/jmreport/**")
+                                    "/test/**", "/ws/**", "/jmreport/**",
+                                    "/warm-flow-ui/**", "/warm-flow/**")
                             .check(r -> StpUtil.checkLogin());
                 }))
                 .addPathPatterns("/**");
@@ -79,7 +85,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 "/v2/**", "/error", "/favicon.ico",
                 "/druid/**", "/actuator/**",
                 "/model/**", "/editor/**", "/blog/**",
-                "/test/**", "/ws/**", "/jmreport/**");
+                "/test/**", "/ws/**", "/jmreport/**",
+                "/warm-flow-ui/**", "/warm-flow/**");
     }
 
     /**
@@ -121,7 +128,11 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     @Bean
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        SimpleModule simpleModule = new SimpleModule();
+        // Long 转为 String 防止 js 丢失精度
+        simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(simpleModule);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         converter.setObjectMapper(objectMapper);
         return converter;

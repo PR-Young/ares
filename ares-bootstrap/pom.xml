@@ -42,11 +42,11 @@
             <artifactId>ares-generator</artifactId>
             <version>${ares-generator.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.ares.flowable</groupId>
-            <artifactId>ares-flowable</artifactId>
-            <version>${ares-flowable.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.ares.flowable</groupId>-->
+<!--            <artifactId>ares-flowable</artifactId>-->
+<!--            <version>${ares-flowable.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.ares.system</groupId>
             <artifactId>ares-system</artifactId>
@@ -56,6 +56,11 @@
             <groupId>com.ares.ai</groupId>
             <artifactId>ares-ai</artifactId>
             <version>${ares-ai.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ares.flow</groupId>
+            <artifactId>ares-flow</artifactId>
+            <version>${ares-flow.version}</version>
         </dependency>
         <!--        <dependency>-->
         <!--            <groupId>com.ares.neo4j</groupId>-->

@@ -21,10 +21,14 @@ package com.ares.core.common.security;
 import cn.dev33.satoken.stp.StpUtil;
 import com.ares.core.common.exception.UserException;
 import com.ares.core.model.exception.ErrorCode;
+import com.ares.core.model.vo.SysRole;
 import com.ares.core.model.vo.SysUser;
+import com.ares.core.persistence.service.ISysRoleService;
 import com.ares.core.persistence.service.ISysTenantUsersService;
 import com.ares.core.persistence.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
+
+import java.util.List;
 
 /**
  * @description:
@@ -47,6 +51,10 @@ public final class SecurityUtils {
         ISysTenantUsersService tenantUsersService = SpringUtils.getBean(ISysTenantUsersService.class);
         Long tenantId = tenantUsersService.getTenantIdByUserId(user.getId());
         user.setTenantId(tenantId);
+        ISysRoleService sysRoleService = SpringUtils.getBean(ISysRoleService.class);
+        List<SysRole> roles = sysRoleService.getRoleByUserId(user.getId());
+        Long[] roleIds = roles.stream().map(SysRole::getId).toArray(Long[]::new);
+        user.setRoleIds(roleIds);
         return user;
     }
 
