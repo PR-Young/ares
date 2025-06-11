@@ -19,6 +19,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jm.version>1.8.1</jm.version>
+        <outDir>${user.dir}/target/dist</outDir>
     </properties>
 
     <dependencies>
@@ -42,11 +43,11 @@
             <artifactId>ares-generator</artifactId>
             <version>${ares-generator.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.ares.flowable</groupId>-->
-<!--            <artifactId>ares-flowable</artifactId>-->
-<!--            <version>${ares-flowable.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.ares.flowable</groupId>-->
+        <!--            <artifactId>ares-flowable</artifactId>-->
+        <!--            <version>${ares-flowable.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>com.ares.system</groupId>
             <artifactId>ares-system</artifactId>
@@ -109,6 +110,44 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <layout>ZIP</layout>
+                    <includes>
+                        <include>
+                            <groupId>nothing</groupId>
+                            <artifactId>nothing</artifactId>
+                        </include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <!-- 使用assembly打包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <!-- assembly配置文件位置 -->
+                        <descriptor>src/main/assembly/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 打包发布时，跳过单元测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>

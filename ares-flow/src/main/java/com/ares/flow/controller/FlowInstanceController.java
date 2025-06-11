@@ -69,7 +69,7 @@ public class FlowInstanceController {
     }
 
     @DeleteMapping("remove/{ids}")
-    public AjaxResult stopProcessInstance(@PathVariable  Long[] ids ) {
+    public AjaxResult stopProcessInstance(@PathVariable Long[] ids) {
         insService.remove(Arrays.asList(ids));
         return AjaxResult.success();
     }
