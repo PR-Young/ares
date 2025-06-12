@@ -117,7 +117,7 @@
         select
         <include refid="Base_Column_List"/>
         from `sys_deploy_form`
-        where id = #{id}
+        where ID_ = #{id}
     </select>
 
     <select id="selectSysDeployFormByDeployId" resultType="com.ares.flow.persistence.entity.SysFormDto">
@@ -125,6 +125,12 @@
         from sys_form t1
                  left join sys_deploy_form t2 on t1.ID_ = t2.FORM_ID_
         where t2.DEPLOY_ID_ = #{deployId} limit 1
+    </select>
+
+    <select id="isBindForm" resultType="java.lang.String">
+        select ID_
+        from `sys_deploy_form`
+        where DEPLOY_ID_ = #{deployId}
     </select>
 
 </mapper>

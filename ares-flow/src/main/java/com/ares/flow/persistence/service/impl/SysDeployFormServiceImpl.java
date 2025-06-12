@@ -110,4 +110,9 @@ public class SysDeployFormServiceImpl implements ISysDeployFormService {
         return converter.convert(sysDeployFormDao.selectSysDeployFormByDeployId(id), SysForm.class);
     }
 
+    @Override
+    public String isBindForm(String deployId) {
+        return sysDeployFormDao.isBindForm(deployId);
+    }
+
 }

@@ -99,9 +99,15 @@ public class SysFormApiController extends BaseController {
      * 挂载流程表单
      */
     @Operation(summary = "流程表单", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = Object.class)))})
-    @PostMapping("/addDeployForm")
+    @PostMapping("addDeployForm")
     public Object addDeployForm(@RequestBody SysDeployForm sysDeployForm) {
-        deployFormService.insert(sysDeployForm);
+        String isBind = deployFormService.isBindForm(sysDeployForm.getDeployId());
+        if (StringUtils.isBlank(isBind)) {
+            deployFormService.insert(sysDeployForm);
+        } else {
+            sysDeployForm.setId(Long.valueOf(isBind));
+            deployFormService.update(sysDeployForm);
+        }
         return AjaxResult.success();
     }
 }

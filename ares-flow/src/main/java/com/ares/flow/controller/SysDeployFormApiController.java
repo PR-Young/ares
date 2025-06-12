@@ -88,4 +88,9 @@ public class SysDeployFormApiController extends BaseController {
         sysDeployFormService.deleteByIds(Arrays.asList(sysDeployFormIds));
         return AjaxResult.success();
     }
+
+    @GetMapping("getForm/{deployId}")
+    public Object selectFormByDeployId(@PathVariable String deployId) {
+        return AjaxResult.successData(sysDeployFormService.selectSysDeployFormByDeployId(deployId));
+    }
 }

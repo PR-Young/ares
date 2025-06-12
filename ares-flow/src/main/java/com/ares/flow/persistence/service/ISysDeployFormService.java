@@ -30,4 +30,5 @@ public interface ISysDeployFormService extends IBaseService<SysDeployForm, SysDe
 
     SysForm selectSysDeployFormByDeployId(String id);
 
+    String isBindForm(String deployId);
 }

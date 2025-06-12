@@ -53,4 +53,6 @@ public interface ISysDeployFormDao extends IBaseDao<SysDeployFormDto, SysDeployF
      * @return
      */
     SysFormDto selectSysDeployFormByDeployId(String deployId);
+
+    String isBindForm(String deployId);
 }

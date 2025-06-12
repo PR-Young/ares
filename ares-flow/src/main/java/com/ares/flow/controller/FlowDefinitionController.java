@@ -25,7 +25,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.utils.DateUtils;
 import com.ares.flow.model.query.FwDefinition;
-import org.dromara.warm.flow.core.orm.agent.WarmQuery;
+import org.dromara.warm.flow.core.entity.Definition;
 import org.dromara.warm.flow.core.service.ChartService;
 import org.dromara.warm.flow.core.service.DefService;
 import org.dromara.warm.flow.core.utils.page.Page;
@@ -58,13 +58,10 @@ public class FlowDefinitionController extends BaseController {
         FlowDefinition definition = new FlowDefinition();
         definition.setFlowName(fwDefinition.getFlowName());
         definition.setCreateTime(DateUtils.parseDate(fwDefinition.getCreateTime()));
-        WarmQuery query = new WarmQuery<>(defService);
-        Page<FlowDefinition> page = new Page<>();
+        Page<Definition> page = new Page<>();
         page.setPageNum(fwDefinition.getPageNum());
         page.setPageSize(fwDefinition.getPageSize());
-        query.page(definition, page);
-        startPage();
-        return AjaxResult.successData(defService.list(definition, query));
+        return AjaxResult.successData(defService.page(definition, page));
     }
 
     @PostMapping("save")
