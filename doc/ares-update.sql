@@ -338,3 +338,7 @@ INSERT INTO `sys_menu` (`ID_`, `NAME_`, `DESCRIPTION_`, `PATH_`, `URL_`, `IS_BLA
 INSERT INTO `sys_menu` (`ID_`, `NAME_`, `DESCRIPTION_`, `PATH_`, `URL_`, `IS_BLANK_`, `PID_`, `ICON_`, `ORDER_`, `VISIBLE_`, `PERMS_`, `TYPE_`, `CREATOR_`, `CREATE_TIME_`, `MODIFIER_`, `MODIFY_TIME_`) VALUES (1082869590943469568, '新增', NULL, NULL, '#', NULL, '1082868976196915200', NULL, 0, 0, 'sysWorkflows:edit', 2, 1, '2025-05-15 05:43:59', NULL, NULL);
 INSERT INTO `sys_menu` (`ID_`, `NAME_`, `DESCRIPTION_`, `PATH_`, `URL_`, `IS_BLANK_`, `PID_`, `ICON_`, `ORDER_`, `VISIBLE_`, `PERMS_`, `TYPE_`, `CREATOR_`, `CREATE_TIME_`, `MODIFIER_`, `MODIFY_TIME_`) VALUES (1082868976196915200, '流程管理', NULL, '/manage', '/tinyflow/manage/index', NULL, '1082868574902685696', 'data-table', 1, 0, 'sysWorkflows:list', 1, 1, '2025-05-15 05:41:33', 1, '2025-05-15 07:42:49');
 INSERT INTO `sys_menu` (`ID_`, `NAME_`, `DESCRIPTION_`, `PATH_`, `URL_`, `IS_BLANK_`, `PID_`, `ICON_`, `ORDER_`, `VISIBLE_`, `PERMS_`, `TYPE_`, `CREATOR_`, `CREATE_TIME_`, `MODIFIER_`, `MODIFY_TIME_`) VALUES (1082868574902685696, 'AI流程管理', NULL, '/tinyflow', '#', NULL, '0', 'build', 6, 0, '#', 1, 1, '2025-05-15 05:39:57', 1, '2025-05-15 05:40:16');
+
+
+/** 20250620 **/
+ALTER TABLE `flow_node` MODIFY COLUMN `ext` text NULL COMMENT '节点扩展属性' AFTER `update_time`;
