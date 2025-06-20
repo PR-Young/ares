@@ -6,19 +6,19 @@
                 :inline="true"
                 label-width="68px"
         >
-            <el-form-item label="岗位编码" prop="postCode">
+            <el-form-item label="" prop="">
                 <el-input
-                        v-model="queryParams.postCode"
-                        placeholder="请输入岗位编码"
+                        v-model="queryParams."
+                        placeholder="请输入"
                         clearable
                         size="small"
                         @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
-            <el-form-item label="岗位名称" prop="postName">
+            <el-form-item label="" prop="">
                 <el-input
-                        v-model="queryParams.postName"
-                        placeholder="请输入岗位名称"
+                        v-model="queryParams."
+                        placeholder="请输入"
                         clearable
                         size="small"
                         @keyup.enter.native="handleQuery"
@@ -27,12 +27,12 @@
             <el-form-item>
                 <el-button
                         type="primary"
-                        icon="el-icon-search"
-                        size="mini"
+                        :icon="Search"
+                        size="default"
                         @click="handleQuery"
                 >搜索
                 </el-button>
-                <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
+                <el-button :icon="Refresh" size="default" @click="resetQuery">重置</el-button>
             </el-form-item>
         </el-form>
 
@@ -40,8 +40,8 @@
             <el-col :span="1.5">
                 <el-button
                         type="primary"
-                        icon="el-icon-plus"
-                        size="mini"
+                        :icon="Plus"
+                        size="default"
                         @click="handleAdd"
                         v-hasPermi="['${entityName1}:edit']"
                 >新增
@@ -50,8 +50,8 @@
             <el-col :span="1.5">
                 <el-button
                         type="success"
-                        icon="el-icon-edit"
-                        size="mini"
+                        :icon="Edit"
+                        size="default"
                         :disabled="single"
                         @click="handleUpdate"
                         v-hasPermi="['${entityName1}:edit']"
@@ -61,8 +61,8 @@
             <el-col :span="1.5">
                 <el-button
                         type="danger"
-                        icon="el-icon-delete"
-                        size="mini"
+                        :icon="Delete"
+                        size="default"
                         :disabled="multiple"
                         @click="handleDelete"
                         v-hasPermi="['${entityName1}:delete']"
@@ -73,8 +73,8 @@
             <el-col :span="1.5">
                 <el-button
                         type="warning"
-                        icon="el-icon-download"
-                        size="mini"
+                        :icon="Download"
+                        size="default"
                         @click="handleExport"
                         v-hasPermi="['${entityName1}:export']"
                 >导出
@@ -110,17 +110,17 @@
             >
                 <template slot-scope="scope">
                     <el-button
-                            size="mini"
+                            size="default"
                             type="text"
-                            icon="el-icon-edit"
+                            :icon="Edit"
                             @click="handleUpdate(scope.row)"
                             v-hasPermi="['${entityName1}:edit']"
                     >修改
                     </el-button>
                     <el-button
-                            size="mini"
+                            size="default"
                             type="text"
-                            icon="el-icon-delete"
+                            :icon="Delete"
                             @click="handleDelete(scope.row)"
                             v-hasPermi="['${entityName1}:delete']"
                     >删除
@@ -139,10 +139,10 @@
 
         <!-- 添加或修改岗位对话框 -->
         <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-            <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+            <el-form ref="addFormRef" :model="form" :rules="rules" label-width="80px">
                 <#list columns as column>
-                    <el-form-item label="岗位名称" prop="${column.name}">
-                        <el-input v-model="form.${column.name}" placeholder="请输入岗位名称"/>
+                    <el-form-item label="" prop="${column.name}">
+                        <el-input v-model="form.${column.name}" placeholder="请输入"/>
                     </el-form-item>
                 </#list>
             </el-form>
@@ -154,176 +154,171 @@
     </div>
 </template>
 
-<script>
-    import {add${entityName},
-    del${entityName},
-    export${entityName},
-    get${entityName},
-    list${entityName},
-    update${entityName}} from "@/api/system/";
+<script setup name="${entityName}">
+    import {
+        Search,
+        Refresh,
+        Plus,
+        Edit,
+        Delete,
+        Download,
+    } from "@element-plus/icons-vue";
+    import {
+        add${entityName},
+        del${entityName},
+        export${entityName},
+        get${entityName},
+        list${entityName},
+        update${entityName}
+    } from "@/api/system/";
+    import { getCurrentInstance, onMounted, reactive, ref } from "vue";
+    import { useRouter } from "vue-router";
 
-    export default {
-        name: "${entityName}",
-        data() {
-            return {
-                // 遮罩层
-                loading: true,
-                // 选中数组
-                ids: [],
-                // 非单个禁用
-                single: true,
-                // 非多个禁用
-                multiple: true,
-                // 总条数
-                total: 0,
-                // 岗位表格数据
-                ${entityName1}List: [],
-                // 弹出层标题
-                title: "",
-                // 是否显示弹出层
-                open: false,
-                // 状态数据字典
-                statusOptions: [],
-                // 查询参数
-                queryParams: {
-                    pageNum: 1,
-                    pageSize: 10,
-                    postCode: undefined,
-                    postName: undefined,
-                },
-                // 表单参数
-                form: {},
-                // 表单校验
-                rules: {},
-            };
-        },
-        created() {
-            this.getList();
-        },
-        methods: {
-            /** 查询岗位列表 */
-            getList() {
-                this.loading = true;
-                list${entityName}(this.queryParams).then((response) => {
-                    this.${entityName1}List = response.rows;
-                    this.total = response.total;
-                    this.loading = false;
-                });
-            },
-            // 取消按钮
-            cancel() {
-                this.open = false;
-                this.reset();
-            },
-            // 表单重置
-            reset() {
-                this.form = {
-                    id: undefined,
-                    <#list columns as column>
-                    ${column.name}: undefined,
-                    </#list>
-                };
-                this.resetForm("form");
-            },
-            /** 搜索按钮操作 */
-            handleQuery() {
-                this.queryParams.pageNum = 1;
-                this.getList();
-            },
-            /** 重置按钮操作 */
-            resetQuery() {
-                this.resetForm("queryForm");
-                this.handleQuery();
-            },
+    const { proxy } = getCurrentInstance();
+    const addFormRef = ref();
+    const router = useRouter();
+
+    // 遮罩层
+    const loading = ref(true);
+    // 选中数组
+    const ids = ref([]);
+    // 非单个禁用
+    const single = ref(true);
+    // 非多个禁用
+    const multiple = ref(true);
+    // 总条数
+    const total = ref(0);
+    // 岗位表格数据
+    const ${entityName1}List = ref([]);
+    // 弹出层标题
+    const title = ref();
+    // 是否显示弹出层
+    const open = ref(false);
+    // 状态数据字典
+    const statusOptions = ref([]);
+    // 查询参数
+    const queryParams = reactive({
+        pageNum: 1,
+        pageSize: 10,
+    });
+    // 表单参数
+    const form = ref({});
+    // 表单校验
+    const rules = ref({});
+
+    onMounted(() => {
+        getList();
+    });
+    /** 查询岗位列表 */
+    const getList = () => {
+        loading.value = true;
+        list${entityName}(queryParams).then((response) => {
+            ${entityName1}List.value = response.rows;
+            total.value = response.total;
+            loading.value = false;
+        });
+    }
+    // 取消按钮
+    const cancel = () => {
+        open.value = false;
+        reset();
+    }
+    // 表单重置
+    const reset = () => {
+        form.value = {
+            id: undefined,
+            <#list columns as column>
+            ${column.name}: undefined,
+            </#list>
+        };
+        proxy.resetForm("form");
+    }
+    /** 搜索按钮操作 */
+    const handleQuery = () => {
+        queryParams.pageNum = 1;
+        getList();
+    }
+    /** 重置按钮操作 */
+    const resetQuery = () => {
+        proxy.resetForm("queryForm");
+        handleQuery();
+    }
             // 多选框选中数据
-            handleSelectionChange(selection) {
-                this.ids = selection.map((item) => item.id);
-                this.single = selection.length != 1;
-                this.multiple = !selection.length;
-            },
-            /** 新增按钮操作 */
-            handleAdd() {
-                this.reset();
-                this.open = true;
-                this.title = "添加岗位";
-            },
-            /** 修改按钮操作 */
-            handleUpdate(row) {
-                this.reset();
-                const id = row.id || this.ids;
-                get${entityName}(id).then((response) => {
-                    this.form = response.data;
-                    this.open = true;
-                    this.title = "修改岗位";
-                });
-            },
-            /** 提交按钮 */
-            submitForm: function () {
-                this.$refs["form"].validate((valid) => {
-                    if (valid) {
-                        if (this.form.id != undefined) {
-                            update${entityName}(this.form).then((response) => {
-                                if (response.code === 200) {
-                                    this.msgSuccess("修改成功");
-                                    this.open = false;
-                                    this.getList();
-                                } else {
-                                    this.msgError(response.msg);
-                                }
-                            });
+    const handleSelectionChange = (selection) => {
+        ids.value = selection.map((item) => item.id);
+        single.value = selection.length != 1;
+        multiple.value = !selection.length;
+    }
+    /** 新增按钮操作 */
+    const handleAdd = () => {
+        reset();
+        open.value = true;
+        title.value = "添加";
+    }
+    /** 修改按钮操作 */
+    const handleUpdate = (row) => {
+        reset();
+        const id = row.id || ids;
+        get${entityName}(id).then((response) => {
+            form.value = response.data;
+            open.value = true;
+            title.value = "修改";
+        });
+    }
+    /** 提交按钮 */
+    const submitForm = () => {
+        addFormRef.value.validate((valid) => {
+            if (valid) {
+                if (form.value.id != undefined) {
+                    update${entityName}(form).then((response) => {
+                        if (response.code === 200) {
+                            proxy.msgSuccess("修改成功");
+                            open.value = false;
+                            getList();
                         } else {
-                            add${entityName}(this.form).then((response) => {
-                                if (response.code === 200) {
-                                    this.msgSuccess("新增成功");
-                                    this.open = false;
-                                    this.getList();
-                                } else {
-                                    this.msgError(response.msg);
-                                }
-                            });
+                            proxy.msgError(response.msg);
                         }
-                    }
-                });
-            },
-            /** 删除按钮操作 */
-            handleDelete(row) {
-                const ids = row.id || this.ids;
-                this.$confirm(
-                    '是否确认删除岗位编号为"' + ids + '"的数据项?',
-                    "警告",
-                    {
-                        confirmButtonText: "确定",
-                        cancelButtonText: "取消",
-                        type: "warning",
-                    }
-                )
-                    .then(function () {
-                        return del${entityName}(ids);
-                    })
-                    .then(() => {
-                        this.getList();
-                        this.msgSuccess("删除成功");
-                    })
-                    .catch(function () {
                     });
-            },
-            /** 导出按钮操作 */
-            handleExport() {
-                const queryParams = this.queryParams;
-                this.$confirm("是否确认导出所有岗位数据项?", "警告", {
+                } else {
+                    add${entityName}(form).then((response) => {
+                        if (response.code === 200) {
+                            proxy.msgSuccess("新增成功");
+                            open.value = false;
+                            getList();
+                        } else {
+                            proxy.msgError(response.msg);
+                        }
+                    });
+                }
+            }
+        });
+    }
+    /** 删除按钮操作 */
+    const handleDelete = (row) => {
+        const ids = row.id || ids;
+        proxy
+            .$confirm('是否确认删除编号为"' + ids + '"的数据项?', "警告", {
                     confirmButtonText: "确定",
                     cancelButtonText: "取消",
                     type: "warning",
-                })
-                    .then(function () {
-                        return export${entityName}(queryParams);
-                    })
-                    .then((response) => {
-                        this.download(response.msg);
-                    })
-                    .catch(function () {
-                    });
-            },
-        },
-    };
+            }).then(function () {
+                return del${entityName}(ids);
+            }).then(() => {
+                getList();
+                proxy.msgSuccess("删除成功");
+            }).catch(function () {});
+    }
+    /** 导出按钮操作 */
+    const handleExport = () => {
+        const queryParams = queryParams;
+        proxy.$confirm("是否确认导出所有数据项?", "警告", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+        }).then(function () {
+            return export${entityName}(queryParams);
+        }).then((response) => {
+            proxy.download(response.msg);
+        }).catch(function () {});
+    }
 </script>
