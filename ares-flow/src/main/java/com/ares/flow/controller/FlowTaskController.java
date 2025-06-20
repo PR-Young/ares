@@ -31,20 +31,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.dromara.warm.flow.core.chart.BetweenChart;
-import org.dromara.warm.flow.core.chart.FlowChart;
 import org.dromara.warm.flow.core.dto.FlowParams;
 import org.dromara.warm.flow.core.service.ChartService;
 import org.dromara.warm.flow.core.service.InsService;
 import org.dromara.warm.flow.core.service.TaskService;
-import org.dromara.warm.flow.core.utils.MapUtil;
 import org.dromara.warm.flow.orm.entity.FlowTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.awt.*;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @description:
@@ -146,34 +139,6 @@ public class FlowTaskController extends BaseController {
     public AjaxResult depute(@RequestBody FlowTaskVO flowTaskVO) {
         taskService.depute(flowTaskVO.getTaskId(), flowTaskVO.getParams());
         return AjaxResult.success();
-    }
-
-    /**
-     * 查询流程图
-     *
-     * @param instanceId
-     * @return
-     */
-    @GetMapping("flowChart/{instanceId}")
-    public AjaxResult flowChart(@PathVariable("instanceId") Long instanceId) {
-        return AjaxResult.successData(chartService.chartIns(instanceId, (flowChartChain) -> {
-            List<FlowChart> flowChartList = flowChartChain.getFlowChartList();
-            flowChartList.forEach(flowChart -> {
-                if (flowChart instanceof BetweenChart) {
-                    BetweenChart betweenChart = (BetweenChart) flowChart;
-                    Map<String, Object> extMap = betweenChart.getNodeJson().getExtMap();
-                    // 给节点顶部增加文字说明
-                    // betweenChart.topText("办理时间: 2025-02-08 12:12:12", Color.red);
-                    if (MapUtil.isNotEmpty(extMap)) {
-                        for (Map.Entry<String, Object> entry : extMap.entrySet()) {
-                            // 给节点中追加文字
-                            betweenChart.addText(entry.getKey() + ":", Color.red);
-                            betweenChart.addText((String) entry.getValue(), Color.red);
-                        }
-                    }
-                }
-            });
-        }));
     }
 
 }

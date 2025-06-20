@@ -25,6 +25,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.utils.DateUtils;
 import com.ares.flow.model.query.FwDefinition;
+import com.ares.flow.persistence.service.IFlowDefinitionService;
 import org.dromara.warm.flow.core.entity.Definition;
 import org.dromara.warm.flow.core.service.ChartService;
 import org.dromara.warm.flow.core.service.DefService;
@@ -46,11 +47,13 @@ import java.util.Arrays;
 public class FlowDefinitionController extends BaseController {
     private DefService defService;
     private ChartService chartService;
+    private IFlowDefinitionService flowDefinitionService;
 
     @Autowired
-    public FlowDefinitionController(DefService defService, ChartService chartService) {
+    public FlowDefinitionController(DefService defService, ChartService chartService, IFlowDefinitionService flowDefinitionService) {
         this.defService = defService;
         this.chartService = chartService;
+        this.flowDefinitionService = flowDefinitionService;
     }
 
     @GetMapping("list")
@@ -127,7 +130,7 @@ public class FlowDefinitionController extends BaseController {
      */
     @GetMapping("flowChart/{instanceId}")
     public AjaxResult flowChart(@PathVariable("instanceId") Long instanceId) {
-        return AjaxResult.successData(chartService.chartDef(instanceId));
+        return AjaxResult.successData(flowDefinitionService.getFlowChart(instanceId));
     }
 
     @GetMapping(value = "activeFlowList")
