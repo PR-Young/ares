@@ -128,7 +128,7 @@ public class FlowTaskController extends BaseController {
     }
 
     @Operation(summary = "转办")
-    @DeleteMapping(value = "transfer")
+    @PostMapping(value = "transfer")
     public AjaxResult transfer(@RequestBody FlowTaskVO flowTaskVO) {
         taskService.transfer(flowTaskVO.getTaskId(), flowTaskVO.getParams());
         return AjaxResult.success();
