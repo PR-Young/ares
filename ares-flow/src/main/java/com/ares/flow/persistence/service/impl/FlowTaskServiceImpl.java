@@ -21,6 +21,7 @@
 package com.ares.flow.persistence.service.impl;
 
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.ares.core.common.security.SecurityUtils;
@@ -43,6 +44,8 @@ import com.ares.flow.persistence.service.ISysFormDataService;
 import com.github.pagehelper.PageInfo;
 import io.github.linpeilie.Converter;
 import org.apache.commons.lang3.StringUtils;
+import org.dromara.warm.flow.core.FlowEngine;
+import org.dromara.warm.flow.core.entity.HisTask;
 import org.dromara.warm.flow.core.service.DefService;
 import org.dromara.warm.flow.core.service.InsService;
 import org.dromara.warm.flow.core.service.TaskService;
@@ -113,6 +116,37 @@ public class FlowTaskServiceImpl implements IFlowTaskService {
             } else {
                 map.put("formData", JSONObject.parseObject(sysForm.getFormContent()));
             }
+        }
+        if (StringUtils.isNotBlank(procInsId)) {
+            List<HisTask> hisTasks = FlowEngine.hisTaskService().getByInsId(Long.valueOf(procInsId));
+            List<Map<String, Object>> hisLists = new ArrayList<>();
+            if (CollectionUtil.isNotEmpty(hisTasks)) {
+                for (HisTask hisTask : hisTasks) {
+                    Map<String, Object> hisMap = new HashMap<>();
+                    hisMap.put("taskId", hisTask.getTaskId());
+                    hisMap.put("nodeName", hisTask.getNodeName());
+                    hisMap.put("flowStatus", hisTask.getFlowStatus());
+                    hisMap.put("message", hisTask.getMessage());
+                    SysUser user = sysUserService.getById(Long.valueOf(hisTask.getApprover()));
+                    hisMap.put("approver", user.getUserName());
+                    if (StringUtils.isNotBlank(hisTask.getCollaborator())) {
+                        String[] ids = hisTask.getCollaborator().split(",");
+                        String collaborator = "";
+                        for (String id : ids) {
+                            SysUser sysUser = sysUserService.getById(Long.valueOf(id));
+                            collaborator += sysUser.getUserName() + " ";
+                        }
+                        hisMap.put("collaborator", collaborator);
+                    }
+                    hisMap.put("cooperateType", hisTask.getCooperateType());
+                    hisMap.put("createTime", hisTask.getCreateTime());
+                    hisMap.put("updateTime", hisTask.getUpdateTime());
+                    hisMap.put("duration", (hisTask.getUpdateTime().getTime() - hisTask.getCreateTime().getTime()) / 1000);
+                    hisMap.put("ext", hisTask.getExt());
+                    hisLists.add(hisMap);
+                }
+            }
+            map.put("hisTasks", hisLists);
         }
         return AjaxResult.successData(map);
     }
