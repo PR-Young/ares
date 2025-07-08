@@ -37,7 +37,7 @@ import org.springframework.context.annotation.Import;
 @EnableEncryptableProperties
 @Import({MyBatisConfig.class})
 @MapperScan("com.ares.**.dao")
-@SpringBootApplication(scanBasePackages = {"org.jeecg.modules.jmreport", "com.ares"})
+@SpringBootApplication(scanBasePackages = {"org.jeecg", "com.ares"})
 public class AresSystemApplication extends SpringBootServletInitializer {
 
     /**

@@ -12,7 +12,7 @@
     <groupId>com.ares</groupId>
     <artifactId>ares</artifactId>
     <packaging>pom</packaging>
-    <version>6.0.0</version>
+    <version>6.0.2</version>
     <description>my first springboot project</description>
 
     <modules>

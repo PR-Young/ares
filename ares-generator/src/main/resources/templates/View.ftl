@@ -270,7 +270,7 @@
         addFormRef.value.validate((valid) => {
             if (valid) {
                 if (form.value.id != undefined) {
-                    update${entityName}(form).then((response) => {
+                    update${entityName}(form.value).then((response) => {
                         if (response.code === 200) {
                             proxy.msgSuccess("修改成功");
                             open.value = false;
@@ -280,7 +280,7 @@
                         }
                     });
                 } else {
-                    add${entityName}(form).then((response) => {
+                    add${entityName}(form.value).then((response) => {
                         if (response.code === 200) {
                             proxy.msgSuccess("新增成功");
                             open.value = false;

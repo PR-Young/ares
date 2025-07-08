@@ -74,7 +74,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                                     "/druid/**", "/actuator/**",
                                     "/model/**", "/editor/**", "/blog/**",
                                     "/test/**", "/ws/**", "/jmreport/**",
-                                    "/warm-flow-ui/**", "/warm-flow/**")
+                                    "/warm-flow-ui/**", "/warm-flow/**",
+                                    "/drag/**", "/jimubi/**")
                             .check(r -> StpUtil.checkLogin());
                 }))
                 .addPathPatterns("/**");
@@ -86,7 +87,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 "/druid/**", "/actuator/**",
                 "/model/**", "/editor/**", "/blog/**",
                 "/test/**", "/ws/**", "/jmreport/**",
-                "/warm-flow-ui/**", "/warm-flow/**");
+                "/warm-flow-ui/**", "/warm-flow/**",
+                "/drag/**", "/jimubi/**");
     }
 
     /**
@@ -98,6 +100,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("index.html").addResourceLocations("classpath:/META-INF/resources.webjars.springfox-swagger-ui/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/drag/**").addResourceLocations("classpath:/static/drag/");
     }
 
     /**
@@ -107,7 +110,6 @@ public class SaTokenConfigure implements WebMvcConfigurer {
     //public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
     //    configurer.enable("ares");
     //}
-
     @Bean
     public HttpMessageConverter<String> responseBodyStringConverter() {
         StringHttpMessageConverter converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);

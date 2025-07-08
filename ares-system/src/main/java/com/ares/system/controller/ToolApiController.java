@@ -79,4 +79,10 @@ public class ToolApiController {
         return "redirect:/jmreport/list";
     }
 
+    @GetMapping("tool/drag/index")
+    @Operation(summary = "积木大屏", responses = {@ApiResponse(content = @Content(schema = @Schema(implementation = String.class)))})
+    public String drag() {
+        return "redirect:/drag/list";
+    }
+
 }
