@@ -1,5 +1,5 @@
 
-package com.ares.bootstrap.service.Impl;
+package com.ares.bootstrap.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.ares.core.common.security.SecurityUtils;

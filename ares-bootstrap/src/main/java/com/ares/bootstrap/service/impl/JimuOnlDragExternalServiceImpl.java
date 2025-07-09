@@ -18,7 +18,7 @@
  *
  */
 
-package com.ares.bootstrap.service.Impl;
+package com.ares.bootstrap.service.impl;
 
 
 import lombok.extern.slf4j.Slf4j;
