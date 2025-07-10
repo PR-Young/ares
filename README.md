@@ -17,7 +17,7 @@ ares
 │
 ├─（※）ares-flow warm-flow流程模块
 │
-├─（※）ares-flowable flowable流程模块
+├─ ares-flowable flowable流程模块
 │
 ├─（※）ares-generator 代码生成模块
 │
@@ -37,12 +37,12 @@ ares
 
 # 使用技术
 
-- 框架：springboot3, mybatis, sa-token
+- 框架：springboot3, mybatis, sa-token(https://sa-token.cc/)
 - jdk版本：17
 - 数据库：mysql8、redis、neo4j
 - 消息机制：kafka
 - 全文检索：elasticsearch
-- 流程引擎：flowable
+- 流程引擎：warm-flow(https://warm-flow.dromara.org/), flowable
 
 # 更新日志
 [更新日志](CHANGELOG.md)
