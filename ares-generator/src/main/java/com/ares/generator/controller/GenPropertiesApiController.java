@@ -28,7 +28,7 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.generator.model.query.GenPropertiesQuery;
 import com.ares.generator.model.vo.GenProperties;
-import com.ares.generator.persistence.service.IGenPropertiesService;
+import com.ares.generator.service.IGenPropertiesService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

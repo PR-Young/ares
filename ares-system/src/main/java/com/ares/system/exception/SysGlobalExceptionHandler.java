@@ -27,7 +27,7 @@ import com.ares.core.model.base.Constants;
 import com.ares.core.model.base.ResultCode;
 import com.ares.core.model.exception.ErrorCode;
 import com.ares.core.model.vo.SysLoginInfo;
-import com.ares.core.persistence.service.ISysLoginInfoService;
+import com.ares.core.service.ISysLoginInfoService;
 import com.ares.core.utils.SpringUtils;
 import com.ares.redis.utils.RedisUtil;
 import jakarta.servlet.http.HttpServletRequest;

@@ -25,7 +25,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.flow.model.FlowTaskVO;
 import com.ares.flow.model.query.FlowTaskQuery;
-import com.ares.flow.persistence.service.IFlowTaskService;
+import com.ares.flow.service.IFlowTaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

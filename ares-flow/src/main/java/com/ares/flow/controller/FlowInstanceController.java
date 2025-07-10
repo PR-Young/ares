@@ -23,7 +23,7 @@ package com.ares.flow.controller;
 
 import com.ares.core.model.base.AjaxResult;
 import com.ares.flow.model.StartFlowParam;
-import com.ares.flow.persistence.service.IFlowInstanceService;
+import com.ares.flow.service.IFlowInstanceService;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.dromara.warm.flow.core.service.InsService;
 import org.springframework.beans.factory.annotation.Autowired;

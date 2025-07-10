@@ -22,7 +22,7 @@ import com.alibaba.fastjson2.JSON;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.model.vo.SysLog;
 import com.ares.core.model.vo.SysUser;
-import com.ares.core.persistence.service.ISysLogService;
+import com.ares.core.service.ISysLogService;
 import com.ares.core.utils.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

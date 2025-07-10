@@ -18,8 +18,8 @@
 
 package com.ares.system.websocket;
 
-import com.ares.core.persistence.service.ISysNoticeService;
-import com.ares.core.persistence.service.ISysUserService;
+import com.ares.core.service.ISysNoticeService;
+import com.ares.core.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;

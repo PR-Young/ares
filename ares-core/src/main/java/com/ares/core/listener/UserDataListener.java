@@ -24,12 +24,12 @@ package com.ares.core.listener;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.fastjson2.JSON;
+import com.ares.core.model.vo.SysPost;
+import com.ares.core.model.vo.SysRole;
 import com.ares.core.model.vo.SysUser;
-import com.ares.core.persistence.dao.ISysPostDao;
-import com.ares.core.persistence.dao.ISysRoleDao;
-import com.ares.core.persistence.entity.SysPostDto;
-import com.ares.core.persistence.entity.SysRoleDto;
-import com.ares.core.persistence.service.ISysUserService;
+import com.ares.core.service.ISysPostService;
+import com.ares.core.service.ISysRoleService;
+import com.ares.core.service.ISysUserService;
 import com.ares.core.utils.SnowflakeIdWorker;
 import com.ares.core.utils.SpringUtils;
 import org.slf4j.Logger;
@@ -79,10 +79,10 @@ public class UserDataListener extends AnalysisEventListener<SysUser> {
     private void saveData() {
         ISysUserService userService = SpringUtils.getBean(ISysUserService.class);
         logger.info("{}条数据，开始存储数据库！", userList.size());
-        ISysPostDao postDao = SpringUtils.getBean(ISysPostDao.class);
-        SysPostDto post = postDao.getByName(POST_NAME);
-        ISysRoleDao roleDao = SpringUtils.getBean(ISysRoleDao.class);
-        SysRoleDto role = roleDao.getRoleByName(ROLE_NAME);
+        ISysPostService postService = SpringUtils.getBean(ISysPostService.class);
+        SysPost post = postService.getByName(POST_NAME);
+        ISysRoleService roleService = SpringUtils.getBean(ISysRoleService.class);
+        SysRole role = roleService.getRoleByName(ROLE_NAME);
         for (SysUser user : userList) {
             if (userService.checkAccount(user.getAccount()) > 0) {
                 if (needUpdate) {
@@ -100,7 +100,7 @@ public class UserDataListener extends AnalysisEventListener<SysUser> {
                 map.put("id", SnowflakeIdWorker.getUUID());
                 map.put("userId", userId);
                 map.put("roleId", role.getId());
-                roleDao.insertRoleUser(map);
+                roleService.insertRoleUser(map);
             }
         }
         logger.info("存储数据库成功！");

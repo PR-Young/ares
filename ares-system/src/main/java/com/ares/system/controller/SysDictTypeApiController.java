@@ -25,7 +25,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysDictTypeQuery;
 import com.ares.core.model.vo.SysDictType;
-import com.ares.core.persistence.service.ISysDictTypeService;
+import com.ares.core.service.ISysDictTypeService;
 import com.ares.core.utils.StringUtils;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;

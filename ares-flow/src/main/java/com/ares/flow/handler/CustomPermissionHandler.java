@@ -24,7 +24,7 @@ package com.ares.flow.handler;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.model.vo.SysRole;
 import com.ares.core.model.vo.SysUser;
-import com.ares.core.persistence.service.ISysRoleService;
+import com.ares.core.service.ISysRoleService;
 import org.dromara.warm.flow.core.handler.PermissionHandler;
 import org.dromara.warm.flow.core.utils.StreamUtils;
 import org.springframework.beans.factory.annotation.Autowired;

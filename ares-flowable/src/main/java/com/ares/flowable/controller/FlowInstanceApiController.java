@@ -21,7 +21,7 @@ package com.ares.flowable.controller;
 
 import com.ares.core.model.base.AjaxResult;
 import com.ares.flowable.model.vo.FlowTaskVo;
-import com.ares.flowable.persistence.service.IFlowInstanceService;
+import com.ares.flowable.service.IFlowInstanceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -26,7 +26,7 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.flow.model.SysFormData;
 import com.ares.flow.model.query.SysFormDataQuery;
-import com.ares.flow.persistence.service.ISysFormDataService;
+import com.ares.flow.service.ISysFormDataService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

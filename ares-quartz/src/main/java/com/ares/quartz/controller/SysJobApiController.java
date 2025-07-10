@@ -27,7 +27,7 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.quartz.model.query.SysQuartzJobQuery;
 import com.ares.quartz.model.vo.SysQuartzJob;
-import com.ares.quartz.persistence.service.ISysQuartzJobService;
+import com.ares.quartz.service.ISysQuartzJobService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

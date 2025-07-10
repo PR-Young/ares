@@ -23,7 +23,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysLogQuery;
 import com.ares.core.model.vo.SysLog;
-import com.ares.core.persistence.service.ISysLogService;
+import com.ares.core.service.ISysLogService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

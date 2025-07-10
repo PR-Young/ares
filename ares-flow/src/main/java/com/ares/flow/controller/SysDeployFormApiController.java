@@ -26,7 +26,7 @@ import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.utils.StringUtils;
 import com.ares.flow.model.SysDeployForm;
 import com.ares.flow.model.query.SysDeployFormQuery;
-import com.ares.flow.persistence.service.ISysDeployFormService;
+import com.ares.flow.service.ISysDeployFormService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

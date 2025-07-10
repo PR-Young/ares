@@ -24,7 +24,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.ares.ai.model.ExecuteParams;
 import com.ares.ai.model.SysWorkflows;
 import com.ares.ai.model.query.SysWorkflowsQuery;
-import com.ares.ai.persistence.service.ISysWorkflowsService;
+import com.ares.ai.service.ISysWorkflowsService;
 import com.ares.core.common.security.SecurityUtils;
 import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;

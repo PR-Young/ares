@@ -26,7 +26,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.core.model.query.SysTemplateQuery;
 import com.ares.core.model.vo.SysTemplate;
-import com.ares.core.persistence.service.ISysTemplateService;
+import com.ares.core.service.ISysTemplateService;
 import com.ares.core.utils.StringUtils;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;

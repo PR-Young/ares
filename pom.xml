@@ -12,7 +12,7 @@
     <groupId>com.ares</groupId>
     <artifactId>ares</artifactId>
     <packaging>pom</packaging>
-    <version>6.0.2</version>
+    <version>6.1.0</version>
     <description>my first springboot project</description>
 
     <modules>
@@ -30,15 +30,15 @@
     </modules>
 
     <properties>
-        <ares-core.version>3.0.0</ares-core.version>
-        <ares-flowable.version>3.1.0</ares-flowable.version>
-        <ares-generator.version>3.1.0</ares-generator.version>
-        <ares-message.version>3.0.0</ares-message.version>
+        <ares-core.version>3.1.0</ares-core.version>
+        <ares-flowable.version>3.2.0</ares-flowable.version>
+        <ares-generator.version>3.2.0</ares-generator.version>
+        <ares-message.version>3.1.0</ares-message.version>
         <ares-neo.version>2.0.0</ares-neo.version>
-        <ares-job.version>3.0.0</ares-job.version>
-        <ares-system.version>3.0.0</ares-system.version>
-        <ares-ai.version>1.0.0</ares-ai.version>
-        <ares-flow.version>1.0.1</ares-flow.version>
+        <ares-job.version>3.1.0</ares-job.version>
+        <ares-system.version>3.1.0</ares-system.version>
+        <ares-ai.version>1.1.0</ares-ai.version>
+        <ares-flow.version>1.1.0</ares-flow.version>
         <java.version>17</java.version>
         <mysql.version>8.0.33</mysql.version>
         <mybatis.version>3.0.2</mybatis.version>

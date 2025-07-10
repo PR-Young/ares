@@ -25,7 +25,7 @@ import com.ares.core.controller.BaseController;
 import com.ares.core.model.base.AjaxResult;
 import com.ares.core.utils.DateUtils;
 import com.ares.flow.model.query.FwDefinition;
-import com.ares.flow.persistence.service.IFlowDefinitionService;
+import com.ares.flow.service.IFlowDefinitionService;
 import org.dromara.warm.flow.core.entity.Definition;
 import org.dromara.warm.flow.core.service.ChartService;
 import org.dromara.warm.flow.core.service.DefService;

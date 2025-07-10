@@ -23,9 +23,9 @@ import com.ares.core.common.exception.UserException;
 import com.ares.core.model.exception.ErrorCode;
 import com.ares.core.model.vo.SysRole;
 import com.ares.core.model.vo.SysUser;
-import com.ares.core.persistence.service.ISysRoleService;
-import com.ares.core.persistence.service.ISysTenantUsersService;
-import com.ares.core.persistence.service.ISysUserService;
+import com.ares.core.service.ISysRoleService;
+import com.ares.core.service.ISysTenantUsersService;
+import com.ares.core.service.ISysUserService;
 import com.ares.core.utils.SpringUtils;
 
 import java.util.List;

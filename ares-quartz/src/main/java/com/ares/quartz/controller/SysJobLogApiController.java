@@ -25,7 +25,7 @@ import com.ares.core.model.base.AjaxResult;
 import com.ares.core.model.page.TableDataInfo;
 import com.ares.quartz.model.query.SysQuartzJobLogQuery;
 import com.ares.quartz.model.vo.SysQuartzJobLog;
-import com.ares.quartz.persistence.service.ISysQuartzJobLogService;
+import com.ares.quartz.service.ISysQuartzJobLogService;
 import com.github.pagehelper.PageInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
