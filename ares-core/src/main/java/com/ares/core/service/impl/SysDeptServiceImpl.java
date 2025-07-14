@@ -115,6 +115,8 @@ public class SysDeptServiceImpl implements ISysDeptService {
                 tree.setLabel(sysDept.getDeptName());
                 if (sysDept.getChildCount() > 0) {
                     tree.setChildren(buildTree(sysDept.getId(), deptList));
+                } else {
+                    tree.setChildren(new LinkedList<>());
                 }
                 trees.add(tree);
             }
