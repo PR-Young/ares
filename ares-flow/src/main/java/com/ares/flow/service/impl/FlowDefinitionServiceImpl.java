@@ -21,11 +21,11 @@
 package com.ares.flow.service.impl;
 
 
+import com.ares.flow.model.chart.*;
 import com.ares.flow.service.IFlowDefinitionService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.dromara.warm.flow.core.FlowEngine;
-import org.dromara.warm.flow.core.chart.*;
 import org.dromara.warm.flow.core.dto.DefChart;
 import org.dromara.warm.flow.core.dto.DefJson;
 import org.dromara.warm.flow.core.dto.NodeJson;
@@ -42,10 +42,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+
 
 /**
  * @description:
@@ -60,8 +60,16 @@ public class FlowDefinitionServiceImpl implements IFlowDefinitionService {
     public String getFlowChart(Long definitionId) {
         DefJson defJson = FlowEngine.defService().queryDesign(definitionId);
         initStatus(defJson);
-        DefChart flowChart = DefJson.copyChart(defJson);
+        DefChart flowChart = copyChart(defJson);
         return basicFlowChart(flowChart.getNodeJsonList(), flowChart.getSkipJsonList());
+    }
+
+    public static DefChart copyChart(DefJson defJson) {
+        DefChart defChart = new DefChart();
+        defChart.setDefJson(defJson);
+        defChart.setNodeJsonList(defJson.getNodeList());
+        defChart.setSkipJsonList(Optional.of(defJson).map(DefJson::getNodeList).orElse(Collections.emptyList()).stream().map(NodeJson::getSkipList).filter(Objects::nonNull).flatMap(Collection::stream).collect(Collectors.toList()));
+        return defChart;
     }
 
     private void initStatus(DefJson defJson) {

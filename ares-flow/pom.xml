@@ -18,7 +18,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <warm-flow.version>1.7.4</warm-flow.version>
+        <warm-flow.version>1.7.7</warm-flow.version>
     </properties>
 
     <dependencies>
