@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.7</version>
+        <version>3.5.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ares</groupId>
     <artifactId>ares</artifactId>
     <packaging>pom</packaging>
-    <version>6.1.0</version>
+    <version>6.2.0</version>
     <description>my first springboot project</description>
 
     <modules>
@@ -41,7 +41,7 @@
         <ares-flow.version>1.2.0</ares-flow.version>
         <java.version>17</java.version>
         <mysql.version>8.0.33</mysql.version>
-        <mybatis.version>3.0.2</mybatis.version>
+        <mybatis.version>3.0.5</mybatis.version>
         <mybatis-generator.version>1.4.2</mybatis-generator.version>
         <pagehelper.version>2.1.0</pagehelper.version>
         <fastjson.version>2.0.38</fastjson.version>
@@ -56,7 +56,7 @@
         <jna.version>5.13.0</jna.version>
         <easyexcel.version>3.3.2</easyexcel.version>
         <sa-token.version>1.40.0</sa-token.version>
-        <durid.version>1.2.19</durid.version>
+        <durid.version>1.2.27</durid.version>
         <springdoc.version>2.2.0</springdoc.version>
         <guava.version>32.1.1-jre</guava.version>
         <jasypt.version>3.0.5</jasypt.version>
