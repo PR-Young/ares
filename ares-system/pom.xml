@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ares</artifactId>
         <groupId>com.ares</groupId>
-        <version>6.2.0</version>
+        <version>6.2.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,8 +16,8 @@
 
     <properties>
         <java.version>17</java.version>
-        <spring-admin.version>3.1.6</spring-admin.version>
-        <junit-platform-launcher.version>1.10.0</junit-platform-launcher.version>
+        <spring-admin.version>3.5.1</spring-admin.version>
+        <junit-platform-launcher.version>1.13.4</junit-platform-launcher.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
     </properties>
 
