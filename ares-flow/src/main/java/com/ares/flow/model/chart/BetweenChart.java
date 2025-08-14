@@ -61,12 +61,12 @@ public class BetweenChart extends FlowChart {
         this.nodeJson = nodeJson;
     }
 
-    public void draw(Graphics2D graphics) {
-        graphics.setColor(this.lightColor(this.c));
+    public void draw(Graphics2D graphics, String modelValue) {
+        graphics.setColor(this.lightColor(this.c, modelValue));
         graphics.fillRoundRect((this.x - 50) * this.n, (this.y - 40) * this.n, this.width * this.n, this.height * this.n, this.arcWidth * this.n, this.arcWidth * this.n);
         graphics.setColor(this.c);
         Stroke originalStroke = graphics.getStroke();
-        if (ChartStatus.getToDo().equals(this.c)) {
+        if (ChartStatus.getToDo(modelValue).equals(this.c)) {
             float[] dashPattern = new float[]{10.0F, 5.0F};
             BasicStroke dashedStroke = new BasicStroke(2.5F, 0, 0, 10.0F, dashPattern, 0.0F);
             graphics.setStroke(dashedStroke);
@@ -110,7 +110,7 @@ public class BetweenChart extends FlowChart {
 
             this.textCharts.forEach((textChartx) -> {
                 if (ObjectUtil.isNotNull(textChartx) && StringUtils.isNotEmpty(textChartx.getTitle())) {
-                    textChartx.setN(this.n).draw(graphics);
+                    textChartx.setN(this.n).draw(graphics, modelValue);
                 }
 
             });

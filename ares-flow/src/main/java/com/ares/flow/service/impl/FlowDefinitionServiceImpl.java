@@ -61,7 +61,7 @@ public class FlowDefinitionServiceImpl implements IFlowDefinitionService {
         DefJson defJson = FlowEngine.defService().queryDesign(definitionId);
         initStatus(defJson);
         DefChart flowChart = copyChart(defJson);
-        return basicFlowChart(flowChart.getNodeJsonList(), flowChart.getSkipJsonList());
+        return basicFlowChart(flowChart.getNodeJsonList(), flowChart.getSkipJsonList(), defJson.getModelValue());
     }
 
     public static DefChart copyChart(DefJson defJson) {
@@ -79,6 +79,7 @@ public class FlowDefinitionServiceImpl implements IFlowDefinitionService {
         nodeList.forEach(node -> node.setStatus(ChartStatus.NOT_DONE.getKey()));
         skipList.forEach(skip -> skip.setStatus(ChartStatus.NOT_DONE.getKey()));
     }
+
     /**
      * DefService 根据流程实例ID获取流程图的图片流(渲染颜色)
      *
@@ -86,7 +87,7 @@ public class FlowDefinitionServiceImpl implements IFlowDefinitionService {
      * @param skipJsonList 节点跳转关联对象Vo
      * @return 流程图base64字符串
      */
-    private String basicFlowChart(List<NodeJson> nodeJsonList, List<SkipJson> skipJsonList) {
+    private String basicFlowChart(List<NodeJson> nodeJsonList, List<SkipJson> skipJsonList, String modelValue) {
         try {
 
             Map<String, Integer> chartXY = new HashMap<>();
@@ -134,7 +135,7 @@ public class FlowDefinitionServiceImpl implements IFlowDefinitionService {
             graphics.setColor(Color.WHITE);
             graphics.fillRect(0, 0, width, height);
 
-            flowChartChain.draw(width, height, offsetW, offsetH, graphics, n);
+            flowChartChain.draw(width, height, offsetW, offsetH, graphics, n, modelValue);
 
             graphics.setPaintMode();
             // 释放此图形的上下文并释放它所使用的所有系统资源

@@ -140,4 +140,9 @@ public class FlowDefinitionController extends BaseController {
         definition.setActivityStatus(1);
         return AjaxResult.successData(defService.list(definition));
     }
+    @RequestMapping("updatePublishStatus/{ids}/{status}")
+    public AjaxResult updatePublishStatus(@PathVariable Long[] ids, @PathVariable Integer status) {
+        defService.updatePublishStatus(Arrays.asList(ids), status);
+        return AjaxResult.success();
+    }
 }

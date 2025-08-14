@@ -21,7 +21,6 @@
 package com.ares.flow.model.chart;
 
 
-
 import org.dromara.warm.flow.core.dto.NodeJson;
 import org.dromara.warm.flow.core.utils.ObjectUtil;
 import org.dromara.warm.flow.core.utils.StringUtils;
@@ -50,10 +49,10 @@ public class SerialChart extends FlowChart {
         this.nodeJson = nodeJson;
     }
 
-    public void draw(Graphics2D graphics) {
+    public void draw(Graphics2D graphics, String modelValue) {
         int[] xSerials = new int[]{(this.x - 20) * this.n, this.x * this.n, (this.x + 20) * this.n, this.x * this.n};
         int[] ySerials = new int[]{this.y * this.n, (this.y - 20) * this.n, this.y * this.n, (this.y + 20) * this.n};
-        graphics.setColor(this.lightColor(this.c));
+        graphics.setColor(this.lightColor(this.c, modelValue));
         graphics.fillPolygon(xSerials, ySerials, 4);
         graphics.setColor(this.c);
         graphics.drawPolygon(xSerials, ySerials, 4);
@@ -65,7 +64,7 @@ public class SerialChart extends FlowChart {
         graphics.drawPolyline(xPoints2, yPoints2, xPoints2.length);
         if (ObjectUtil.isNotNull(this.textChart) && StringUtils.isNotEmpty(this.textChart.getTitle())) {
             this.textChart.setY(this.textChart.getY() - 5);
-            this.textChart.setN(this.n).draw(graphics);
+            this.textChart.setN(this.n).draw(graphics, modelValue);
         }
 
     }

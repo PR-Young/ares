@@ -60,7 +60,7 @@ public class TextChart extends FlowChart {
         this.font = font;
     }
 
-    public void draw(Graphics2D graphics) {
+    public void draw(Graphics2D graphics, String modelValue) {
         graphics.setColor(this.c == null ? Color.BLACK : this.c);
         if (this.font != null) {
             graphics.setFont(this.font);

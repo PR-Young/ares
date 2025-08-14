@@ -49,7 +49,7 @@ public class FlowChartChain {
     }
 
     @SuppressWarnings("checkstyle:ParameterNumber")
-    public void draw(int width, int height, int offsetW, int offsetH, Graphics2D graphics, int n) {
+    public void draw(int width, int height, int offsetW, int offsetH, Graphics2D graphics, int n, String modelValue) {
         this.width = width;
         this.height = height;
         this.n = n;
@@ -63,7 +63,7 @@ public class FlowChartChain {
         graphics.setStroke(new BasicStroke(2.5F));
 
         for (FlowChart flowChart : this.flowChartList) {
-            flowChart.setN(n).draw(graphics);
+            flowChart.setN(n).draw(graphics, modelValue);
         }
 
     }
@@ -87,7 +87,7 @@ public class FlowChartChain {
             int textX = nodeX - 20;
             int textY = nodeY - 25;
             TextChart textChart = new TextChart(textX, textY, value.getValue());
-            this.addFlowChart((new BetweenChart(nodeX, nodeY, ChartStatus.getColorByKey(value), CollUtil.toList(new TextChart[]{textChart}), (NodeJson) null)).setWidth(60).setHeight(20).setArcWidth(5).setOffsetEnable(false));
+            this.addFlowChart((new BetweenChart(nodeX, nodeY, ChartStatus.getColorByKey(value.getKey()), CollUtil.toList(new TextChart[]{textChart}), (NodeJson) null)).setWidth(60).setHeight(20).setArcWidth(5).setOffsetEnable(false));
             tmp += 140;
         }
 

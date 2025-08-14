@@ -229,7 +229,7 @@ public class FlowTaskServiceImpl implements IFlowTaskService {
                         result = result + dept.getDeptName() + ",";
                         break;
                     default:
-                        SysUser user = sysUserService.getById(Long.valueOf(split[1]));
+                        SysUser user = sysUserService.getById(Long.valueOf(split[0]));
                         result = result + user.getUserName() + ",";
                         break;
                 }

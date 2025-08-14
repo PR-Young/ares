@@ -45,10 +45,10 @@ public class ParallelChart extends FlowChart {
         this.nodeJson = nodeJson;
     }
 
-    public void draw(Graphics2D graphics) {
+    public void draw(Graphics2D graphics, String modelValue) {
         int[] xParallels = new int[]{(this.x - 20) * this.n, this.x * this.n, (this.x + 20) * this.n, this.x * this.n};
         int[] yParallels = new int[]{this.y * this.n, (this.y - 20) * this.n, this.y * this.n, (this.y + 20) * this.n};
-        graphics.setColor(this.lightColor(this.c));
+        graphics.setColor(this.lightColor(this.c, modelValue));
         graphics.fillPolygon(xParallels, yParallels, 4);
         graphics.setColor(this.c);
         graphics.drawPolygon(xParallels, yParallels, 4);

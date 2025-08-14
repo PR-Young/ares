@@ -39,12 +39,12 @@ public class FlowChart {
     public FlowChart() {
     }
 
-    public void draw(Graphics2D var1) {
+    public void draw(Graphics2D var1, String modelValue) {
 
     }
 
-    public Color lightColor(Color c) {
-        if (ChartStatus.getNotDone().equals(c)) {
+    public Color lightColor(Color c, String modelValue) {
+        if (ChartStatus.getNotDone(modelValue).equals(c)) {
             return Color.WHITE;
         } else {
             float red = (float) c.getRed() / 255.0F;

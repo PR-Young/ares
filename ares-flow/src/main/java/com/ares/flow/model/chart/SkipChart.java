@@ -47,7 +47,7 @@ public class SkipChart extends FlowChart {
         this.textChart = textChart;
     }
 
-    public void draw(Graphics2D graphics) {
+    public void draw(Graphics2D graphics, String modelValue) {
         graphics.setColor(this.c);
         this.xPoints = Arrays.stream(this.xPoints).map((x) -> x * this.n).toArray();
         this.yPoints = Arrays.stream(this.yPoints).map((y) -> y * this.n).toArray();
@@ -79,7 +79,7 @@ public class SkipChart extends FlowChart {
         graphics.fillPolygon(xArrow, yArrow, 3);
         if (ObjectUtil.isNotNull(this.textChart) && StringUtils.isNotEmpty(this.textChart.getTitle())) {
             this.textChart.setY(this.textChart.getY() - 5);
-            this.textChart.setN(this.n).draw(graphics);
+            this.textChart.setN(this.n).draw(graphics, modelValue);
         }
 
     }

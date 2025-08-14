@@ -21,7 +21,6 @@
 package com.ares.flow.model.chart;
 
 
-
 import org.dromara.warm.flow.core.dto.NodeJson;
 import org.dromara.warm.flow.core.utils.ObjectUtil;
 import org.dromara.warm.flow.core.utils.StringUtils;
@@ -50,14 +49,14 @@ public class OvalChart extends FlowChart {
         this.nodeJson = nodeJson;
     }
 
-    public void draw(Graphics2D graphics) {
-        graphics.setColor(this.lightColor(this.c));
+    public void draw(Graphics2D graphics, String modelValue) {
+        graphics.setColor(this.lightColor(this.c, modelValue));
         graphics.fillOval((this.x - 20) * this.n, (this.y - 20) * this.n, 40 * this.n, 40 * this.n);
         graphics.setColor(this.c);
         graphics.drawOval((this.x - 20) * this.n, (this.y - 20) * this.n, 40 * this.n, 40 * this.n);
         if (ObjectUtil.isNotNull(this.textChart) && StringUtils.isNotEmpty(this.textChart.getTitle())) {
             this.textChart.setY(this.y + 5);
-            this.textChart.setN(this.n).draw(graphics);
+            this.textChart.setN(this.n).draw(graphics, modelValue);
         }
 
     }
