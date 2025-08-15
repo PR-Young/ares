@@ -193,7 +193,7 @@
         where `STATUS_` = 1 and `ID_` not in (
         select `USER_ID_`
         from `sys_role_user`
-        where `RoleId` = #{roleId,jdbcType=VARCHAR}
+        where `ROLE_ID_` = #{roleId,jdbcType=VARCHAR}
         )
     </select>
 
