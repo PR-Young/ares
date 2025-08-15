@@ -61,6 +61,7 @@ public class BetweenChart extends FlowChart {
         this.nodeJson = nodeJson;
     }
 
+    @SuppressWarnings("checkstyle:HiddenField")
     public void draw(Graphics2D graphics, String modelValue) {
         graphics.setColor(this.lightColor(this.c, modelValue));
         graphics.fillRoundRect((this.x - 50) * this.n, (this.y - 40) * this.n, this.width * this.n, this.height * this.n, this.arcWidth * this.n, this.arcWidth * this.n);
