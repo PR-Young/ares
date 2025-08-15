@@ -56,7 +56,7 @@ public class FlowInstanceServiceImpl implements IFlowInstanceService {
     @Override
     public AjaxResult start(StartFlowParam params) {
         String businessId = SnowflakeIdWorker.getSUID();
-        FlowParams flowParams = FlowParams.build().flowCode(params.getFlowCode());
+        FlowParams flowParams = FlowParams.build().flowCode(params.getFlowCode()).variable(params.getVariables());
         Instance instance = insService.start(businessId, flowParams);
 
         //保存表单数据
