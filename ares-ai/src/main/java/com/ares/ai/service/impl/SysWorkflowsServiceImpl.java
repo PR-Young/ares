@@ -22,10 +22,8 @@ package com.ares.ai.service.impl;
 
 import com.agentsflex.llm.qwen.QwenLlm;
 import com.agentsflex.llm.qwen.QwenLlmConfig;
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.alibaba.fastjson2.TypeReference;
 import com.ares.ai.model.ExecuteParams;
 import com.ares.ai.model.SysWorkflows;
 import com.ares.ai.model.query.SysWorkflowsQuery;
@@ -108,14 +106,12 @@ public class SysWorkflowsServiceImpl implements ISysWorkflowsService {
     @Override
     public Map<String, Object> exe(ExecuteParams params) {
         Tinyflow tinyflow = parseFlowParam(params.getData());
-        Map<String, Object> variables = JSON.parseObject(params.getParam(), new TypeReference<Map<String, Object>>() {
-        });
+        Map<String, Object> variables = params.getParam();
         Map<String, Object> result = tinyflow.toChain().executeForResult(variables);
         return result;
     }
 
-    private Tinyflow parseFlowParam(String graph) {
-        JSONObject json = JSONObject.parseObject(graph);
+    private Tinyflow parseFlowParam(JSONObject json) {
         JSONArray nodeArr = json.getJSONArray("nodes");
         Tinyflow tinyflow = new Tinyflow(json.toJSONString());
         for (int i = 0; i < nodeArr.size(); i++) {
@@ -124,9 +120,9 @@ public class SysWorkflowsServiceImpl implements ISysWorkflowsService {
                 case "llmNode":
                     JSONObject data = node.getJSONObject("data");
                     QwenLlmConfig qwenLlmConfig = new QwenLlmConfig();
-                    //  千问apikey
-                    qwenLlmConfig.setApiKey("sk-0119dfa3487045ceb4bce6d055e4257c");
-                    qwenLlmConfig.setModel("qwen-plus");
+                    qwenLlmConfig.setEndpoint("https://ai.gitee.com/v1");
+                    qwenLlmConfig.setApiKey("JH9YAZO29ZZPXGCAHXA2XC5Z10BZCMFWZBPXNNLB");
+                    qwenLlmConfig.setModel("Qwen3-8B");
                     tinyflow.setLlmProvider(id -> new QwenLlm(qwenLlmConfig));
                     break;
                 case "zsk":

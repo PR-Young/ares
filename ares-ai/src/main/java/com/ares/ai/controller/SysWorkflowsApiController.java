@@ -96,7 +96,7 @@ public class SysWorkflowsApiController extends BaseController {
         return AjaxResult.success();
     }
 
-    @PostMapping("/workflow/exe")
+    @PostMapping("workflow/exe")
     public Object exe(@RequestBody ExecuteParams ep) {
         return AjaxResult.successData(sysWorkflowsService.exe(ep));
     }

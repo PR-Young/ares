@@ -21,6 +21,7 @@
 package com.ares.ai.model;
 
 
+import com.alibaba.fastjson2.JSONObject;
 import lombok.Data;
 
 /**
@@ -31,6 +32,6 @@ import lombok.Data;
  **/
 @Data
 public class ExecuteParams {
-    private String data;
-    private String param;
+    private JSONObject data;
+    private JSONObject param;
 }
