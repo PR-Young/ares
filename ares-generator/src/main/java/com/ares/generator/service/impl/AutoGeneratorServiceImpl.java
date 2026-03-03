@@ -23,7 +23,7 @@ package com.ares.generator.service.impl;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.StrUtil;
-import com.ares.config.gen.GeneratorConfig;
+import com.ares.generator.config.gen.GeneratorConfig;
 import com.ares.generator.model.query.Column;
 import com.ares.generator.model.query.ColumnType;
 import com.ares.generator.model.query.DataType;
