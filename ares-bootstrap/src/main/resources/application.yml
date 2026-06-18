@@ -40,7 +40,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:mapping/**/*.xml
-  type-aliases-package: com.ares.**.**.model
+  type-aliases-package: com.ares.**.**.entity
   config-location: classpath:mybatis-config.xml
 
 #分页配置
