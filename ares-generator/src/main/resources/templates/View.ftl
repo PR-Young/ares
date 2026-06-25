@@ -11,7 +11,7 @@
                         v-model="queryParams."
                         placeholder="请输入"
                         clearable
-                        size="small"
+                        :size="size"
                         @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
@@ -20,7 +20,7 @@
                         v-model="queryParams."
                         placeholder="请输入"
                         clearable
-                        size="small"
+                        :size="size"
                         @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
@@ -28,11 +28,11 @@
                 <el-button
                         type="primary"
                         :icon="Search"
-                        size="default"
+                        :size="size"
                         @click="handleQuery"
                 >搜索
                 </el-button>
-                <el-button :icon="Refresh" size="default" @click="resetQuery">重置</el-button>
+                <el-button :icon="Refresh" :size="size" @click="resetQuery">重置</el-button>
             </el-form-item>
         </el-form>
 
@@ -41,7 +41,7 @@
                 <el-button
                         type="primary"
                         :icon="Plus"
-                        size="default"
+                        :size="size"
                         @click="handleAdd"
                         v-hasPermi="['${entityName1}:edit']"
                 >新增
@@ -51,7 +51,7 @@
                 <el-button
                         type="success"
                         :icon="Edit"
-                        size="default"
+                        :size="size"
                         :disabled="single"
                         @click="handleUpdate"
                         v-hasPermi="['${entityName1}:edit']"
@@ -62,7 +62,7 @@
                 <el-button
                         type="danger"
                         :icon="Delete"
-                        size="default"
+                        :size="size"
                         :disabled="multiple"
                         @click="handleDelete"
                         v-hasPermi="['${entityName1}:delete']"
@@ -74,7 +74,7 @@
                 <el-button
                         type="warning"
                         :icon="Download"
-                        size="default"
+                        :size="size"
                         @click="handleExport"
                         v-hasPermi="['${entityName1}:export']"
                 >导出
@@ -110,7 +110,7 @@
             >
                 <template slot-scope="scope">
                     <el-button
-                            size="default"
+                            :size="size"
                             type="text"
                             :icon="Edit"
                             @click="handleUpdate(scope.row)"
@@ -118,7 +118,7 @@
                     >修改
                     </el-button>
                     <el-button
-                            size="default"
+                            :size="size"
                             type="text"
                             :icon="Delete"
                             @click="handleDelete(scope.row)"
@@ -171,9 +171,16 @@
         list${entityName},
         update${entityName}
     } from "@/api/system/";
-    import { getCurrentInstance, onMounted, reactive, ref } from "vue";
+    import { getCurrentInstance, onMounted, reactive, ref, computed } from "vue";
     import { useRouter } from "vue-router";
+    import store from "@/store";
+    import useAppStore from "@/store/modules/app";
 
+    const app = useAppStore(store);
+
+    const size = computed(() => {
+      return app.size;
+    });
     const { proxy } = getCurrentInstance();
     const addFormRef = ref();
     const router = useRouter();
