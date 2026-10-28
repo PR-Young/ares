@@ -37,8 +37,8 @@ ares
 
 # 使用技术
 
-- 框架：springboot3, mybatis, sa-token(https://sa-token.cc/)
-- jdk版本：17
+- 框架：springboot4, mybatis, sa-token(https://sa-token.cc/)
+- jdk版本：21
 - 数据库：mysql8、redis、neo4j
 - 消息机制：kafka
 - 全文检索：elasticsearch
