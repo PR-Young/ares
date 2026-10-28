@@ -18,7 +18,8 @@
 
 package com.ares.quartz.common.quartz;
 
-import org.springframework.boot.autoconfigure.quartz.SchedulerFactoryBeanCustomizer;
+
+import org.springframework.boot.quartz.autoconfigure.SchedulerFactoryBeanCustomizer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;

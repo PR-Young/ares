@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.ares</groupId>
         <artifactId>ares</artifactId>
-        <version>6.2.2</version>
+        <version>7.0.0</version>
     </parent>
 
     <groupId>com.ares.flow</groupId>
@@ -15,16 +15,16 @@
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <warm-flow.version>1.8.1</warm-flow.version>
+        <warm-flow.version>1.8.9</warm-flow.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.dromara.warm</groupId>
-            <artifactId>warm-flow-mybatis-sb3-starter</artifactId>
+            <artifactId>warm-flow-mybatis-sb4-starter</artifactId>
             <version>${warm-flow.version}</version>
         </dependency>
         <dependency>

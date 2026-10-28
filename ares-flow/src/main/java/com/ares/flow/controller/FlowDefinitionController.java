@@ -69,7 +69,7 @@ public class FlowDefinitionController extends BaseController {
 
     @PostMapping("save")
     public AjaxResult saveFlow(@RequestBody FlowDefinition definition) {
-        defService.saveAndInitNode(definition);
+        defService.save(definition);
         return AjaxResult.success();
     }
 

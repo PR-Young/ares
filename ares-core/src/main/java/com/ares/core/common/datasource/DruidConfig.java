@@ -1,8 +1,8 @@
 package com.ares.core.common.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.spring.boot3.autoconfigure.DruidDataSourceBuilder;
-import com.alibaba.druid.spring.boot3.autoconfigure.properties.DruidStatProperties;
+import com.alibaba.druid.spring.boot4.autoconfigure.DruidDataSourceBuilder;
+import com.alibaba.druid.spring.boot4.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
 import com.ares.core.utils.SpringUtils;
 import jakarta.servlet.*;

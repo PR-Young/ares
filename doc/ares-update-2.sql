@@ -10,3 +10,30 @@ update flow_skip set skip_condition = REPLACE(skip_condition,'notNike','notLike'
 
 ALTER TABLE `flow_his_task`
     MODIFY COLUMN `collaborator` varchar(500) NULL DEFAULT NULL COMMENT '协作人' AFTER `cooperate_type`;
+
+/** 20261028 **/
+ALTER TABLE `flow_definition`
+    ADD COLUMN `create_by` varchar(64) NULL DEFAULT NULL COMMENT '创建人' AFTER `create_time`,
+    ADD COLUMN `update_by` varchar(64) NULL DEFAULT NULL COMMENT '更新人' AFTER `update_time`;
+
+ALTER TABLE `flow_node`
+    ADD COLUMN `create_by` varchar(64) NULL DEFAULT NULL COMMENT '创建人' AFTER `create_time`,
+    ADD COLUMN `update_by` varchar(64) NULL DEFAULT NULL COMMENT '更新人' AFTER `update_time`;
+
+ALTER TABLE `flow_skip`
+    ADD COLUMN `create_by` varchar(64) NULL DEFAULT NULL COMMENT '创建人' AFTER `create_time`,
+    ADD COLUMN `update_by` varchar(64) NULL DEFAULT NULL COMMENT '更新人' AFTER `update_time`;
+
+ALTER TABLE `flow_instance`
+    ADD COLUMN `update_by` varchar(64) NULL DEFAULT NULL COMMENT '更新人' AFTER `update_time`;
+
+ALTER TABLE `flow_task`
+    ADD COLUMN `create_by` varchar(64) NULL DEFAULT NULL COMMENT '创建人' AFTER `create_time`,
+    ADD COLUMN `update_by` varchar(64) NULL DEFAULT NULL COMMENT '更新人' AFTER `update_time`;
+
+ALTER TABLE `flow_user`
+    ADD COLUMN `update_by` varchar(64) NULL DEFAULT NULL COMMENT '更新人' AFTER `update_time`;
+
+ALTER TABLE flow_node MODIFY COLUMN node_ratio varchar(200) NULL COMMENT '流程签署比例值';
+ALTER TABLE flow_node DROP COLUMN handler_type;
+ALTER TABLE flow_node DROP COLUMN handler_path;

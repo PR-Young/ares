@@ -2,11 +2,6 @@ server:
   servlet:
     context-path: /ares
   port: 8080
-  undertow:
-    url-charset: UTF-8
-    threads:
-      worker: 5
-      io: 5
 spring:
   profiles:
     active: @profileActive@
