@@ -47,4 +47,9 @@ public final class ThreadPoolUtils {
             TimeUnit.SECONDS,
             new ArrayBlockingQueue<>(10),
             new ThreadPoolExecutor.DiscardPolicy());
+
+
+    public static void virtualExecuter(Runnable runnable) {
+        Executors.newVirtualThreadPerTaskExecutor().execute(runnable);
+    }
 }

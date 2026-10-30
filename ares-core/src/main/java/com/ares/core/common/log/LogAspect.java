@@ -131,7 +131,7 @@ public class LogAspect {
             sysLog.setNotes(StringUtils.substring(ex.getMessage(), 0, 2000));
         } finally {
             if (null != sysLog.getUrl()) {
-                ThreadPoolUtils.SINGLE_EXECUTOR_SERVICE.execute(new SaveLogThread(sysLog, sysLogService));
+                ThreadPoolUtils.virtualExecuter(new SaveLogThread(sysLog, sysLogService));
             }
             logger.debug("用户行为日志记录结束！");
         }
